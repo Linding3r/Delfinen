@@ -4,17 +4,18 @@ import javax.swing.*;
 
 
 public class Engine {
-
+  SwingGUI gui = new SwingGUI();
 
 
   public void execute() {
-    SwingGUI gui = new SwingGUI();
     gui.chooseUser();
   }
 
   public void presidentExecute(JFrame visibility){
     visibility.setVisible(false);
+    gui.mainPanelPresident();
     System.out.println("Welcome to the President menu!!");
+
   }
 
   public void cashierExecute(JFrame visibility){

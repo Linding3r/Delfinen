@@ -3,21 +3,21 @@ package com.company;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.KeyEvent;
+import java.awt.event.ActionEvent;
 
 public class SwingGUI extends JFrame{
   private JFrame frame;
   private JPanel panel;
-  private ImageIcon dolphin;
-  private JLabel myLabel;
+
   private JButton presidentButton;
   private JButton cashierButton;
   private JButton trainerButton;
+  TextArea textPanel;
+  JTextField textField;
+  private final static String newline = "\n";
 
   public void chooseUser(){
 
-    dolphin = new ImageIcon(this.getClass().getResource("Delfinen/res/dolphin.jpg"));
-    myLabel = new JLabel(dolphin);
     presidentButton = new JButton("President");
     presidentButton.setBounds(100,100,300,50);
 
@@ -27,24 +27,24 @@ public class SwingGUI extends JFrame{
     trainerButton = new JButton("Trainer");
     trainerButton.setBounds(100,300,300,50);
 
-    myLabel.add(presidentButton);
+/*    myLabel.add(presidentButton);
     myLabel.add(cashierButton);
     myLabel.add(trainerButton);
-    frame.add(myLabel);
-    frame.setSize(500, 500);
+    frame.add(myLabel);*/
     Engine engine = new Engine();
     frame = new JFrame("Select Account");
+    frame.setSize(500, 500);
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frame.setSize(500, 100);
     frame.setLocationRelativeTo(null);
     frame.add(panel = new JPanel());
 
-   /* JLabel heading = new JLabel("Whose which account to login with: ");
+    JLabel heading = new JLabel("Whose which account to login with: ");
     panel.add(heading);
     JButton presidentButton = (JButton) panel.add(new JButton("President"));
     JButton cashierButton = (JButton) panel.add(new JButton("Cashier"));
     JButton trainerButton = (JButton) panel.add(new JButton("Trainer"));
-*/
+
     panel.add(presidentButton);
     panel.add(cashierButton);
     panel.add(trainerButton);
@@ -56,69 +56,66 @@ public class SwingGUI extends JFrame{
     frame.setVisible(true);
   }
 
-  public void mainPanelPresident(){
+  public void mainPanelPresident() {
     setTitle("Swimming Club Dolphin");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLayout(null);
     //setting the bounds for the JFrame
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 //    setBounds(100,100,screenSize.width, screenSize.height);
-    setBounds(100,100,1200, 800);
+    setBounds(100, 100, 1200, 800);
 
+    // Used to create a border around all objects.
     Border br = BorderFactory.createLineBorder(Color.black);
-    Container c=getContentPane();
+    Container c = getContentPane();
+
+    // Creating the buttons, textfields and textarea.
 
     JButton topPanel = new JButton("Option 1");
     JButton mid1Panel = new JButton("Option 2");
     JButton mid2Panel = new JButton("Option 3");
     JButton buttomPanel = new JButton("Option 4");
-    JPanel textPanel = new JPanel();
-    JTextField textField = new JTextField(100);
+    textPanel = new TextArea();
+    textField = new JTextField(100);
     JPanel inputField = new JPanel();
 
     topPanel.setLayout(null);
     mid1Panel.setLayout(null);
     mid2Panel.setLayout(null);
     buttomPanel.setLayout(null);
-    textPanel.setLayout(null);
     textField.setLayout(null);
     inputField.setLayout(null);
 
 
     JLabel label5 = new JLabel("Input: ");
-
-
-    label5.setBounds(0,0,50,20);
-    ;
+    label5.setBounds(0, 0, 50, 20);
     inputField.add(label5);
 
-    topPanel.setBounds(10,10,200,100);
-    //Panel 1
+    //
 
-    mid1Panel.setBounds(10,120,200,100);
-    //Panel 2
-
-    mid2Panel.setBounds(10,230,200,100);
-    //Panel 3
-    buttomPanel.setBounds(10,340,200,100);
-
-    //text panel
-    textPanel.setBounds(220,10,400,400);
+    // Gives all panels a specific location on the screen.
+    topPanel.setBounds(10, 10, 200, 100);
+    mid1Panel.setBounds(10, 120, 200, 100);
+    mid2Panel.setBounds(10, 230, 200, 100);
+    buttomPanel.setBounds(10, 340, 200, 100);
+    textPanel.setBounds(220, 10, 400, 400);
     textPanel.setBackground(Color.white);
-    //text field
-    textField.setBounds(260,415,360,20);
+    textField.setBounds(260, 415, 360, 20);
 
-    inputField.setBounds(220,414,50,20);
+    //input field where user input is shown.
+    inputField.setBounds(220, 414, 50, 20);
 
-    topPanel.setVisible(true);
+    // Adds border around all boxes.
     topPanel.setBorder(br);
     mid1Panel.setBorder(br);
     mid2Panel.setBorder(br);
     buttomPanel.setBorder(br);
-    textPanel.setBorder(br);
     textField.setBorder(br);
 
+    // welcome text
+    textPanel.append("Welcome to the President menu!!" + newline);
 
+    // Adds all Jframe components to the container which makes sure everything is visible.
     c.add(topPanel);
     c.add(mid1Panel);
     c.add(mid2Panel);
@@ -127,19 +124,30 @@ public class SwingGUI extends JFrame{
     c.add(textField);
     c.add(inputField);
 
+    // sets visibility. This is required to open the window in the first place. If visibility == false, it will not
+    // open at all.
     setVisible(true);
+
+    // Sets the position to the middle of the screen.
     setLocationRelativeTo(null);
 
+    // When pressing enter it will perform below action.
+    textField.addActionListener(action);
+
+  }
+
+  Action action = new AbstractAction()
+  {
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+      // Adds string from the text field and adds it to the textpanel. It will then make a new line and remove input
+      // from the text field.
+
       String text = textField.getText();
-      textField.setText(text);
-
-
-  }
-
-  private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {
-    if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-      // Enter was pressed. Your code goes here.
+      textPanel.append(text + newline);
+      textField.setText("");
     }
-  }
+  };
 
 }
