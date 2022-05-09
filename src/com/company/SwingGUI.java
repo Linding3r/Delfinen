@@ -20,7 +20,7 @@ public class SwingGUI {
 
     frame.add(panel2 = new JPanel());
 
-    JLabel heading = new JLabel("Whose which account to login with: ");
+    JLabel heading = new JLabel("Chose which account to login with: ");
     panel2.add(heading);
     JButton presidentButton = (JButton) panel.add(new JButton("President"));
     JButton cashierButton = (JButton) panel.add(new JButton("Cashier"));
