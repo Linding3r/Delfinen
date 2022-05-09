@@ -8,9 +8,30 @@ import java.awt.event.KeyEvent;
 public class SwingGUI extends JFrame{
   private JFrame frame;
   private JPanel panel;
-
+  private ImageIcon dolphin;
+  private JLabel myLabel;
+  private JButton presidentButton;
+  private JButton cashierButton;
+  private JButton trainerButton;
 
   public void chooseUser(){
+
+    dolphin = new ImageIcon(this.getClass().getResource("Delfinen/res/dolphin.jpg"));
+    myLabel = new JLabel(dolphin);
+    presidentButton = new JButton("President");
+    presidentButton.setBounds(100,100,300,50);
+
+    cashierButton = new JButton("Cashier");
+    cashierButton.setBounds(100,200,300,50);
+
+    trainerButton = new JButton("Trainer");
+    trainerButton.setBounds(100,300,300,50);
+
+    myLabel.add(presidentButton);
+    myLabel.add(cashierButton);
+    myLabel.add(trainerButton);
+    frame.add(myLabel);
+    frame.setSize(500, 500);
     Engine engine = new Engine();
     frame = new JFrame("Select Account");
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -18,12 +39,12 @@ public class SwingGUI extends JFrame{
     frame.setLocationRelativeTo(null);
     frame.add(panel = new JPanel());
 
-    JLabel heading = new JLabel("Whose which account to login with: ");
+   /* JLabel heading = new JLabel("Whose which account to login with: ");
     panel.add(heading);
     JButton presidentButton = (JButton) panel.add(new JButton("President"));
     JButton cashierButton = (JButton) panel.add(new JButton("Cashier"));
     JButton trainerButton = (JButton) panel.add(new JButton("Trainer"));
-
+*/
     panel.add(presidentButton);
     panel.add(cashierButton);
     panel.add(trainerButton);
@@ -47,10 +68,10 @@ public class SwingGUI extends JFrame{
     Border br = BorderFactory.createLineBorder(Color.black);
     Container c=getContentPane();
 
-    JButton topPanel = new JButton();
-    JButton mid1Panel = new JButton();
-    JButton mid2Panel = new JButton();
-    JButton buttomPanel = new JButton();
+    JButton topPanel = new JButton("Option 1");
+    JButton mid1Panel = new JButton("Option 2");
+    JButton mid2Panel = new JButton("Option 3");
+    JButton buttomPanel = new JButton("Option 4");
     JPanel textPanel = new JPanel();
     JTextField textField = new JTextField(100);
     JPanel inputField = new JPanel();
@@ -63,23 +84,12 @@ public class SwingGUI extends JFrame{
     textField.setLayout(null);
     inputField.setLayout(null);
 
-    JLabel label1 = new JLabel("Option 1");
-    JLabel label2 = new JLabel("Option 2");
-    JLabel label3 = new JLabel("Option 3");
-    JLabel label4 = new JLabel("Option 4");
+
     JLabel label5 = new JLabel("Input: ");
 
-    label1.setBounds(75,0,200,100);
-    label2.setBounds(75,0,200,100);
-    label3.setBounds(75,0,200,100);
-    label4.setBounds(75,0,200,100);
+
     label5.setBounds(0,0,50,20);
-
-
-    topPanel.add(label1);
-    mid1Panel.add(label2);
-    mid2Panel.add(label3);
-    buttomPanel.add(label4);
+    ;
     inputField.add(label5);
 
     topPanel.setBounds(10,10,200,100);
