@@ -2,11 +2,12 @@ package com.company;
 
 import javax.swing.*;
 
+
 public class Engine {
 
 
 
-  public void execute(){
+  public void execute() {
     SwingGUI gui = new SwingGUI();
     gui.chooseUser();
   }
