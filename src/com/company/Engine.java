@@ -13,12 +13,12 @@ public class Engine {
   }
 
   public void cashierExecute(){
-    gui.mainPanelCashier();
+//    gui.mainPanelCashier();
     System.out.println("Welcome to the Cashier menu!");
   }
 
   public void trainerExecute(){
-    gui.mainPanelTrainer();
+//    gui.mainPanelTrainer();
     System.out.println("Welcome to the Trainer menu!");
   }
 }

@@ -29,9 +29,9 @@ public class SwingGUI extends JFrame{
     c.add(cashierButton);
     c.add(trainerButton);
     setResizable(false);
-    presidentButton.setBounds(75,50,150,50);
-    cashierButton.setBounds(75,100,150,50);
-    trainerButton.setBounds(75,150,150,50);
+    presidentButton.setBounds(75,25,150,50);
+    cashierButton.setBounds(75,80,150,50);
+    trainerButton.setBounds(75,135,150,50);
     label.setBounds(10,0,300,20);
 
     presidentButton.addActionListener(e -> {engine.presidentExecute(); setVisible(false);});
@@ -48,8 +48,8 @@ public class SwingGUI extends JFrame{
     setLayout(null);
     //setting the bounds for the JFrame
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//    setBounds(100, 100, 1200, 800);
-    setBounds(100,100,screenSize.width, screenSize.height);
+    setBounds(100, 100, 1200, 800);
+//    setBounds(100,100,screenSize.width, screenSize.height);
 
     // Used to create a border around all objects.
     Border br = BorderFactory.createLineBorder(Color.black);
@@ -57,10 +57,11 @@ public class SwingGUI extends JFrame{
 
     // Creating the buttons, textfields and textarea.
 
-    JButton topButton = new JButton("Option 1");
-    JButton midButton = new JButton("Option 2");
+    JButton topButton = new JButton("Create Member");
+    JButton midButton = new JButton("Show Members");
     JButton midButton2 = new JButton("Option 3");
     JButton buttomButton = new JButton("Save & Exit");
+
     textPanel = new TextArea();
     textField = new JTextField(100);
     JPanel inputField = new JPanel();
@@ -71,7 +72,6 @@ public class SwingGUI extends JFrame{
     buttomButton.setLayout(null);
     textField.setLayout(null);
     inputField.setLayout(null);
-
     JLabel label5 = new JLabel("Input: ");
     label5.setBounds(0, 0, 50, 20);
     inputField.add(label5);
@@ -87,6 +87,9 @@ public class SwingGUI extends JFrame{
 
     //input field where user input is shown.
     inputField.setBounds(220, 414, 50, 20);
+
+    //Makes the textfield uneditable
+    textPanel.setEditable(false);
 
     // Adds border around all boxes.
     topButton.setBorder(br);
@@ -116,6 +119,9 @@ public class SwingGUI extends JFrame{
     setLocationRelativeTo(null);
     // When pressing enter it will perform below action.
     textField.addActionListener(action);
+
+
+    buttomButton.addActionListener(e -> System.exit(EXIT_ON_CLOSE));
 
   }
 
