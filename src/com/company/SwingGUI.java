@@ -5,20 +5,22 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class SwingGUI extends JFrame{
+public class SwingGUI {
 
+  private JFrame frame;
   private TextArea textPanel;
   private JTextField textField;
   private final static String newline = "\n";
 
   public void chooseUser(){
+    frame = new JFrame();
     Engine engine = new Engine();
-    setTitle("President Account");
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setLayout(null);
-    Container c = getContentPane();
-    setBounds(0, 0, 300, 250);
-    setLocationRelativeTo(null);
+    frame.setTitle("President Account");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setLayout(null);
+    Container c = frame.getContentPane();
+    frame.setBounds(0, 0, 300, 250);
+    frame.setLocationRelativeTo(null);
 
     JLabel label = new JLabel("Choose which account you wish to login to:");
     JButton presidentButton = new JButton("President");
@@ -28,32 +30,33 @@ public class SwingGUI extends JFrame{
     c.add(presidentButton);
     c.add(cashierButton);
     c.add(trainerButton);
-    setResizable(false);
+    frame.setResizable(false);
     presidentButton.setBounds(75,25,150,50);
     cashierButton.setBounds(75,80,150,50);
     trainerButton.setBounds(75,135,150,50);
     label.setBounds(10,0,300,20);
 
-    presidentButton.addActionListener(e -> {engine.presidentExecute(); setVisible(false);});
-    cashierButton.addActionListener(e -> {engine.cashierExecute(); setVisible(false);});
-    trainerButton.addActionListener(e -> {engine.trainerExecute(); setVisible(false);});
+    presidentButton.addActionListener(e -> {engine.presidentExecute(); frame.setVisible(false);});
+    cashierButton.addActionListener(e -> {engine.cashierExecute(); frame.setVisible(false);});
+    trainerButton.addActionListener(e -> {engine.trainerExecute(); frame.setVisible(false);});
 
 
-    setVisible(true);
+    frame.setVisible(true);
   }
 
   public void mainPanelPresident() {
-    setTitle("Swimming Club Dolphin");
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setLayout(null);
+    frame = new JFrame();
+    frame.setTitle("Swimming Club Dolphin");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setLayout(null);
     //setting the bounds for the JFrame
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    setBounds(100, 100, 1200, 800);
+    frame.setBounds(100, 100, 1200, 800);
 //    setBounds(100,100,screenSize.width, screenSize.height);
 
     // Used to create a border around all objects.
     Border br = BorderFactory.createLineBorder(Color.black);
-    Container c = getContentPane();
+    Container c = frame.getContentPane();
 
     // Creating the buttons, textfields and textarea.
 
@@ -66,12 +69,13 @@ public class SwingGUI extends JFrame{
     textField = new JTextField(100);
     JPanel inputField = new JPanel();
 
-    topButton.setLayout(null);
+/*    topButton.setLayout(null);
     midButton.setLayout(null);
     midButton2.setLayout(null);
     buttomButton.setLayout(null);
     textField.setLayout(null);
-    inputField.setLayout(null);
+    inputField.setLayout(null);*/
+
     JLabel label5 = new JLabel("Input: ");
     label5.setBounds(0, 0, 50, 20);
     inputField.add(label5);
@@ -81,9 +85,9 @@ public class SwingGUI extends JFrame{
     midButton.setBounds(10, 120, 200, 100);
     midButton2.setBounds(10, 230, 200, 100);
     buttomButton.setBounds(10, 340, 200, 100);
-    textPanel.setBounds(220, 10, 700, 400);
+    textPanel.setBounds(220, 10, 900, 400);
     textPanel.setBackground(Color.white);
-    textField.setBounds(260, 415, 660, 20);
+    textField.setBounds(260, 415, 860, 20);
 
     //input field where user input is shown.
     inputField.setBounds(220, 414, 50, 20);
@@ -113,19 +117,80 @@ public class SwingGUI extends JFrame{
 
     // sets visibility. This is required to open the window in the first place. If visibility == false, it will not
     // open at all.
-    setVisible(true);
-    setResizable(false);
+    frame.setVisible(true);
+    frame.setResizable(false);
     // Sets the position to the middle of the screen.
-    setLocationRelativeTo(null);
+    frame.setLocationRelativeTo(null);
     // When pressing enter it will perform below action.
     textField.addActionListener(action);
+    frame.getGlassPane().setVisible(false);
 
-
-    buttomButton.addActionListener(e -> System.exit(EXIT_ON_CLOSE));
+    topButton.addActionListener(e -> {
+      frame.toBack(); textField.setEditable(false); createUser(frame);});
+    buttomButton.addActionListener(e -> System.exit(frame.EXIT_ON_CLOSE));
 
   }
 
-  public void mainPanelCashier() {
+  private void createUser(JFrame frame2) {
+    frame = new JFrame();
+    frame.setTitle("Create Member");
+    frame.setDefaultCloseOperation(frame.DO_NOTHING_ON_CLOSE);
+    frame.setLayout(null);
+    frame.setBounds(0, 0, 500, 230);
+
+    Border br = BorderFactory.createLineBorder(Color.black);
+    Container c = frame.getContentPane();
+
+    JLabel name = new JLabel("Name: ");
+    JLabel age = new JLabel("Age: ");
+    JLabel activeMember = new JLabel("Active member(yes/no): ");
+    JLabel competitiveSwimmer = new JLabel("Competitive swimmer(yes/no): ");
+
+    JTextField textFieldName = new JTextField();
+    JTextField textFieldAge = new JTextField();
+    JTextField textFieldActive = new JTextField();
+    JTextField textFieldCompetitive = new JTextField();
+
+    JButton save = new JButton("Save & Close");
+    JButton cancel = new JButton("Cancel");
+
+    c.add(name);
+    c.add(textFieldName);
+    c.add(age);
+    c.add(textFieldAge);
+    c.add(activeMember);
+    c.add(textFieldActive);
+    c.add(competitiveSwimmer);
+    c.add(textFieldCompetitive);
+    c.add(save);
+    c.add(cancel);
+
+
+    name.setBounds(5,5,200,20);
+    textFieldName.setBounds(205,5,200,20);
+    age.setBounds(5,30,200,20);
+    textFieldAge.setBounds(205,30,200,20);
+    activeMember.setBounds(5,60,200,20);
+    textFieldActive.setBounds(205,60,200,20);
+    competitiveSwimmer.setBounds(5,90,200,20);
+    textFieldCompetitive.setBounds(205,90,200,20);
+
+    save.setBounds(10,120,110,50);
+    cancel.setBounds(350,120,110,50);
+
+    frame.setLocationRelativeTo(null);
+    frame.setResizable(false);
+    frame.setAlwaysOnTop(true);
+    frame.setVisible(true);
+    frame.toFront();
+
+    save.addActionListener(e -> {});
+    cancel.addActionListener(e -> {frame.dispose(); frame2.toFront();});
+
+
+  }
+
+/*  public void mainPanelCashier() {
     setTitle("Swimming Club Dolphin");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLayout(null);
@@ -203,6 +268,8 @@ public class SwingGUI extends JFrame{
 
     // When pressing enter it will perform below action.
     textField.addActionListener(action);
+
+
 
   }
 
@@ -284,7 +351,7 @@ public class SwingGUI extends JFrame{
     // When pressing enter it will perform below action.
     textField.addActionListener(action);
 
-  }
+  }*/
 
   Action action = new AbstractAction()
   {
