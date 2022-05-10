@@ -11,20 +11,17 @@ public class Engine {
     gui.chooseUser();
   }
 
-  public void presidentExecute(JFrame frame){
-    frame.setVisible(false);
+  public void presidentExecute(){
     gui.mainPanelPresident();
     System.out.println("Welcome to the President menu!!");
   }
 
-  public void cashierExecute(JFrame frame){
-    frame.setVisible(false);
+  public void cashierExecute(){
     gui.mainPanelCashier();
     System.out.println("Welcome to the Cashier menu!");
   }
 
-  public void trainerExecute(JFrame frame){
-    frame.setVisible(false);
+  public void trainerExecute(){
     gui.mainPanelTrainer();
     System.out.println("Welcome to the Trainer menu!");
   }

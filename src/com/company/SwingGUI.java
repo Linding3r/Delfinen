@@ -6,49 +6,40 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class SwingGUI extends JFrame{
-  private JFrame frame;
-  private JPanel panel;
 
-  private JButton presidentButton;
-  private JButton cashierButton;
-  private JButton trainerButton;
   private TextArea textPanel;
   private JTextField textField;
   private final static String newline = "\n";
 
   public void chooseUser(){
-
     Engine engine = new Engine();
-    frame = new JFrame("Select Account");
-    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    frame.setSize(500, 300);
-    frame.setLocationRelativeTo(null);
-    frame.add(panel = new JPanel());
+    setTitle("President Account");
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setLayout(null);
+    Container c = getContentPane();
+    setBounds(0, 0, 300, 250);
+    setLocationRelativeTo(null);
 
+    JLabel label = new JLabel("Choose which account you wish to login to:");
     JButton presidentButton = new JButton("President");
-
     JButton cashierButton = new JButton("Cashier");
-    cashierButton.setBounds(100,200,300,50);
-
     JButton trainerButton = new JButton("Trainer");
-    trainerButton.setBounds(100,300,300,50);
-    JLabel heading = new JLabel("Whose which account to login with: ");
-    panel.add(heading);
-    panel.add(presidentButton);
+    c.add(label);
+    c.add(presidentButton);
+    c.add(cashierButton);
+    c.add(trainerButton);
+    setResizable(false);
+    presidentButton.setBounds(75,50,150,50);
+    cashierButton.setBounds(75,100,150,50);
+    trainerButton.setBounds(75,150,150,50);
+    label.setBounds(10,0,300,20);
 
-    JPanel panel2 = new JPanel();
-    panel.setBounds(50,100,300,300);
-
-/*    JButton presidentButton = new JButton("President");
-    JButton cashierButton = (JButton) panel.add(new JButton("Cashier"));
-    JButton trainerButton = (JButton) panel.add(new JButton("Trainer"));*/
+    presidentButton.addActionListener(e -> {engine.presidentExecute(); setVisible(false);});
+    cashierButton.addActionListener(e -> {engine.cashierExecute(); setVisible(false);});
+    trainerButton.addActionListener(e -> {engine.trainerExecute(); setVisible(false);});
 
 
-    presidentButton.addActionListener(e -> engine.presidentExecute(frame));
-    cashierButton.addActionListener(e -> engine.cashierExecute(frame));
-    trainerButton.addActionListener(e -> engine.trainerExecute(frame));
-
-    frame.setVisible(true);
+    setVisible(true);
   }
 
   public void mainPanelPresident() {
@@ -69,7 +60,7 @@ public class SwingGUI extends JFrame{
     JButton topButton = new JButton("Option 1");
     JButton midButton = new JButton("Option 2");
     JButton midButton2 = new JButton("Option 3");
-    JButton buttomButton = new JButton("Option 4");
+    JButton buttomButton = new JButton("Save & Exit");
     textPanel = new TextArea();
     textField = new JTextField(100);
     JPanel inputField = new JPanel();
@@ -84,8 +75,6 @@ public class SwingGUI extends JFrame{
     JLabel label5 = new JLabel("Input: ");
     label5.setBounds(0, 0, 50, 20);
     inputField.add(label5);
-
-    //
 
     // Gives all panels a specific location on the screen.
     topButton.setBounds(10, 10, 200, 100);
