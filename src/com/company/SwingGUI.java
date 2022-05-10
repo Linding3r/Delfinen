@@ -123,10 +123,9 @@ public class SwingGUI {
     frame.setLocationRelativeTo(null);
     // When pressing enter it will perform below action.
     textField.addActionListener(action);
-    frame.getGlassPane().setVisible(false);
 
     topButton.addActionListener(e -> {
-      frame.toBack(); textField.setEditable(false); createUser(frame);});
+      frame.toBack(); createUser(frame);});
     buttomButton.addActionListener(e -> System.exit(frame.EXIT_ON_CLOSE));
 
   }
@@ -143,13 +142,13 @@ public class SwingGUI {
 
     JLabel name = new JLabel("Name: ");
     JLabel age = new JLabel("Age: ");
-    JLabel activeMember = new JLabel("Active member(yes/no): ");
-    JLabel competitiveSwimmer = new JLabel("Competitive swimmer(yes/no): ");
+    JLabel activeMember = new JLabel("Active member: ");
+    JLabel competitiveSwimmer = new JLabel("Competitive swimmer: ");
 
     JTextField textFieldName = new JTextField();
     JTextField textFieldAge = new JTextField();
-    JTextField textFieldActive = new JTextField();
-    JTextField textFieldCompetitive = new JTextField();
+    JCheckBox textFieldActive = new JCheckBox();
+    JCheckBox textFieldCompetitive = new JCheckBox();
 
     JButton save = new JButton("Save & Close");
     JButton cancel = new JButton("Cancel");
@@ -184,7 +183,8 @@ public class SwingGUI {
     frame.setVisible(true);
     frame.toFront();
 
-    save.addActionListener(e -> {});
+
+    save.addActionListener(e -> {frame.dispose(); frame2.toFront();});
     cancel.addActionListener(e -> {frame.dispose(); frame2.toFront();});
 
 
