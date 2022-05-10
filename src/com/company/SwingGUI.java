@@ -48,8 +48,8 @@ public class SwingGUI extends JFrame{
     setLayout(null);
     //setting the bounds for the JFrame
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    setBounds(100, 100, 1200, 800);
-//    setBounds(100,100,screenSize.width, screenSize.height);
+//    setBounds(100, 100, 1200, 800);
+    setBounds(100,100,screenSize.width, screenSize.height);
 
     // Used to create a border around all objects.
     Border br = BorderFactory.createLineBorder(Color.black);
@@ -111,7 +111,7 @@ public class SwingGUI extends JFrame{
     // sets visibility. This is required to open the window in the first place. If visibility == false, it will not
     // open at all.
     setVisible(true);
-
+    setResizable(false);
     // Sets the position to the middle of the screen.
     setLocationRelativeTo(null);
     // When pressing enter it will perform below action.
@@ -125,8 +125,8 @@ public class SwingGUI extends JFrame{
     setLayout(null);
     //setting the bounds for the JFrame
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    setBounds(100, 100, 1200, 800);
-//    setBounds(100,100,screenSize.width, screenSize.height);
+//    setBounds(100, 100, 1200, 800);
+    setBounds(100,100,screenSize.width, screenSize.height);
 
     // Used to create a border around all objects.
     Border br = BorderFactory.createLineBorder(Color.black);
@@ -187,6 +187,7 @@ public class SwingGUI extends JFrame{
     c.add(textField);
     c.add(inputField);
 
+    setResizable(false);
     // sets visibility. This is required to open the window in the first place. If visibility == false, it will not
     // open at all.
     setVisible(true);
@@ -205,8 +206,8 @@ public class SwingGUI extends JFrame{
     setLayout(null);
     //setting the bounds for the JFrame
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    setBounds(100, 100, 1200, 800);
-//    setBounds(100,100,screenSize.width, screenSize.height);
+//    setBounds(100, 100, 1200, 800);
+    setBounds(100,100,screenSize.width, screenSize.height);
 
     // Used to create a border around all objects.
     Border br = BorderFactory.createLineBorder(Color.black);
@@ -254,7 +255,7 @@ public class SwingGUI extends JFrame{
     buttomButton.setBorder(br);
     textField.setBorder(br);
 
-
+    setResizable(false);
     // welcome text
     textPanel.append("Welcome to the Trainer menu!!" + newline);
 

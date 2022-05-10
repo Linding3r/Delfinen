@@ -1,11 +1,7 @@
 package com.company;
 
-import javax.swing.*;
-
-
 public class Engine {
   SwingGUI gui = new SwingGUI();
-
 
   public void execute() {
     gui.chooseUser();
