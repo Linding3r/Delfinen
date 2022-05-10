@@ -159,7 +159,6 @@ public class SwingGUI {
         JCheckBox checkBoxComp = new JCheckBox();
 
 
-        JButton cancelButton = new JButton("Close");
         JButton validateButton = new JButton("Validate & save");
 
 
@@ -171,7 +170,7 @@ public class SwingGUI {
         c.add(checkBoxActive);
         c.add(competitiveSwimmer);
         c.add(checkBoxComp);
-        c.add(cancelButton);
+
         c.add(validateButton);
 
         name.setBounds(5, 5, 200, 20);
@@ -183,8 +182,8 @@ public class SwingGUI {
         competitiveSwimmer.setBounds(5, 90, 200, 20);
         checkBoxComp.setBounds(200, 90, 200, 20);
 
-        cancelButton.setBounds(350, 120, 110, 50);
-        validateButton.setBounds(10, 120, 150, 50);
+
+        validateButton.setBounds(150, 120, 150, 50);
 
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -199,11 +198,7 @@ public class SwingGUI {
 
 
        validateButton.addActionListener(e -> validateInput(textFieldName, textFieldAge, checkBoxActive, checkBoxComp, frame, frameMain));
-        cancelButton.addActionListener(e -> {
-            frame.dispose();
-            frameMain.toFront();
 
-        });
     }
 
     public void validateInput(JTextField textFieldName, JTextField textFieldAge, JCheckBox checkBoxActive, JCheckBox checkBoxComp, JFrame frameMember, JFrame frameMain) {
@@ -232,13 +227,14 @@ public class SwingGUI {
             success(frameMember, frameMain);
         } else error();
 
+
     }
 
     public void error() {
         frame = new JFrame("Oopps you messed up!");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(320, 100);
-
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         JLabel label3 = new JLabel("Invalid input, try again");
         JPanel panel3 = new JPanel();
@@ -255,13 +251,13 @@ public class SwingGUI {
         frame = new JFrame("Fields have been validated");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(320, 100);
-
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        JLabel label3 = new JLabel("SUCCESS!!");
+        JLabel label3 = new JLabel("User created!");
         JPanel panel3 = new JPanel();
         frame.add(panel3);
         panel3.add(label3);
-        JButton button2 = new JButton("OK");
+        JButton button2 = new JButton("Ok");
         panel3.add(button2);
         frame.setVisible(true);
         frame.setAlwaysOnTop(true);
