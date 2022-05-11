@@ -79,13 +79,6 @@ public class SwingGUI {
         textField = new JTextField(100);
         JPanel inputField = new JPanel();
 
-/*    topButton.setLayout(null);
-    midButton.setLayout(null);
-    midButton2.setLayout(null);
-    buttomButton.setLayout(null);
-    textField.setLayout(null);
-    inputField.setLayout(null);*/
-
         JLabel label5 = new JLabel("Input: ");
         label5.setBounds(0, 0, 50, 20);
         inputField.add(label5);
@@ -191,12 +184,6 @@ public class SwingGUI {
         frame.setVisible(true);
         frame.toFront();
 
-        Border br = BorderFactory.createLineBorder(Color.RED);
-
-            textFieldName.setBorder(br);
-            textFieldAge.setBorder(br);
-
-
        validateButton.addActionListener(e -> validateInput(textFieldName, textFieldAge, checkBoxActive, checkBoxComp, frame, frameMain));
 
     }
@@ -222,6 +209,11 @@ public class SwingGUI {
        if (!Objects.equals(textFieldAge.getText(), "")){
             textFieldAge.setBorder(br);
         }
+       else br = BorderFactory.createLineBorder(Color.RED);
+
+        textFieldName.setBorder(br);
+        textFieldAge.setBorder(br);
+
         if (!Objects.equals(textFieldName.getText(), "") && (!Objects.equals(textFieldAge.getText(), "")))  {
             textPanel.append("Name: " + name + newline + "Age: " + age + newline + "Active member: " + active + newline + "Competitive swimmer: " + comp);
             success(frameMember, frameMain);
