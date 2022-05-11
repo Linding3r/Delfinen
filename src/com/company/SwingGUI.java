@@ -253,7 +253,7 @@ public class SwingGUI {
         } else br = BorderFactory.createLineBorder(Color.WHITE);
         textFieldAge.setBorder(br);
 
-
+        engine.setMemberId(engine.getMemberId());
 
         if (!Objects.equals(textFieldName.getText(), "") && (!(age > 100) && (!(age < 0)))) {
             Member member = new Member(age, memberID, name, active, comp);
