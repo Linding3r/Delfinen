@@ -11,8 +11,6 @@ public class MemberList {
 
   @Override
   public String toString() {
-    return "MemberList{" +
-        "memberList=" + memberList +
-        '}';
+    return "░░░░░░▒▒▒▒▒▒▓▓▓▓▓▓\n" + memberList + "\n░░░░░░▒▒▒▒▒▒▓▓▓▓▓▓";
   }
 }

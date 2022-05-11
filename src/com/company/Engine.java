@@ -6,31 +6,39 @@ public class Engine {
   Scanner sc = new Scanner(System.in);
   MemberList memberList = new MemberList();
   private int memberId = 2022001;
+  Ui ui = new Ui();
 
-  public void runProgram() {
+  public void runProgram() throws InterruptedException {
     boolean run = true;
+    ui.introLabel();
     while (run) {
-      System.out.println("Velkommen til Delfin-klubbens medlemssystem.");
-      System.out.println("Du kan vælge at tilføje medlemmer til medlemslisten");
-      System.out.println("1: Tilføj medlem");
+      ui.mainMenu();
       String choice = sc.nextLine();
       switch (choice) {
         case "1" -> addMember();
         case "2" -> System.out.println(memberList.toString());
+        case "9" -> {
+          run = false;
+          ui.newLine();
+          System.out.println("SHUTTING DOWN");
+        }
+        default -> ui.invalidInput();
       }
     }
 
   }
 
   public void addMember() {
+    ui.newLine();
+    System.out.println("Du er nu i gang med at Tiljøje et nyt medlem!\n\n\n");
     System.out.println("Indtast medlemmets navn:");
     String name = sc.nextLine();
-    System.out.println("Indtast medlemmets alder:");
+    System.out.println("\n\nIndtast medlemmets alder:");
     int age = sc.nextInt();
     sc.nextLine();
-    System.out.println("Indtast om medlemmet er aktiv eller inaktiv");
+    System.out.println("\n\nIndtast om medlemmet er aktiv eller inaktiv");
     boolean memberStatus = makeChoiceBoolean("Aktiv = 1\nInactiv = 2");
-    System.out.println("Indtast om medlemmet er konkurrencesvømmer eller motionssvømmer");
+    System.out.println("\n\nIndtast om medlemmet er konkurrencesvømmer eller motionssvømmer");
     boolean competitionStatus = makeChoiceBoolean("Konkurrencesvømmer = 1\nMotionssvømmer = 2");
     Member member = new Member(age, memberId, name, memberStatus, competitionStatus);
     memberList.addMemberToList(member);
