@@ -1,13 +1,11 @@
 package com.company;
 
 
-import javax.swing.*;
-
 public class Main {
 
     public void run (){
 
-        Medlem thomas = new Medlem(95,007,"Thomas Lindinger", false, false);
+        Member thomas = new Member(95,007,"Thomas Lindinger", false, false);
 
         System.out.println(thomas);
     }

@@ -1,15 +1,16 @@
 package com.company;
 
-public class Medlem {
+public class Member {
 
   private Integer age;
   private int id;
   private String name;
-  private boolean aktiv;
-  private boolean konkurrenceSvømmer;
+  private boolean active;
+  private boolean competitionSwimmer;
+  private Trainer trainer;
 
 
-  public Medlem(Integer age, int id, String name, boolean aktiv, boolean konkurrenceSvømmer) {
+  public Member(Integer age, int id, String name, boolean active, boolean competitionSwimmer) {
     this.age = age;
     this.id = id;
     this.name = name;
@@ -33,8 +34,8 @@ public class Medlem {
     return aktiv;
   }
 
-  public boolean isKonkurrenceSvømmer() {
-    return konkurrenceSvømmer;
+  public boolean isCompetitionSwimmer() {
+    return competitionSwimmer;
   }
 
   public void setAge (Integer age){
@@ -53,8 +54,8 @@ public class Medlem {
     this.aktiv = aktiv;
   }
 
-  public void setKonkurrenceSvømmer(boolean konkurrenceSvømmer) {
-    this.konkurrenceSvømmer = konkurrenceSvømmer;
+  public void setKonkurrenceSvømmer(boolean competitionSwimmer) {
+    this.competitionSwimmer = competitionSwimmer;
   }
 
 
