@@ -9,6 +9,10 @@ public class MemberList {
     memberList.add(member);
   }
 
+  public ArrayList<Member> getMemberList() {
+    return memberList;
+  }
+
   @Override
   public String toString() {
     return "MemberList{" +

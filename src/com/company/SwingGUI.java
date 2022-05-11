@@ -13,6 +13,8 @@ public class SwingGUI {
     private JTextField textField;
     private final static String newline = "\n";
 
+    MemberList memberList = new MemberList();
+
     public void chooseUser() {
         frame = new JFrame();
         Engine engine = new Engine();
@@ -71,8 +73,8 @@ public class SwingGUI {
 
         // Creating the buttons, textfields and textarea.
 
-        JButton topButton = new JButton("Create Member");
-        JButton midButton = new JButton("Show Members");
+        JButton createMember = new JButton("Create Member");
+        JButton showMembers = new JButton("Show Members");
         JButton midButton2 = new JButton("Option 3");
         JButton buttomButton = new JButton("Save & Exit");
 
@@ -85,8 +87,8 @@ public class SwingGUI {
         inputField.add(label5);
 
         // Gives all panels a specific location on the screen.
-        topButton.setBounds(10, 10, 200, 100);
-        midButton.setBounds(10, 120, 200, 100);
+        createMember.setBounds(10, 10, 200, 100);
+        showMembers.setBounds(10, 120, 200, 100);
         midButton2.setBounds(10, 230, 200, 100);
         buttomButton.setBounds(10, 340, 200, 100);
         textPanel.setBounds(220, 10, 900, 400);
@@ -100,16 +102,16 @@ public class SwingGUI {
         textPanel.setEditable(false);
 
         // Adds border around all boxes.
-        topButton.setBorder(br);
-        midButton.setBorder(br);
+        createMember.setBorder(br);
+        showMembers.setBorder(br);
         midButton2.setBorder(br);
         buttomButton.setBorder(br);
         textField.setBorder(br);
 
 
         // Adds all Jframe components to the container which makes sure everything is visible.
-        c.add(topButton);
-        c.add(midButton);
+        c.add(createMember);
+        c.add(showMembers);
         c.add(midButton2);
         c.add(buttomButton);
         c.add(textPanel);
@@ -125,11 +127,13 @@ public class SwingGUI {
         // When pressing enter it will perform below action.
         textField.addActionListener(action);
 
-        topButton.addActionListener(e -> {
+        createMember.addActionListener(e -> {
             frame.toBack();
             createUser(frame);
         });
+        showMembers.addActionListener(e -> {textPanel.append(String.valueOf(memberList.getMemberList()).replace("{","").replace("}",""));textPanel.append(newline);});
         buttomButton.addActionListener(e -> System.exit(frame.EXIT_ON_CLOSE));
+
 
     }
 
@@ -190,12 +194,12 @@ public class SwingGUI {
     }
 
     public void validateInput(JTextField textFieldName, JTextField textFieldAge, JCheckBox checkBoxActive, JCheckBox checkBoxComp, JFrame frameMember, JFrame frameMain) {
+        Engine engine = new Engine();
         Border br = BorderFactory.createLineBorder(Color.WHITE);
         String name;
         int age;
         boolean active;
         boolean comp;
-
         name = textFieldName.getText();
 
         if (Objects.equals(textFieldAge.getText(), "")) {
@@ -216,7 +220,12 @@ public class SwingGUI {
         textFieldAge.setBorder(br);
 
         if (!Objects.equals(textFieldName.getText(), "") && (!Objects.equals(textFieldAge.getText(), "")))  {
-            textPanel.append("Name: " + name + newline + "Age: " + age + newline + "Active member: " + active + newline + "Competitive swimmer: " + comp);
+        Member member = new Member(age, engine.getMemberId(), name, active, comp);
+            textPanel.append(String.valueOf(member));
+            textPanel.append(newline);
+//            textPanel.append("Name: " + name + newline + "Age: " + age + newline + "Active member: " + active + newline + "Competitive swimmer: " + comp);
+            engine.setMemberId(engine.getMemberId()+1);
+            memberList.addMemberToList(member);
             success(frameMember, frameMain);
         } else error();
 
