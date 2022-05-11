@@ -1,7 +1,38 @@
 package com.company;
 
 public class Engine {
-  SwingGUI gui = new SwingGUI();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*SwingGUI gui = new SwingGUI();
 
   public void execute() {
     gui.chooseUser();
@@ -20,5 +51,5 @@ public class Engine {
   public void trainerExecute(){
 //    gui.mainPanelTrainer();
     System.out.println("Welcome to the Trainer menu!");
-  }
+  }*/
 }

@@ -14,8 +14,8 @@ public class Member {
     this.age = age;
     this.id = id;
     this.name = name;
-    this.aktiv = aktiv;
-    this.konkurrenceSvømmer = konkurrenceSvømmer;
+    this.active = active;
+    this.competitionSwimmer = competitionSwimmer;
   }
 
   public Integer getAge() {
@@ -30,8 +30,8 @@ public class Member {
     return name;
   }
 
-  public boolean isAktiv() {
-    return aktiv;
+  public boolean isActive() {
+    return active;
   }
 
   public boolean isCompetitionSwimmer() {
@@ -50,8 +50,8 @@ public class Member {
     this.name = name;
   }
 
-  public void setAktiv(boolean aktiv) {
-    this.aktiv = aktiv;
+  public void setActive(boolean active) {
+    this.active = active;
   }
 
   public void setKonkurrenceSvømmer(boolean competitionSwimmer) {
@@ -60,6 +60,6 @@ public class Member {
 
 
   public String toString (){
-    return "Alder: " + age + "\nid: " + id + "\nNavn: " + name + "\nAktiv/ikke aktiv: " + aktiv + "\nKonkurrence/Motionssvømmer: "+ konkurrenceSvømmer;
+    return "Alder: " + age + "\nid: " + id + "\nNavn: " + name + "\nAktiv/ikke aktiv: " + active + "\nKonkurrence/Motionssvømmer: "+ konkurrenceSvømmer;
   }
 }
