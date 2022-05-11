@@ -132,7 +132,29 @@ public class SwingGUI {
             frame.toBack();
             createUser(frame);
         });
-        showMembers.addActionListener(e -> {textPanel.append(String.valueOf(memberList.getMemberList()).replace("{","").replace("}",""));textPanel.append(newline);});
+        showMembers.addActionListener(e ->
+        {
+            for (int i = 0; i < memberList.getMemberList().size(); i++) {
+                Member member = (memberList.getMemberList().get(i));
+                String yesNoActive;
+                String yesNoComp;
+
+                if (member.isCompetitionSwimmer()){
+                    yesNoComp = "Yes";
+                }
+                else yesNoComp = "No";
+                if (member.isActive()){
+                    yesNoActive = "Yes";
+                }
+                else yesNoActive = "No";
+                textPanel.append("Name: " + member.getName() + newline +"Member ID: " + member.getId() + newline +
+                        "Age: " + member.getAge() + newline + "Active membership: " + yesNoActive + newline +
+                        "Competitive Member: " + yesNoComp + newline + newline);
+
+            }
+
+        });
+
         buttomButton.addActionListener(e -> System.exit(frame.EXIT_ON_CLOSE));
 
     }
@@ -206,14 +228,12 @@ public class SwingGUI {
 
     public void validateInput(JTextField textFieldName, JTextField textFieldAge, JCheckBox checkBoxActive, JCheckBox checkBoxComp, JFrame frameMember, JFrame frameMain) {
         Engine engine = new Engine();
-        Border br = BorderFactory.createLineBorder(Color.RED);
         String name;
         int age;
-        if (Objects.equals(textFieldAge.getText(), "")){
+        if (Objects.equals(textFieldAge.getText(), "")) {
             age = 0;
             textFieldAge.setText("0");
-        }
-        else age = Integer.parseInt(textFieldAge.getText());
+        } else age = Integer.parseInt(textFieldAge.getText());
         boolean active;
         boolean comp;
         name = textFieldName.getText();
@@ -221,23 +241,24 @@ public class SwingGUI {
 
         active = checkBoxActive.isSelected();
         comp = checkBoxComp.isSelected();
-        if (Objects.equals(textFieldName.getText(), "")){
+        Border br;
+        if (Objects.equals(textFieldName.getText(), "")) {
+            br = BorderFactory.createLineBorder(Color.RED);
             textFieldName.setBorder(br);
-        }
-       if (age > 100 || age <= 0){
-           textFieldAge.setBorder(br);
-       }
-       else br = BorderFactory.createLineBorder(Color.WHITE);
-        textFieldAge.setBorder(br);
+        } else br = BorderFactory.createLineBorder(Color.WHITE);
         textFieldName.setBorder(br);
+        if (age > 100 || age <= 0) {
+            textFieldAge.setBorder(br);
+        } else br = BorderFactory.createLineBorder(Color.WHITE);
+        textFieldAge.setBorder(br);
 
 
-        if (!Objects.equals(textFieldName.getText(), "") && (!(age > 100) && (!(age < 0))))  {
-        Member member = new Member(age, engine.getMemberId(), name, active, comp);
+        if (!Objects.equals(textFieldName.getText(), "") && (!(age > 100) && (!(age < 0)))) {
+            Member member = new Member(age, engine.getMemberId(), name, active, comp);
             textPanel.append("User Created:" + newline + member + newline);
 //            textPanel.append("Name: " + name + newline + "Age: " + age + newline + "Active member: " + active + newline + "Competitive swimmer: " + comp);
-            engine.setMemberId(engine.getMemberId()+1);
             memberList.addMemberToList(member);
+            engine.setMemberId(engine.getMemberId() + 1);
             success(frameMember, frameMain);
         } else error();
 
