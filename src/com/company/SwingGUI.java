@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Objects;
 
 public class SwingGUI {
@@ -154,6 +156,15 @@ public class SwingGUI {
         JCheckBox checkBoxActive = new JCheckBox();
         JCheckBox checkBoxComp = new JCheckBox();
 
+        // Below keyListener will only accept numbers to avoid any exceptions.
+        textFieldAge.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+                    e.consume();  // if it's not a number, ignore the event
+                }
+            }
+        });
 
         JButton validateButton = new JButton("Validate & save");
 
@@ -181,6 +192,8 @@ public class SwingGUI {
 
         validateButton.setBounds(150, 120, 150, 50);
 
+
+
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setAlwaysOnTop(true);
@@ -193,40 +206,35 @@ public class SwingGUI {
 
     public void validateInput(JTextField textFieldName, JTextField textFieldAge, JCheckBox checkBoxActive, JCheckBox checkBoxComp, JFrame frameMember, JFrame frameMain) {
         Engine engine = new Engine();
-        Border br = BorderFactory.createLineBorder(Color.WHITE);
+        Border br = BorderFactory.createLineBorder(Color.RED);
         String name;
-        int age = 0;
+        int age;
+        if (Objects.equals(textFieldAge.getText(), "")){
+            age = 0;
+            textFieldAge.setText("0");
+        }
+        else age = Integer.parseInt(textFieldAge.getText());
         boolean active;
         boolean comp;
         name = textFieldName.getText();
 
-        try {age = Integer.parseInt(textFieldAge.getText());
-        }
-        catch (NumberFormatException e){
-            frameMain.toFront();
-            frame.dispose();
-        }
-     /*   if (Objects.equals(textFieldAge.getText(), "")) {
-            age = 0;
-        }
-        else age = Integer.parseInt(textFieldAge.getText());*/
+
         active = checkBoxActive.isSelected();
         comp = checkBoxComp.isSelected();
-        if (!Objects.equals(textFieldName.getText(), "")){
+        if (Objects.equals(textFieldName.getText(), "")){
             textFieldName.setBorder(br);
         }
-       if (!Objects.equals(textFieldAge.getText(), "")){
-            textFieldAge.setBorder(br);
-        }
-       else br = BorderFactory.createLineBorder(Color.RED);
-
-        textFieldName.setBorder(br);
+       if (age > 100 || age <= 0){
+           textFieldAge.setBorder(br);
+       }
+       else br = BorderFactory.createLineBorder(Color.WHITE);
         textFieldAge.setBorder(br);
+        textFieldName.setBorder(br);
 
-        if (!Objects.equals(textFieldName.getText(), "") && (!Objects.equals(textFieldAge.getText(), "")))  {
+
+        if (!Objects.equals(textFieldName.getText(), "") && (!(age > 100) && (!(age < 0))))  {
         Member member = new Member(age, engine.getMemberId(), name, active, comp);
-            textPanel.append("User Created:" + newline + member);
-            textPanel.append(newline);
+            textPanel.append("User Created:" + newline + member + newline);
 //            textPanel.append("Name: " + name + newline + "Age: " + age + newline + "Active member: " + active + newline + "Competitive swimmer: " + comp);
             engine.setMemberId(engine.getMemberId()+1);
             memberList.addMemberToList(member);
@@ -254,12 +262,12 @@ public class SwingGUI {
     }
 
     public void success(JFrame frameMember, JFrame frameMain) {
-        frame = new JFrame("Fields have been validated");
+        frame = new JFrame("SUCCESS");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(320, 100);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        JLabel label3 = new JLabel("User created!");
+        JLabel label3 = new JLabel("User successfully created!");
         JPanel panel3 = new JPanel();
         frame.add(panel3);
         panel3.add(label3);
