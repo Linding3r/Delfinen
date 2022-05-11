@@ -60,6 +60,6 @@ public class Member {
 
 
   public String toString (){
-    return "Alder: " + age + "\nid: " + id + "\nNavn: " + name + "\nAktiv/ikke aktiv: " + active + "\nKonkurrence/Motionssvømmer: "+ konkurrenceSvømmer;
+    return "Alder: " + age + "\nid: " + id + "\nNavn: " + name + "\nAktiv/ikke aktiv: " + active + "\nKonkurrence/Motionssvømmer: "+ competitionSwimmer;
   }
 }
