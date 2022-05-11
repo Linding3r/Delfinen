@@ -11,7 +11,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-
+        System.out.println("Test");
         new Main().run();
         //Engine engine = new Engine();
         //engine.execute();
