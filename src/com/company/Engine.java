@@ -10,6 +10,7 @@ public class Engine {
 
   public void runProgram() throws InterruptedException {
     boolean run = true;
+    ui.dolphinLogo();
     ui.introLabel();
     while (run) {
       ui.mainMenu();
