@@ -10,7 +10,7 @@ public class Engine {
 
   public void runProgram() throws InterruptedException {
     boolean run = true;
-    ui.dolphinNew();
+    ui.dolphinLogo();
     ui.introLabel();
     while (run) {
       ui.mainMenu();
@@ -38,9 +38,9 @@ public class Engine {
     int age = sc.nextInt();
     sc.nextLine();
     System.out.println("\n\nIndtast om medlemmet er aktiv eller inaktiv");
-    boolean memberStatus = makeChoiceBoolean("Aktiv = 1\nInactiv = 2");
+    boolean memberStatus = makeChoiceBoolean(ui.activePassiveChoice());
     System.out.println("\n\nIndtast om medlemmet er konkurrencesvømmer eller motionssvømmer");
-    boolean competitionStatus = makeChoiceBoolean("Konkurrencesvømmer = 1\nMotionssvømmer = 2");
+    boolean competitionStatus = makeChoiceBoolean(ui.compNonCompChoice());
     Member member = new Member(age, memberId, name, memberStatus, competitionStatus);
     memberList.addMemberToList(member);
     memberId++;
@@ -61,7 +61,7 @@ public class Engine {
           value = false;
           run = false;
         }
-        default -> System.out.println("Forkert input");
+        default -> System.out.println("INVALID INPUT");
       }
     }
     return value;

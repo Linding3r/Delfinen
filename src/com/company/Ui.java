@@ -29,25 +29,6 @@ public class Ui {
     newLine();
   }
 
-  public void dolphinLogo() throws InterruptedException {
-    System.out.println(BLUE+"\n\n                   YAao,\n" +
-        "                    Y8888b,\n" +
-        "                  ,oA8888888b,\n" +
-        "            ,aaad8888888888888888bo,\n" +
-        "         ,d888888888888888888888888888b,\n" +
-        "       ,888888888888888888888888888888888b,\n" +
-        "      d8888888888888888888888888888888888888,\n" +
-        "     d888888888888888888888888888888888888888b\n" +
-        "    d888888P'                    `Y888888888888,\n" +
-        "    88888P'                    Ybaaaa8888888888l\n" +
-        "   a8888'                      `Y8888P' `V888888\n" +
-        " d8888888a                                `Y8888\n" +
-        "AY/'' `\\Y8b                                 ``Y8b\n" +
-        "Y'      `YP                                    ~~\n" +
-        "         `'"+RESET);
-    Thread.sleep(3000);
-    newLine();
-  }
 
   public void newLine(){
     System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
@@ -59,7 +40,29 @@ public class Ui {
     newLine();
   }
 
-  public void dolphinNew() throws InterruptedException {
+  public String activePassiveChoice(){
+    return """
+        ╔════════════════╗
+        ║      Vælg:     ║
+        ╠════════════════╣
+        ║  1:  Aktiv     ║
+        ║  2:  Passiv    ║
+        ╚════════════════╝
+        """;
+  }
+
+  public String compNonCompChoice(){
+    return """
+        ╔═════════════════════════╗
+        ║          Vælg:          ║
+        ╠═════════════════════════╣
+        ║  1:  Konkurrencesvømmer ║
+        ║  2:  Motionssvømmer     ║
+        ╚═════════════════════════╝
+        """;
+  }
+
+  public void dolphinLogo() throws InterruptedException {
     System.out.println(BLUE+"\n\n                   ▓█▄▄▄\n" +
         "                    ▓████▄▄\n" +
         "                  ▄▄▓███████▄▄\n" +
@@ -70,7 +73,7 @@ public class Ui {
         "     ▄███████████████████████████████████████▄\n" +
         "    ▄██████▒▀                    ▀▓████████████▄\n" +
         "    █████▒▀                    ▓▄▄▄▄▄███████████\n" +
-        "   ▄████▀                      ▀▓████▀▀ ▀▓██████\n" +
+        "   ▄████▀      ®Lindinger      ▀▓████▀▀ ▀▓██████\n" +
         " ▄███████▄                                ▀▓████\n" +
         "▓▓█▀▀ ▀█▓█▄                                 ▀▀██▒\n" +
         "▓▀      ▀▓▒                                    ▀▀\n" +
