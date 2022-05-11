@@ -133,7 +133,6 @@ public class SwingGUI {
         showMembers.addActionListener(e -> {textPanel.append(String.valueOf(memberList.getMemberList()).replace("{","").replace("}",""));textPanel.append(newline);});
         buttomButton.addActionListener(e -> System.exit(frame.EXIT_ON_CLOSE));
 
-
     }
 
     private void createUser(JFrame frameMain) {
