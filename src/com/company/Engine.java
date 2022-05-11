@@ -56,6 +56,7 @@ public class Engine {
       }
     }
     return value;
+  }
 
   SwingGUI gui = new SwingGUI();
 
