@@ -10,6 +10,7 @@ public class Member {
   private Trainer trainer;
 
 
+
   public Member(Integer age, int id, String name, boolean active, boolean competitionSwimmer) {
     this.age = age;
     this.id = id;

@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class SwingGUI {
 
-    private JFrame frame;
+   /* private JFrame frame;
     private TextArea textPanel;
     private JTextField textField;
     private final static String newline = "\n";
@@ -255,7 +255,7 @@ public class SwingGUI {
         frame.setVisible(true);
         frame.setAlwaysOnTop(true);
         button2.addActionListener(f -> {frame.dispose(); frameMember.dispose(); frameMain.toFront();});
-    }
+    }*/
 
 /*  public void mainPanelCashier() {
     setTitle("Swimming Club Dolphin");
@@ -420,7 +420,7 @@ public class SwingGUI {
 
   }*/
 
-    Action action = new AbstractAction() {
+/*    Action action = new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent e) {
             // Adds string from the text field and adds it to the textpanel. It will then make a new line and remove input
@@ -430,6 +430,6 @@ public class SwingGUI {
             textPanel.append(text + newline);
             textField.setText("");
         }
-    };
+    };*/
 
 }

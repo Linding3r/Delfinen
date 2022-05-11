@@ -9,4 +9,10 @@ public class MemberList {
     memberList.add(member);
   }
 
+  @Override
+  public String toString() {
+    return "MemberList{" +
+        "memberList=" + memberList +
+        '}';
+  }
 }
