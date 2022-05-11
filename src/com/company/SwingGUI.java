@@ -108,7 +108,6 @@ public class SwingGUI {
         buttomButton.setBorder(br);
         textField.setBorder(br);
 
-
         // Adds all Jframe components to the container which makes sure everything is visible.
         c.add(createMember);
         c.add(showMembers);
@@ -197,15 +196,21 @@ public class SwingGUI {
         Engine engine = new Engine();
         Border br = BorderFactory.createLineBorder(Color.WHITE);
         String name;
-        int age;
+        int age = 0;
         boolean active;
         boolean comp;
         name = textFieldName.getText();
 
-        if (Objects.equals(textFieldAge.getText(), "")) {
+        try {age = Integer.parseInt(textFieldAge.getText());
+        }
+        catch (NumberFormatException e){
+            frameMain.toFront();
+            frame.dispose();
+        }
+     /*   if (Objects.equals(textFieldAge.getText(), "")) {
             age = 0;
         }
-        else age = Integer.parseInt(textFieldAge.getText());
+        else age = Integer.parseInt(textFieldAge.getText());*/
         active = checkBoxActive.isSelected();
         comp = checkBoxComp.isSelected();
         if (!Objects.equals(textFieldName.getText(), "")){
@@ -221,7 +226,7 @@ public class SwingGUI {
 
         if (!Objects.equals(textFieldName.getText(), "") && (!Objects.equals(textFieldAge.getText(), "")))  {
         Member member = new Member(age, engine.getMemberId(), name, active, comp);
-            textPanel.append(String.valueOf(member));
+            textPanel.append("User Created:" + newline + member);
             textPanel.append(newline);
 //            textPanel.append("Name: " + name + newline + "Age: " + age + newline + "Active member: " + active + newline + "Competitive swimmer: " + comp);
             engine.setMemberId(engine.getMemberId()+1);
@@ -436,6 +441,11 @@ public class SwingGUI {
             // from the text field.
 
             String text = textField.getText();
+            if (Objects.equals(textField.getText(), "clear")){
+                textPanel.setText("");
+                textField.setText("");
+            }
+            else
             textPanel.append(text + newline);
             textField.setText("");
         }
