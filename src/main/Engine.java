@@ -1,4 +1,8 @@
-package com.company;
+package main;
+
+import entities.Member;
+import entities.MemberList;
+import ui.Ui;
 
 import java.util.Scanner;
 

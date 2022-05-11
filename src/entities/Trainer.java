@@ -1,4 +1,4 @@
-package com.company;
+package entities;
 
 public class Trainer {
   private String name;
