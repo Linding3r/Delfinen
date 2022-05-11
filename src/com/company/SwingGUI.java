@@ -37,8 +37,8 @@ public class SwingGUI {
         trainerButton.setBounds(75, 135, 150, 50);
         label.setBounds(10, 0, 300, 20);
 
-        //TODO remove below comment block.
-       /* presidentButton.addActionListener(e -> {
+
+        presidentButton.addActionListener(e -> {
             engine.presidentExecute();
             frame.setVisible(false);
         });
@@ -49,7 +49,7 @@ public class SwingGUI {
         trainerButton.addActionListener(e -> {
             engine.trainerExecute();
             frame.setVisible(false);
-        });*/
+        });
 
 
         frame.setVisible(true);
