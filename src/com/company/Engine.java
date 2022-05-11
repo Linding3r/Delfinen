@@ -11,7 +11,7 @@ public class Engine {
   }
 
   public void setMemberId(int memberId) {
-    this.memberId = memberId;
+    this.memberId = memberId + 1;
   }
 
   SwingGUI gui = new SwingGUI();

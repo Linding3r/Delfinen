@@ -236,6 +236,7 @@ public class SwingGUI {
         } else age = Integer.parseInt(textFieldAge.getText());
         boolean active;
         boolean comp;
+        int memberID = engine.getMemberId();
         name = textFieldName.getText();
 
 
@@ -253,12 +254,12 @@ public class SwingGUI {
         textFieldAge.setBorder(br);
 
 
+
         if (!Objects.equals(textFieldName.getText(), "") && (!(age > 100) && (!(age < 0)))) {
-            Member member = new Member(age, engine.getMemberId(), name, active, comp);
+            Member member = new Member(age, memberID, name, active, comp);
             textPanel.append("User Created:" + newline + member + newline);
 //            textPanel.append("Name: " + name + newline + "Age: " + age + newline + "Active member: " + active + newline + "Competitive swimmer: " + comp);
             memberList.addMemberToList(member);
-            engine.setMemberId(engine.getMemberId() + 1);
             success(frameMember, frameMain);
         } else error();
 
