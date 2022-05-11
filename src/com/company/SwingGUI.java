@@ -14,6 +14,7 @@ public class SwingGUI {
     private TextArea textPanel;
     private JTextField textField;
     private final static String newline = "\n";
+    private int memberID = 2022001;
 
     MemberList memberList = new MemberList();
 
@@ -236,7 +237,6 @@ public class SwingGUI {
         } else age = Integer.parseInt(textFieldAge.getText());
         boolean active;
         boolean comp;
-        int memberID = engine.getMemberId();
         name = textFieldName.getText();
 
 
@@ -253,7 +253,6 @@ public class SwingGUI {
         } else br = BorderFactory.createLineBorder(Color.WHITE);
         textFieldAge.setBorder(br);
 
-        engine.setMemberId(engine.getMemberId());
 
         if (!Objects.equals(textFieldName.getText(), "") && (!(age > 100) && (!(age < 0)))) {
             Member member = new Member(age, memberID, name, active, comp);
@@ -261,6 +260,7 @@ public class SwingGUI {
 //            textPanel.append("Name: " + name + newline + "Age: " + age + newline + "Active member: " + active + newline + "Competitive swimmer: " + comp);
             memberList.addMemberToList(member);
             success(frameMember, frameMain);
+            memberID++;
         } else error();
 
 

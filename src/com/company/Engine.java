@@ -10,8 +10,8 @@ public class Engine {
     return memberId;
   }
 
-  public void setMemberId(int memberId) {
-    this.memberId = memberId + 1;
+  public void setMemberId(int memeberId) {
+    this.memberId = memberId;
   }
 
   SwingGUI gui = new SwingGUI();
