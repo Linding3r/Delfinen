@@ -82,7 +82,7 @@ public class SwingGUI {
 
         JButton createMember = new JButton("Opret nyt medlem");
         JButton showMembers = new JButton("Vis medlemmer i tabel");
-        JButton midButton2 = new JButton("Slet medlem");
+        JButton deleteMember = new JButton("Slet medlem");
         JButton buttomButton = new JButton("Gem og luk");
 
         textArea = new JTextArea();
@@ -96,7 +96,7 @@ public class SwingGUI {
         // Gives all panels a specific location on the screen.
         createMember.setBounds(10, 10, 200, 100);
         showMembers.setBounds(10, 120, 200, 100);
-        midButton2.setBounds(10, 230, 200, 100);
+        deleteMember.setBounds(10, 230, 200, 100);
         buttomButton.setBounds(10, 340, 200, 100);
         textArea.setBounds(220, 10, 900, 400);
         textArea.setBackground(Color.white);
@@ -111,14 +111,14 @@ public class SwingGUI {
         // Adds border around all boxes.
         createMember.setBorder(br);
         showMembers.setBorder(br);
-        midButton2.setBorder(br);
+        deleteMember.setBorder(br);
         buttomButton.setBorder(br);
         textField.setBorder(br);
 
         // Adds all Jframe components to the container which makes sure everything is visible.
         c.add(createMember);
         c.add(showMembers);
-        c.add(midButton2);
+        c.add(deleteMember);
         c.add(buttomButton);
         c.add(textArea);
         c.add(textField);
@@ -133,8 +133,8 @@ public class SwingGUI {
         // When pressing enter it will perform below action.
         textField.addActionListener(action);
 
-        midButton2.addActionListener(e -> {
-            membersTable();
+        deleteMember.addActionListener(e -> {
+            deleteMember();
         });
 
         createMember.addActionListener(e -> {
@@ -293,6 +293,7 @@ public class SwingGUI {
         frame.setSize(320, 100);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
+
         JLabel label3 = new JLabel("Brugeren er blevet oprettet");
         JPanel panel3 = new JPanel();
         frame.add(panel3);
@@ -306,6 +307,30 @@ public class SwingGUI {
             frameMember.dispose();
             frameMain.toFront();
         });
+    }
+
+    public void deleteMember(){
+        frame = new JFrame("Slet Bruger");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(320, 300);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        JPanel panel = new JPanel();
+        JPanel panel2 = new JPanel();
+        JLabel label = new JLabel("Hvilken bruger ønsker du at slette?");
+        JLabel label2 = new JLabel("Skriv medlemsnummer");
+
+        frame.add(panel);
+        panel.setBounds(0,0,100,100);
+        panel2.setBounds(100,100,200,200);
+        panel.add(label);
+        panel.add(label2);
+        frame.add(panel2);
+        JTextField userID = new JTextField();
+        panel2.add(userID);
+        userID.setBounds(150,100,150,20);
+        userID.addActionListener(action);
+        frame.setVisible(true);
     }
 
     public void membersTable() {
@@ -353,169 +378,3 @@ public class SwingGUI {
     }
 
 }
-
-
-
-
-/*  public void mainPanelCashier() {
-    setTitle("Swimming Club Dolphin");
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setLayout(null);
-    //setting the bounds for the JFrame
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//    setBounds(100, 100, 1200, 800);
-    setBounds(100,100,screenSize.width, screenSize.height);
-
-    // Used to create a border around all objects.
-    Border br = BorderFactory.createLineBorder(Color.black);
-    Container c = getContentPane();
-
-    // Creating the buttons, textfields and textarea.
-
-    JButton topButton = new JButton("Option 1");
-    JButton midButton = new JButton("Option 2");
-    JButton midButton2 = new JButton("Option 3");
-    JButton buttomButton = new JButton("Option 4");
-    textPanel = new TextArea();
-    textField = new JTextField(100);
-    JPanel inputField = new JPanel();
-
-    topButton.setLayout(null);
-    midButton.setLayout(null);
-    midButton2.setLayout(null);
-    buttomButton.setLayout(null);
-    textField.setLayout(null);
-    inputField.setLayout(null);
-
-    JLabel label5 = new JLabel("Input: ");
-    label5.setBounds(0, 0, 50, 20);
-    inputField.add(label5);
-
-    //
-
-    // Gives all panels a specific location on the screen.
-    topButton.setBounds(10, 10, 200, 100);
-    midButton.setBounds(10, 120, 200, 100);
-    midButton2.setBounds(10, 230, 200, 100);
-    buttomButton.setBounds(10, 340, 200, 100);
-    textPanel.setBounds(220, 10, 700, 400);
-    textPanel.setBackground(Color.white);
-    textField.setBounds(260, 415, 660, 20);
-
-    //input field where user input is shown.
-    inputField.setBounds(220, 414, 50, 20);
-
-    // Adds border around all boxes.
-    topButton.setBorder(br);
-    midButton.setBorder(br);
-    midButton2.setBorder(br);
-    buttomButton.setBorder(br);
-    textField.setBorder(br);
-
-
-    // welcome text
-    textPanel.append("Welcome to the Cashier menu!!" + newline);
-
-    // Adds all Jframe components to the container which makes sure everything is visible.
-    c.add(topButton);
-    c.add(midButton);
-    c.add(midButton2);
-    c.add(buttomButton);
-    c.add(textPanel);
-    c.add(textField);
-    c.add(inputField);
-
-    setResizable(false);
-    // sets visibility. This is required to open the window in the first place. If visibility == false, it will not
-    // open at all.
-    setVisible(true);
-
-    // Sets the position to the middle of the screen.
-    setLocationRelativeTo(null);
-
-    // When pressing enter it will perform below action.
-    textField.addActionListener(action);
-
-
-
-  }
-
-  public void mainPanelTrainer() {
-    setTitle("Swimming Club Dolphin");
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setLayout(null);
-    //setting the bounds for the JFrame
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//    setBounds(100, 100, 1200, 800);
-    setBounds(100,100,screenSize.width, screenSize.height);
-
-    // Used to create a border around all objects.
-    Border br = BorderFactory.createLineBorder(Color.black);
-    Container c = getContentPane();
-
-    // Creating the buttons, textfields and textarea.
-
-    JButton topButton = new JButton("Option 1");
-    JButton midButton = new JButton("Option 2");
-    JButton midButton2 = new JButton("Option 3");
-    JButton buttomButton = new JButton("Option 4");
-    textPanel = new TextArea();
-    textField = new JTextField(100);
-    JPanel inputField = new JPanel();
-
-    topButton.setLayout(null);
-    midButton.setLayout(null);
-    midButton2.setLayout(null);
-    buttomButton.setLayout(null);
-    textField.setLayout(null);
-    inputField.setLayout(null);
-
-    JLabel label5 = new JLabel("Input: ");
-    label5.setBounds(0, 0, 50, 20);
-    inputField.add(label5);
-
-    //
-
-    // Gives all panels a specific location on the screen.
-    topButton.setBounds(10, 10, 200, 100);
-    midButton.setBounds(10, 120, 200, 100);
-    midButton2.setBounds(10, 230, 200, 100);
-    buttomButton.setBounds(10, 340, 200, 100);
-    textPanel.setBounds(220, 10, 700, 400);
-    textPanel.setBackground(Color.white);
-    textField.setBounds(260, 415, 660, 20);
-
-    //input field where user input is shown.
-    inputField.setBounds(220, 414, 50, 20);
-
-    // Adds border around all boxes.
-    topButton.setBorder(br);
-    midButton.setBorder(br);
-    midButton2.setBorder(br);
-    buttomButton.setBorder(br);
-    textField.setBorder(br);
-
-    setResizable(false);
-    // welcome text
-    textPanel.append("Welcome to the Trainer menu!!" + newline);
-
-    // Adds all Jframe components to the container which makes sure everything is visible.
-    c.add(topButton);
-    c.add(midButton);
-    c.add(midButton2);
-    c.add(buttomButton);
-    c.add(textPanel);
-    c.add(textField);
-    c.add(inputField);
-
-    // sets visibility. This is required to open the window in the first place. If visibility == false, it will not
-    // open at all.
-    setVisible(true);
-
-    // Sets the position to the middle of the screen.
-    setLocationRelativeTo(null);
-
-    // When pressing enter it will perform below action.
-    textField.addActionListener(action);
-
-  }*/
