@@ -68,6 +68,7 @@ public class Engine {
             case "4" -> sort.sortActive(); //Not working yet
             case "5" -> sort.sortComp(); //Not working yet
             case "6" -> sort.sortRegDate();
+            case "7" -> sort.sortId();
             default -> ui.invalidInput();
         }
     }
