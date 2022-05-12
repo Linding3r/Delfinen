@@ -47,7 +47,7 @@ public class Engine {
             for (int i = 0; i < memberList.getMemberList().size(); i++) {
                 Member member = memberList.getMemberList().get(i);
                 if (whichMemberID == member.getId()) {
-                    System.out.println("Du ved at slette bruger: " + member.getFirstName() + " " + member.getSurname() + " Medlemsnummer: " + member.getId());
+                    System.out.println("Du ved at slette bruger: " + member.getFirstName() + " " + member.getSurname() + ", Medlemsnummer: " + member.getId());
                     System.out.println("Tryk 1 for at slette eller 2 for at afbryde.");
                 }
                 else if (whichMemberID != member.getId()) {
