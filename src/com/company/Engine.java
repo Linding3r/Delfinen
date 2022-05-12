@@ -4,15 +4,6 @@ package com.company;
 
 public class Engine {
 
-  private int memberId = 2022001;
-
-  public int getMemberId() {
-    return memberId;
-  }
-
-  public void setMemberId(int memeberId) {
-    this.memberId = memberId;
-  }
 
   SwingGUI gui = new SwingGUI();
 

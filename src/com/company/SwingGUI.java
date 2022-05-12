@@ -140,15 +140,13 @@ public class SwingGUI {
                 String yesNoActive;
                 String yesNoComp;
 
-                if (member.isCompetitionSwimmer()){
+                if (member.isCompetitionSwimmer()) {
                     yesNoComp = "Yes";
-                }
-                else yesNoComp = "No";
-                if (member.isActive()){
+                } else yesNoComp = "No";
+                if (member.isActive()) {
                     yesNoActive = "Yes";
-                }
-                else yesNoActive = "No";
-                textPanel.append("Name: " + member.getName() + newline +"Member ID: " + member.getId() + newline +
+                } else yesNoActive = "No";
+                textPanel.append("Name: " + member.getName() + newline + "Member ID: " + member.getId() + newline +
                         "Age: " + member.getAge() + newline + "Active membership: " + yesNoActive + newline +
                         "Competitive Member: " + yesNoComp + newline + newline);
 
@@ -183,7 +181,7 @@ public class SwingGUI {
         textFieldAge.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
-                if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+                if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
                     e.consume();  // if it's not a number, ignore the event
                 }
             }
@@ -216,19 +214,17 @@ public class SwingGUI {
         validateButton.setBounds(150, 120, 150, 50);
 
 
-
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setAlwaysOnTop(true);
         frame.setVisible(true);
         frame.toFront();
 
-       validateButton.addActionListener(e -> validateInput(textFieldName, textFieldAge, checkBoxActive, checkBoxComp, frame, frameMain));
+        validateButton.addActionListener(e -> validateInput(textFieldName, textFieldAge, checkBoxActive, checkBoxComp, frame, frameMain));
 
     }
 
     public void validateInput(JTextField textFieldName, JTextField textFieldAge, JCheckBox checkBoxActive, JCheckBox checkBoxComp, JFrame frameMember, JFrame frameMain) {
-        Engine engine = new Engine();
         String name;
         int age;
         if (Objects.equals(textFieldAge.getText(), "")) {
@@ -297,7 +293,11 @@ public class SwingGUI {
         panel3.add(button2);
         frame.setVisible(true);
         frame.setAlwaysOnTop(true);
-        button2.addActionListener(f -> {frame.dispose(); frameMember.dispose(); frameMain.toFront();});
+        button2.addActionListener(f -> {
+            frame.dispose();
+            frameMember.dispose();
+            frameMain.toFront();
+        });
     }
 
 /*  public void mainPanelCashier() {
@@ -470,12 +470,11 @@ public class SwingGUI {
             // from the text field.
 
             String text = textField.getText();
-            if (Objects.equals(textField.getText(), "clear")){
+            if (Objects.equals(textField.getText(), "clear")) {
                 textPanel.setText("");
                 textField.setText("");
-            }
-            else
-            textPanel.append(text + newline);
+            } else
+                textPanel.append(text + newline);
             textField.setText("");
         }
     };
