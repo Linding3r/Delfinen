@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.time.Year;
 import java.util.Objects;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -18,7 +19,7 @@ public class SwingGUI {
     private JTextArea textArea;
     private JTextField textField;
     private final static String newline = "\n";
-    private int memberID = 2022001;
+    private int memberID = Integer.parseInt(String.valueOf(Year.now()))*1000+1;
 
     MemberList memberList = new MemberList();
 
