@@ -14,7 +14,7 @@ import javax.swing.JTable;
 public class SwingGUI {
 
     private JFrame frame;
-    private TextArea textPanel;
+    private JTextArea textArea;
     private JTextField textField;
     private final static String newline = "\n";
     private int memberID = 2022001;
@@ -84,7 +84,7 @@ public class SwingGUI {
         JButton midButton2 = new JButton("Option 3");
         JButton buttomButton = new JButton("Gem og luk");
 
-        textPanel = new TextArea();
+        textArea = new JTextArea();
         textField = new JTextField(100);
         JPanel inputField = new JPanel();
 
@@ -97,15 +97,15 @@ public class SwingGUI {
         showMembers.setBounds(10, 120, 200, 100);
         midButton2.setBounds(10, 230, 200, 100);
         buttomButton.setBounds(10, 340, 200, 100);
-        textPanel.setBounds(220, 10, 900, 400);
-        textPanel.setBackground(Color.white);
+        textArea.setBounds(220, 10, 900, 400);
+        textArea.setBackground(Color.white);
         textField.setBounds(260, 415, 860, 20);
 
         //input field where user input is shown.
         inputField.setBounds(220, 414, 50, 20);
 
         //Makes the textfield uneditable
-        textPanel.setEditable(false);
+        textArea.setEditable(false);
 
         // Adds border around all boxes.
         createMember.setBorder(br);
@@ -119,7 +119,7 @@ public class SwingGUI {
         c.add(showMembers);
         c.add(midButton2);
         c.add(buttomButton);
-        c.add(textPanel);
+        c.add(textArea);
         c.add(textField);
         c.add(inputField);
 
@@ -153,7 +153,7 @@ public class SwingGUI {
                 if (member.isActive()) {
                     yesNoActive = "Ja";
                 } else yesNoActive = "Nej";
-                textPanel.append("Navn: " + member.getName() + newline + "Medlemsnummer: " + member.getId() + newline +
+                textArea.append("Navn: " + member.getName() + newline + "Medlemsnummer: " + member.getId() + newline +
                         "Age: " + member.getAge() + newline + "Aktivt medlemsskab: " + yesNoActive + newline +
                         "Konkurrence svømmer: " + yesNoComp + newline + newline);
 
@@ -238,10 +238,10 @@ public class SwingGUI {
 
             String text = textField.getText();
             if (Objects.equals(textField.getText(), "clear")) {
-                textPanel.setText("");
+                textArea.setText("");
                 textField.setText("");
             } else
-                textPanel.append(text + newline);
+                textArea.append(text + newline);
             textField.setText("");
         }
     };
@@ -274,7 +274,7 @@ public class SwingGUI {
 
         if (!Objects.equals(textFieldName.getText(), "") && (!(age > 100) && (!(age < 0)))) {
             Member member = new Member(age, memberID, name, active, comp);
-            textPanel.append("User Created:" + newline + member + newline);
+            textArea.append("User Created:" + newline + member + newline);
 //            textPanel.append("Name: " + name + newline + "Age: " + age + newline + "Active member: " + active + newline + "Competitive swimmer: " + comp);
             memberList.addMemberToList(member);
             success(frameMember, frameMain);
@@ -323,13 +323,12 @@ public class SwingGUI {
     }
 
     public void membersTable() {
-        // frame
+
         JFrame f = new JFrame();
-        // Table
         JTable j;
 
             // Frame Title
-            f.setTitle("JTable Example");
+            f.setTitle("Tabel over medlemmer");
             String[][] data = new String[memberList.getMemberList().size()][5];
             String[] columnNames = {"Navn", "Alder", "Medlemsnummer","Aktivt medlem", "Konkurrencesvømmer"};
         for (int i = 0; i < memberList.getMemberList().size(); i++) {
