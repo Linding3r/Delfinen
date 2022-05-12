@@ -11,7 +11,8 @@ public class Engine {
   private Scanner sc = new Scanner(System.in);
   public static MemberList memberList = new MemberList();
   private Sort sort = new Sort();
-  private int memberId = 1;
+  private int memberId = 999;
+  private int idCode = 1000;
   Ui ui = new Ui();
 
     public void runProgram() throws InterruptedException {
@@ -87,16 +88,19 @@ public class Engine {
         boolean competitionStatus = makeChoiceBoolean(ui.compNonCompChoice());
         System.out.println("\n\nIndtast om medlemmet har betalt eller ikke betalt");
         boolean paymentStatus = makeChoiceBoolean(ui.paidNotPaidChoice());
-        int idCode = 1000;
-        if(memberId == 1000){
-            memberId = 1001;
-            idCode = 10000;
-        } else if(memberId==9999){
-            idCode = 100000;
-        }
+        idCode = updateIdCode(idCode);
         Member member = new Member(age, memberId, firstname, surname, memberStatus, competitionStatus, paymentStatus,idCode);
         memberList.addMemberToList(member);
         memberId++;
+    }
+
+    public int updateIdCode(int idCode){
+        if(memberId == 1000){
+            memberId = 1001;
+            return 10000;
+        } else if(memberId==9999){
+            return 100000;
+        } else return idCode;
     }
 
     public boolean makeChoiceBoolean(String ui) {
