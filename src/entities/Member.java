@@ -14,7 +14,7 @@ public class Member {
   private Trainer trainer;
   private LocalDate registerDate = LocalDate.now();
 
-  public Member(Integer age, int id, String name, boolean active, boolean competitionSwimmer) {
+  public Member(Integer age, int id, String firstName, String surname, boolean active, boolean competitionSwimmer, boolean payment) {
     this.age = age;
     this.id = id;
     this.firstName = firstName;
