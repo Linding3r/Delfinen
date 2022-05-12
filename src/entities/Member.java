@@ -10,18 +10,19 @@ public class Member {
   private String surname;
   private boolean active;
   private boolean competitionSwimmer;
+  private boolean payment;
   private Trainer trainer;
   private LocalDate registerDate = LocalDate.now();
 
-
-
-  public Member(Integer age, int id, String firstName, String surname, boolean active, boolean competitionSwimmer) {
+  public Member(Integer age, int id, String name, boolean active, boolean competitionSwimmer) {
     this.age = age;
     this.id = id;
     this.firstName = firstName;
     this.surname = surname;
     this.active = active;
-    this.id = id;
+    this.competitionSwimmer = competitionSwimmer;
+    this.payment = payment;
+
   }
 
   public Integer getAge() {
@@ -76,6 +77,15 @@ public class Member {
     this.competitionSwimmer = competitionSwimmer;
   }
 
+  public boolean isPayment() {
+    return payment;
+  }
+
+  public void setPayment(boolean payment) {
+    this.payment = payment;
+  }
+
+
   public String activeOrPassive(){
     String activeOrPassive;
     if(active == true){
@@ -87,7 +97,7 @@ public class Member {
   public String compOrNotComp(){
     String competition;
     if(active == true){
-      competition = "Konkurencesvømmer";
+      competition = "Konkurrencesvømmer";
     } else competition = "Motionssvømmer";
     return competition;
   }

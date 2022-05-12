@@ -27,6 +27,7 @@ public class Engine {
         case "1" -> addMember();
         case "2" -> System.out.println(memberList.toString());
         case "3" -> sortMemberList();
+        case "4" -> changePaymentStatus();
         case "9" -> {
           run = false;
           ui.newLine();
@@ -65,7 +66,9 @@ public class Engine {
     boolean memberStatus = makeChoiceBoolean(ui.activePassiveChoice());
     System.out.println("\n\nIndtast om medlemmet er konkurrencesvømmer eller motionssvømmer");
     boolean competitionStatus = makeChoiceBoolean(ui.compNonCompChoice());
-    Member member = new Member(age, memberId, firstname, surname, memberStatus, competitionStatus);
+    System.out.println("\n\nIndtast om medlemmet har betalt eller ikke betalt");
+    boolean paymentStatus = makeChoiceBoolean(ui.paidNotPaidChoice());
+    Member member = new Member(age, memberId, firstname, surname, memberStatus, competitionStatus, paymentStatus);
     memberList.addMemberToList(member);
     memberId++;
   }
@@ -89,5 +92,19 @@ public class Engine {
       }
     }
     return value;
+  }
+
+  public void changePaymentStatus(){
+    System.out.println("Indtast ID på medlem, som du vil ændre betalingsstatus for:");
+    int id = sc.nextInt();
+    for(int i = 0; i < memberList.getMemberList().size(); i++){
+      if (id == memberList.getMemberList().get(i).getId()){
+        if (memberList.getMemberList().get(i).isPayment() == true) { // TODO: 12/05/2022 Refactor change of status to seperate method
+          memberList.getMemberList().get(i).setPayment(false);
+        } else {
+          memberList.getMemberList().get(i).setPayment(true);
+        }
+      }
+    }
   }
 }
