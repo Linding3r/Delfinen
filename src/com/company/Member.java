@@ -61,6 +61,15 @@ public class Member {
 
 
   public String toString (){
-    return "Alder: " + age + "\nid: " + id + "\nNavn: " + name + "\nAktiv/ikke aktiv: " + active + "\nKonkurrence/Motionssvømmer: "+ competitionSwimmer;
+    String yesNoActive;
+    String yesNoComp;
+
+    if (competitionSwimmer) {
+      yesNoComp = "Ja";
+    } else yesNoComp = "Nej";
+    if (active) {
+      yesNoActive = "Ja";
+    } else yesNoActive = "Nej";
+    return "Navn: " + name  + " | Alder: " + age + " | id: " + id + " | Aktiv: " + yesNoActive + " | Konkurrencesvømmer: "+ yesNoComp + "\n";
   }
 }

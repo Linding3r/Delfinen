@@ -19,7 +19,7 @@ public class SwingGUI {
     private JTextArea textArea;
     private JTextField textField;
     private final static String newline = "\n";
-    private int memberID = Integer.parseInt(String.valueOf(Year.now()))*1000+1;
+    private int memberID = Integer.parseInt(String.valueOf(Year.now())) * 1000 + 1;
 
     MemberList memberList = new MemberList();
 
@@ -100,14 +100,14 @@ public class SwingGUI {
         showMembers.setBounds(10, 120, 200, 100);
         deleteMember.setBounds(10, 230, 200, 100);
         buttomButton.setBounds(10, 340, 200, 100);
-        clearScreen.setBounds(260, 440, 100, 20);
+        clearScreen.setBounds(260, 740, 100, 20);
 
-        textArea.setBounds(220, 10, 900, 400);
+        textArea.setBounds(220, 10, 900, 700);
         textArea.setBackground(Color.white);
-        textField.setBounds(260, 415, 860, 20);
+        textField.setBounds(260, 715, 860, 20);
 
         //input field where user input is shown.
-        inputField.setBounds(220, 414, 50, 20);
+        inputField.setBounds(215, 710, 50, 20);
 
         //Makes the textfield uneditable
         textArea.setEditable(false);
@@ -139,7 +139,10 @@ public class SwingGUI {
         // When pressing enter it will perform below action.
         textField.addActionListener(action);
 
-        clearScreen.addActionListener(e -> {textArea.setText(""); textField.setText("");});
+        clearScreen.addActionListener(e -> {
+            textArea.setText("");
+            textField.setText("");
+        });
         deleteMember.addActionListener(e -> {
             deleteMember(textField, textArea);
         });
@@ -230,7 +233,7 @@ public class SwingGUI {
             // from the text field.
 
             String text = textField.getText();
-            if (Objects.equals(textField.getText(), "clear")) {
+            if (Objects.equals(textField.getText(), "ryd")) {
                 textArea.setText("");
                 textField.setText("");
             } else
@@ -267,8 +270,7 @@ public class SwingGUI {
 
         if (!Objects.equals(textFieldName.getText(), "") && (!(age > 100) && (!(age < 0)))) {
             Member member = new Member(age, memberID, name, active, comp);
-            textArea.append("User Created:" + newline + member + newline);
-//            textPanel.append("Name: " + name + newline + "Age: " + age + newline + "Active member: " + active + newline + "Competitive swimmer: " + comp);
+            textArea.append("Medlem oprettet: " + newline + member + newline);
             memberList.addMemberToList(member);
             success(frameMember, frameMain);
             memberID++;
@@ -316,19 +318,20 @@ public class SwingGUI {
         });
     }
 
-    public void deleteMember(JTextField textField, JTextArea textArea){
+    public void deleteMember(JTextField textField, JTextArea textArea) {
         try {
             for (int i = 0; i < memberList.getMemberList().size(); i++) {
                 int getID = memberList.getMemberList().get(i).getId();
-                if (Integer.parseInt(textField.getText()) == getID) {
+                if (Objects.equals(textField.getText(), "")){
+                    textArea.append("Ugyldigt nummer. Indtast medlemsnummeret i input feltet under." + newline);
+                }
+                else if (Integer.parseInt(textField.getText()) == getID) {
                     textArea.append(newline + "Du har slettet: " + newline + memberList.getMemberList().get(i).getName() + ", Medlemsnummer: " + getID);
                     memberList.getMemberList().remove(i);
                     textField.setText("");
                 }
-                else textArea.append(("Indtast medlemsnummeret på medlemmet du ønsker at slette" + newline));
             }
         }catch (NumberFormatException e){
-            textArea.append("Ugyldigt nummer. Indtast medlemsnummeret i input feltet under." + newline);
         }
     }
 
@@ -346,17 +349,24 @@ public class SwingGUI {
             data[i][0] = member.getName();
             data[i][1] = String.valueOf(member.getAge());
             data[i][2] = String.valueOf(member.getId());
-            data[i][3] = String.valueOf(member.isActive());
-            data[i][4] = String.valueOf(member.isCompetitionSwimmer());
+            String yesNoActive;
+            String yesNoComp;
+            if (member.isCompetitionSwimmer()) {
+                yesNoComp = "Ja";
+            } else yesNoComp = "Nej";
+            if (member.isActive()) {
+                yesNoActive = "Ja";
+            } else yesNoActive = "Nej";
+            data[i][3] = yesNoActive;
+            data[i][4] = yesNoComp;
             // Initializing the JTable
         }
         j = new JTable(data, columnNames);
         j.setAutoCreateRowSorter(true);
-        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames){
+        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
 
             @Override
-            public boolean isCellEditable(int row, int column)
-            {
+            public boolean isCellEditable(int row, int column) {
                 // make read only fields except column 0,13,14
                 return column == 0 || column == 3 || column == 1 || column == 4;
             }
