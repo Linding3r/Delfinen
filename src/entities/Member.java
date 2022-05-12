@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Member {
 
-  private static int id = 2022000;
+  private int id;
   private Integer age;
   private String firstName;
   private String surname;
@@ -21,7 +21,7 @@ public class Member {
     this.firstName = firstName;
     this.surname = surname;
     this.active = active;
-    this.id = id++;
+    this.id = id;
   }
 
   public Integer getAge() {
@@ -30,6 +30,14 @@ public class Member {
 
   public int getId() {
     return id;
+  }
+
+  public Trainer getTrainer() {
+    return trainer;
+  }
+
+  public LocalDate getRegisterDate() {
+    return registerDate;
   }
 
   public String getFirstName() {

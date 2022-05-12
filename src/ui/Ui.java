@@ -16,8 +16,25 @@ public class Ui {
         ╠════════════════════════════════╣
         ║   1:  Tilføj Ny Medlem         ║
         ║   2:  Liste Af Medlemer        ║
+        ║   3:  Sortere Medlemmer        ║
         ║   9:  SHUTDOWN                 ║
         ╚════════════════════════════════╝
+        """);
+  }
+
+  public void sortMenu() {
+    System.out.println("""
+        ╔══════════════════════════════════════╗
+        ║           SORTERINGS MENU            ║
+        ╠══════════════════════════════════════╣
+        ║   1:  Sorter efter Efternavn         ║
+        ║   2:  Sorter efter Fornavn           ║
+        ║   3:  Sorter efter Alder             ║
+        ║   4:  Sorter efter Aktivitets Status ║
+        ║   5:  Sorter efter Svømme Status     ║
+        ║   6:  Sorter efter Anciennitet       ║
+        ║   7:  Sorter efter ID nummer         ║
+        ╚══════════════════════════════════════╝
         """);
   }
 

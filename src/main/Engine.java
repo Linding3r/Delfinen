@@ -4,11 +4,14 @@ import entities.Member;
 import entities.MemberList;
 import ui.Ui;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Engine {
   private Scanner sc = new Scanner(System.in);
-  public MemberList memberList = new MemberList();
+  public static MemberList memberList = new MemberList();
+  private Sort sort = new Sort();
 
   private int memberId = 2022001;
   Ui ui = new Ui();
@@ -23,6 +26,7 @@ public class Engine {
       switch (choice) {
         case "1" -> addMember();
         case "2" -> System.out.println(memberList.toString());
+        case "3" -> sortMemberList();
         case "9" -> {
           run = false;
           ui.newLine();
@@ -32,6 +36,19 @@ public class Engine {
       }
     }
 
+  }
+
+  public void sortMemberList() throws InterruptedException {
+    ui.sortMenu();
+    switch(sc.nextLine()){
+      case "1" -> sort.sortSurname();
+      case "2" -> sort.sortFirstname();
+      case "3" -> sort.sortAge();
+      case "4" -> sort.sortActive(); //Not working yet
+      case "5" -> sort.sortComp(); //Not working yet
+      case "6" -> sort.sortRegDate();
+      default -> ui.invalidInput();
+    }
   }
 
   public void addMember() {

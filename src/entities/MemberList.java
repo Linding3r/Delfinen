@@ -5,7 +5,7 @@ import ui.Ui;
 import java.util.ArrayList;
 
 public class MemberList {
-  private ArrayList<Member> memberList = new ArrayList<>();
+  private static ArrayList<Member> memberList = new ArrayList<>();
   Ui ui = new Ui();
 
   public void addMemberToList(Member member){
