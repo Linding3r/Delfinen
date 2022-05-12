@@ -6,7 +6,8 @@ public class Member {
 
   private Integer age;
   private int id;
-  private String name;
+  private String firstName;
+  private String surname;
   private boolean active;
   private boolean competitionSwimmer;
   private Trainer trainer;
@@ -14,10 +15,11 @@ public class Member {
 
 
 
-  public Member(Integer age, int id, String name, boolean active, boolean competitionSwimmer) {
+  public Member(Integer age, int id, String firstName, String surname, boolean active, boolean competitionSwimmer) {
     this.age = age;
     this.id = id;
-    this.name = name;
+    this.firstName = firstName;
+    this.surname = surname;
     this.active = active;
     this.competitionSwimmer = competitionSwimmer;
   }
@@ -30,8 +32,12 @@ public class Member {
     return id;
   }
 
-  public String getName() {
-    return name;
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public String getSurname(){
+    return surname;
   }
 
   public boolean isActive() {
@@ -46,8 +52,12 @@ public class Member {
     this.age = age;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public void setSurname(String surname){
+    this.surname = surname;
   }
 
   public void setActive(boolean active) {
@@ -75,7 +85,7 @@ public class Member {
   }
 
   public String toString(){
-    return String.format("ID: %-7d | Navn: %-20s | Alder: %2d | %-6s | %-17s | ", id, name, age, activeOrPassive(),compOrNotComp()) + registerDate + "\n";
+    return String.format("ID: %-7d | Navn: %-20s | Alder: %2d | %-6s | %-17s | ", id, firstName, age, activeOrPassive(),compOrNotComp()) + registerDate + "\n";
   }
 
 

@@ -36,8 +36,10 @@ public class Engine {
   public void addMember() {
     ui.newLine();
     System.out.println("Du er nu i gang med at Tiljøje et nyt medlem!\n\n\n");
-    System.out.println("Indtast medlemmets navn:");
-    String name = sc.nextLine();
+    System.out.println("Indtast medlemmets fornavn:");
+    String firstname = sc.nextLine();
+    System.out.println("Indtast medlemmets efternavn");
+    String surname = sc.nextLine();
     System.out.println("\n\nIndtast medlemmets alder:");
     int age = sc.nextInt();
     sc.nextLine();
@@ -45,7 +47,7 @@ public class Engine {
     boolean memberStatus = makeChoiceBoolean(ui.activePassiveChoice());
     System.out.println("\n\nIndtast om medlemmet er konkurrencesvømmer eller motionssvømmer");
     boolean competitionStatus = makeChoiceBoolean(ui.compNonCompChoice());
-    Member member = new Member(age, memberId, name, memberStatus, competitionStatus);
+    Member member = new Member(age, memberId, firstname, surname, memberStatus, competitionStatus);
     memberList.addMemberToList(member);
     memberId++;
   }
