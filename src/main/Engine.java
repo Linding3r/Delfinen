@@ -87,7 +87,14 @@ public class Engine {
         boolean competitionStatus = makeChoiceBoolean(ui.compNonCompChoice());
         System.out.println("\n\nIndtast om medlemmet har betalt eller ikke betalt");
         boolean paymentStatus = makeChoiceBoolean(ui.paidNotPaidChoice());
-        Member member = new Member(age, memberId, firstname, surname, memberStatus, competitionStatus, paymentStatus);
+        int idCode = 1000;
+        if(memberId == 1000){
+            memberId = 1001;
+            idCode = 10000;
+        } else if(memberId==9999){
+            idCode = 100000;
+        }
+        Member member = new Member(age, memberId, firstname, surname, memberStatus, competitionStatus, paymentStatus,idCode);
         memberList.addMemberToList(member);
         memberId++;
     }
