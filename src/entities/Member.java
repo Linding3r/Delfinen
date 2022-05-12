@@ -4,8 +4,8 @@ import java.time.LocalDate;
 
 public class Member {
 
+  private static int id = 2022000;
   private Integer age;
-  private int id;
   private String firstName;
   private String surname;
   private boolean active;
@@ -21,7 +21,7 @@ public class Member {
     this.firstName = firstName;
     this.surname = surname;
     this.active = active;
-    this.competitionSwimmer = competitionSwimmer;
+    this.id = id++;
   }
 
   public Integer getAge() {
@@ -84,8 +84,20 @@ public class Member {
     return competition;
   }
 
+  public String shortenSurname(){
+    if(surname.length() > 20){
+      return surname.substring(0,16) + "...";
+    } else return surname;
+  }
+
+  public String shortenFirstname(){
+    if(firstName.length() > 15){
+      return firstName.substring(0,14) + "...";
+    } else return firstName;
+  }
+
   public String toString(){
-    return String.format("ID: %-7d | Navn: %-20s | Alder: %2d | %-6s | %-17s | ", id, firstName, age, activeOrPassive(),compOrNotComp()) + registerDate + "\n";
+    return String.format("ID: %-7d | Efternavn: %-20s | Fornavn: %-18s | Alder: %2d | %-6s | %-17s | ", id, shortenSurname(), shortenFirstname(), age, activeOrPassive(),compOrNotComp()) + registerDate + "\n";
   }
 
 

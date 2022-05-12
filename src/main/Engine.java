@@ -7,8 +7,9 @@ import ui.Ui;
 import java.util.Scanner;
 
 public class Engine {
-  Scanner sc = new Scanner(System.in);
-  MemberList memberList = new MemberList();
+  private Scanner sc = new Scanner(System.in);
+  public MemberList memberList = new MemberList();
+
   private int memberId = 2022001;
   Ui ui = new Ui();
 
