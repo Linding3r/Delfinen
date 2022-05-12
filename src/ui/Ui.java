@@ -17,7 +17,8 @@ public class Ui {
         ║   1:  Tilføj Ny Medlem         ║
         ║   2:  Liste Af Medlemer        ║
         ║   3:  Sortere Medlemmer        ║
-        ║   4:  Ændre Betaling Status    ║
+        ║   4:  Slette Medlem            ║
+        ║   5:  Ændre Betaling Status    ║
         ║   9:  SHUTDOWN                 ║
         ╚════════════════════════════════╝
         """);
@@ -84,7 +85,7 @@ public class Ui {
         "║" + BLUE + "  ██   ██ ██      ██      ██      ██ ██  ██ ██ ██      ██  ██ ██ " + RESET + " ║\n" +
         "║" + BLUE + "  ██████  ███████ ███████ ██      ██ ██   ████ ███████ ██   ████ " + RESET + " ║\n" +
         "╚══════════════════════════════════════════════════════════════════╝");
-    Thread.sleep(3000);
+//    Thread.sleep(3000);
     newLine();
   }
 
@@ -104,7 +105,7 @@ public class Ui {
         "▓▓█▀▀ ▀█▓█▄                                 ▀▀██▒\n" +
         "▓▀      ▀▓▒                                    ▀▀\n" +
         "         ▀▀" + RESET);
-    Thread.sleep(3000);
+//    Thread.sleep(3000);
     newLine();
   }
 
