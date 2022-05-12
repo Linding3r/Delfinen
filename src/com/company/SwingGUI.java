@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.time.Year;
+import java.util.Date;
 import java.util.Objects;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -19,7 +20,7 @@ public class SwingGUI {
     private JTextArea textArea;
     private JTextField textField;
     private final static String newline = "\n";
-    private int memberID = Integer.parseInt(String.valueOf(Year.now())) * 1000 + 1;
+    private int memberID = Integer.parseInt(String.valueOf(Year.now())) *1000 + 999;
 
     MemberList memberList = new MemberList();
 
@@ -267,13 +268,21 @@ public class SwingGUI {
         } else br = BorderFactory.createLineBorder(Color.WHITE);
         textFieldAge.setBorder(br);
 
-
         if (!Objects.equals(textFieldName.getText(), "") && (!(age > 100) && (!(age < 0)))) {
             Member member = new Member(age, memberID, name, active, comp);
+            if (memberList.getMemberList() != null && !(memberList.getMemberList().isEmpty())) {
+                int calculateNewYear = memberList.getMemberList().get(memberList.getMemberList().size() - 1).getId() - Integer.parseInt(String.valueOf(Year.now()));
+                memberID = Integer.parseInt(String.valueOf(Year.now())) + calculateNewYear + 1;
+                }
+
             textArea.append("Medlem oprettet: " + newline + member + newline);
             memberList.addMemberToList(member);
-            success(frameMember, frameMain);
             memberID++;
+            if (memberID == 2023000){
+                memberID = 20221000;
+            }
+            success(frameMember, frameMain);
+
         } else error();
 
 
@@ -368,7 +377,7 @@ public class SwingGUI {
             @Override
             public boolean isCellEditable(int row, int column) {
                 // make read only fields except column 0,13,14
-                return column == 0 || column == 3 || column == 1 || column == 4;
+                return column == 0 || column == 2 || column == 1 || column == 4;
             }
         };
         j.setModel(tableModel);
