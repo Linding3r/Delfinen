@@ -10,6 +10,7 @@ import java.util.Objects;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class SwingGUI {
 
@@ -80,8 +81,8 @@ public class SwingGUI {
         // Creating the buttons, textfields and textarea.
 
         JButton createMember = new JButton("Opret nyt medlem");
-        JButton showMembers = new JButton("Vis medlemmer");
-        JButton midButton2 = new JButton("Option 3");
+        JButton showMembers = new JButton("Vis medlemmer i tabel");
+        JButton midButton2 = new JButton("Slet medlem");
         JButton buttomButton = new JButton("Gem og luk");
 
         textArea = new JTextArea();
@@ -142,22 +143,7 @@ public class SwingGUI {
         });
         showMembers.addActionListener(e ->
         {
-            for (int i = 0; i < memberList.getMemberList().size(); i++) {
-                Member member = (memberList.getMemberList().get(i));
-                String yesNoActive;
-                String yesNoComp;
-
-                if (member.isCompetitionSwimmer()) {
-                    yesNoComp = "Ja";
-                } else yesNoComp = "Nej";
-                if (member.isActive()) {
-                    yesNoActive = "Ja";
-                } else yesNoActive = "Nej";
-                textArea.append("Navn: " + member.getName() + newline + "Medlemsnummer: " + member.getId() + newline +
-                        "Age: " + member.getAge() + newline + "Aktivt medlemsskab: " + yesNoActive + newline +
-                        "Konkurrence svømmer: " + yesNoComp + newline + newline);
-
-            }
+            membersTable();
         });
 
         buttomButton.addActionListener(e -> System.exit(frame.EXIT_ON_CLOSE));
@@ -327,10 +313,10 @@ public class SwingGUI {
         JFrame f = new JFrame();
         JTable j;
 
-            // Frame Title
-            f.setTitle("Tabel over medlemmer");
-            String[][] data = new String[memberList.getMemberList().size()][5];
-            String[] columnNames = {"Navn", "Alder", "Medlemsnummer","Aktivt medlem", "Konkurrencesvømmer"};
+        // Frame Title
+        f.setTitle("Tabel over medlemmer");
+        String[][] data = new String[memberList.getMemberList().size()][5];
+        String[] columnNames = {"Navn", "Alder", "Medlemsnummer", "Aktivt medlem", "Konkurrencesvømmer"};
         for (int i = 0; i < memberList.getMemberList().size(); i++) {
             Member member = memberList.getMemberList().get(i);
             data[i][0] = member.getName();
@@ -338,27 +324,35 @@ public class SwingGUI {
             data[i][2] = String.valueOf(member.getId());
             data[i][3] = String.valueOf(member.isActive());
             data[i][4] = String.valueOf(member.isCompetitionSwimmer());
-
             // Initializing the JTable
         }
-            j = new JTable(data, columnNames);
-            j.setAutoCreateRowSorter(true);
+        j = new JTable(data, columnNames);
+        j.setAutoCreateRowSorter(true);
+        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames){
 
-            // Column Names
-            j.setBounds(30, 40, 200, 300);
+            @Override
+            public boolean isCellEditable(int row, int column)
+            {
+                // make read only fields except column 0,13,14
+                return column == 0 || column == 3 || column == 1 || column == 4;
+            }
+        };
+        j.setModel(tableModel);
+        // Column Names
+        j.setBounds(30, 40, 200, 300);
 
-            // adding it to JScrollPane
-            JScrollPane sp = new JScrollPane(j);
-            f.add(sp);
-            // Frame Size
-            f.setSize(700, 200);
-            // Frame Visible = true
-            f.setLocationRelativeTo(null);
-            f.setVisible(true);
-        }
+        // adding it to JScrollPane
+        JScrollPane sp = new JScrollPane(j);
+        f.add(sp);
+        // Frame Size
+        f.setSize(700, 200);
+        // Frame Visible = true
+        f.setLocationRelativeTo(null);
+        f.setVisible(true);
+
+    }
+
 }
-
-// Packages to import
 
 
 
