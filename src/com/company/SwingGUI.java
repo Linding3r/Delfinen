@@ -7,6 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Objects;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class SwingGUI {
 
@@ -21,25 +24,25 @@ public class SwingGUI {
     public void chooseUser() {
         frame = new JFrame();
         Engine engine = new Engine();
-        frame.setTitle("President Account");
+        frame.setTitle("Vælg bruger");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
         Container c = frame.getContentPane();
-        frame.setBounds(0, 0, 300, 250);
+        frame.setBounds(0, 0, 320, 250);
         frame.setLocationRelativeTo(null);
 
-        JLabel label = new JLabel("Choose which account you wish to login to:");
-        JButton presidentButton = new JButton("President");
-        JButton cashierButton = new JButton("Cashier");
-        JButton trainerButton = new JButton("Trainer");
+        JLabel label = new JLabel("Vælg hvilken bruger du ønsker at logge ind på:");
+        JButton presidentButton = new JButton("Formand");
+        JButton cashierButton = new JButton("Kaserer");
+        JButton trainerButton = new JButton("Træner");
         c.add(label);
         c.add(presidentButton);
         c.add(cashierButton);
         c.add(trainerButton);
         frame.setResizable(false);
-        presidentButton.setBounds(75, 25, 150, 50);
-        cashierButton.setBounds(75, 80, 150, 50);
-        trainerButton.setBounds(75, 135, 150, 50);
+        presidentButton.setBounds(95, 25, 150, 50);
+        cashierButton.setBounds(95, 80, 150, 50);
+        trainerButton.setBounds(95, 135, 150, 50);
         label.setBounds(10, 0, 300, 20);
 
 
@@ -62,7 +65,7 @@ public class SwingGUI {
 
     public void mainPanelPresident() {
         frame = new JFrame();
-        frame.setTitle("Swimming Club Dolphin");
+        frame.setTitle("Svømmeklubben Delfinen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
         //setting the bounds for the JFrame
@@ -76,10 +79,10 @@ public class SwingGUI {
 
         // Creating the buttons, textfields and textarea.
 
-        JButton createMember = new JButton("Create Member");
-        JButton showMembers = new JButton("Show Members");
+        JButton createMember = new JButton("Opret nyt medlem");
+        JButton showMembers = new JButton("Vis medlemmer");
         JButton midButton2 = new JButton("Option 3");
-        JButton buttomButton = new JButton("Save & Exit");
+        JButton buttomButton = new JButton("Gem og luk");
 
         textPanel = new TextArea();
         textField = new JTextField(100);
@@ -129,6 +132,10 @@ public class SwingGUI {
         // When pressing enter it will perform below action.
         textField.addActionListener(action);
 
+        midButton2.addActionListener(e -> {
+            membersTable();
+        });
+
         createMember.addActionListener(e -> {
             frame.toBack();
             createUser(frame);
@@ -141,17 +148,16 @@ public class SwingGUI {
                 String yesNoComp;
 
                 if (member.isCompetitionSwimmer()) {
-                    yesNoComp = "Yes";
-                } else yesNoComp = "No";
+                    yesNoComp = "Ja";
+                } else yesNoComp = "Nej";
                 if (member.isActive()) {
-                    yesNoActive = "Yes";
-                } else yesNoActive = "No";
-                textPanel.append("Name: " + member.getName() + newline + "Member ID: " + member.getId() + newline +
-                        "Age: " + member.getAge() + newline + "Active membership: " + yesNoActive + newline +
-                        "Competitive Member: " + yesNoComp + newline + newline);
+                    yesNoActive = "Ja";
+                } else yesNoActive = "Nej";
+                textPanel.append("Navn: " + member.getName() + newline + "Medlemsnummer: " + member.getId() + newline +
+                        "Age: " + member.getAge() + newline + "Aktivt medlemsskab: " + yesNoActive + newline +
+                        "Konkurrence svømmer: " + yesNoComp + newline + newline);
 
             }
-
         });
 
         buttomButton.addActionListener(e -> System.exit(frame.EXIT_ON_CLOSE));
@@ -167,10 +173,10 @@ public class SwingGUI {
 
         Container c = frame.getContentPane();
 
-        JLabel name = new JLabel("Name: ");
-        JLabel age = new JLabel("Age: ");
-        JLabel activeMember = new JLabel("Active member: ");
-        JLabel competitiveSwimmer = new JLabel("Competitive swimmer: ");
+        JLabel name = new JLabel("Fornavn: ");
+        JLabel age = new JLabel("Alder: ");
+        JLabel activeMember = new JLabel("Aktivt medlem: ");
+        JLabel competitiveSwimmer = new JLabel("Konkurrence svømmer: ");
 
         JTextField textFieldName = new JTextField();
         JTextField textFieldAge = new JTextField();
@@ -187,7 +193,7 @@ public class SwingGUI {
             }
         });
 
-        JButton validateButton = new JButton("Validate & save");
+        JButton validateButton = new JButton("Valider og gem");
 
 
         c.add(name);
@@ -223,6 +229,22 @@ public class SwingGUI {
         validateButton.addActionListener(e -> validateInput(textFieldName, textFieldAge, checkBoxActive, checkBoxComp, frame, frameMain));
 
     }
+
+    Action action = new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Adds string from the text field and adds it to the textpanel. It will then make a new line and remove input
+            // from the text field.
+
+            String text = textField.getText();
+            if (Objects.equals(textField.getText(), "clear")) {
+                textPanel.setText("");
+                textField.setText("");
+            } else
+                textPanel.append(text + newline);
+            textField.setText("");
+        }
+    };
 
     public void validateInput(JTextField textFieldName, JTextField textFieldAge, JCheckBox checkBoxActive, JCheckBox checkBoxComp, JFrame frameMember, JFrame frameMain) {
         String name;
@@ -263,12 +285,12 @@ public class SwingGUI {
     }
 
     public void error() {
-        frame = new JFrame("Oopps you messed up!");
+        frame = new JFrame("Fejl!");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(320, 100);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        JLabel label3 = new JLabel("Invalid input, try again");
+        JLabel label3 = new JLabel("Ugyldigt valg, prøv igen");
         JPanel panel3 = new JPanel();
         frame.add(panel3);
         panel3.add(label3);
@@ -280,12 +302,12 @@ public class SwingGUI {
     }
 
     public void success(JFrame frameMember, JFrame frameMain) {
-        frame = new JFrame("SUCCESS");
+        frame = new JFrame("Success");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(320, 100);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        JLabel label3 = new JLabel("User successfully created!");
+        JLabel label3 = new JLabel("Brugeren er blevet oprettet");
         JPanel panel3 = new JPanel();
         frame.add(panel3);
         panel3.add(label3);
@@ -299,6 +321,48 @@ public class SwingGUI {
             frameMain.toFront();
         });
     }
+
+    public void membersTable() {
+        // frame
+        JFrame f = new JFrame();
+        // Table
+        JTable j;
+
+            // Frame Title
+            f.setTitle("JTable Example");
+            String[][] data = new String[memberList.getMemberList().size()][5];
+            String[] columnNames = {"Navn", "Alder", "Medlemsnummer","Aktivt medlem", "Konkurrencesvømmer"};
+        for (int i = 0; i < memberList.getMemberList().size(); i++) {
+            Member member = memberList.getMemberList().get(i);
+            data[i][0] = member.getName();
+            data[i][1] = String.valueOf(member.getAge());
+            data[i][2] = String.valueOf(member.getId());
+            data[i][3] = String.valueOf(member.isActive());
+            data[i][4] = String.valueOf(member.isCompetitionSwimmer());
+
+            // Initializing the JTable
+        }
+            j = new JTable(data, columnNames);
+            j.setAutoCreateRowSorter(true);
+
+            // Column Names
+            j.setBounds(30, 40, 200, 300);
+
+            // adding it to JScrollPane
+            JScrollPane sp = new JScrollPane(j);
+            f.add(sp);
+            // Frame Size
+            f.setSize(700, 200);
+            // Frame Visible = true
+            f.setLocationRelativeTo(null);
+            f.setVisible(true);
+        }
+}
+
+// Packages to import
+
+
+
 
 /*  public void mainPanelCashier() {
     setTitle("Swimming Club Dolphin");
@@ -462,21 +526,3 @@ public class SwingGUI {
     textField.addActionListener(action);
 
   }*/
-
-    Action action = new AbstractAction() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // Adds string from the text field and adds it to the textpanel. It will then make a new line and remove input
-            // from the text field.
-
-            String text = textField.getText();
-            if (Objects.equals(textField.getText(), "clear")) {
-                textPanel.setText("");
-                textField.setText("");
-            } else
-                textPanel.append(text + newline);
-            textField.setText("");
-        }
-    };
-
-}
