@@ -4,16 +4,21 @@ import entities.Member;
 import entities.MemberList;
 import ui.Ui;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.MonthDay;
+import java.time.Year;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Engine {
   private Scanner sc = new Scanner(System.in);
   public static MemberList memberList = new MemberList();
   private Sort sort = new Sort();
-
-  private int memberId = 2022001;
+  private LocalDate date = LocalDate.now();
+  private int memberId = 1;
   Ui ui = new Ui();
 
   public void runProgram() throws InterruptedException {
@@ -36,7 +41,6 @@ public class Engine {
         default -> ui.invalidInput();
       }
     }
-
   }
 
   public void sortMemberList() throws InterruptedException {

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public class Member {
 
-  private int id;
   private Integer age;
   private String firstName;
   private String surname;
@@ -13,10 +12,11 @@ public class Member {
   private boolean payment;
   private Trainer trainer;
   private LocalDate registerDate = LocalDate.now();
+  private int id = (registerDate.getYear() * 10000);
 
   public Member(Integer age, int id, String firstName, String surname, boolean active, boolean competitionSwimmer, boolean payment) {
     this.age = age;
-    this.id = id;
+    this.id += id;
     this.firstName = firstName;
     this.surname = surname;
     this.active = active;
@@ -115,7 +115,7 @@ public class Member {
   }
 
   public String toString(){
-    return String.format("ID: %-7d | Efternavn: %-20s | Fornavn: %-18s | Alder: %2d | %-6s | %-17s | ", id, shortenSurname(), shortenFirstname(), age, activeOrPassive(),compOrNotComp()) + registerDate + "\n";
+    return String.format("ID: %-7d | Efternavn: %-20s | Fornavn: %-18s | Alder: %2d | %-6s | %-18s | ", id, shortenSurname(), shortenFirstname(), age, activeOrPassive(),compOrNotComp()) + registerDate + "\n";
   }
 
 
