@@ -34,7 +34,7 @@ public class SwingGUI {
 
         JLabel label = new JLabel("Vælg hvilken bruger du ønsker at logge ind på:");
         JButton presidentButton = new JButton("Formand");
-        JButton cashierButton = new JButton("Kaserer");
+        JButton cashierButton = new JButton("Kasserer");
         JButton trainerButton = new JButton("Træner");
         c.add(label);
         c.add(presidentButton);
@@ -84,6 +84,7 @@ public class SwingGUI {
         JButton showMembers = new JButton("Vis medlemmer i tabel");
         JButton deleteMember = new JButton("Slet medlem");
         JButton buttomButton = new JButton("Gem og luk");
+        JButton clearScreen = new JButton("Ryd skærmen");
 
         textArea = new JTextArea();
         textField = new JTextField(100);
@@ -98,6 +99,8 @@ public class SwingGUI {
         showMembers.setBounds(10, 120, 200, 100);
         deleteMember.setBounds(10, 230, 200, 100);
         buttomButton.setBounds(10, 340, 200, 100);
+        clearScreen.setBounds(260, 440, 100, 20);
+
         textArea.setBounds(220, 10, 900, 400);
         textArea.setBackground(Color.white);
         textField.setBounds(260, 415, 860, 20);
@@ -114,6 +117,7 @@ public class SwingGUI {
         deleteMember.setBorder(br);
         buttomButton.setBorder(br);
         textField.setBorder(br);
+        clearScreen.setBorder(br);
 
         // Adds all Jframe components to the container which makes sure everything is visible.
         c.add(createMember);
@@ -123,6 +127,7 @@ public class SwingGUI {
         c.add(textArea);
         c.add(textField);
         c.add(inputField);
+        c.add(clearScreen);
 
         // sets visibility. This is required to open the window in the first place. If visibility == false, it will not
         // open at all.
@@ -133,8 +138,9 @@ public class SwingGUI {
         // When pressing enter it will perform below action.
         textField.addActionListener(action);
 
+        clearScreen.addActionListener(e -> {textArea.setText(""); textField.setText("");});
         deleteMember.addActionListener(e -> {
-            deleteMember();
+            deleteMember(textField, textArea);
         });
 
         createMember.addActionListener(e -> {
@@ -309,28 +315,20 @@ public class SwingGUI {
         });
     }
 
-    public void deleteMember(){
-        frame = new JFrame("Slet Bruger");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(320, 300);
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-        JPanel panel = new JPanel();
-        JPanel panel2 = new JPanel();
-        JLabel label = new JLabel("Hvilken bruger ønsker du at slette?");
-        JLabel label2 = new JLabel("Skriv medlemsnummer");
-
-        frame.add(panel);
-        panel.setBounds(0,0,100,100);
-        panel2.setBounds(100,100,200,200);
-        panel.add(label);
-        panel.add(label2);
-        frame.add(panel2);
-        JTextField userID = new JTextField();
-        panel2.add(userID);
-        userID.setBounds(150,100,150,20);
-        userID.addActionListener(action);
-        frame.setVisible(true);
+    public void deleteMember(JTextField textField, JTextArea textArea){
+        try {
+            for (int i = 0; i < memberList.getMemberList().size(); i++) {
+                int getID = memberList.getMemberList().get(i).getId();
+                if (Integer.parseInt(textField.getText()) == getID) {
+                    textArea.append(newline + "Du har slettet: " + newline + memberList.getMemberList().get(i).getName() + ", Medlemsnummer: " + getID);
+                    memberList.getMemberList().remove(i);
+                    textField.setText("");
+                }
+                else textArea.append(("Indtast medlemsnummeret på medlemmet du ønsker at slette" + newline));
+            }
+        }catch (NumberFormatException e){
+            textArea.append("Ugyldigt nummer. Indtast medlemsnummeret i input feltet under." + newline);
+        }
     }
 
     public void membersTable() {
