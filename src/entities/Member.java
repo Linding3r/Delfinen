@@ -102,11 +102,11 @@ public class Member {
     return competition;
   }
 
-  public String shortenSurname(){
-    if(surname.length() > 20){
-      return surname.substring(0,16) + "...";
-    } else return surname;
-  }
+    public String shortenSurname() {
+        if (surname.length() > 20) {
+            return surname.substring(0, 16) + "...";
+        } else return surname;
+    }
 
   public String shortenFirstname(){
     if(firstName.length() > 15){
