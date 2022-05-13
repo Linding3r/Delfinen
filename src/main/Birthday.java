@@ -21,7 +21,7 @@ public class Birthday {
         } catch (ArrayIndexOutOfBoundsException ignored) {
         }
         while (!(day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900 && year <= Integer.parseInt(String.valueOf(Year.now())))) {
-            System.out.println("Ugyldig fødselsdagsdato valgt. Prøv igen.");
+            System.out.println((Arrays.toString(birthdayArray).replace("{","").replace("}","")) + " Er en ugyldig fødselsdagsdato. Indtast ny dato:");
             birthday = sc.nextLine();
             checkBirthday(birthday);
         }

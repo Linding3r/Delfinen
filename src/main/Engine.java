@@ -131,7 +131,7 @@ public class Engine {
         int id = sc.nextInt();
         for (int i = 0; i < memberList.getMemberList().size(); i++) {
             if (id == memberList.getMemberList().get(i).getId()) {
-                if (memberList.getMemberList().get(i).isPayment() == true) { // TODO: 12/05/2022 Refactor change of status to seperate method
+                if (memberList.getMemberList().get(i).isPayment()) { // TODO: 12/05/2022 Refactor change of status to seperate method
                     memberList.getMemberList().get(i).setPayment(false);
                 } else {
                     memberList.getMemberList().get(i).setPayment(true);
