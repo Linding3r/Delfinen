@@ -4,7 +4,7 @@ import entities.Member;
 import entities.MemberList;
 import ui.Ui;
 
-import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Engine {
@@ -80,9 +80,10 @@ public class Engine {
         String firstname = sc.nextLine();
         System.out.println("Indtast medlemmets efternavn");
         String surname = sc.nextLine();
-        System.out.println("\n\nIndtast medlemmets alder:");
-        int age = sc.nextInt();
-        sc.nextLine();
+        System.out.println("\n\nIndtast medlemmets fødselsdagsdato. (FORMAT DD/MM/YEAR):");
+        String birthday = sc.nextLine();
+        Birthday birthdayClass = new Birthday();
+        birthdayClass.checkBirthday(birthday);
         System.out.println("\n\nIndtast om medlemmet er aktiv eller inaktiv");
         boolean memberStatus = makeChoiceBoolean(ui.activePassiveChoice());
         System.out.println("\n\nIndtast om medlemmet er konkurrencesvømmer eller motionssvømmer");
@@ -90,7 +91,7 @@ public class Engine {
         System.out.println("\n\nIndtast om medlemmet har betalt eller ikke betalt");
         boolean paymentStatus = makeChoiceBoolean(ui.paidNotPaidChoice());
         idCode = updateIdCode(idCode);
-        Member member = new Member(age, memberId, firstname, surname, memberStatus, competitionStatus, paymentStatus,idCode);
+        Member member = new Member(birthday, memberId, firstname, surname, memberStatus, competitionStatus, paymentStatus,idCode);
         memberList.addMemberToList(member);
         memberId++;
     }

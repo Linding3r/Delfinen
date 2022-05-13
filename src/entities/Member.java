@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Member {
 
-  private Integer age;
+  private String birthday;
   private String firstName;
   private String surname;
   private boolean active;
@@ -14,8 +14,8 @@ public class Member {
   private LocalDate registerDate = LocalDate.now();
   private int id;
 
-  public Member(Integer age, int id, String firstName, String surname, boolean active, boolean competitionSwimmer, boolean payment, int idCode) {
-    this.age = age;
+  public Member(String birthday, int id, String firstName, String surname, boolean active, boolean competitionSwimmer, boolean payment, int idCode) {
+    this.birthday = birthday;
     this.id = registerDate.getYear() * idCode + id;
     this.firstName = firstName;
     this.surname = surname;
@@ -25,8 +25,8 @@ public class Member {
 
   }
 
-  public Integer getAge() {
-    return age;
+  public String getBirthday() {
+    return birthday;
   }
 
   public int getId() {
@@ -57,8 +57,8 @@ public class Member {
     return competitionSwimmer;
   }
 
-  public void setAge (Integer age){
-    this.age = age;
+  public void setBirthday(String birthday){
+    this.birthday = birthday;
   }
 
   public void setFirstName(String firstName) {
@@ -115,7 +115,7 @@ public class Member {
   }
 
   public String toString(){
-    return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | Alder: %2d | %-6s | %-18s | ", id, shortenSurname(), shortenFirstname(), age, activeOrPassive(),compOrNotComp()) + registerDate + "\n";
+    return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | Fødselsdagsdato: %2s | %-6s | %-18s | ", id, shortenSurname(), shortenFirstname(), birthday, activeOrPassive(),compOrNotComp()) + registerDate + "\n";
   }
 
 

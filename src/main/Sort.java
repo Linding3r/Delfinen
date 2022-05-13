@@ -25,7 +25,7 @@ public class Sort {
 
   public void sortAge() {
     if (memberList.getMemberList() != null) {
-      Collections.sort(memberList.getMemberList(), Comparator.comparing(Member::getAge));
+      Collections.sort(memberList.getMemberList(), Comparator.comparing(Member::getBirthday));
     } else System.out.println("Der er ingen medlemer på listen til at sortere!");
   }
 
