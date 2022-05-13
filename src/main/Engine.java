@@ -81,9 +81,9 @@ public class Engine {
         System.out.println("Indtast medlemmets efternavn");
         String surname = sc.nextLine();
         System.out.println("\n\nIndtast medlemmets fødselsdagsdato. (FORMAT DD/MM/YEAR):");
-        String birthday = sc.nextLine();
         Birthday birthdayClass = new Birthday();
-        birthdayClass.checkBirthday(birthday);
+        birthdayClass.checkBirthday();
+        String birthday = birthdayClass.getBirthday();
         System.out.println("\n\nIndtast om medlemmet er aktiv eller inaktiv");
         boolean memberStatus = makeChoiceBoolean(ui.activePassiveChoice());
         System.out.println("\n\nIndtast om medlemmet er konkurrencesvømmer eller motionssvømmer");

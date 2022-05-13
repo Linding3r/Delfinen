@@ -9,8 +9,9 @@ public class Birthday {
     private int month;
     private int year;
     Scanner sc = new Scanner(System.in);
+    private String birthday = sc.nextLine();;
 
-    public void checkBirthday(String birthday) {
+    public String checkBirthday() {
         String[] birthdayArray = birthday.split("/");
         try {
             for (int i = 0; i < birthdayArray.length; i++) {
@@ -23,19 +24,12 @@ public class Birthday {
         while (!(day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900 && year <= Integer.parseInt(String.valueOf(Year.now())))) {
             System.out.println((Arrays.toString(birthdayArray).replace("{","").replace("}","")) + " Er en ugyldig fødselsdagsdato. Indtast ny dato:");
             birthday = sc.nextLine();
-            checkBirthday(birthday);
+            checkBirthday();
         }
+        return birthday;
     }
 
-    public int getDay() {
-        return day;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public int getYear() {
-        return year;
+    public String getBirthday() {
+        return birthday;
     }
 }
