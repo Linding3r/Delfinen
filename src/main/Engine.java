@@ -11,9 +11,9 @@ public class Engine {
   private Scanner sc = new Scanner(System.in);
   public static MemberList memberList = new MemberList();
   private Sort sort = new Sort();
-  private int memberId = 999;
+  private int memberId = 1;
   private int idCode = 1000;
-  Ui ui = new Ui();
+  private Ui ui = new Ui();
 
     public void runProgram() throws InterruptedException {
         boolean run = true;
@@ -64,7 +64,7 @@ public class Engine {
         switch (sc.nextLine()) {
             case "1" -> sort.sortSurname();
             case "2" -> sort.sortFirstname();
-            case "3" -> sort.sortAge();
+            //case "3" -> sort.sortAge();
             case "4" -> sort.sortActive(); //Not working yet
             case "5" -> sort.sortComp(); //Not working yet
             case "6" -> sort.sortRegDate();
@@ -81,9 +81,8 @@ public class Engine {
         System.out.println("Indtast medlemmets efternavn");
         String surname = sc.nextLine();
         System.out.println("\n\nIndtast medlemmets fødselsdagsdato. (FORMAT DD/MM/YEAR):");
-        Birthday birthdayClass = new Birthday();
-        birthdayClass.checkBirthday();
-        String birthday = birthdayClass.getBirthday();
+        Birthday birthday = new Birthday();
+        birthday.checkBirthday();
         System.out.println("\n\nIndtast om medlemmet er aktiv eller inaktiv");
         boolean memberStatus = makeChoiceBoolean(ui.activePassiveChoice());
         System.out.println("\n\nIndtast om medlemmet er konkurrencesvømmer eller motionssvømmer");

@@ -23,11 +23,11 @@ public class Sort {
     } else System.out.println("Der er ingen medlemer på listen til at sortere!");
   }
 
-  public void sortAge() {
+  /*public void sortAge() {
     if (memberList.getMemberList() != null) {
       Collections.sort(memberList.getMemberList(), Comparator.comparing(Member::getBirthday));
     } else System.out.println("Der er ingen medlemer på listen til at sortere!");
-  }
+  }*/
 
   public void sortRegDate() {
     if (memberList.getMemberList() != null) {

@@ -1,10 +1,12 @@
 package entities;
 
+import main.Birthday;
+
 import java.time.LocalDate;
 
 public class Member {
 
-  private String birthday;
+  private Birthday birthday;
   private String firstName;
   private String surname;
   private boolean active;
@@ -13,8 +15,9 @@ public class Member {
   private Trainer trainer;
   private LocalDate registerDate = LocalDate.now();
   private int id;
+  private int age;
 
-  public Member(String birthday, int id, String firstName, String surname, boolean active, boolean competitionSwimmer, boolean payment, int idCode) {
+  public Member(Birthday birthday, int id, String firstName, String surname, boolean active, boolean competitionSwimmer, boolean payment, int idCode) {
     this.birthday = birthday;
     this.id = registerDate.getYear() * idCode + id;
     this.firstName = firstName;
@@ -25,7 +28,7 @@ public class Member {
 
   }
 
-  public String getBirthday() {
+  public Birthday getBirthday() {
     return birthday;
   }
 
@@ -39,6 +42,14 @@ public class Member {
 
   public LocalDate getRegisterDate() {
     return registerDate;
+  }
+
+  public void setAge(int age){
+    this.age = age;
+  }
+
+  public int getAge(){
+    return age;
   }
 
   public String getFirstName() {
@@ -57,9 +68,6 @@ public class Member {
     return competitionSwimmer;
   }
 
-  public void setBirthday(String birthday){
-    this.birthday = birthday;
-  }
 
   public void setFirstName(String firstName) {
     this.firstName = firstName;
@@ -115,7 +123,7 @@ public class Member {
   }
 
   public String toString(){
-    return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | Fødselsdagsdato: %2s | %-6s | %-18s | ", id, shortenSurname(), shortenFirstname(), birthday, activeOrPassive(),compOrNotComp()) + registerDate + "\n";
+    return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | Fødselsdag: %10s | %-6s | %-18s | ", id, shortenSurname(), shortenFirstname(), birthday.getBirthday(), activeOrPassive(),compOrNotComp()) + registerDate + "\n";
   }
 
 
