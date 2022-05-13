@@ -7,6 +7,8 @@ import java.time.LocalDate;
 public class Member {
 
   private Birthday birthday;
+  private int age;
+  private String membership;
   private String firstName;
   private String surname;
   private boolean active;
@@ -15,11 +17,14 @@ public class Member {
   private Trainer trainer;
   private LocalDate registerDate = LocalDate.now();
   private int id;
-  private int age;
 
-  public Member(Birthday birthday, int id, String firstName, String surname, boolean active, boolean competitionSwimmer, boolean payment, int idCode) {
+
+  public Member(Birthday birthday, int id, String firstName, String surname, boolean active,
+                boolean competitionSwimmer, boolean payment, int idCode) {
     this.birthday = birthday;
     this.id = registerDate.getYear() * idCode + id;
+    this.age = birthday.birthdayToAge();
+    this.membership = birthday.membershipType();
     this.firstName = firstName;
     this.surname = surname;
     this.active = active;
@@ -42,14 +47,6 @@ public class Member {
 
   public LocalDate getRegisterDate() {
     return registerDate;
-  }
-
-  public void setAge(int age){
-    this.age = age;
-  }
-
-  public int getAge(){
-    return age;
   }
 
   public String getFirstName() {
@@ -123,12 +120,8 @@ public class Member {
   }
 
   public String toString(){
-    return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | Fødselsdag: %10s | %-6s | %-18s | ", id, shortenSurname(), shortenFirstname(), birthday.getBirthday(), activeOrPassive(),compOrNotComp()) + registerDate + "\n";
+    return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | %10s | %-6s | %-6s | %-18s | "
+        , id, shortenSurname(), shortenFirstname(), birthday.getBirthday(), membership,
+        activeOrPassive(),compOrNotComp()) + registerDate + "\n";
   }
-
-
-  /*public String toString (){
-    return "ID: " + id + " | Navn: " + name + " | Alder: " + age + " | " + activeOrPassive() +
-        " | " + compOrNotComp() + " | " + registerDate + "\n";
-  }*/
 }
