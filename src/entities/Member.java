@@ -65,6 +65,9 @@ public class Member {
     return competitionSwimmer;
   }
 
+  public int getAge(){
+    return age;
+  }
 
   public void setFirstName(String firstName) {
     this.firstName = firstName;

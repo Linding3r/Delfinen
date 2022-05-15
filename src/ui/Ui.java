@@ -78,19 +78,21 @@ public class Ui {
   //**********************************************************
 
   public void introLabel() throws InterruptedException {
-    System.out.println("╔══════════════════════════════════════════════════════════════════╗\n" +
+    String intro = "╔══════════════════════════════════════════════════════════════════╗\n" +
         "║" + BLUE + "  ██████  ███████ ██      ███████ ██ ███    ██ ███████ ███    ██ " + RESET + " ║\n" +
         "║" + BLUE + "  ██   ██ ██      ██      ██      ██ ████   ██ ██      ████   ██ " + RESET + " ║\n" +
         "║" + BLUE + "  ██   ██ █████   ██      █████   ██ ██ ██  ██ █████   ██ ██  ██ " + RESET + " ║\n" +
         "║" + BLUE + "  ██   ██ ██      ██      ██      ██ ██  ██ ██ ██      ██  ██ ██ " + RESET + " ║\n" +
         "║" + BLUE + "  ██████  ███████ ███████ ██      ██ ██   ████ ███████ ██   ████ " + RESET + " ║\n" +
-        "╚══════════════════════════════════════════════════════════════════╝");
-//    Thread.sleep(3000);
+        "╚══════════════════════════════════════════════════════════════════╝\n\n\n\n\n";
+    System.out.println(intro);
+    Thread.sleep(2000);
     newLine();
+
   }
 
   public void dolphinLogo() throws InterruptedException {
-    System.out.println(BLUE + "\n\n                   ▓█▄▄▄\n" +
+    String dolphine = BLUE + "\n\n                   ▓█▄▄▄\n" +
         "                    ▓████▄▄\n" +
         "                  ▄▄▓███████▄▄\n" +
         "            ▄▄▄▄▄████████████████▄▄▄\n" +
@@ -104,14 +106,29 @@ public class Ui {
         " ▄███████▄                                ▀▓████\n" +
         "▓▓█▀▀ ▀█▓█▄                                 ▀▀██▒\n" +
         "▓▀      ▀▓▒                                    ▀▀\n" +
-        "         ▀▀" + RESET);
-//    Thread.sleep(3000);
-    newLine();
+        "         ▀▀" + RESET;
+    System.out.println(dolphine);
+    //Thread.sleep(1000);
+
   }
 
   public String asciiLines(){
     return BLUE + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" +
         "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓" + RESET;
+  }
+
+  public void loadingBar() throws InterruptedException {
+    System.out.println("\n\n                     LOADING");
+    String bar ="░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    String solidBar = BLUE + "▓" + RESET;
+    for (int i = 0; i <= 46; i++) {
+      solidBar += BLUE + "▓" + RESET;
+      bar = bar.substring(0,46-i);
+      System.out.print("|" + solidBar + bar + "|\r");
+      Thread.sleep(200);
+    }
+    Thread.sleep(1000);
+    newLine();
   }
 
   //**********************************************************

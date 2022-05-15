@@ -18,6 +18,7 @@ public class Engine {
     public void runProgram() throws InterruptedException {
         boolean run = true;
         ui.dolphinLogo();
+        ui.loadingBar();
         ui.introLabel();
         while (run) {
             ui.mainMenu();
@@ -64,7 +65,7 @@ public class Engine {
         switch (sc.nextLine()) {
             case "1" -> sort.sortSurname();
             case "2" -> sort.sortFirstname();
-            //case "3" -> sort.sortAge();
+            case "3" -> sort.sortAge();
             case "4" -> sort.sortActive(); //Not working yet
             case "5" -> sort.sortComp(); //Not working yet
             case "6" -> sort.sortRegDate();
