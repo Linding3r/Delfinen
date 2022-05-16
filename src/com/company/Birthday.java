@@ -1,5 +1,6 @@
 package com.company;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.Arrays;
@@ -11,12 +12,13 @@ public class Birthday {
     private int year;
     private int age;
     Scanner sc = new Scanner(System.in);
-    private String birthday = sc.nextLine();
+    private String birthday;
     private LocalDate currentDate = LocalDate.now();
+    SwingGUI gui = new SwingGUI();
 
 
-
-    public String checkBirthday() {
+    public String checkBirthday(JTextField textFieldAge) {
+        birthday = (textFieldAge.getText());
         String[] birthdayArray = birthday.split("/");
         try {
             for (int i = 0; i < birthdayArray.length; i++) {
@@ -26,14 +28,11 @@ public class Birthday {
             }
         } catch (ArrayIndexOutOfBoundsException  | NumberFormatException ignored) {
         }
-        while (!(day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900
+        if (!(day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900
                 && year <= Integer.parseInt(String.valueOf(Year.now())))) {
-            System.out.println((Arrays.toString(birthdayArray).replace("{","").replace("}","")) +
-                    " Er en ugyldig fødselsdagsdato. Indtast ny dato:");
-            birthday = sc.nextLine();
-            checkBirthday();
+            return null;
         }
-        return birthday;
+        else return birthday;
     }
 
     public String getBirthday() {

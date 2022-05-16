@@ -1,8 +1,5 @@
 package com.company;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 public class Member {
 
 /*  private main.Birthday birthday;
@@ -34,14 +31,14 @@ public class Member {
 
   }*/
 
-  private Integer age;
+  private String age;
   private int id;
   private String name;
   private boolean active;
   private boolean competitionSwimmer;
   private Trainer trainer;
 
-  public Member(Integer age, int id, String name, boolean active, boolean competitionSwimmer) {
+  public Member(String age, int id, String name, boolean active, boolean competitionSwimmer) {
     this.age = age;
     this.id = id;
     this.name = name;
@@ -49,7 +46,7 @@ public class Member {
     this.competitionSwimmer = competitionSwimmer;
   }
 
-  public Integer getAge() {
+  public String getAge() {
     return age;
   }
 
@@ -69,7 +66,7 @@ public class Member {
     return competitionSwimmer;
   }
 
-  public void setAge (Integer age){
+  public void setAge (String age){
     this.age = age;
   }
 
@@ -100,6 +97,6 @@ public class Member {
     if (active) {
       yesNoActive = "Ja";
     } else yesNoActive = "Nej";
-    return "Navn: " + name  + " | Alder: " + age + " | id: " + id + " | Aktiv: " + yesNoActive + " | Konkurrencesvømmer: "+ yesNoComp + "\n";
+    return "Navn: " + name  + " | Fødselsdagsdato: " + age + " | id: " + id + " | Aktiv: " + yesNoActive + " | Konkurrencesvømmer: "+ yesNoComp + "\n";
   }
 }

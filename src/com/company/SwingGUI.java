@@ -142,7 +142,7 @@ public class SwingGUI {
         Container c = frame.getContentPane();
 
         JLabel name = new JLabel("Fornavn: ");
-        JLabel age = new JLabel("Alder: ");
+        JLabel age = new JLabel("Fødselsdagsdato: (DD/MM/YYYY) ");
         JLabel activeMember = new JLabel("Aktivt medlem: ");
         JLabel competitiveSwimmer = new JLabel("Konkurrence svømmer: ");
 
@@ -218,11 +218,9 @@ public class SwingGUI {
 
     public void validateInput(JTextField textFieldName, JTextField textFieldAge, JCheckBox checkBoxActive, JCheckBox checkBoxComp, JFrame frameMember, JFrame frameMain) {
         String name;
-        int age;
-        if (Objects.equals(textFieldAge.getText(), "")) {
-            age = 0;
-            textFieldAge.setText("0");
-        } else age = Integer.parseInt(textFieldAge.getText());
+        String age;
+        Birthday birthday = new Birthday();
+        age =  birthday.checkBirthday(textFieldAge);
         boolean active;
         boolean comp;
         name = textFieldName.getText();
@@ -236,12 +234,14 @@ public class SwingGUI {
             textFieldName.setBorder(br);
         } else br = BorderFactory.createLineBorder(Color.WHITE);
         textFieldName.setBorder(br);
-        if (age > 100 || age <= 0) {
+
+
+       /* if (age > 100 || age <= 0) {
             textFieldAge.setBorder(br);
         } else br = BorderFactory.createLineBorder(Color.WHITE);
         textFieldAge.setBorder(br);
-
-        if (!Objects.equals(textFieldName.getText(), "") && (!(age > 100) && (!(age < 0)))) {
+*/
+        if (!Objects.equals(textFieldName.getText(), "") && birthday.checkBirthday(textFieldAge) != null) {
             Member member = new Member(age, memberID, name, active, comp);
             if (memberList.getMemberList() != null && !(memberList.getMemberList().isEmpty())) {
                 int calculateNewYear = memberList.getMemberList().get(memberList.getMemberList().size() - 1).getId() - Integer.parseInt(String.valueOf(Year.now()));
@@ -324,7 +324,7 @@ public class SwingGUI {
         // Frame Title
         f.setTitle("Tabel over medlemmer");
         String[][] data = new String[memberList.getMemberList().size()][5];
-        String[] columnNames = {"Navn", "Alder", "Medlemsnummer", "Aktivt medlem", "Konkurrencesvømmer"};
+        String[] columnNames = {"Navn", "Fødselsdagsdato", "Medlemsnummer", "Aktivt medlem", "Konkurrencesvømmer"};
         for (int i = 0; i < memberList.getMemberList().size(); i++) {
             Member member = memberList.getMemberList().get(i);
             data[i][0] = member.getName();
