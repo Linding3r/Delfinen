@@ -24,7 +24,7 @@ public class Birthday {
                 month = Integer.parseInt(birthdayArray[1]);
                 year = Integer.parseInt(birthdayArray[2]);
             }
-        } catch (ArrayIndexOutOfBoundsException ignored) {
+        } catch (ArrayIndexOutOfBoundsException  | NumberFormatException ignored) {
         }
         while (!(day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900
             && year <= Integer.parseInt(String.valueOf(Year.now())))) {
