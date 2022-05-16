@@ -44,7 +44,7 @@ public class SwingGUI {
         JButton showMembers = new JButton("Vis medlemmer i tabel");
         JButton deleteMember = new JButton("Slet medlem");
         JButton checkIncome = new JButton("Tjek indtjening");
-        JButton button2 = new JButton("Knap");
+        JButton changePaymentStatus = new JButton("Ændr betalingsstatus");
         JButton button3 = new JButton("Knap");
         JButton saveAndExit = new JButton("Gem og luk");
         JButton clearScreen = new JButton("Ryd skærmen");
@@ -61,7 +61,7 @@ public class SwingGUI {
         createMember.setBounds(10, 10, 200, 100);
         showMembers.setBounds(10, 120, 200, 100);
         checkIncome.setBounds(10, 230, 200, 100);
-        button2.setBounds(10, 340, 200, 100);
+        changePaymentStatus.setBounds(10, 340, 200, 100);
         button3.setBounds(10, 450, 200, 100);
         deleteMember.setBounds(10, 560, 200, 100);
 
@@ -87,7 +87,7 @@ public class SwingGUI {
         textField.setBorder(br);
         clearScreen.setBorder(br);
         checkIncome.setBorder(br);
-        button2.setBorder(br);
+        changePaymentStatus.setBorder(br);
         button3.setBorder(br);
 
         // Adds all Jframe components to the container which makes sure everything is visible.
@@ -100,7 +100,7 @@ public class SwingGUI {
         c.add(inputField);
         c.add(clearScreen);
         c.add(checkIncome);
-        c.add(button2);
+        c.add(changePaymentStatus);
         c.add(button3);
 
         // sets visibility. This is required to open the window in the first place. If visibility == false, it will not
@@ -128,6 +128,8 @@ public class SwingGUI {
         {
             membersTable();
         });
+
+        changePaymentStatus.addActionListener(e -> changePaymentStatus(textField,textArea));
 
         checkIncome.addActionListener(e -> checkIncome());
 
@@ -303,6 +305,22 @@ public class SwingGUI {
         });
     }
 
+    public void changePaymentStatus(JTextField textField, JTextArea textArea) {
+        try {
+            for (int i = 0; i < memberList.getMemberList().size(); i++) {
+                int getID = memberList.getMemberList().get(i).getId();
+                if (Objects.equals(textField.getText(), "")) {
+                    textArea.append("Ugyldigt nummer. Indtast medlemsnummeret i input feltet under." + newline);
+                } else if (Integer.parseInt(textField.getText()) == getID) {
+                    textArea.append(newline + "Du har ændret betalingsstatus for: " + newline + memberList.getMemberList().get(i).getName() + ", Medlemsnummer: " + getID);
+                    memberList.getMemberList().get(i).setPayment(false);
+                    textField.setText("");
+                }
+            }
+        } catch (NumberFormatException e) {
+        }
+    }
+
     public void deleteMember(JTextField textField, JTextArea textArea) {
         try {
             for (int i = 0; i < memberList.getMemberList().size(); i++) {
@@ -354,14 +372,16 @@ public class SwingGUI {
             data[i][5] = yesNoComp;
             String payment;
             if (member.isPayment()){
-             payment = "Yes";
+             payment = "OK";
             }
-            else payment = Color.RED + "No" + Color.black;
+            else payment = "Ikke betalt!";
             data[i][6] = payment;
             // Initializing the JTable
         }
         j = new JTable(data, columnNames);
         j.setAutoCreateRowSorter(true);
+
+
         DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
 
             @Override
