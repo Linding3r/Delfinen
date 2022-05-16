@@ -2,35 +2,6 @@ package com.company;
 
 public class Member {
 
-/*  private main.Birthday birthday;
-  private int age;
-  private String membership;
-  private String firstName;
-  private String surname;
-  private boolean active;
-  private boolean competitionSwimmer;
-  private boolean payment;
-  private Trainer trainer;
-  private LocalDate registerDate = LocalDate.now();
-  private int id;
-  private ArrayList<Competition> competiton;
-
-
-  public Member(main.Birthday birthday, int id, String firstName, String surname, boolean active,
-                boolean competitionSwimmer, boolean payment, int idCode) {
-    this.birthday = birthday;
-    this.id = registerDate.getYear() * idCode + id;
-    this.age = birthday.birthdayToAge();
-    this.membership = birthday.membershipType();
-    this.firstName = firstName;
-    this.surname = surname;
-    this.active = active;
-    this.competitionSwimmer = competitionSwimmer;
-    this.payment = payment;
-    this.competiton = new ArrayList<>();
-
-  }*/
-
   private Birthday birthday;
   private int age;
   private int id;
