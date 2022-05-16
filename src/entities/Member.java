@@ -3,6 +3,7 @@ package entities;
 import main.Birthday;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Member {
 
@@ -17,6 +18,7 @@ public class Member {
   private Trainer trainer;
   private LocalDate registerDate = LocalDate.now();
   private int id;
+  private ArrayList<Competition> competiton;
 
 
   public Member(Birthday birthday, int id, String firstName, String surname, boolean active,
@@ -30,7 +32,12 @@ public class Member {
     this.active = active;
     this.competitionSwimmer = competitionSwimmer;
     this.payment = payment;
+    this.competiton = new ArrayList<>();
 
+  }
+
+  public ArrayList<Competition> getCompetiton(){
+    return competiton;
   }
 
   public Birthday getBirthday() {

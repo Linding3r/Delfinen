@@ -15,28 +15,35 @@ public class Engine {
   private int idCode = 1000;
   private Ui ui = new Ui();
 
-    public void runProgram() throws InterruptedException {
-        boolean run = true;
-        ui.dolphinLogo();
-        ui.loadingBar();
-        ui.introLabel();
-        while (run) {
-            ui.mainMenu();
-            String choice = sc.nextLine();
-            switch (choice) {
-                case "1" -> addMember();
-                case "2" -> System.out.println(memberList.toString());
-                case "3" -> sortMemberList();
-                case "4" -> deleteMember();
-                case "5" -> changePaymentStatus();
-                case "9" -> {
-                    run = false;
-                    ui.newLine();
-                    System.out.println("SHUTTING DOWN");
-                }
-                default -> ui.invalidInput();
-            }
+  public void runProgram() throws InterruptedException {
+    boolean run = true;
+    ui.dolphinLogo();
+    ui.loadingBar();
+    ui.introLabel();
+    while (run) {
+      ui.mainMenu();
+      String choice = sc.nextLine();
+      switch (choice) {
+        case "1" -> addMember();
+        case "2" -> System.out.println(memberList.toString());
+        case "3" -> sortMemberList();
+        case "4" -> deleteMember();
+        case "5" -> changePaymentStatus();
+        case "6" -> System.out.println("Implement see list of junior/senior members");
+        case "7" -> System.out.println("Implement see list of active/non active members");
+        case "8" -> System.out.println("Implement see list of payment status of members (paid/not paid)");
+        case "9" -> System.out.println("Implement register best TRAINING result, date for junior/senior swimmers");
+        case "10" -> System.out.println("Implement register best COMPETITION result, date for junior/senior swimmers ");
+        case "11" -> System.out.println("Implement see list of top 5 results based on TRAINING results");
+        case "12" -> System.out.println("Implement change status of swimmers from competition to free-timer swimmer (and vice versa)");
+        case "99" -> {
+          run = false;
+          ui.newLine();
+          System.out.println("SHUTTING DOWN");
         }
+        default -> ui.invalidInput();
+      }
+    }
 
     }
 
@@ -66,8 +73,8 @@ public class Engine {
             case "1" -> sort.sortSurname();
             case "2" -> sort.sortFirstname();
             case "3" -> sort.sortAge();
-            case "4" -> sort.sortActive(); //Not working yet
-            case "5" -> sort.sortComp(); //Not working yet
+            case "4" -> sort.sortActive();
+            case "5" -> sort.sortComp();
             case "6" -> sort.sortRegDate();
             case "7" -> sort.sortId();
             case "8" -> sort.sortPayment();
@@ -127,17 +134,32 @@ public class Engine {
         return value;
     }
 
-    public void changePaymentStatus() {
-        System.out.println("Indtast ID på medlem, som du vil ændre betalingsstatus for:");
-        int id = sc.nextInt();
-        for (int i = 0; i < memberList.getMemberList().size(); i++) {
-            if (id == memberList.getMemberList().get(i).getId()) {
-                if (memberList.getMemberList().get(i).isPayment()) { // TODO: 12/05/2022 Refactor change of status to seperate method
-                    memberList.getMemberList().get(i).setPayment(false);
-                } else {
-                    memberList.getMemberList().get(i).setPayment(true);
-                }
+  public void changePaymentStatus() {
+    System.out.println("Indtast ID på medlem, som du vil ændre betalingsstatus for:");
+    int id = sc.nextInt();
+    sc.nextLine();
+    for (int i = 0; i < memberList.getMemberList().size(); i++) {
+      if (id == memberList.getMemberList().get(i).getId()) {
+        boolean run = true;
+        while (run) {
+          System.out.println("Hvilken betalingsstatus skal medlemmet have?");
+          System.out.println("1: Betalt");
+          System.out.println("2: Ikke betalt");
+          String input = sc.nextLine();
+          switch (input) {
+            case "1" -> {
+              memberList.getMemberList().get(i).setPayment(true);
+              run = false;
             }
+            case "2" -> {
+              memberList.getMemberList().get(i).setPayment(false);
+              run = false;
+            }
+            default -> System.out.println("Invalid input");
+          }
         }
+      }
     }
+  }
+
 }
