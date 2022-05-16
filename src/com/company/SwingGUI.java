@@ -323,13 +323,14 @@ public class SwingGUI {
 
         // Frame Title
         f.setTitle("Tabel over medlemmer");
-        String[][] data = new String[memberList.getMemberList().size()][5];
-        String[] columnNames = {"Navn:", "Fødselsdagsdato:", "Medlemsnummer:", "Aktivt medlem:", "Konkurrencesvømmer:"};
+        String[][] data = new String[memberList.getMemberList().size()][6];
+        String[] columnNames = {"Navn:", "Fødselsdagsdato:", "Medlemstype:", "Medlemsnummer:", "Aktivt medlem:", "Konkurrencesvømmer:"};
         for (int i = 0; i < memberList.getMemberList().size(); i++) {
             Member member = memberList.getMemberList().get(i);
             data[i][0] = member.getName();
             data[i][1] = String.valueOf(((member.getBirthday().getBirthday())));
-            data[i][2] = String.valueOf(member.getId());
+            data[i][2] = String.valueOf(member.getBirthday().membershipType());
+            data[i][3] = String.valueOf(member.getId());
             String yesNoActive;
             String yesNoComp;
             if (member.isCompetitionSwimmer()) {
@@ -338,8 +339,8 @@ public class SwingGUI {
             if (member.isActive()) {
                 yesNoActive = "Ja";
             } else yesNoActive = "Nej";
-            data[i][3] = yesNoActive;
-            data[i][4] = yesNoComp;
+            data[i][4] = yesNoActive;
+            data[i][5] = yesNoComp;
             // Initializing the JTable
         }
         j = new JTable(data, columnNames);
@@ -360,7 +361,7 @@ public class SwingGUI {
         JScrollPane sp = new JScrollPane(j);
         f.add(sp);
         // Frame Size
-        f.setSize(700, 200);
+        f.setSize(1000, 200);
         // Frame Visible = true
         f.setLocationRelativeTo(null);
         f.setVisible(true);
