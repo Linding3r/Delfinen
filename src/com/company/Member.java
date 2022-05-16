@@ -38,6 +38,8 @@ public class Member {
   private boolean active;
   private boolean competitionSwimmer;
   private Trainer trainer;
+  private String membership;
+
 
   public Member(Birthday birthday, int id, String name, boolean active, boolean competitionSwimmer) {
     this.birthday = birthday;
@@ -72,26 +74,18 @@ public class Member {
     return competitionSwimmer;
   }
 
-  public void setAge (int age){
-    this.age = age;
-  }
 
-  public void setId(int id) {
-    this.id = id;
+  public int subscription(){
+    int subscription;
+    if(active == true){
+      if(membership.equals("Junior")){
+        subscription = 1000;
+      } else if(membership.equals("Senior")){
+        subscription = 1600;
+      } else subscription = 1200;
+    }else subscription = 500;
+    return subscription;
   }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public void setActive(boolean active) {
-    this.active = active;
-  }
-
-  public void setKonkurrenceSvømmer(boolean competitionSwimmer) {
-    this.competitionSwimmer = competitionSwimmer;
-  }
-
 
   public String toString (){
     String yesNoActive;
