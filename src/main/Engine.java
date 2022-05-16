@@ -30,7 +30,14 @@ public class Engine {
                 case "3" -> sortMemberList();
                 case "4" -> deleteMember();
                 case "5" -> changePaymentStatus();
-                case "9" -> {
+                case "6" -> System.out.println("Implement see list of junior/senior members");
+                case "7" -> System.out.println("Implement see list of active/non active members");
+                case "8" -> System.out.println("Implement see list of payment status of members (paid/not paid)");
+                case "9" -> System.out.println("Implement register best TRAINING result, date for junior/senior swimmers");
+                case "10" -> System.out.println("Implement register best COMPETITION result, date for junior/senior swimmers ");
+                case "11" -> System.out.println("Implement see list of top 5 results based on TRAINING results");
+                case "12" -> System.out.println("Implement change status of swimmers from competition to free-timer swimmer (and vice versa)");
+                case "99" -> {
                     run = false;
                     ui.newLine();
                     System.out.println("SHUTTING DOWN");
