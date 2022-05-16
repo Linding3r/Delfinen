@@ -15,6 +15,7 @@ public class Birthday {
     private LocalDate currentDate = LocalDate.now();
 
 
+
     public String checkBirthday() {
         String[] birthdayArray = birthday.split("/");
         try {

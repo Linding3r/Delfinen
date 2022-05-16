@@ -19,7 +19,7 @@ public class Ui {
         ║   3:  Sortere Medlemmer        ║
         ║   4:  Slet Medlem              ║
         ║   5:  Ændre Betaling Status    ║
-        ║   9:  SHUTDOWN                 ║
+        ║   99:  SHUTDOWN                ║
         ╚════════════════════════════════╝
         """);
   }
@@ -103,13 +103,12 @@ public class Ui {
         "     ▄███████████████████████████████████████▄\n" +
         "    ▄██████▒▀                    ▀▓████████████▄\n" +
         "    █████▒▀                    ▓▄▄▄▄▄███████████\n" +
-        "   ▄████▀      ®Lindinger      ▀▓████▀▀ ▀▓██████\n" +
+        "   ▄████▀                      ▀▓████▀▀ ▀▓██████\n" +
         " ▄███████▄                                ▀▓████\n" +
         "▓▓█▀▀ ▀█▓█▄                                 ▀▀██▒\n" +
         "▓▀      ▀▓▒                                    ▀▀\n" +
         "         ▀▀" + RESET;
     System.out.println(dolphine);
-    //Thread.sleep(1000);
 
   }
 
@@ -121,11 +120,13 @@ public class Ui {
   public void loadingBar() throws InterruptedException {
     System.out.println("\n\n                     LOADING");
     String bar ="░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    int procent = 6;
     String solidBar = BLUE + "▓" + RESET;
     for (int i = 0; i <= 46; i++) {
+      procent += 2;
       solidBar += BLUE + "▓" + RESET;
       bar = bar.substring(0,46-i);
-      System.out.print("|" + solidBar + bar + "|\r");
+      System.out.print("|" + solidBar + bar + "| " + procent + "/100%\r");
       Thread.sleep(50);
     }
     Thread.sleep(1000);
