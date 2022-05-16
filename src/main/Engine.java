@@ -30,11 +30,12 @@ public class Engine {
         case "3" -> sortMemberList();
         case "4" -> deleteMember();
         case "5" -> changePaymentStatus();
-        case "6" -> checkIncome();
-        //case "6" -> System.out.println("Implement register best COMPETITION/Training result, date for junior/senior swimmers ");
-        //case "7" -> System.out.println("Implement see list of top 5 results in each disciplin");
+        case "6" -> changeMemberStatus();
+        case "7" -> checkIncome();
+        //case "8" -> System.out.println("Implement register best COMPETITION/Training result, date for junior/senior swimmers ");
+        //case "9" -> System.out.println("Implement see list of top 5 results in each disciplin");
         //case "8" -> System.out.println("Implement change status of swimmers from competition to free-timer swimmer (and vice versa)");
-        case "9" -> {
+        case "0" -> {
           run = false;
           ui.newLine();
           System.out.println("SHUTTING DOWN");
@@ -50,6 +51,7 @@ public class Engine {
     for (int i = 0; i < memberList.getMemberList().size(); i++) {
       income += memberList.getMemberList().get(i).subscription();
     }
+    System.out.println("\n\n\nForventet årligt indkomst:");
     System.out.println(income + "DKK");
   }
 
@@ -89,6 +91,7 @@ public class Engine {
           case "6" -> sort.sortRegDate();
           case "7" -> sort.sortId();
           case "8" -> sort.sortPayment();
+          case "9" -> System.out.println("Tilbage");
           default -> {
             ui.invalidInput();
             run = true;
@@ -147,7 +150,7 @@ public class Engine {
     }
 
   public void changePaymentStatus() throws InterruptedException {
-    System.out.println("Indtast ID på medlem, som du vil ændre betalingsstatus for:");
+    System.out.println("Indtast ID på medlem:");
     try {
     int id = sc.nextInt();
     sc.nextLine();
@@ -155,7 +158,6 @@ public class Engine {
       if (id == memberList.getMemberList().get(i).getId()) {
         boolean run = true;
         while (run) {
-          System.out.println("Hvilken betalingsstatus skal medlemmet have?");
           System.out.println(ui.paidNotPaidChoice());
           String input = sc.nextLine();
           switch (input) {
@@ -173,6 +175,35 @@ public class Engine {
       }
     }catch (NumberFormatException | InputMismatchException exception){
         ui.invalidInput();
+    }
+  }
+
+  public void changeMemberStatus() throws InterruptedException {
+    System.out.println("Indtast ID på medlem:");
+    try {
+      int id = sc.nextInt();
+      sc.nextLine();
+      for (int i = 0; i < memberList.getMemberList().size(); i++) {
+        if (id == memberList.getMemberList().get(i).getId()) {
+          boolean run = true;
+          while (run) {
+            System.out.println(ui.activePassiveChoice());
+            String input = sc.nextLine();
+            switch (input) {
+              case "1" -> {
+                memberList.getMemberList().get(i).setActive(true);
+                run = false;
+              }
+              case "2" -> {
+                memberList.getMemberList().get(i).setActive(false);
+                run = false;
+              }
+              default -> System.out.println("Invalid input");
+            }
+          }}
+      }
+    }catch (NumberFormatException | InputMismatchException exception){
+      ui.invalidInput();
     }
   }
 

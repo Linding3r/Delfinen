@@ -19,7 +19,10 @@ public class Ui {
         ║   3:  Sortere Medlemmer        ║
         ║   4:  Slet Medlem              ║
         ║   5:  Ændre Betalingsstatus    ║
-        ║   99:  SHUTDOWN                ║
+        ║   6:  Ændre Aktivitetsstatus   ║
+        ║   7:  Årsregnskab              ║
+        ║                                ║
+        ║   0:  SHUTDOWN                 ║
         ╚════════════════════════════════╝
         """);
   }
@@ -37,6 +40,7 @@ public class Ui {
         ║   6:  Sorter efter Anciennitet       ║
         ║   7:  Sorter efter ID nummer         ║
         ║   8:  Sorter efter Betaling Status   ║
+        ║   9:  Hovedmenu                      ║
         ╚══════════════════════════════════════╝
         """);
   }
@@ -113,7 +117,7 @@ public class Ui {
   }
 
   public String asciiLines(){
-    return BLUE + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" +
+    return BLUE + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" +
         "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓" + RESET;
   }
 
