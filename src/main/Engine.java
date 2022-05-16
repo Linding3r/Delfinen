@@ -153,8 +153,7 @@ public class Engine {
         boolean run = true;
         while (run) {
           System.out.println("Hvilken betalingsstatus skal medlemmet have?");
-          System.out.println("1: Betalt");
-          System.out.println("2: Ikke betalt");
+          System.out.println(ui.paidNotPaidChoice());
           String input = sc.nextLine();
           switch (input) {
             case "1" -> {
