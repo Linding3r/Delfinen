@@ -53,7 +53,7 @@ public class Engine {
         try {
 
         int whichMemberID = Integer.parseInt(sc.nextLine());
-        for (int i = 0; i <= memberList.getMemberList().size(); i++) {
+        for (int i = 0; i < memberList.getMemberList().size(); i++) {
             Member member = memberList.getMemberList().get(i);
             if (whichMemberID == member.getId()) {
                 System.out.println("Du ved at slette bruger: " + member.getFirstName() + " " + member.getSurname() + ", Medlemsnummer: " + member.getId());
