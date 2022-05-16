@@ -70,6 +70,7 @@ public class Engine {
             case "5" -> sort.sortComp(); //Not working yet
             case "6" -> sort.sortRegDate();
             case "7" -> sort.sortId();
+            case "8" -> sort.sortPayment();
             default -> ui.invalidInput();
         }
     }

@@ -52,4 +52,10 @@ public class Sort {
       Collections.sort(memberList.getMemberList(), Comparator.comparing(Member::getId));
     } else System.out.println("Der er ingen medlemer på listen til at sortere!");
   }
+
+  public void sortPayment(){
+    if (memberList.getMemberList() != null) {
+      Collections.sort(memberList.getMemberList(), Comparator.comparing(Member::isPayment));
+    } else System.out.println("Der er ingen medlemer på listen til at sortere!");
+  }
 }

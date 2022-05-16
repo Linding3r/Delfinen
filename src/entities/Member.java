@@ -110,6 +110,14 @@ public class Member {
     return competition;
   }
 
+  public String paidOrNotPaid(){
+    String paidStatus;
+    if(payment == true){
+      paidStatus = "Betalt";
+    } else paidStatus = "Ikke Betalt";
+    return paidStatus;
+  }
+
     public String shortenSurname() {
         if (surname.length() > 20) {
             return surname.substring(0, 16) + "...";
@@ -123,8 +131,8 @@ public class Member {
   }
 
   public String toString(){
-    return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | %10s | %-6s | %-6s | %-18s | "
-        , id, shortenSurname(), shortenFirstname(), birthday.getBirthday(), membership,
-        activeOrPassive(),compOrNotComp()) + registerDate + "\n";
+    return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | %10s | %-6s | %-6s | %11s | %-18s | ",
+        id, shortenSurname(), shortenFirstname(), birthday.getBirthday(), membership, activeOrPassive(), paidOrNotPaid(),
+        compOrNotComp()) + registerDate + "\n";
   }
 }
