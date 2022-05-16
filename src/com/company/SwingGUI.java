@@ -352,7 +352,12 @@ public class SwingGUI {
             } else yesNoActive = "Nej";
             data[i][4] = yesNoActive;
             data[i][5] = yesNoComp;
-            data[i][6] = paymentStatus;
+            String payment;
+            if (member.isPayment()){
+             payment = "Yes";
+            }
+            else payment = Color.RED + "No" + Color.black;
+            data[i][6] = payment;
             // Initializing the JTable
         }
         j = new JTable(data, columnNames);

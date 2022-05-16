@@ -39,7 +39,7 @@ public class Member {
   private boolean competitionSwimmer;
   private Trainer trainer;
   private String membership;
-
+  private boolean payment;
 
   public Member(Birthday birthday, int id, String name, boolean active, boolean competitionSwimmer) {
     this.birthday = birthday;
@@ -49,6 +49,15 @@ public class Member {
     this.name = name;
     this.active = active;
     this.competitionSwimmer = competitionSwimmer;
+    this.payment = true;
+  }
+
+  public boolean isPayment() {
+    return payment;
+  }
+
+  public void setPayment(boolean payment) {
+    this.payment = payment;
   }
 
   public Birthday getBirthday() {

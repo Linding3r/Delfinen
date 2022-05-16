@@ -1,6 +1,8 @@
 package com.company;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.Arrays;
@@ -28,11 +30,16 @@ public class Birthday {
             }
         } catch (ArrayIndexOutOfBoundsException  | NumberFormatException ignored) {
         }
+        Border br = BorderFactory.createLineBorder(Color.red);
         if (!(day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900
                 && year <= Integer.parseInt(String.valueOf(Year.now())))) {
+            textFieldAge.setBorder(br);
             return null;
         }
-        else return birthday;
+        else
+        br = BorderFactory.createLineBorder(Color.WHITE);
+        textFieldAge.setBorder(br);
+        return birthday;
     }
 
     public String getBirthday() {
