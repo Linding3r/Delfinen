@@ -125,9 +125,9 @@ public class Ui {
       solidBar += BLUE + "▓" + RESET;
       bar = bar.substring(0,46-i);
       System.out.print("|" + solidBar + bar + "|\r");
-      Thread.sleep(20);
+      Thread.sleep(50);
     }
-    Thread.sleep(100);
+    Thread.sleep(1000);
     newLine();
   }
 
