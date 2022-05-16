@@ -242,7 +242,7 @@ public class SwingGUI {
         textFieldAge.setBorder(br);
 */
         if (!Objects.equals(textFieldName.getText(), "") && birthday.checkBirthday(textFieldAge) != null) {
-            Member member = new Member(age, memberID, name, active, comp);
+            Member member = new Member(birthday, memberID, name, active, comp);
             if (memberList.getMemberList() != null && !(memberList.getMemberList().isEmpty())) {
                 int calculateNewYear = memberList.getMemberList().get(memberList.getMemberList().size() - 1).getId() - Integer.parseInt(String.valueOf(Year.now()));
                 memberID = Integer.parseInt(String.valueOf(Year.now())) + calculateNewYear + 1;

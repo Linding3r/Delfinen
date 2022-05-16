@@ -31,22 +31,24 @@ public class Member {
 
   }*/
 
-  private String age;
+  private Birthday birthday;
+  private int age;
   private int id;
   private String name;
   private boolean active;
   private boolean competitionSwimmer;
   private Trainer trainer;
 
-  public Member(String age, int id, String name, boolean active, boolean competitionSwimmer) {
-    this.age = age;
+  public Member(Birthday birthday, int id, String name, boolean active, boolean competitionSwimmer) {
+    this.birthday = birthday;
+    this.age = birthday.birthdayToAge();
     this.id = id;
     this.name = name;
     this.active = active;
     this.competitionSwimmer = competitionSwimmer;
   }
 
-  public String getAge() {
+  public int getAge() {
     return age;
   }
 
@@ -66,7 +68,7 @@ public class Member {
     return competitionSwimmer;
   }
 
-  public void setAge (String age){
+  public void setAge (int age){
     this.age = age;
   }
 
