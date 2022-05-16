@@ -5,6 +5,7 @@ import entities.MemberList;
 import ui.Ui;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -144,8 +145,9 @@ public class Engine {
         return value;
     }
 
-  public void changePaymentStatus() {
+  public void changePaymentStatus() throws InterruptedException {
     System.out.println("Indtast ID på medlem, som du vil ændre betalingsstatus for:");
+    try {
     int id = sc.nextInt();
     sc.nextLine();
     for (int i = 0; i < memberList.getMemberList().size(); i++) {
@@ -166,8 +168,10 @@ public class Engine {
             }
             default -> System.out.println("Invalid input");
           }
-        }
+        }}
       }
+    }catch (NumberFormatException | InputMismatchException exception){
+        ui.invalidInput();
     }
   }
 
