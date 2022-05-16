@@ -20,6 +20,7 @@ public class SwingGUI {
     private JTextField textField;
     private final static String newline = "\n";
     private int memberID = Integer.parseInt(String.valueOf(Year.now())) * 1000 + 1;
+    private String paymentStatus;
 
     MemberList memberList = new MemberList();
 
@@ -42,7 +43,7 @@ public class SwingGUI {
         JButton createMember = new JButton("Opret nyt medlem");
         JButton showMembers = new JButton("Vis medlemmer i tabel");
         JButton deleteMember = new JButton("Slet medlem");
-        JButton button1 = new JButton("Knap");
+        JButton checkIncome = new JButton("Tjek indtjening");
         JButton button2 = new JButton("Knap");
         JButton button3 = new JButton("Knap");
         JButton saveAndExit = new JButton("Gem og luk");
@@ -59,7 +60,7 @@ public class SwingGUI {
         // Gives all panels a specific location on the screen.
         createMember.setBounds(10, 10, 200, 100);
         showMembers.setBounds(10, 120, 200, 100);
-        button1.setBounds(10, 230, 200, 100);
+        checkIncome.setBounds(10, 230, 200, 100);
         button2.setBounds(10, 340, 200, 100);
         button3.setBounds(10, 450, 200, 100);
         deleteMember.setBounds(10, 560, 200, 100);
@@ -85,7 +86,7 @@ public class SwingGUI {
         saveAndExit.setBorder(br);
         textField.setBorder(br);
         clearScreen.setBorder(br);
-        button1.setBorder(br);
+        checkIncome.setBorder(br);
         button2.setBorder(br);
         button3.setBorder(br);
 
@@ -98,7 +99,7 @@ public class SwingGUI {
         c.add(textField);
         c.add(inputField);
         c.add(clearScreen);
-        c.add(button1);
+        c.add(checkIncome);
         c.add(button2);
         c.add(button3);
 
@@ -127,6 +128,8 @@ public class SwingGUI {
         {
             membersTable();
         });
+
+        checkIncome.addActionListener(e -> checkIncome());
 
         saveAndExit.addActionListener(e -> System.exit(frame.EXIT_ON_CLOSE));
 
@@ -316,6 +319,14 @@ public class SwingGUI {
         }
     }
 
+    public void checkIncome() {
+        int income = 0;
+        for (int i = 0; i < memberList.getMemberList().size(); i++) {
+            income += memberList.getMemberList().get(i).subscription();
+        }
+        textArea.append( newline +"Indtjening på nuværende medlemmers kontigent: "  + income + " DKK" + newline);
+    }
+
     public void membersTable() {
 
         JFrame f = new JFrame();
@@ -323,13 +334,13 @@ public class SwingGUI {
 
         // Frame Title
         f.setTitle("Tabel over medlemmer");
-        String[][] data = new String[memberList.getMemberList().size()][6];
-        String[] columnNames = {"Navn:", "Fødselsdagsdato:", "Medlemstype:", "Medlemsnummer:", "Aktivt medlem:", "Konkurrencesvømmer:"};
+        String[][] data = new String[memberList.getMemberList().size()][7];
+        String[] columnNames = {"Navn:", "Fødselsdagsdato:", "Alder / Medlemstype:", "Medlemsnummer:", "Aktivt medlem:", "Konkurrencesvømmer:", "Betalingsstatus: "};
         for (int i = 0; i < memberList.getMemberList().size(); i++) {
             Member member = memberList.getMemberList().get(i);
             data[i][0] = member.getName();
             data[i][1] = String.valueOf(((member.getBirthday().getBirthday())));
-            data[i][2] = String.valueOf(member.getBirthday().membershipType());
+            data[i][2] = member.getAge() + " år, " + member.getBirthday().membershipType();
             data[i][3] = String.valueOf(member.getId());
             String yesNoActive;
             String yesNoComp;
@@ -341,6 +352,7 @@ public class SwingGUI {
             } else yesNoActive = "Nej";
             data[i][4] = yesNoActive;
             data[i][5] = yesNoComp;
+            data[i][6] = paymentStatus;
             // Initializing the JTable
         }
         j = new JTable(data, columnNames);
