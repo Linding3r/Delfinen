@@ -68,17 +68,24 @@ public class Engine {
     }
 
     public void sortMemberList() throws InterruptedException {
-        ui.sortMenu();
+        boolean run = true;
+        while(run){
+          run = false;
+          ui.sortMenu();
         switch (sc.nextLine()) {
-            case "1" -> sort.sortSurname();
-            case "2" -> sort.sortFirstname();
-            case "3" -> sort.sortAge();
-            case "4" -> sort.sortActive();
-            case "5" -> sort.sortComp();
-            case "6" -> sort.sortRegDate();
-            case "7" -> sort.sortId();
-            case "8" -> sort.sortPayment();
-            default -> ui.invalidInput();
+          case "1" -> sort.sortSurname();
+          case "2" -> sort.sortFirstname();
+          case "3" -> sort.sortAge();
+          case "4" -> sort.sortActive();
+          case "5" -> sort.sortComp();
+          case "6" -> sort.sortRegDate();
+          case "7" -> sort.sortId();
+          case "8" -> sort.sortPayment();
+          default -> {
+            ui.invalidInput();
+            run = true;
+          }
+          }
         } System.out.println(memberList.toString());
     }
 
