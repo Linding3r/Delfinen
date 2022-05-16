@@ -48,6 +48,10 @@ public class Member {
     this.competitionSwimmer = competitionSwimmer;
   }
 
+  public Birthday getBirthday() {
+    return birthday;
+  }
+
   public int getAge() {
     return age;
   }
@@ -99,6 +103,6 @@ public class Member {
     if (active) {
       yesNoActive = "Ja";
     } else yesNoActive = "Nej";
-    return "Navn: " + name  + " | Fødselsdagsdato: " + age + " | id: " + id + " | Aktiv: " + yesNoActive + " | Konkurrencesvømmer: "+ yesNoComp + "\n";
+    return "Navn: " + name  + " | Fødselsdagsdato: " + birthday.getBirthday() + " | id: " + id + " | Aktiv: " + yesNoActive + " | Konkurrencesvømmer: "+ yesNoComp + "\n";
   }
 }

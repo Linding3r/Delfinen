@@ -30,7 +30,7 @@ public class SwingGUI {
         frame.setLayout(null);
         //setting the bounds for the JFrame
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setBounds(100, 100, 1200, 800);
+        frame.setBounds(100, 100, 1200, 810);
 //    setBounds(100,100,screenSize.width, screenSize.height);
 
         // Used to create a border around all objects.
@@ -324,11 +324,11 @@ public class SwingGUI {
         // Frame Title
         f.setTitle("Tabel over medlemmer");
         String[][] data = new String[memberList.getMemberList().size()][5];
-        String[] columnNames = {"Navn", "Fødselsdagsdato", "Medlemsnummer", "Aktivt medlem", "Konkurrencesvømmer"};
+        String[] columnNames = {"Navn:", "Fødselsdagsdato:", "Medlemsnummer:", "Aktivt medlem:", "Konkurrencesvømmer:"};
         for (int i = 0; i < memberList.getMemberList().size(); i++) {
             Member member = memberList.getMemberList().get(i);
             data[i][0] = member.getName();
-            data[i][1] = String.valueOf(member.getAge());
+            data[i][1] = String.valueOf(((member.getBirthday().getBirthday())));
             data[i][2] = String.valueOf(member.getId());
             String yesNoActive;
             String yesNoComp;
