@@ -1,5 +1,6 @@
 package main;
 
+import entities.Competition;
 import entities.Member;
 import entities.MemberList;
 import ui.Ui;
