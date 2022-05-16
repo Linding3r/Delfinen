@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.time.Year;
-import java.util.Date;
 import java.util.Objects;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -20,53 +19,11 @@ public class SwingGUI {
     private JTextArea textArea;
     private JTextField textField;
     private final static String newline = "\n";
-    private int memberID = Integer.parseInt(String.valueOf(Year.now())) *1000 + 999;
+    private int memberID = Integer.parseInt(String.valueOf(Year.now())) * 1000 + 1;
 
     MemberList memberList = new MemberList();
 
-    public void chooseUser() {
-        frame = new JFrame();
-        Engine engine = new Engine();
-        frame.setTitle("Vælg bruger");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(null);
-        Container c = frame.getContentPane();
-        frame.setBounds(0, 0, 320, 250);
-        frame.setLocationRelativeTo(null);
-
-        JLabel label = new JLabel("Vælg hvilken bruger du ønsker at logge ind på:");
-        JButton presidentButton = new JButton("Formand");
-        JButton cashierButton = new JButton("Kasserer");
-        JButton trainerButton = new JButton("Træner");
-        c.add(label);
-        c.add(presidentButton);
-        c.add(cashierButton);
-        c.add(trainerButton);
-        frame.setResizable(false);
-        presidentButton.setBounds(95, 25, 150, 50);
-        cashierButton.setBounds(95, 80, 150, 50);
-        trainerButton.setBounds(95, 135, 150, 50);
-        label.setBounds(10, 0, 300, 20);
-
-
-        presidentButton.addActionListener(e -> {
-            engine.presidentExecute();
-            frame.setVisible(false);
-        });
-        cashierButton.addActionListener(e -> {
-            engine.cashierExecute();
-            frame.setVisible(false);
-        });
-        trainerButton.addActionListener(e -> {
-            engine.trainerExecute();
-            frame.setVisible(false);
-        });
-
-
-        frame.setVisible(true);
-    }
-
-    public void mainPanelPresident() {
+    public void mainMenu() {
         frame = new JFrame();
         frame.setTitle("Svømmeklubben Delfinen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,7 +42,10 @@ public class SwingGUI {
         JButton createMember = new JButton("Opret nyt medlem");
         JButton showMembers = new JButton("Vis medlemmer i tabel");
         JButton deleteMember = new JButton("Slet medlem");
-        JButton buttomButton = new JButton("Gem og luk");
+        JButton button1 = new JButton("Knap");
+        JButton button2 = new JButton("Knap");
+        JButton button3 = new JButton("Knap");
+        JButton saveAndExit = new JButton("Gem og luk");
         JButton clearScreen = new JButton("Ryd skærmen");
 
         textArea = new JTextArea();
@@ -99,8 +59,13 @@ public class SwingGUI {
         // Gives all panels a specific location on the screen.
         createMember.setBounds(10, 10, 200, 100);
         showMembers.setBounds(10, 120, 200, 100);
-        deleteMember.setBounds(10, 230, 200, 100);
-        buttomButton.setBounds(10, 340, 200, 100);
+        button1.setBounds(10, 230, 200, 100);
+        button2.setBounds(10, 340, 200, 100);
+        button3.setBounds(10, 450, 200, 100);
+        deleteMember.setBounds(10, 560, 200, 100);
+
+
+        saveAndExit.setBounds(10, 670, 200, 100);
         clearScreen.setBounds(260, 740, 100, 20);
 
         textArea.setBounds(220, 10, 900, 700);
@@ -117,19 +82,25 @@ public class SwingGUI {
         createMember.setBorder(br);
         showMembers.setBorder(br);
         deleteMember.setBorder(br);
-        buttomButton.setBorder(br);
+        saveAndExit.setBorder(br);
         textField.setBorder(br);
         clearScreen.setBorder(br);
+        button1.setBorder(br);
+        button2.setBorder(br);
+        button3.setBorder(br);
 
         // Adds all Jframe components to the container which makes sure everything is visible.
         c.add(createMember);
         c.add(showMembers);
         c.add(deleteMember);
-        c.add(buttomButton);
+        c.add(saveAndExit);
         c.add(textArea);
         c.add(textField);
         c.add(inputField);
         c.add(clearScreen);
+        c.add(button1);
+        c.add(button2);
+        c.add(button3);
 
         // sets visibility. This is required to open the window in the first place. If visibility == false, it will not
         // open at all.
@@ -157,7 +128,7 @@ public class SwingGUI {
             membersTable();
         });
 
-        buttomButton.addActionListener(e -> System.exit(frame.EXIT_ON_CLOSE));
+        saveAndExit.addActionListener(e -> System.exit(frame.EXIT_ON_CLOSE));
 
     }
 
@@ -235,10 +206,12 @@ public class SwingGUI {
 
             String text = textField.getText();
             if (Objects.equals(textField.getText(), "ryd")) {
+
                 textArea.setText("");
                 textField.setText("");
-            } else
+            } else {
                 textArea.append(text + newline);
+            }
             textField.setText("");
         }
     };
@@ -273,12 +246,12 @@ public class SwingGUI {
             if (memberList.getMemberList() != null && !(memberList.getMemberList().isEmpty())) {
                 int calculateNewYear = memberList.getMemberList().get(memberList.getMemberList().size() - 1).getId() - Integer.parseInt(String.valueOf(Year.now()));
                 memberID = Integer.parseInt(String.valueOf(Year.now())) + calculateNewYear + 1;
-                }
+            }
 
             textArea.append("Medlem oprettet: " + newline + member + newline);
             memberList.addMemberToList(member);
             memberID++;
-            if (memberID == 2023000){
+            if (memberID == 2023000) {
                 memberID = 20221000;
             }
             success(frameMember, frameMain);
@@ -331,16 +304,15 @@ public class SwingGUI {
         try {
             for (int i = 0; i < memberList.getMemberList().size(); i++) {
                 int getID = memberList.getMemberList().get(i).getId();
-                if (Objects.equals(textField.getText(), "")){
+                if (Objects.equals(textField.getText(), "")) {
                     textArea.append("Ugyldigt nummer. Indtast medlemsnummeret i input feltet under." + newline);
-                }
-                else if (Integer.parseInt(textField.getText()) == getID) {
+                } else if (Integer.parseInt(textField.getText()) == getID) {
                     textArea.append(newline + "Du har slettet: " + newline + memberList.getMemberList().get(i).getName() + ", Medlemsnummer: " + getID);
                     memberList.getMemberList().remove(i);
                     textField.setText("");
                 }
             }
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
         }
     }
 

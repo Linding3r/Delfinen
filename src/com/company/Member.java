@@ -66,7 +66,7 @@ public class Member {
 
     if (competitionSwimmer) {
       yesNoComp = "Ja";
-    } else yesNoComp = "Nej";
+    } else yesNoComp = "Nej (motionssvømmer)";
     if (active) {
       yesNoActive = "Ja";
     } else yesNoActive = "Nej";
