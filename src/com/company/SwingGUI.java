@@ -151,6 +151,7 @@ public class SwingGUI {
         JCheckBox checkBoxActive = new JCheckBox();
         JCheckBox checkBoxComp = new JCheckBox();
 
+        checkBoxActive.setSelected(true);
         // Below keyListener will only accept numbers to avoid any exceptions.
         textFieldAge.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -209,9 +210,7 @@ public class SwingGUI {
 
                 textArea.setText("");
                 textField.setText("");
-            } else {
-                textArea.append(text + newline);
-            }
+            } else
             textField.setText("");
         }
     };
