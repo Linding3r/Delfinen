@@ -2,6 +2,10 @@ package com.company;
 
 public class Member {
 
+
+
+
+
   private Integer age;
   private int id;
   private String name;
