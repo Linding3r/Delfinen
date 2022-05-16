@@ -30,13 +30,13 @@ public class Engine {
         case "3" -> sortMemberList();
         case "4" -> deleteMember();
         case "5" -> changePaymentStatus();
-        case "6" -> System.out.println("Implement see list of junior/senior members");
-        case "7" -> System.out.println("Implement see list of active/non active members");
-        case "8" -> System.out.println("Implement see list of payment status of members (paid/not paid)");
-        case "9" -> System.out.println("Implement register best TRAINING result, date for junior/senior swimmers");
-        case "10" -> System.out.println("Implement register best COMPETITION result, date for junior/senior swimmers ");
-        case "11" -> System.out.println("Implement see list of top 5 results based on TRAINING results");
-        case "12" -> System.out.println("Implement change status of swimmers from competition to free-timer swimmer (and vice versa)");
+        //case "6" -> System.out.println("Implement see list of junior/senior members");
+        //case "7" -> System.out.println("Implement see list of active/non active members");
+        //case "8" -> System.out.println("Implement see list of payment status of members (paid/not paid)");
+        //case "9" -> System.out.println("Implement register best TRAINING result, date for junior/senior swimmers");
+        //case "10" -> System.out.println("Implement register best COMPETITION result, date for junior/senior swimmers ");
+        //case "11" -> System.out.println("Implement see list of top 5 results based on TRAINING results");
+        //case "12" -> System.out.println("Implement change status of swimmers from competition to free-timer swimmer (and vice versa)");
         case "99" -> {
           run = false;
           ui.newLine();
@@ -71,18 +71,25 @@ public class Engine {
     }
 
     public void sortMemberList() throws InterruptedException {
-        ui.sortMenu();
+        boolean run = true;
+        while(run){
+          run = false;
+          ui.sortMenu();
         switch (sc.nextLine()) {
-            case "1" -> sort.sortSurname();
-            case "2" -> sort.sortFirstname();
-            case "3" -> sort.sortAge();
-            case "4" -> sort.sortActive();
-            case "5" -> sort.sortComp();
-            case "6" -> sort.sortRegDate();
-            case "7" -> sort.sortId();
-            case "8" -> sort.sortPayment();
-            default -> ui.invalidInput();
-        }
+          case "1" -> sort.sortSurname();
+          case "2" -> sort.sortFirstname();
+          case "3" -> sort.sortAge();
+          case "4" -> sort.sortActive();
+          case "5" -> sort.sortComp();
+          case "6" -> sort.sortRegDate();
+          case "7" -> sort.sortId();
+          case "8" -> sort.sortPayment();
+          default -> {
+            ui.invalidInput();
+            run = true;
+          }
+          }
+        } System.out.println(memberList.toString());
     }
 
     public void addMember() {
