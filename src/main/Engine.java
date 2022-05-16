@@ -5,6 +5,7 @@ import entities.MemberList;
 import ui.Ui;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Engine {
@@ -49,21 +50,23 @@ public class Engine {
 
     public void deleteMember() throws InterruptedException {
         System.out.println("Skriv medlemsnummeret på brugeren du ønsker at slette.");
+        try {
+
         int whichMemberID = Integer.parseInt(sc.nextLine());
         for (int i = 0; i <= memberList.getMemberList().size(); i++) {
             Member member = memberList.getMemberList().get(i);
             if (whichMemberID == member.getId()) {
                 System.out.println("Du ved at slette bruger: " + member.getFirstName() + " " + member.getSurname() + ", Medlemsnummer: " + member.getId());
-                System.out.println("Tryk 1 for at slette tryk på alt andet for a afbryde.");
-            } else if (whichMemberID != member.getId()) {
-                ui.invalidInput();
-                break;
+                System.out.println("Tryk 1 for at slette tryk på alt andet for at afbryde.");
+                String choice = sc.nextLine();
+                if (Objects.equals(choice, "1")) {
+                    memberList.getMemberList().remove(i);
+                    System.out.println(member.getFirstName() + " " + member.getSurname() + " er blevet slettet.");
+                }
+                else break;
             }
-            String choice = sc.nextLine();
-            if ("1".equals(choice)) {
-                memberList.getMemberList().remove(i);
-                System.out.println(member.getFirstName() + " " + member.getSurname() + " er blevet slettet.");
-            } else break;
+        }}catch (NumberFormatException e){
+            ui.invalidInput();
         }
     }
 

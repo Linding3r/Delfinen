@@ -87,7 +87,7 @@ public class Ui {
         "║" + BLUE + "  ██████  ███████ ███████ ██      ██ ██   ████ ███████ ██   ████ " + RESET + " ║\n" +
         "╚══════════════════════════════════════════════════════════════════╝\n\n\n\n\n";
     System.out.println(intro);
-    Thread.sleep(2000);
+    Thread.sleep(1000);
     newLine();
 
   }
@@ -143,7 +143,7 @@ public class Ui {
 
   public void invalidInput() throws InterruptedException {
     System.out.println("INVALID INPUT");
-    Thread.sleep(2000);
+    Thread.sleep(1500);
     newLine();
   }
 
