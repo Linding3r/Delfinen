@@ -45,6 +45,7 @@ public class Member {
     this.birthday = birthday;
     this.age = birthday.birthdayToAge();
     this.id = id;
+    this.membership = birthday.membershipType();
     this.name = name;
     this.active = active;
     this.competitionSwimmer = competitionSwimmer;
