@@ -258,7 +258,7 @@ public class SwingGUI {
         textFieldLastName.setBorder(br);
 
         if (!Objects.equals(textFieldFirstName.getText(), "") && !Objects.equals(textFieldLastName.getText(), "") && birthday.checkBirthday(textFieldAge) != null) {
-            Member member = new Member(birthday, memberID, firstName, active, comp);
+            Member member = new Member(birthday, memberID, firstName, lastName, active, comp);
             if (memberList.getMemberList() != null && !(memberList.getMemberList().isEmpty())) {
                 int calculateNewYear = memberList.getMemberList().get(memberList.getMemberList().size() - 1).getId() - Integer.parseInt(String.valueOf(Year.now()));
                 memberID = Integer.parseInt(String.valueOf(Year.now())) + calculateNewYear + 1;
@@ -323,7 +323,7 @@ public class SwingGUI {
                 if (Objects.equals(textField.getText(), "")) {
                     textArea.append("Ugyldigt nummer. Indtast medlemsnummeret i input feltet under." + newline);
                 } else if (Integer.parseInt(textField.getText()) == getID) {
-                    textArea.append(newline + "Du har ændret betalingsstatus for: " + newline + memberList.getMemberList().get(i).getName() + ", Medlemsnummer: " + getID);
+                    textArea.append(newline + "Du har ændret betalingsstatus for: " + newline + memberList.getMemberList().get(i).getFirstName() + ", Medlemsnummer: " + getID);
                     memberList.getMemberList().get(i).setPayment(false);
                     textField.setText("");
                 }
@@ -339,7 +339,7 @@ public class SwingGUI {
                 if (Objects.equals(textField.getText(), "")) {
                     textArea.append("Ugyldigt nummer. Indtast medlemsnummeret i input feltet under." + newline);
                 } else if (Integer.parseInt(textField.getText()) == getID) {
-                    textArea.append(newline + "Du har slettet: " + newline + memberList.getMemberList().get(i).getName() + ", Medlemsnummer: " + getID);
+                    textArea.append(newline + "Du har slettet: " + newline + memberList.getMemberList().get(i).getFirstName() + ", Medlemsnummer: " + getID);
                     memberList.getMemberList().remove(i);
                     textField.setText("");
                 }
@@ -363,14 +363,15 @@ public class SwingGUI {
 
         // Frame Title
         f.setTitle("Tabel over medlemmer");
-        String[][] data = new String[memberList.getMemberList().size()][7];
-        String[] columnNames = {"Navn:", "Fødselsdagsdato:", "Alder / Medlemstype:", "Medlemsnummer:", "Aktivt medlem:", "Konkurrencesvømmer:", "Betalingsstatus: "};
+        String[][] data = new String[memberList.getMemberList().size()][8];
+        String[] columnNames = {"Fornavn:", "Efternavn:", "Fødselsdagsdato:", "Alder / Medlemstype:", "Medlemsnummer:", "Aktivt medlem:", "Konkurrencesvømmer:", "Betalingsstatus: "};
         for (int i = 0; i < memberList.getMemberList().size(); i++) {
             Member member = memberList.getMemberList().get(i);
-            data[i][0] = member.getName();
-            data[i][1] = String.valueOf(((member.getBirthday().getBirthday())));
-            data[i][2] = member.getAge() + " år, " + member.getBirthday().membershipType();
-            data[i][3] = String.valueOf(member.getId());
+            data[i][0] = member.getFirstName();
+            data[i][1] = member.getSurname();
+            data[i][2] = String.valueOf(((member.getBirthday().getBirthday())));
+            data[i][3] = member.getAge() + " år, " + member.getBirthday().membershipType();
+            data[i][4] = String.valueOf(member.getId());
             String yesNoActive;
             String yesNoComp;
             if (member.isCompetitionSwimmer()) {
@@ -379,13 +380,13 @@ public class SwingGUI {
             if (member.isActive()) {
                 yesNoActive = "Ja";
             } else yesNoActive = "Nej";
-            data[i][4] = yesNoActive;
-            data[i][5] = yesNoComp;
+            data[i][5] = yesNoActive;
+            data[i][6] = yesNoComp;
             String payment;
             if (member.isPayment()) {
                 payment = "OK";
             } else payment = "Ikke betalt!";
-            data[i][6] = payment;
+            data[i][7] = payment;
             // Initializing the JTable
         }
         j = new JTable(data, columnNames);

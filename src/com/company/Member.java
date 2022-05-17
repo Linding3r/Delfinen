@@ -5,22 +5,28 @@ public class Member {
   private Birthday birthday;
   private int age;
   private int id;
-  private String name;
+  private String firstName;
+  private String surname;
   private boolean active;
   private boolean competitionSwimmer;
   private Trainer trainer;
   private String membership;
   private boolean payment;
 
-  public Member(Birthday birthday, int id, String name, boolean active, boolean competitionSwimmer) {
+  public Member(Birthday birthday, int id, String firstName, String surname, boolean active, boolean competitionSwimmer) {
     this.birthday = birthday;
     this.age = birthday.birthdayToAge();
     this.id = id;
     this.membership = birthday.membershipType();
-    this.name = name;
+    this.firstName = firstName;
+    this.surname = surname;
     this.active = active;
     this.competitionSwimmer = competitionSwimmer;
     this.payment = true;
+  }
+
+  public String getSurname() {
+    return surname;
   }
 
   public boolean isPayment() {
@@ -43,8 +49,8 @@ public class Member {
     return id;
   }
 
-  public String getName() {
-    return name;
+  public String getFirstName() {
+    return firstName;
   }
 
   public boolean isActive() {
@@ -78,6 +84,6 @@ public class Member {
     if (active) {
       yesNoActive = "Ja";
     } else yesNoActive = "Nej";
-    return "Navn: " + name  + " | Fødselsdagsdato: " + birthday.getBirthday() + " | id: " + id + " | Aktiv: " + yesNoActive + " | Konkurrencesvømmer: "+ yesNoComp + "\n";
+    return "Fornavn: " + firstName + " | Efternavn: " + surname + " | Fødselsdagsdato: " + birthday.getBirthday() + " | id: " + id + " | Aktiv: " + yesNoActive + " | Konkurrencesvømmer: "+ yesNoComp + "\n";
   }
 }
