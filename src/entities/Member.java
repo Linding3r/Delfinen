@@ -18,6 +18,7 @@ public class Member {
   private Trainer trainer;
   private LocalDate registerDate = LocalDate.now();
   private int id;
+  private int idCode;
   private Discipline discipline;
   public final String RED = "\u001B[31m";
   public final String RESET = "\u001B[0m";
@@ -56,6 +57,10 @@ public class Member {
 
   public Date getBirthday() {
     return birthday;
+  }
+
+  public int getID(){
+    return registerDate.getYear() * idCode + id;
   }
 
   public int getId() {

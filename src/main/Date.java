@@ -11,11 +11,15 @@ public class Date {
     private int year;
     private int age;
     Scanner sc = new Scanner(System.in);
-    private String birthday = sc.nextLine();
+    private String birthday;
     private LocalDate currentDate = LocalDate.now();
 
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
 
     public String checkDate() {
+        birthday = sc.nextLine();
         String[] birthdayArray = birthday.split("/");
         try {
             for (int i = 0; i < birthdayArray.length; i++) {
@@ -65,5 +69,8 @@ public class Date {
         }else return "60+";
     }
 
-
+    @Override
+    public String toString() {
+        return birthday;
+    }
 }

@@ -4,20 +4,23 @@ import entities.Member;
 import entities.MemberList;
 import ui.Ui;
 
-import java.util.InputMismatchException;
-import java.util.Objects;
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.util.*;
 
 public class Engine {
   private Scanner sc = new Scanner(System.in);
+
   public static MemberList memberList = new MemberList();
   private Sort sort = new Sort();
   private int memberId = 1;
   private int idCode = 1000;
   private Ui ui = new Ui();
 
-  public void runProgram() throws InterruptedException {
+  public void runProgram() throws InterruptedException, FileNotFoundException {
     boolean run = true;
+    loadMembersToFile();
     ui.dolphinLogo();
     ui.loadingBar();
     ui.introLabel();
@@ -39,6 +42,7 @@ public class Engine {
           run = false;
           ui.newLine();
           System.out.println("SHUTTING DOWN");
+          saveAnimalsToFile();
         }
         default -> ui.invalidInput();
       }
@@ -147,6 +151,50 @@ public class Engine {
             }
         }
         return value;
+    }
+
+    public void loadMembersToFile() {
+        try {
+            Scanner fileScanner = new Scanner(new File("members.csv"));
+            while (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine();
+                Scanner input = new Scanner(line).useDelimiter(";").useLocale(Locale.ENGLISH);
+                Date birthday = new Date();
+                birthday.setBirthday(input.next());
+                int iD = input.nextInt();
+                String firstName = input.next();
+                String surname = input.next();
+                boolean competition = input.nextBoolean();
+                int idCode = input.nextInt();
+                Member member = new Member(birthday,iD,firstName,surname,competition,idCode);
+                memberList.addMemberToList(member);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Cannot locate file");
+        }
+    }
+
+    public void saveAnimalsToFile() {
+        try {
+            PrintStream out = new PrintStream("members.csv");
+            for (int i = 0; i < memberList.getMemberList().size(); i++) {
+                Member member = memberList.getMemberList().get(i);
+                out.print(member.getBirthday());
+                out.print(";");
+                out.print(member.getId());
+                out.print(";");
+                out.print(member.getFirstName());
+                out.print(";");
+                out.print(member.getSurname());
+                out.print(";");
+                out.print(member.isCompetitionSwimmer());
+                out.print(";");
+                out.print(member.getID());
+                out.print("\n");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Cannot locate file");
+        }
     }
 
   public void changePaymentStatus() throws InterruptedException {
