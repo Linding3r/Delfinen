@@ -142,7 +142,7 @@ public class SwingGUI {
         frame.setTitle("Create Member");
         frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
         frame.setLayout(null);
-        frame.setBounds(0, 0, 500, 230);
+        frame.setBounds(0, 0, 500, 210);
 
         Container c = frame.getContentPane();
 
@@ -183,16 +183,16 @@ public class SwingGUI {
         c.add(validateButton);
 
         name.setBounds(5, 5, 200, 20);
-        textFieldName.setBounds(205, 5, 200, 20);
-        age.setBounds(5, 30, 200, 20);
-        textFieldAge.setBounds(205, 30, 200, 20);
+        textFieldName.setBounds(255, 5, 200, 20);
+        age.setBounds(5, 30, 300, 20);
+        textFieldAge.setBounds(255, 30, 200, 20);
         activeMember.setBounds(5, 60, 200, 20);
-        checkBoxActive.setBounds(200, 60, 200, 20);
+        checkBoxActive.setBounds(250, 60, 200, 20);
         competitiveSwimmer.setBounds(5, 90, 200, 20);
-        checkBoxComp.setBounds(200, 90, 200, 20);
+        checkBoxComp.setBounds(250, 90, 200, 20);
 
 
-        validateButton.setBounds(150, 120, 150, 50);
+        validateButton.setBounds(175, 120, 150, 50);
 
 
         frame.setLocationRelativeTo(null);
