@@ -2,7 +2,8 @@ package disciplins;
 
 public class Discipline {
 
-  private String name;
+  private String competitionName;
+  private Time time;
   private Integer position;
   private Integer butterfly;
   private Integer crawl;
@@ -11,7 +12,7 @@ public class Discipline {
 
 
   public Discipline() {
-    this.name = null;
+    this.competitionName = null;
     this.position = null;
     this.butterfly = null;
     this.crawl = null;
@@ -20,11 +21,11 @@ public class Discipline {
   }
 
   public String getName() {
-    return name;
+    return competitionName;
   }
 
   public void setName(String name) {
-    this.name = name;
+    this.competitionName = name;
   }
 
   public Integer getPosition() {
