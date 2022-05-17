@@ -22,7 +22,8 @@ public class Engine {
 
   public void runProgram() throws InterruptedException, FileNotFoundException {
     boolean run = true;
-    loadMembersToFile();
+    loadMembersFromFile();
+    sort.sortId();
     loadLastMemberID();
     ui.dolphinLogo();
     ui.loadingBar();
@@ -163,10 +164,11 @@ public class Engine {
   }
 
   public void loadLastMemberID(){
-    memberId = memberList.getMemberList().get(memberList.getMemberList().size()-1).getId();
+    //int memberyear = memberList.getMemberList().get(memberList.getMemberList().size()-1).getRegisterDate().getYear();
+    memberId = (memberList.getMemberList().get(memberList.getMemberList().size()-1).getId() - (2022 * idCode))+1;
   }
 
-    public void loadMembersToFile() {
+    public void loadMembersFromFile() {
         try {
             Scanner fileScanner = new Scanner(new File("members.csv"));
             while (fileScanner.hasNextLine()) {

@@ -17,7 +17,7 @@ public class Member {
   private boolean competitionSwimmer;
   private boolean payment;
   private Trainer trainer;
-  private LocalDate registerDate;
+  private LocalDate registerDate = LocalDate.now();
   private int id;
   private SwimmingTime swimmingTime;
   private Ui ui = new Ui();
@@ -36,7 +36,6 @@ public class Member {
     this.competitionSwimmer = competitionSwimmer;
     this.payment = true;
     this.swimmingTime = new SwimmingTime();
-    registerDate = LocalDate.now();
 
   }
 
