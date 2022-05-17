@@ -142,16 +142,18 @@ public class SwingGUI {
         frame.setTitle("Create Member");
         frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
         frame.setLayout(null);
-        frame.setBounds(0, 0, 500, 210);
+        frame.setBounds(0, 0, 500, 250);
 
         Container c = frame.getContentPane();
 
-        JLabel name = new JLabel("Fornavn: ");
-        JLabel age = new JLabel("Fødselsdagsdato: (DD/MM/YYYY) ");
+        JLabel firstName = new JLabel("Fornavn: ");
+        JLabel lastName = new JLabel("Efternavn: ");
+        JLabel age = new JLabel("Fødselsdagsdato (DD/MM/YYYY): ");
         JLabel activeMember = new JLabel("Aktivt medlem: ");
         JLabel competitiveSwimmer = new JLabel("Konkurrence svømmer: ");
 
-        JTextField textFieldName = new JTextField();
+        JTextField textFieldFirstName = new JTextField();
+        JTextField textFieldLastName = new JTextField();
         JTextField textFieldAge = new JTextField();
         JCheckBox checkBoxActive = new JCheckBox();
         JCheckBox checkBoxComp = new JCheckBox();
@@ -171,27 +173,40 @@ public class SwingGUI {
         JButton validateButton = new JButton("Valider og gem");
 
 
-        c.add(name);
-        c.add(textFieldName);
+        c.add(firstName);
+        c.add(textFieldFirstName);
+
+        c.add(lastName);
+        c.add(textFieldLastName);
+
         c.add(age);
         c.add(textFieldAge);
+
         c.add(activeMember);
         c.add(checkBoxActive);
+
         c.add(competitiveSwimmer);
         c.add(checkBoxComp);
+
         c.add(validateButton);
 
-        name.setBounds(5, 5, 200, 20);
-        textFieldName.setBounds(255, 5, 200, 20);
-        age.setBounds(5, 30, 300, 20);
-        textFieldAge.setBounds(255, 30, 200, 20);
-        activeMember.setBounds(5, 60, 200, 20);
-        checkBoxActive.setBounds(250, 60, 200, 20);
-        competitiveSwimmer.setBounds(5, 90, 200, 20);
-        checkBoxComp.setBounds(250, 90, 200, 20);
+        firstName.setBounds(5, 10, 200, 20);
+        textFieldFirstName.setBounds(255, 10, 200, 20);
+
+        lastName.setBounds(5, 40, 200, 20);
+        textFieldLastName.setBounds(255, 40, 200, 20);
+
+        age.setBounds(5, 70, 300, 20);
+        textFieldAge.setBounds(255, 70, 200, 20);
+
+        activeMember.setBounds(5, 100, 200, 20);
+        checkBoxActive.setBounds(250, 100, 200, 20);
+
+        competitiveSwimmer.setBounds(5, 130, 200, 20);
+        checkBoxComp.setBounds(250, 130, 200, 20);
 
 
-        validateButton.setBounds(175, 120, 150, 50);
+        validateButton.setBounds(175, 160, 150, 50);
 
 
         frame.setLocationRelativeTo(null);
@@ -200,7 +215,7 @@ public class SwingGUI {
         frame.setVisible(true);
         frame.toFront();
 
-        validateButton.addActionListener(e -> validateInput(textFieldName, textFieldAge, checkBoxActive, checkBoxComp, frame, frameMain));
+        validateButton.addActionListener(e -> validateInput(textFieldFirstName, textFieldLastName, textFieldAge, checkBoxActive, checkBoxComp, frame, frameMain));
 
     }
 
@@ -220,27 +235,30 @@ public class SwingGUI {
         }
     };
 
-    public void validateInput(JTextField textFieldName, JTextField textFieldAge, JCheckBox checkBoxActive, JCheckBox checkBoxComp, JFrame frameMember, JFrame frameMain) {
-        String name;
+    public void validateInput(JTextField textFieldFirstName, JTextField textFieldLastName, JTextField textFieldAge, JCheckBox checkBoxActive, JCheckBox checkBoxComp, JFrame frameMember, JFrame frameMain) {
+        String firstName;
+        String lastName;
         String age;
         Birthday birthday = new Birthday();
         age = birthday.checkBirthday(textFieldAge);
         boolean active;
         boolean comp;
-        name = textFieldName.getText();
-
+        firstName = textFieldFirstName.getText();
+        lastName = textFieldLastName.getText();
 
         active = checkBoxActive.isSelected();
         comp = checkBoxComp.isSelected();
         Border br;
-        if (Objects.equals(textFieldName.getText(), "")) {
+        if (Objects.equals(textFieldFirstName.getText(), "") && Objects.equals(textFieldLastName.getText(), "")) {
             br = BorderFactory.createLineBorder(Color.RED);
-            textFieldName.setBorder(br);
+            textFieldFirstName.setBorder(br);
+            textFieldLastName.setBorder(br);
         } else br = BorderFactory.createLineBorder(Color.WHITE);
-        textFieldName.setBorder(br);
+        textFieldFirstName.setBorder(br);
+        textFieldLastName.setBorder(br);
 
-        if (!Objects.equals(textFieldName.getText(), "") && birthday.checkBirthday(textFieldAge) != null) {
-            Member member = new Member(birthday, memberID, name, active, comp);
+        if (!Objects.equals(textFieldFirstName.getText(), "") && !Objects.equals(textFieldLastName.getText(), "") && birthday.checkBirthday(textFieldAge) != null) {
+            Member member = new Member(birthday, memberID, firstName, active, comp);
             if (memberList.getMemberList() != null && !(memberList.getMemberList().isEmpty())) {
                 int calculateNewYear = memberList.getMemberList().get(memberList.getMemberList().size() - 1).getId() - Integer.parseInt(String.valueOf(Year.now()));
                 memberID = Integer.parseInt(String.valueOf(Year.now())) + calculateNewYear + 1;
