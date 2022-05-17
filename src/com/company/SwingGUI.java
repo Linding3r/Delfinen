@@ -253,7 +253,8 @@ public class SwingGUI {
             br = BorderFactory.createLineBorder(Color.RED);
             textFieldFirstName.setBorder(br);
             textFieldLastName.setBorder(br);
-        } else br = BorderFactory.createLineBorder(Color.WHITE);
+        } else
+            br = BorderFactory.createLineBorder(Color.WHITE);
         textFieldFirstName.setBorder(br);
         textFieldLastName.setBorder(br);
 
