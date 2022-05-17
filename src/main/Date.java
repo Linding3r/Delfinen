@@ -18,7 +18,7 @@ public class Date {
         this.birthday = birthday;
     }
 
-    public String checkDate() {
+    public String createDate() {
         birthday = sc.nextLine();
         String[] birthdayArray = birthday.split("/");
         try {
@@ -34,7 +34,7 @@ public class Date {
             System.out.println((Arrays.toString(birthdayArray).replace("{","").replace("}","")) +
                 " Er en ugyldig dato. Indtast ny dato:");
             birthday = sc.nextLine();
-            checkDate();
+            createDate();
         }
         return birthday;
     }

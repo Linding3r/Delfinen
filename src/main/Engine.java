@@ -23,9 +23,9 @@ public class Engine {
 
   public void runProgram() throws InterruptedException, FileNotFoundException {
     boolean run = true;
-    loadMembersFromFile();
     ui.dolphinLogo();
     ui.loadingBar();
+    loadMembersFromFile();
     ui.introLabel();
     while (run) {
       ui.mainMenu();
@@ -128,7 +128,7 @@ public class Engine {
     String surname = sc.nextLine();
     System.out.println("\n\nIndtast medlemmets fødselsdagsdato. (FORMAT DD/MM/YEAR):");
     Date date = new Date();
-    date.checkDate();
+    date.createDate();
     System.out.println("\n\nIndtast om medlemmet er konkurrencesvømmer eller motionssvømmer");
     boolean competitionStatus = makeChoiceBoolean(ui.compNonCompChoice());
     idCode = updateIdCode(idCode);
@@ -155,18 +155,16 @@ public class Engine {
     boolean value = true;
     boolean run = true;
     while (run) {
+      run = false;
       System.out.println(ui);
       String input = sc.nextLine();
       switch (input) {
-        case "1" -> {
-          value = true;
-          run = false;
+        case "1" -> value = true;
+        case "2" -> value = false;
+        default -> {
+          System.out.println("INVALID INPUT");
+          run = true;
         }
-        case "2" -> {
-          value = false;
-          run = false;
-        }
-        default -> System.out.println("INVALID INPUT");
       }
     }
     return value;
@@ -195,14 +193,15 @@ public class Engine {
         Member member = new Member(birthday, age, iD, firstName, surname, competition);
         memberList.addMemberToList(member);
       }
+      } catch (FileNotFoundException e) {
+        System.out.println("Cannot locate file");
+      } try {
       sort.sortId();
       loadLastMemberID();
-    } catch (FileNotFoundException e) {
-      System.out.println("Cannot locate file");
-    } catch (NoSuchElementException e) {
-      System.out.println("File is empty");
+    } catch (NoSuchElementException | IndexOutOfBoundsException e) {
+        System.out.println("File is empty\n\n\n");
+      }
     }
-  }
 
   public void saveAnimalsToFile() {
     try {
