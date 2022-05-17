@@ -39,8 +39,25 @@ public class Date {
         return birthday;
     }
 
+    public String checkDateFromCSV() {
+        String[] birthdayArray = birthday.split("/");
+        try {
+            for (int i = 0; i < birthdayArray.length; i++) {
+                day = Integer.parseInt(birthdayArray[0]);
+                month = Integer.parseInt(birthdayArray[1]);
+                year = Integer.parseInt(birthdayArray[2]);
+            }
+        } catch (ArrayIndexOutOfBoundsException  | NumberFormatException ignored) {
+        }
+        return birthday;
+    }
+
     public String getBirthday() {
         return birthday;
+    }
+
+    public int getAge(){
+        return age;
     }
 
     public int birthdayToAge(){

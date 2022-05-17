@@ -23,8 +23,6 @@ public class Engine {
   public void runProgram() throws InterruptedException, FileNotFoundException {
     boolean run = true;
     loadMembersFromFile();
-    sort.sortId();
-    loadLastMemberID();
     ui.dolphinLogo();
     ui.loadingBar();
     ui.introLabel();
@@ -164,8 +162,8 @@ public class Engine {
   }
 
   public void loadLastMemberID(){
-    //int memberyear = memberList.getMemberList().get(memberList.getMemberList().size()-1).getRegisterDate().getYear();
-    memberId = (memberList.getMemberList().get(memberList.getMemberList().size()-1).getId() - (2022 * idCode))+1;
+    int memberYear = memberList.getMemberList().get(memberList.getMemberList().size()-1).getRegisterDate().getYear();
+    memberId = (memberList.getMemberList().get(memberList.getMemberList().size()-1).getId() - (memberYear * idCode))+1;
   }
 
     public void loadMembersFromFile() {
@@ -175,17 +173,23 @@ public class Engine {
                 String line = fileScanner.nextLine();
                 Scanner input = new Scanner(line).useDelimiter(";").useLocale(Locale.ENGLISH);
                 Date birthday = new Date();
-                birthday.setBirthday(input.next());
-                int age = input.nextInt();
                 int iD = input.nextInt();
-                String firstName = input.next();
                 String surname = input.next();
+                String firstName = input.next();
                 boolean competition = input.nextBoolean();
+                birthday.setBirthday(input.next());
+                birthday.checkDateFromCSV();
+                birthday.birthdayToAge();
+                int age = birthday.getAge();
                 Member member = new Member(birthday,age,iD,firstName,surname,competition);
                 memberList.addMemberToList(member);
             }
+          sort.sortId();
+          loadLastMemberID();
         } catch (FileNotFoundException e) {
             System.out.println("Cannot locate file");
+        } catch (NoSuchElementException e){
+          System.out.println("File is empty");
         }
     }
 
@@ -194,18 +198,20 @@ public class Engine {
             PrintStream out = new PrintStream("members.csv");
             for (int i = 0; i < memberList.getMemberList().size(); i++) {
                 Member member = memberList.getMemberList().get(i);
-                out.print(member.getBirthday());
-                out.print(";");
-                out.print(member.getAge());
-                out.print(";");
                 out.print(member.getId());
-                out.print(";");
-                out.print(member.getFirstName());
                 out.print(";");
                 out.print(member.getSurname());
                 out.print(";");
+                out.print(member.getFirstName());
+                out.print(";");
                 out.print(member.isCompetitionSwimmer());
-                out.print("\n");
+                out.print(";");
+                out.print(member.getBirthday());
+                out.print(";");
+                out.print(member.getAge());
+                out.print(";\n");
+
+
             }
         } catch (FileNotFoundException e) {
             System.out.println("Cannot locate file");
