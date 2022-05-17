@@ -35,7 +35,7 @@ public class Member {
     this.competitionSwimmer = competitionSwimmer;
     this.payment = true;
     this.discipline = new Discipline();
-
+    trainer = null;
   }
 
   public int subscription(){
@@ -90,12 +90,8 @@ public class Member {
     return age;
   }
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public void setSurname(String surname){
-    this.surname = surname;
+  public void setTrainer(Trainer trainer) {
+    this.trainer = trainer;
   }
 
   public void setActive(boolean active) {
@@ -139,6 +135,13 @@ public class Member {
     return paidStatus;
   }
 
+  public String trainerName(){
+    String name = "";
+    if(trainer != null){
+        name = trainer.getName();
+    } return name;
+  }
+
     public String shortenSurname() {
         if (surname.length() > 20) {
             return surname.substring(0, 16) + "...";
@@ -152,8 +155,8 @@ public class Member {
   }
 
   public String toString(){
-    return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | %10s (%-2sår) | %-6s | %-6s | %11s | %-18s | ",
+    return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | %10s (%-2sår) | %-6s | %-6s | %11s | %-18s | Træner: %-5s | ",
         id, shortenSurname(), shortenFirstname(), birthday.getBirthday(), age, membership, activeOrPassive(), paidOrNotPaid(),
-        compOrNotComp()) + registerDate + "\n";
+        compOrNotComp(), trainerName()) + registerDate + "\n";
   }
 }
