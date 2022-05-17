@@ -129,7 +129,7 @@ public class SwingGUI {
             membersTable();
         });
 
-        changePaymentStatus.addActionListener(e -> changePaymentStatus(textField,textArea));
+        changePaymentStatus.addActionListener(e -> changePaymentStatus(textField, textArea));
 
         checkIncome.addActionListener(e -> checkIncome());
 
@@ -216,7 +216,7 @@ public class SwingGUI {
                 textArea.setText("");
                 textField.setText("");
             } else
-            textField.setText("");
+                textField.setText("");
         }
     };
 
@@ -224,7 +224,7 @@ public class SwingGUI {
         String name;
         String age;
         Birthday birthday = new Birthday();
-        age =  birthday.checkBirthday(textFieldAge);
+        age = birthday.checkBirthday(textFieldAge);
         boolean active;
         boolean comp;
         name = textFieldName.getText();
@@ -335,7 +335,7 @@ public class SwingGUI {
         for (int i = 0; i < memberList.getMemberList().size(); i++) {
             income += memberList.getMemberList().get(i).subscription();
         }
-        textArea.append( newline +"Indtjening på nuværende medlemmers kontigent: "  + income + " DKK" + newline);
+        textArea.append(newline + "Indtjening på nuværende medlemmers kontigent: " + income + " DKK" + newline);
     }
 
     public void membersTable() {
@@ -364,10 +364,9 @@ public class SwingGUI {
             data[i][4] = yesNoActive;
             data[i][5] = yesNoComp;
             String payment;
-            if (member.isPayment()){
-             payment = "OK";
-            }
-            else payment = "Ikke betalt!";
+            if (member.isPayment()) {
+                payment = "OK";
+            } else payment = "Ikke betalt!";
             data[i][6] = payment;
             // Initializing the JTable
         }
