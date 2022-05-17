@@ -124,6 +124,7 @@ public class Engine {
   public void deleteMember() throws InterruptedException {
     System.out.println("Skriv medlemsnummeret på brugeren du ønsker at slette.");
     try {
+
       int whichMemberID = Integer.parseInt(sc.nextLine());
       for (int i = 0; i < memberList.getMemberList().size(); i++) {
         Member member = memberList.getMemberList().get(i);
@@ -180,40 +181,44 @@ public class Engine {
     boolean competitionStatus = makeChoiceBoolean(ui.compNonCompChoice());
     idCode = updateIdCode(idCode);
     Member member = new Member(date, memberId, firstname, surname, competitionStatus, idCode);
-    memberList.addMemberToList(member);
+    ui.confirmInput();
     System.out.println(member);
-    memberId++;
-  }
-
-  public int updateIdCode(int idCode) {
-    if (memberId == 1000) {
-      memberId = 1001;
-      return 10000;
-    } else if (memberId == 9999) {
-      return 100000;
-    } else return idCode;
-  }
-
-  public boolean makeChoiceBoolean(String ui) {
-    boolean value = true;
-    boolean run = true;
-    while (run) {
-      System.out.println(ui);
-      String input = sc.nextLine();
-      switch (input) {
-        case "1" -> {
-          value = true;
-          run = false;
-        }
-        case "2" -> {
-          value = false;
-          run = false;
-        }
-        default -> System.out.println("INVALID INPUT");
-      }
+    boolean yesNo = makeChoiceBoolean(ui.yesNo());
+    if (yesNo == true) {
+      memberList.addMemberToList(member);
+      memberId++;
     }
-    return value;
   }
+
+    public int updateIdCode(int idCode){
+        if(memberId == 1000){
+            memberId = 1001;
+            return 10000;
+        } else if(memberId==9999){
+            return 100000;
+        } else return idCode;
+    }
+
+    public boolean makeChoiceBoolean(String ui) {
+        boolean value = true;
+        boolean run = true;
+        while (run) {
+            System.out.println(ui);
+            String input = sc.nextLine();
+            switch (input) {
+                case "1" -> {
+                    value = true;
+                    run = false;
+                }
+                case "2" -> {
+                    value = false;
+                    run = false;
+                }
+                default -> System.out.println("INVALID INPUT");
+            }
+        }
+        return value;
+    }
 
   public void changePaymentStatus() throws InterruptedException {
     System.out.println("Indtast ID på medlem:");
@@ -222,6 +227,9 @@ public class Engine {
       sc.nextLine();
       for (int i = 0; i < memberList.getMemberList().size(); i++) {
         if (id == memberList.getMemberList().get(i).getId()) {
+          System.out.println("De nuværende oplysninger på medlemmet er:");
+          System.out.println(memberList.getMemberList().get(i));
+          System.out.println("Hvad vil du sætte betalingsstatussen til?");
           boolean run = true;
           while (run) {
             System.out.println(ui.paidNotPaidChoice());
@@ -252,6 +260,9 @@ public class Engine {
       sc.nextLine();
       for (int i = 0; i < memberList.getMemberList().size(); i++) {
         if (id == memberList.getMemberList().get(i).getId()) {
+          System.out.println("De nuværende oplysninger på medlemmet er:");
+          System.out.println(memberList.getMemberList().get(i));
+          System.out.println("Hvad vil du sætte medlemsstatussen til?");
           boolean run = true;
           while (run) {
             System.out.println(ui.activePassiveChoice());
