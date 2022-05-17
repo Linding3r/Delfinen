@@ -30,7 +30,7 @@ public class Ui {
   public void sortMenu() {
     System.out.println("""
         ╔══════════════════════════════════════╗
-        ║           SORTERINGS MENU            ║
+        ║           SORTERINGSMENU             ║
         ╠══════════════════════════════════════╣
         ║   1:  Sorter efter Efternavn         ║
         ║   2:  Sorter efter Fornavn           ║
@@ -74,6 +74,17 @@ public class Ui {
         ╠═════════════════════════╣
         ║  1:  Betalt             ║
         ║  2:  Ikke betalt        ║
+        ╚═════════════════════════╝
+        """;
+  }
+
+  public String yesNo() {
+    return """
+        ╔═════════════════════════╗
+        ║          Vælg:          ║
+        ╠═════════════════════════╣
+        ║  1:  Ja                 ║
+        ║  2:  Nej                ║
         ╚═════════════════════════╝
         """;
   }

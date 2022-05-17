@@ -114,8 +114,11 @@ public class Engine {
         boolean competitionStatus = makeChoiceBoolean(ui.compNonCompChoice());
         idCode = updateIdCode(idCode);
         Member member = new Member(date, memberId, firstname, surname, competitionStatus,idCode);
-        memberList.addMemberToList(member);
+        System.out.println("Kan du bekræfte, at dataene er udfyldt korrekt?");
         System.out.println(member);
+
+        memberList.addMemberToList(member);
+
         memberId++;
     }
 
