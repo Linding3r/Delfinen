@@ -114,6 +114,10 @@ public class Member {
     this.payment = payment;
   }
 
+  public void setDiscipline(Discipline discipline){
+    this.discipline = discipline;
+  }
+
 
   public String activeOrPassive(){
     String activeOrPassive;

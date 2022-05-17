@@ -1,5 +1,6 @@
 package main;
 
+import disciplins.Discipline;
 import entities.Member;
 import entities.MemberList;
 import ui.Ui;
@@ -15,6 +16,7 @@ public class Engine {
   private int memberId = 1;
   private int idCode = 1000;
   private Ui ui = new Ui();
+  private Discipline discipline = new Discipline();
 
   public void runProgram() throws InterruptedException {
     boolean run = true;
@@ -32,6 +34,7 @@ public class Engine {
         case "5" -> changePaymentStatus();
         case "6" -> changeMemberStatus();
         case "7" -> checkIncome();
+        case "9" -> setSwimmingTime();
         //case "8" -> System.out.println("Implement register best COMPETITION/Training result, date for junior/senior swimmers ");
         //case "9" -> System.out.println("Implement see list of top 5 results in each disciplin");
         //case "8" -> System.out.println("Implement change status of swimmers from competition to free-timer swimmer (and vice versa)");
@@ -217,6 +220,18 @@ public class Engine {
       }
     } catch (NumberFormatException | InputMismatchException exception) {
       ui.invalidInput();
+    }
+  }
+
+  public void setSwimmingTime() throws InterruptedException {
+    System.out.println("Indtast disciplin som du vil sætte tid for");
+    String input = sc.nextLine();
+    switch (input){
+      case "butterfly" ->
+      case "crawl"->
+      case "backcrawl" ->
+      case "breaststroke" ->
+      default -> ui.invalidInput();
     }
   }
 

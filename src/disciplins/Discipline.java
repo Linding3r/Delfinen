@@ -1,14 +1,17 @@
 package disciplins;
 
+import main.Date;
+
 public class Discipline {
 
   private String competitionName;
   private Time time;
+  private Date date;
   private Integer position;
   private Integer butterfly;
   private Integer crawl;
   private Integer backcrawl;
-  private Integer chest;
+  private Integer breaststroke;
 
 
   public Discipline() {
@@ -17,7 +20,7 @@ public class Discipline {
     this.butterfly = null;
     this.crawl = null;
     this.backcrawl = null;
-    this.chest = null;
+    this.breaststroke = null;
   }
 
   public String getName() {
@@ -60,12 +63,12 @@ public class Discipline {
     this.backcrawl = backcrawl;
   }
 
-  public Integer getChest() {
-    return chest;
+  public Integer getBreaststroke() {
+    return breaststroke;
   }
 
-  public void setChest(Integer chest) {
-    this.chest = chest;
+  public void setBreaststroke(Integer breaststroke) {
+    this.breaststroke = breaststroke;
   }
 }
 
