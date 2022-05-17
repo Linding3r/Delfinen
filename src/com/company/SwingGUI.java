@@ -179,7 +179,6 @@ public class SwingGUI {
         c.add(checkBoxActive);
         c.add(competitiveSwimmer);
         c.add(checkBoxComp);
-
         c.add(validateButton);
 
         name.setBounds(5, 5, 200, 20);
