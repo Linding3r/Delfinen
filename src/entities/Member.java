@@ -1,7 +1,8 @@
 package entities;
 
-import disciplins.Discipline;
+import disciplins.SwimmingTime;
 import main.Date;
+import ui.Ui;
 
 import java.time.LocalDate;
 
@@ -20,10 +21,7 @@ public class Member {
   private int id;
   private SwimmingTime swimmingTime;
   private Ui ui = new Ui();
-  private int idCode;
-  private Discipline discipline;
-  public final String RED = "\u001B[31m";
-  public final String RESET = "\u001B[0m";
+
 
 
   public Member(Date birthday, int id, String firstName, String surname,
@@ -61,9 +59,6 @@ public class Member {
     return birthday;
   }
 
-  public int getID(){
-    return registerDate.getYear() * idCode + id;
-  }
 
   public int getId() {
     return id;
