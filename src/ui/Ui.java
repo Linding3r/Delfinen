@@ -4,7 +4,7 @@ public class Ui {
   public final String BLUE = "\u001B[34m";
   public final String RESET = "\u001B[0m";
   public final String YELLOW = "\033[0;33m";
-
+  public final String RED = "\u001B[31m";
 
   //**********************************************************
   //**************************MENU****************************

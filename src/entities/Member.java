@@ -2,6 +2,7 @@ package entities;
 
 import disciplins.Discipline;
 import main.Date;
+import ui.Ui;
 
 import java.time.LocalDate;
 
@@ -19,8 +20,7 @@ public class Member {
   private LocalDate registerDate = LocalDate.now();
   private int id;
   private Discipline discipline;
-  public final String RED = "\u001B[31m";
-  public final String RESET = "\u001B[0m";
+  private Ui ui = new Ui();
 
 
   public Member(Date birthday, int id, String firstName, String surname,
@@ -135,7 +135,7 @@ public class Member {
     String paidStatus;
     if(payment == true){
       paidStatus = "Betalt";
-    } else paidStatus = RED + "Ikke Betalt" + RESET;
+    } else paidStatus = ui.RED + "Ikke Betalt" + ui.RESET;
     return paidStatus;
   }
 
