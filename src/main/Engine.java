@@ -194,6 +194,9 @@ public class Engine {
       sc.nextLine();
       for (int i = 0; i < memberList.getMemberList().size(); i++) {
         if (id == memberList.getMemberList().get(i).getId()) {
+          System.out.println("De nuværende oplysninger på medlemmet er:");
+          System.out.println(memberList.getMemberList().get(i));
+          System.out.println("Hvad vil du sætte medlemsstatussen til?");
           boolean run = true;
           while (run) {
             System.out.println(ui.activePassiveChoice());
