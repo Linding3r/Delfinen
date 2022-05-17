@@ -3,7 +3,8 @@ package ui;
 public class Ui {
   public final String BLUE = "\u001B[34m";
   public final String RESET = "\u001B[0m";
-
+  public final String YELLOW = "\033[0;33m";
+  public final String RED = "\u001B[31m";
 
   //**********************************************************
   //**************************MENU****************************
@@ -30,7 +31,7 @@ public class Ui {
   public void sortMenu() {
     System.out.println("""
         ╔══════════════════════════════════════╗
-        ║           SORTERINGS MENU            ║
+        ║           SORTERINGSMENU             ║
         ╠══════════════════════════════════════╣
         ║   1:  Sorter efter Efternavn         ║
         ║   2:  Sorter efter Fornavn           ║
@@ -74,6 +75,17 @@ public class Ui {
         ╠═════════════════════════╣
         ║  1:  Betalt             ║
         ║  2:  Ikke betalt        ║
+        ╚═════════════════════════╝
+        """;
+  }
+
+  public String yesNo() {
+    return """
+        ╔═════════════════════════╗
+        ║          Vælg:          ║
+        ╠═════════════════════════╣
+        ║  1:  Ja                 ║
+        ║  2:  Nej                ║
         ╚═════════════════════════╝
         """;
   }
@@ -149,6 +161,11 @@ public class Ui {
     System.out.println("INVALID INPUT");
     Thread.sleep(1500);
     newLine();
+  }
+
+  public void confirmInput(){
+    newLine();
+    System.out.println(YELLOW + "Vil du bekræfte, at dataene er udfyldt korrekt?" + RESET);
   }
 
 }

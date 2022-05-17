@@ -18,6 +18,8 @@ public class Member {
   private Trainer trainer;
   private LocalDate registerDate = LocalDate.now();
   private int id;
+  private SwimmingTime swimmingTime;
+  private Ui ui = new Ui();
   private int idCode;
   private Discipline discipline;
   public final String RED = "\u001B[31m";
@@ -35,7 +37,7 @@ public class Member {
     this.active = true;
     this.competitionSwimmer = competitionSwimmer;
     this.payment = true;
-    this.discipline = new Discipline();
+    this.swimmingTime = new SwimmingTime();
 
   }
 
@@ -51,8 +53,8 @@ public class Member {
     return subscription;
   }
 
-  public Discipline getDiscipline(){
-    return discipline;
+  public SwimmingTime getDiscipline(){
+    return swimmingTime;
   }
 
   public Date getBirthday() {
@@ -119,6 +121,10 @@ public class Member {
     this.payment = payment;
   }
 
+  public void setDiscipline(SwimmingTime swimmingTime){
+    this.swimmingTime = swimmingTime;
+  }
+
 
   public String activeOrPassive(){
     String activeOrPassive;
@@ -140,7 +146,7 @@ public class Member {
     String paidStatus;
     if(payment == true){
       paidStatus = "Betalt";
-    } else paidStatus = RED + "Ikke Betalt" + RESET;
+    } else paidStatus = ui.RED + "Ikke Betalt" + ui.RESET;
     return paidStatus;
   }
 
