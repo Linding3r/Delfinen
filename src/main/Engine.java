@@ -23,6 +23,7 @@ public class Engine {
   public void runProgram() throws InterruptedException, FileNotFoundException {
     boolean run = true;
     loadMembersToFile();
+    loadLastMemberID();
     ui.dolphinLogo();
     ui.loadingBar();
     ui.introLabel();
@@ -161,6 +162,10 @@ public class Engine {
     return value;
   }
 
+  public void loadLastMemberID(){
+    memberId = memberList.getMemberList().get(memberList.getMemberList().size()-1).getId();
+  }
+
     public void loadMembersToFile() {
         try {
             Scanner fileScanner = new Scanner(new File("members.csv"));
@@ -169,12 +174,12 @@ public class Engine {
                 Scanner input = new Scanner(line).useDelimiter(";").useLocale(Locale.ENGLISH);
                 Date birthday = new Date();
                 birthday.setBirthday(input.next());
+                int age = input.nextInt();
                 int iD = input.nextInt();
                 String firstName = input.next();
                 String surname = input.next();
                 boolean competition = input.nextBoolean();
-                int idCode = input.nextInt();
-                Member member = new Member(birthday,iD,firstName,surname,competition,idCode);
+                Member member = new Member(birthday,age,iD,firstName,surname,competition);
                 memberList.addMemberToList(member);
             }
         } catch (FileNotFoundException e) {
@@ -189,6 +194,8 @@ public class Engine {
                 Member member = memberList.getMemberList().get(i);
                 out.print(member.getBirthday());
                 out.print(";");
+                out.print(member.getAge());
+                out.print(";");
                 out.print(member.getId());
                 out.print(";");
                 out.print(member.getFirstName());
@@ -196,8 +203,6 @@ public class Engine {
                 out.print(member.getSurname());
                 out.print(";");
                 out.print(member.isCompetitionSwimmer());
-                out.print(";");
-                out.print(member.getID());
                 out.print("\n");
             }
         } catch (FileNotFoundException e) {

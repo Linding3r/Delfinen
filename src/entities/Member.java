@@ -17,7 +17,7 @@ public class Member {
   private boolean competitionSwimmer;
   private boolean payment;
   private Trainer trainer;
-  private LocalDate registerDate = LocalDate.now();
+  private LocalDate registerDate;
   private int id;
   private SwimmingTime swimmingTime;
   private Ui ui = new Ui();
@@ -29,6 +29,22 @@ public class Member {
     this.birthday = birthday;
     this.id = registerDate.getYear() * idCode + id;
     this.age = birthday.birthdayToAge();
+    this.membership = birthday.membershipType();
+    this.firstName = firstName;
+    this.surname = surname;
+    this.active = true;
+    this.competitionSwimmer = competitionSwimmer;
+    this.payment = true;
+    this.swimmingTime = new SwimmingTime();
+    registerDate = LocalDate.now();
+
+  }
+
+  public Member (Date birthday, int age, int id, String firstName, String surname,
+                boolean competitionSwimmer) {
+    this.birthday = birthday;
+    this.id = id;
+    this.age = age;
     this.membership = birthday.membershipType();
     this.firstName = firstName;
     this.surname = surname;
