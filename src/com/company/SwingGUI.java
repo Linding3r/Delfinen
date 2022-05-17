@@ -240,12 +240,6 @@ public class SwingGUI {
         } else br = BorderFactory.createLineBorder(Color.WHITE);
         textFieldName.setBorder(br);
 
-
-       /* if (age > 100 || age <= 0) {
-            textFieldAge.setBorder(br);
-        } else br = BorderFactory.createLineBorder(Color.WHITE);
-        textFieldAge.setBorder(br);
-*/
         if (!Objects.equals(textFieldName.getText(), "") && birthday.checkBirthday(textFieldAge) != null) {
             Member member = new Member(birthday, memberID, name, active, comp);
             if (memberList.getMemberList() != null && !(memberList.getMemberList().isEmpty())) {
