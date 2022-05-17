@@ -165,7 +165,7 @@ public class Ui {
 
   public void confirmInput(){
     newLine();
-    System.out.println(YELLOW + "Kan du bekræfte, at dataene er udfyldt korrekt?" + RESET);
+    System.out.println(YELLOW + "Vil du bekræfte, at dataene er udfyldt korrekt?" + RESET);
   }
 
 }
