@@ -69,9 +69,9 @@ public class SwingGUI {
         saveAndExit.setBounds(10, 670, 200, 100);
         clearScreen.setBounds(260, 740, 100, 20);
 
-        textArea.setBounds(220, 10, 900, 700);
+        textArea.setBounds(220, 10, 970, 700);
         textArea.setBackground(Color.white);
-        textField.setBounds(260, 715, 860, 20);
+        textField.setBounds(260, 715, 930, 20);
 
         //input field where user input is shown.
         inputField.setBounds(215, 710, 50, 20);
