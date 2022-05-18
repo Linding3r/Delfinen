@@ -22,7 +22,7 @@ public class Ui {
         ║   5:  Ændre Betalingsstatus    ║
         ║   6:  Ændre Aktivitetsstatus   ║
         ║   7:  Årsregnskab              ║
-        ║                                ║
+        ║   8:  Tilføj/Fjern Træner      ║
         ║   0:  SHUTDOWN                 ║
         ╚════════════════════════════════╝
         """);
@@ -79,6 +79,28 @@ public class Ui {
         """;
   }
 
+  public String chooseTrainer() {
+    return """
+        ╔═════════════════════════╗
+        ║          Vælg:          ║
+        ╠═════════════════════════╣
+        ║  1:  Egon Olsen         ║
+        ║  2:  Benny Frandsen     ║
+        ╚═════════════════════════╝
+        """;
+  }
+
+  public String removeOrAddTrainer() {
+    return """
+        ╔═════════════════════════╗
+        ║          Vælg:          ║
+        ╠═════════════════════════╣
+        ║  1:  Tilføj Træner      ║
+        ║  2:  Fjern Træner       ║
+        ╚═════════════════════════╝
+        """;
+  }
+
   public String yesNo() {
     return """
         ╔═════════════════════════╗
@@ -129,8 +151,8 @@ public class Ui {
   }
 
   public String asciiLines(){
-    return BLUE + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" +
-        "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓" + RESET;
+    return BLUE + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" +
+        "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓" + RESET;
   }
 
   public void loadingBar() throws InterruptedException {

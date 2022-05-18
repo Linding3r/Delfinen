@@ -3,6 +3,7 @@ package main;
 import disciplins.SwimmingTime;
 import entities.Member;
 import entities.MemberList;
+import entities.Trainer;
 import ui.Ui;
 
 import java.io.File;
@@ -12,14 +13,14 @@ import java.util.*;
 
 public class Engine {
   private Scanner sc = new Scanner(System.in);
-
   public static MemberList memberList = new MemberList();
   private Sort sort = new Sort();
   private int memberId = 1;
-  private Choice C;
   private int idCode = 1000;
   private Ui ui = new Ui();
   private SwimmingTime swimmingTime = new SwimmingTime();
+  private Trainer trainer1 = new Trainer("Egon Olson");
+  private Trainer trainer2 = new Trainer("Benny Frandsen");
 
   public void runProgram() throws InterruptedException, FileNotFoundException {
     boolean run = true;
@@ -34,11 +35,12 @@ public class Engine {
         case "1" -> addMember();
         case "2" -> System.out.println(memberList.toString());
         case "3" -> sortMemberList();
-        case "4" -> updateMember(C = Choice.ONE);
-        case "5" -> updateMember(C = Choice.TWO);
-        case "6" -> updateMember(C = Choice.THREE);
+        case "4" -> deleteMember();
+        case "5" -> changePaymentStatusLoop();
+        case "6" -> changeMemberStatus();
         case "7" -> checkIncome();
         case "9" -> createTime();
+        case "8" -> addOrRemoveTrainer();
         //case "8" -> System.out.println("Implement register best COMPETITION/Training result, date for junior/senior swimmers ");
         //case "9" -> System.out.println("Implement see list of top 5 results in each disciplin");
         //case "8" -> System.out.println("Implement change status of swimmers from competition to free-timer swimmer (and vice versa)");
@@ -46,14 +48,13 @@ public class Engine {
           run = false;
           ui.newLine();
           System.out.println("SHUTTING DOWN");
-          saveAnimalsToFile();
+          saveMemberToFile();
         }
         default -> ui.invalidInput();
       }
     }
 
   }
-
   private void createTime() {
     System.out.println("Indtast ID på medlem:");
     // TODO: 18/05/2022 Make method to get Member based on ID argument
@@ -63,20 +64,61 @@ public class Engine {
 
 
   }
+  private int searchMember() throws InterruptedException {
+    System.out.println("Indtast ID på medlem:");
+    int id = sc.nextInt();
+    sc.nextLine();
+    try {
+      for (int i = 0; i < memberList.getMemberList().size(); i++) {
+        if (id == memberList.getMemberList().get(i).getId()) {
+          System.out.println("De nuværende oplysninger på medlemmet er:");
+          System.out.println(memberList.getMemberList().get(i));
+          return i;
+          }
+        }
+      } catch (NumberFormatException | InputMismatchException exception) {
+      ui.invalidInput();
+    } return 0;
+  }
 
-  private void updateMember(Choice c) throws InterruptedException {
+  private void chooseTrainer(int i) throws InterruptedException {
+    boolean run = true;
+    while (run) {
+      run = false;
+      System.out.println(ui.chooseTrainer());
+      String input = sc.nextLine();
+      switch (input) {
+        case "1" -> memberList.getMemberList().get(i).setTrainer(trainer1);
+        case "2" -> memberList.getMemberList().get(i).setTrainer(trainer2);
+        default -> {
+          System.out.println("Invalid input");
+          run = true;
+        }
+      }
+    }
+  }
+
+
+  private void addOrRemoveTrainer() throws InterruptedException {
     System.out.println("Indtast ID på medlem:");
     try {
       int id = sc.nextInt();
       sc.nextLine();
       for (int i = 0; i < memberList.getMemberList().size(); i++) {
         if (id == memberList.getMemberList().get(i).getId()) {
-          System.out.println("De nuværende oplysninger på medlemmet er:");
-          System.out.println(memberList.getMemberList().get(i));
-          switch (c) {
-            case ONE -> deleteMember(i);
-            case TWO -> changePaymentStatusLoop(i);
-            case THREE -> changeMemberStatus(i);
+          boolean run = true;
+          while (run) {
+            run = false;
+            System.out.println(ui.removeOrAddTrainer());
+            String input = sc.nextLine();
+            switch (input) {
+              case "1" -> chooseTrainer(i);
+              case "2" -> memberList.getMemberList().get(i).setTrainer(null);
+              default -> {
+                ui.invalidInput();
+                run = true;
+              }
+            }
           }
         }
       }
@@ -94,7 +136,8 @@ public class Engine {
     System.out.println(income + "DKK");
   }
 
-  public void deleteMember(int i) {
+  public void deleteMember() throws InterruptedException {
+    int i = searchMember();
     Member member = memberList.getMemberList().get(i);
     System.out.println("Du ved at slette bruger: " + member.getFirstName() + " " + member.getSurname() + ", Medlemsnummer: " + member.getId());
     System.out.println("Tryk 1 for at slette tryk på alt andet for at afbryde.");
@@ -104,7 +147,6 @@ public class Engine {
       System.out.println(member.getFirstName() + " " + member.getSurname() + " er blevet slettet.");
     }
   }
-
 
   public void sortMemberList() throws InterruptedException {
     boolean run = true;
@@ -214,7 +256,7 @@ public class Engine {
       }
     }
 
-  public void saveAnimalsToFile() {
+  public void saveMemberToFile() {
     try {
       PrintStream out = new PrintStream("members.csv");
       for (int i = 0; i < memberList.getMemberList().size(); i++) {
@@ -240,7 +282,8 @@ public class Engine {
   }
 
 
-  public void changePaymentStatusLoop(int i) {
+  public void changePaymentStatusLoop() throws InterruptedException {
+    int i = searchMember();
     boolean run = true;
     while (run) {
       System.out.println(ui.paidNotPaidChoice());
@@ -259,7 +302,8 @@ public class Engine {
     }
   }
 
-  public void changeMemberStatus(int i) throws InterruptedException {
+  public void changeMemberStatus() throws InterruptedException {
+    int i = searchMember();
     boolean run = true;
     while (run) {
       System.out.println(ui.activePassiveChoice());
@@ -276,6 +320,7 @@ public class Engine {
         default -> System.out.println("Invalid input");
       }
     }
+
   }
 
 }
