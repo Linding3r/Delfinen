@@ -57,8 +57,8 @@ public class Engine {
         case "5" -> changePaymentStatusLoop();
         case "6" -> changeMemberStatus();
         case "7" -> checkIncome();
-        case "9" -> createTime();
         case "8" -> addOrRemoveTrainer();
+        case "9" -> createTime();
         //case "8" -> System.out.println("Implement register best COMPETITION/Training result, date for junior/senior swimmers ");
         //case "9" -> System.out.println("Implement see list of top 5 results in each disciplin");
         //case "8" -> System.out.println("Implement change status of swimmers from competition to free-timer swimmer (and vice versa)");
@@ -137,7 +137,7 @@ public class Engine {
         default -> ui.invalidInput();
       }
     }
-
+     return choice;
   }
   private int searchMember() throws InterruptedException {
     System.out.println("Indtast ID på medlem:");
@@ -314,6 +314,7 @@ public class Engine {
         String surname = input.next();
         String firstName = input.next();
         boolean competition = input.nextBoolean();
+        boolean payment = input.nextBoolean();
         birthday.setBirthday(input.next());
         birthday.checkDateFromCSV();
         birthday.birthdayToAge();
