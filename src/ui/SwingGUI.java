@@ -1,7 +1,8 @@
-/*
 package ui;
 
-i
+import entities.Member;
+import entities.MemberList;
+import main.Date;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -241,9 +242,11 @@ public class SwingGUI {
     public void validateInput(JTextField textFieldFirstName, JTextField textFieldLastName, JTextField textFieldAge, JCheckBox checkBoxActive, JCheckBox checkBoxComp, JFrame frameMember, JFrame frameMain) {
         String firstName;
         String lastName;
-        String age;
-        Birthday birthday = new Birthday();
-        age = birthday.checkBirthday(textFieldAge);
+        Date birthday = new Date();
+        birthday.setBirthday(String.valueOf(textFieldAge));
+        birthday.checkDateFromCSV();
+        birthday.birthdayToAge();
+        int age = birthday.getAge();
         boolean active;
         boolean comp;
         firstName = textFieldFirstName.getText();
@@ -261,7 +264,7 @@ public class SwingGUI {
         textFieldFirstName.setBorder(br);
         textFieldLastName.setBorder(br);
 
-        if (!Objects.equals(textFieldFirstName.getText(), "") && !Objects.equals(textFieldLastName.getText(), "") && birthday.checkBirthday(textFieldAge) != null) {
+        if (!Objects.equals(textFieldFirstName.getText(), "") && !Objects.equals(textFieldLastName.getText(), "") && birthday.getBirthday() != null) {
             Member member = new Member(birthday, memberID, firstName, lastName, active, comp);
             if (memberList.getMemberList() != null && !(memberList.getMemberList().isEmpty())) {
                 int calculateNewYear = memberList.getMemberList().get(memberList.getMemberList().size() - 1).getId() - Integer.parseInt(String.valueOf(Year.now()));
@@ -421,4 +424,3 @@ public class SwingGUI {
     }
 
 }
-*/
