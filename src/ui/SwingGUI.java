@@ -37,8 +37,8 @@ public class SwingGUI {
         frame.setLayout(null);
         //setting the bounds for the JFrame
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//        frame.setBounds(100, 100, 1200, 810);
-    frame.setBounds(100,100,screenSize.width, screenSize.height);
+        frame.setBounds(100, 100, 1200, 810);
+//    frame.setBounds(100,100,screenSize.width, screenSize.height);
 
         // Used to create a border around all objects.
         Border br = BorderFactory.createLineBorder(Color.black);
@@ -79,13 +79,7 @@ public class SwingGUI {
 
         textArea.setBounds(220, 10, 970, 700);
 
-        textArea.setBackground(Color.white);
-        textArea.setWrapStyleWord(true);
-        textArea.setLineWrap(true);
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        scrollPane.setBounds(220,10,970,700);
         textField.setBounds(260, 715, 930, 20);
 
         //input field where user input is shown.
@@ -157,7 +151,7 @@ public class SwingGUI {
         frame = new JFrame();
         frame.setTitle("Create Member");
         frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
-//        frame.setLayout(null);
+        frame.setLayout(null);
         frame.setBounds(0, 0, 500, 250);
 
         Container c = frame.getContentPane();
