@@ -4,6 +4,7 @@ import disciplins.SwimmingTime;
 import entities.Member;
 import entities.MemberList;
 import entities.Trainer;
+import ui.SwingGUI;
 import ui.Ui;
 
 import java.io.File;
@@ -22,9 +23,24 @@ public class Engine {
   private Trainer trainer1 = new Trainer("Egon Olson");
   private Trainer trainer2 = new Trainer("Benny Frandsen");
 
-  public void runProgram() throws InterruptedException, FileNotFoundException {
-    boolean run = true;
+  public void runProgram() throws FileNotFoundException, InterruptedException {
+    System.out.println(ui.consoleOrSwing());
     loadMembersFromFile();
+    String choice = sc.nextLine();
+    switch (choice) {
+      case "1" -> runConsole();
+      case "2" -> runSwing();
+      default -> ui.invalidInput();
+    }
+  }
+
+  public void runSwing(){
+    SwingGUI swing = new SwingGUI();
+    swing.mainMenu();
+  }
+
+  public void runConsole() throws InterruptedException, FileNotFoundException {
+    boolean run = true;
     ui.dolphinLogo();
     ui.loadingBar();
     ui.introLabel();

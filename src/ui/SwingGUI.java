@@ -3,6 +3,7 @@ package ui;
 import entities.Member;
 import entities.MemberList;
 import main.Date;
+import main.Engine;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -24,7 +25,7 @@ public class SwingGUI {
     private JTextField textField;
     private final static String newline = "\n";
     private int memberID = Integer.parseInt(String.valueOf(Year.now())) * 1000 + 1;
-    private String paymentStatus;
+
 
     MemberList memberList = new MemberList();
 
@@ -136,8 +137,8 @@ public class SwingGUI {
         changePaymentStatus.addActionListener(e -> changePaymentStatus(textField, textArea));
 
         checkIncome.addActionListener(e -> checkIncome());
-
-        saveAndExit.addActionListener(e -> System.exit(frame.EXIT_ON_CLOSE));
+        Engine engine = new Engine();
+        saveAndExit.addActionListener(e -> {  engine.saveMemberToFile() ;System.exit(frame.EXIT_ON_CLOSE);});
 
     }
 
