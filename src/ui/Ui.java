@@ -31,7 +31,7 @@ public class Ui {
   public String consoleOrSwing(){
     return """
         ╔═══════════════════════════════════════════════════╗
-        ║      Kør programmet i konsolllen eller Swing:     ║
+        ║      Kør programmet i konsollen eller Swing:     ║
         ╠═══════════════════════════════════════════════════╣
         ║  1:  Konsollen                                    ║
         ║  2:  Swing UI                                     ║
@@ -129,7 +129,7 @@ public class Ui {
         ║          Vælg:          ║
         ╠═════════════════════════╣
         ║  1:  Butterfly          ║
-        ║  2:  Craw               ║
+        ║  2:  Crawl              ║
         ║  3:  Backcrawl          ║
         ║  4:  Breaststroke       ║
         ╚═════════════════════════╝
