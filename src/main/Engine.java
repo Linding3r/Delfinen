@@ -38,7 +38,7 @@ public class Engine {
         case "5" -> updateMember(C = Choice.TWO);
         case "6" -> updateMember(C = Choice.THREE);
         case "7" -> checkIncome();
-        //case "9" ->
+        case "9" -> createTime();
         //case "8" -> System.out.println("Implement register best COMPETITION/Training result, date for junior/senior swimmers ");
         //case "9" -> System.out.println("Implement see list of top 5 results in each disciplin");
         //case "8" -> System.out.println("Implement change status of swimmers from competition to free-timer swimmer (and vice versa)");
@@ -53,6 +53,17 @@ public class Engine {
     }
 
   }
+
+  private void createTime() {
+    System.out.println("Indtast ID på medlem:");
+    // TODO: 18/05/2022 Make method to get Member based on ID argument
+    System.out.println("Hvilken dato er tiden sat?");
+    Date date = new Date();
+    date.createDate();
+
+
+  }
+
   private void updateMember(Choice c) throws InterruptedException {
     System.out.println("Indtast ID på medlem:");
     try {
@@ -265,6 +276,6 @@ public class Engine {
         default -> System.out.println("Invalid input");
       }
     }
-
   }
+
 }

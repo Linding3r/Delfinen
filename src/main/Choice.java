@@ -4,5 +4,4 @@ public enum Choice {
   ONE,
   TWO,
   THREE,
-
 }
