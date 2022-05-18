@@ -28,6 +28,17 @@ public class Ui {
         """);
   }
 
+  public String consoleOrSwing(){
+    return """
+        ╔═══════════════════════════════════════════════════╗
+        ║      Kør programmet i konsolllen eller Swing:     ║
+        ╠═══════════════════════════════════════════════════╣
+        ║  1:  Konsollen                                    ║
+        ║  2:  Swing UI                                     ║
+        ╚═══════════════════════════════════════════════════╝
+        """;
+  }
+
   public void sortMenu() {
     System.out.println("""
         ╔══════════════════════════════════════╗

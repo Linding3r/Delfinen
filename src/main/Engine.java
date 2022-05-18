@@ -6,6 +6,7 @@ import disciplins.Time;
 import entities.Member;
 import entities.MemberList;
 import entities.Trainer;
+import ui.SwingGUI;
 import ui.Ui;
 
 import java.io.File;
@@ -24,11 +25,26 @@ public class Engine {
   private Trainer trainer1 = new Trainer("Egon Olson");
   private Trainer trainer2 = new Trainer("Benny Frandsen");
 
-  public void runProgram() throws InterruptedException, FileNotFoundException {
+  public void runProgram() throws FileNotFoundException, InterruptedException {
+    System.out.println(ui.consoleOrSwing());
+    loadMembersFromFile();
+    String choice = sc.nextLine();
+    switch (choice) {
+      case "1" -> runConsole();
+      case "2" -> runSwing();
+      default -> ui.invalidInput();
+    }
+  }
+
+  public void runSwing(){
+    SwingGUI swing = new SwingGUI();
+    swing.mainMenu();
+  }
+
+  public void runConsole() throws InterruptedException, FileNotFoundException {
     boolean run = true;
     ui.dolphinLogo();
     ui.loadingBar();
-    loadMembersFromFile();
     ui.introLabel();
     while (run) {
       ui.mainMenu();
@@ -121,9 +137,8 @@ public class Engine {
         default -> ui.invalidInput();
       }
     }
-    return choice;
-  }
 
+  }
   private int searchMember() throws InterruptedException {
     System.out.println("Indtast ID på medlem:");
     int id = sc.nextInt();
@@ -134,12 +149,11 @@ public class Engine {
           System.out.println("De nuværende oplysninger på medlemmet er:");
           System.out.println(memberList.getMemberList().get(i));
           return i;
+          }
         }
-      }
-    } catch (NumberFormatException | InputMismatchException exception) {
+      } catch (NumberFormatException | InputMismatchException exception) {
       ui.invalidInput();
-    }
-    return 0;
+    } return 0;
   }
 
   private void chooseTrainer(int i) throws InterruptedException {
@@ -304,19 +318,18 @@ public class Engine {
         birthday.checkDateFromCSV();
         birthday.birthdayToAge();
         int age = birthday.getAge();
-        Member member = new Member(birthday, age, iD, firstName, surname, competition);
+        Member member = new Member(birthday, age, iD, firstName, surname, competition, payment);
         memberList.addMemberToList(member);
       }
-    } catch (FileNotFoundException e) {
-      System.out.println("Cannot locate file");
-    }
-    try {
+      } catch (FileNotFoundException | NoSuchElementException e) {
+        System.out.println("Cannot locate file");
+      } try {
       sort.sortId();
       loadLastMemberID();
     } catch (NoSuchElementException | IndexOutOfBoundsException e) {
-      System.out.println("File is empty\n\n\n");
+        System.out.println("File is empty\n\n\n");
+      }
     }
-  }
 
   public void saveMemberToFile() {
     try {
@@ -330,6 +343,8 @@ public class Engine {
         out.print(member.getFirstName());
         out.print(";");
         out.print(member.isCompetitionSwimmer());
+        out.print(";");
+        out.print(member.isPayment());
         out.print(";");
         out.print(member.getBirthday());
         out.print(";");

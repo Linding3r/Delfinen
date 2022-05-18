@@ -40,8 +40,20 @@ public class Member {
     this.fastestSwimmingTime = null;
   }
 
+  public Member(Date birthday, int id, String firstName, String surname, boolean active, boolean competitionSwimmer) {
+    this.birthday = birthday;
+    this.age = birthday.birthdayToAge();
+    this.id = id;
+    this.membership = birthday.membershipType();
+    this.firstName = firstName;
+    this.surname = surname;
+    this.active = active;
+    this.competitionSwimmer = competitionSwimmer;
+    this.payment = true;
+  }
+
   public Member (Date birthday, int age, int id, String firstName, String surname,
-                boolean competitionSwimmer) {
+                boolean competitionSwimmer, boolean payment) {
     this.birthday = birthday;
     this.id = id;
     this.age = age;
@@ -50,8 +62,8 @@ public class Member {
     this.surname = surname;
     this.active = true;
     this.competitionSwimmer = competitionSwimmer;
-    this.payment = true;
-    this.swimmingTime = new SwimmingTime();
+    this.payment = payment;
+//    this.swimmingTime = swimmingTime;
 
   }
 
