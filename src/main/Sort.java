@@ -6,6 +6,7 @@ import entities.Member;
 import java.util.Collections;
 import java.util.Comparator;
 
+import static java.util.Comparator.comparing;
 import static main.Engine.memberList;
 
 
@@ -58,4 +59,11 @@ public class Sort {
       Collections.sort(memberList.getMemberList(), Comparator.comparing(Member::isPayment));
     } else System.out.println("Der er ingen medlemmer på listen til at sortere!");
   }
+
+//  public void sortTop5(){  TODO: Needs implementation
+//    if (memberList.getMemberList() != null) {
+//      Collections.sort(memberList.getMemberList(), Comparator.comparing(Member::getDiscipline, comparing(Discipline::getBackcrawl)));
+//    } else System.out.println("Der er ingen medlemmer på listen til at sortere!");
+//  }
+
 }

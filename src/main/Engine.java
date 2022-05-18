@@ -19,6 +19,8 @@ public class Engine {
   private int idCode = 1000;
   private Ui ui = new Ui();
   private SwimmingTime swimmingTime = new SwimmingTime();
+  private Trainer trainer1 = new Trainer("Egon Olson");
+  private Trainer trainer2 = new Trainer("Benny Frandsen");
 
   public void runProgram() throws InterruptedException, FileNotFoundException {
     boolean run = true;
@@ -33,9 +35,9 @@ public class Engine {
         case "1" -> addMember();
         case "2" -> System.out.println(memberList.toString());
         case "3" -> sortMemberList();
-        case "4" -> updateMember(C = Choice.ONE);
-        case "5" -> updateMember(C = Choice.TWO);
-        case "6" -> updateMember(C = Choice.THREE);
+        case "4" -> deleteMember();
+        case "5" -> changePaymentStatusLoop();
+        case "6" -> changeMemberStatus();
         case "7" -> checkIncome();
         case "8" -> addOrRemoveTrainer();
         //case "8" -> System.out.println("Implement register best COMPETITION/Training result, date for junior/senior swimmers ");
@@ -51,25 +53,21 @@ public class Engine {
     }
 
   }
-  private void updateMember(Choice c) throws InterruptedException {
+  private int searchMember() throws InterruptedException {
     System.out.println("Indtast ID på medlem:");
+    int id = sc.nextInt();
+    sc.nextLine();
     try {
-      int id = sc.nextInt();
-      sc.nextLine();
       for (int i = 0; i < memberList.getMemberList().size(); i++) {
         if (id == memberList.getMemberList().get(i).getId()) {
           System.out.println("De nuværende oplysninger på medlemmet er:");
           System.out.println(memberList.getMemberList().get(i));
-          switch (c) {
-            case ONE -> deleteMember(i);
-            case TWO -> changePaymentStatusLoop(i);
-            case THREE -> changeMemberStatus(i);
+          return i;
           }
         }
-      }
-    } catch (NumberFormatException | InputMismatchException exception) {
+      } catch (NumberFormatException | InputMismatchException exception) {
       ui.invalidInput();
-    }
+    } return 0;
   }
 
   private void chooseTrainer(int i) throws InterruptedException {
@@ -88,22 +86,6 @@ public class Engine {
       }
     }
   }
-
-//  public Member searchMember() throws InterruptedException { //TODO: Add searchMember method to all method that use this function
-//    System.out.println("Indtast ID på medlem:");
-//    try {
-//      int id = sc.nextInt();
-//      sc.nextLine();
-//      for (int i = 0; i < memberList.getMemberList().size(); i++) {
-//        if (id == memberList.getMemberList().get(i).getId()) {
-//          return memberList.getMemberList().get(i);
-//        }
-//      }
-//    } catch (NumberFormatException | InputMismatchException exception) {
-//      ui.invalidInput();
-//    } return null;
-//  }
-
 
 
   private void addOrRemoveTrainer() throws InterruptedException {
@@ -143,7 +125,8 @@ public class Engine {
     System.out.println(income + "DKK");
   }
 
-  public void deleteMember(int i) {
+  public void deleteMember() throws InterruptedException {
+    int i = searchMember();
     Member member = memberList.getMemberList().get(i);
     System.out.println("Du ved at slette bruger: " + member.getFirstName() + " " + member.getSurname() + ", Medlemsnummer: " + member.getId());
     System.out.println("Tryk 1 for at slette tryk på alt andet for at afbryde.");
@@ -262,7 +245,7 @@ public class Engine {
       }
     }
 
-  public void saveAnimalsToFile() {
+  public void saveMemberToFile() {
     try {
       PrintStream out = new PrintStream("members.csv");
       for (int i = 0; i < memberList.getMemberList().size(); i++) {
@@ -288,7 +271,8 @@ public class Engine {
   }
 
 
-  public void changePaymentStatusLoop(int i) {
+  public void changePaymentStatusLoop() throws InterruptedException {
+    int i = searchMember();
     boolean run = true;
     while (run) {
       System.out.println(ui.paidNotPaidChoice());
@@ -307,7 +291,8 @@ public class Engine {
     }
   }
 
-  public void changeMemberStatus(int i) throws InterruptedException {
+  public void changeMemberStatus() throws InterruptedException {
+    int i = searchMember();
     boolean run = true;
     while (run) {
       System.out.println(ui.activePassiveChoice());
