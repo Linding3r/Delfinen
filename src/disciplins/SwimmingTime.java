@@ -13,7 +13,7 @@ public class SwimmingTime {
   public SwimmingTime() {
     this.competitionName = null;
     this.position = null;
-    this.swimmingStyle = null;
+    this.swimmingStyle = new SwimmingStyle();
     date = new Date();
   }
 

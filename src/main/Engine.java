@@ -61,47 +61,67 @@ public class Engine {
   private void createTime() throws InterruptedException {
     Date date = new Date();
     Time time = new Time();
-    SwimmingTime swimmingTime = new SwimmingTime();
-    SwimmingStyle swimmingStyle = new SwimmingStyle();
     System.out.println("Indtast ID på medlem:");
     int indexPosition = searchMember();
+    Member member = memberList.getMemberList().get(indexPosition);
     System.out.println("Hvilken dato er tiden sat?");
     date.createDate();
     swimmingTime.setDate(date);
     System.out.println("Hvilken svømmestil er tiden sat i?");
-    ui.swimmingStyle();
-    String choice = sc.nextLine();
+    System.out.println(ui.swimmingStyle());
+    String validChoice = checkSwimmingStyleInput();
     System.out.println("Hvad er tiden?");
     time.competitionTime();
-    isExistingTime(indexPosition);
-    switch (choice) {
-      case "1" -> {
-        swimmingStyle.setButterfly(time);
+    boolean checkedTime = isExistingTime(time, indexPosition);
+    if (checkedTime == true) {
+      member.setFastestSwimmingTime(time);
+      switch (validChoice) {
+        case "1" -> member.getSwimmingTime().getSwimmingStyle().setButterfly(time);
+        case "2" -> member.getSwimmingTime().getSwimmingStyle().setCrawl(time);
+        case "3" -> member.getSwimmingTime().getSwimmingStyle().setBackcrawl(time);
+        case "4" -> member.getSwimmingTime().getSwimmingStyle().setBreaststroke(time);
+        }
       }
-      case "2" -> {
-        swimmingStyle.setCrawl(time);
-      }
-      case "3" -> {
-        swimmingStyle.setBackcrawl(time);
-      }
-      case "4" -> {
-        swimmingStyle.setBreaststroke(time);
-      }
-      default -> ui.invalidInput();
-        // TODO: 18/05/2022 Implement ask for competition/not competition
+      // TODO: 18/05/2022 Implement ask for competition/not competition
     }
-
-  }
 
   private void updateSwimmingTime() {
     // TODO: 18/05/2022 Implement
   }
 
-  private boolean isExistingTime(int indexPosition) {
+  private boolean isExistingTime(Time time, int indexPosition) {
     Member member = memberList.getMemberList().get(indexPosition);
-    if (member.getSwimmingTime().getSwimmingStyle() != null) {
+    if (member.getFastestSwimmingTime() != null) {
+      return isTimeFaster(time,member);
+    } else return true;
+  }
+
+  private boolean isTimeFaster(Time time, Member member) {
+    if (time.getMinutes() < member.getFastestSwimmingTime().getMinutes()) {
       return true;
-    } else return false;
+    } else if (time.getMinutes() == member.getFastestSwimmingTime().getMinutes()) {
+      if (time.getSeconds() < member.getFastestSwimmingTime().getSeconds()) {
+        return true;
+      } else if (time.getSeconds() == member.getFastestSwimmingTime().getSeconds()) {
+        if (time.getMiliseconds() < member.getFastestSwimmingTime().getMiliseconds()) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  private String checkSwimmingStyleInput() throws InterruptedException {
+    boolean runLoop = true;
+    String choice = "";
+    while (runLoop) {
+      choice = sc.nextLine();
+      switch (choice) {
+        case "1", "2", "3", "4" -> runLoop = false;
+        default -> ui.invalidInput();
+      }
+    }
+    return choice;
   }
 
   private int searchMember() throws InterruptedException {

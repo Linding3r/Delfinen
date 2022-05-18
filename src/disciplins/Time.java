@@ -9,9 +9,10 @@ public class Time {
   private int seconds;
   private int miliseconds;
   Scanner sc = new Scanner(System.in);
-  private String time = sc.nextLine();
+  private String time;
 
   public String competitionTime() {
+    time = sc.nextLine();
     String[] timeArray = time.split(":");
     try {
       for (int i = 0; i < timeArray.length; i++) {
@@ -22,7 +23,7 @@ public class Time {
     } catch (ArrayIndexOutOfBoundsException | NumberFormatException ignored) {
     }
     while (!(minutes >= 1 && minutes <= 60 && seconds >= 1 && seconds <= 60 && miliseconds >= 1
-        && miliseconds <= 100)) {
+        && miliseconds <= 1000)) {
       System.out.println((Arrays.toString(timeArray)) +
           " Er en ugyldig tid. Indtast venligst ny tid:");
       time = sc.nextLine();
@@ -33,5 +34,29 @@ public class Time {
 
   public String getTime(){
     return time;
+  }
+
+  public int getMinutes() {
+    return minutes;
+  }
+
+  public void setMinutes(int minutes) {
+    this.minutes = minutes;
+  }
+
+  public int getSeconds() {
+    return seconds;
+  }
+
+  public void setSeconds(int seconds) {
+    this.seconds = seconds;
+  }
+
+  public int getMiliseconds() {
+    return miliseconds;
+  }
+
+  public void setMiliseconds(int miliseconds) {
+    this.miliseconds = miliseconds;
   }
 }

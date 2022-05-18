@@ -1,6 +1,7 @@
 package entities;
 
 import disciplins.SwimmingTime;
+import disciplins.Time;
 import main.Date;
 import ui.Ui;
 
@@ -20,6 +21,7 @@ public class Member {
   private LocalDate registerDate = LocalDate.now();
   private int id;
   private SwimmingTime swimmingTime;
+  private Time fastestSwimmingTime;
   private Ui ui = new Ui();
 
 
@@ -35,7 +37,7 @@ public class Member {
     this.competitionSwimmer = competitionSwimmer;
     this.payment = true;
     this.swimmingTime = new SwimmingTime();
-
+    this.fastestSwimmingTime = null;
   }
 
   public Member (Date birthday, int age, int id, String firstName, String surname,
@@ -63,6 +65,10 @@ public class Member {
       } else subscription = 1200;
     }else subscription = 500;
     return subscription;
+  }
+
+  public Time getFastestSwimmingTime() {
+    return fastestSwimmingTime;
   }
 
   public SwimmingTime getSwimmingTime(){
@@ -105,6 +111,10 @@ public class Member {
     return age;
   }
 
+  public void setFastestSwimmingTime(Time fastestSwimmingTime) {
+    this.fastestSwimmingTime = fastestSwimmingTime;
+  }
+
   public void setTrainer(Trainer trainer) {
     this.trainer = trainer;
   }
@@ -125,7 +135,7 @@ public class Member {
     this.payment = payment;
   }
 
-  public void setDiscipline(SwimmingTime swimmingTime){
+  public void setSwimmingTime(SwimmingTime swimmingTime){
     this.swimmingTime = swimmingTime;
   }
 
@@ -173,9 +183,15 @@ public class Member {
     } else return firstName;
   }
 
+  public String fastestTime(){
+    if(fastestSwimmingTime == null){
+      return "No Time";
+    } else return fastestSwimmingTime.getTime();
+  }
+
   public String toString(){
     return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | %10s (%-2sår) | %-6s | %-6s | %11s | %-18s | Træner: %-5s | ",
         id, shortenSurname(), shortenFirstname(), birthday.getBirthday(), age, membership, activeOrPassive(), paidOrNotPaid(),
-        compOrNotComp(), trainerName()) + registerDate + "\n";
+        compOrNotComp(), trainerName()) + registerDate + " | " + fastestTime() + "\n";
   }
 }
