@@ -244,7 +244,7 @@ public class SwingGUI {
         String firstName;
         String lastName;
         Date birthday = new Date();
-        birthday.setBirthday(String.valueOf(textFieldAge));
+        birthday.setBirthday((textFieldAge));
         birthday.checkDateFromCSV();
         birthday.birthdayToAge();
         int age = birthday.getAge();
@@ -377,7 +377,7 @@ public class SwingGUI {
             Member member = memberList.getMemberList().get(i);
             data[i][0] = member.getFirstName();
             data[i][1] = member.getSurname();
-            data[i][2] = String.valueOf(((member.getBirthday().getBirthday())));
+            data[i][2] = String.valueOf(member.getBirthday());
             data[i][3] = member.getAge() + " år, " + member.getBirthday().membershipType();
             data[i][4] = String.valueOf(member.getId());
             String yesNoActive;
