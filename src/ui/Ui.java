@@ -31,7 +31,7 @@ public class Ui {
   public String consoleOrSwing(){
     return """
         ╔═══════════════════════════════════════════════════╗
-        ║      Kør programmet i konsollen eller Swing:     ║
+        ║      Kør programmet i konsollen eller Swing:      ║
         ╠═══════════════════════════════════════════════════╣
         ║  1:  Konsollen                                    ║
         ║  2:  Swing UI                                     ║
