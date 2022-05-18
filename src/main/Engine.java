@@ -98,12 +98,9 @@ public class Engine {
         case "4" -> member.getSwimmingTime().getSwimmingStyle().setBreaststroke(time);
         }
       }
-      // TODO: 18/05/2022 Implement ask for competition/not competition
+      // TODO: 18/05/2022 Implement ask for competition/not competition and placement in competition
     }
 
-  private void updateSwimmingTime() {
-    // TODO: 18/05/2022 Implement
-  }
 
   private boolean isExistingTime(Time time, int indexPosition) {
     Member member = memberList.getMemberList().get(indexPosition);
