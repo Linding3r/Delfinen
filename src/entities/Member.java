@@ -1,9 +1,9 @@
 package entities;
 
+import disciplins.Discipline;
 import main.Birthday;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Member {
 
@@ -18,7 +18,7 @@ public class Member {
   private Trainer trainer;
   private LocalDate registerDate = LocalDate.now();
   private int id;
-  private ArrayList<Competition> competiton;
+  private Discipline discipline;
 
 
   public Member(Birthday birthday, int id, String firstName, String surname, boolean active,
@@ -32,12 +32,12 @@ public class Member {
     this.active = active;
     this.competitionSwimmer = competitionSwimmer;
     this.payment = payment;
-    this.competiton = new ArrayList<>();
+    this.discipline = new Discipline();
 
   }
 
-  public ArrayList<Competition> getCompetiton(){
-    return competiton;
+  public Discipline getCompetiton(){
+    return discipline;
   }
 
   public Birthday getBirthday() {
@@ -88,7 +88,7 @@ public class Member {
     this.active = active;
   }
 
-  public void setKonkurrenceSvømmer(boolean competitionSwimmer) {
+  public void setCompetitionSwimmer(boolean competitionSwimmer) {
     this.competitionSwimmer = competitionSwimmer;
   }
 
@@ -138,8 +138,8 @@ public class Member {
   }
 
   public String toString(){
-    return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | %10s | %-6s | %-6s | %11s | %-18s | ",
-        id, shortenSurname(), shortenFirstname(), birthday.getBirthday(), membership, activeOrPassive(), paidOrNotPaid(),
+    return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | %10s (%-2sår) | %-6s | %-6s | %11s | %-18s | ",
+        id, shortenSurname(), shortenFirstname(), birthday.getBirthday(), age, membership, activeOrPassive(), paidOrNotPaid(),
         compOrNotComp()) + registerDate + "\n";
   }
 }

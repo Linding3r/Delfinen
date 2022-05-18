@@ -1,6 +1,6 @@
-package entities;
+package disciplins;
 
-public class Competition {
+public class Discipline {
 
   private String name;
   private Integer position;
@@ -10,7 +10,7 @@ public class Competition {
   private Integer chest;
 
 
-  public Competition() {
+  public Discipline() {
     this.name = null;
     this.position = null;
     this.butterfly = null;
