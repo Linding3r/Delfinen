@@ -112,6 +112,7 @@ public class Engine {
         idCode = updateIdCode(idCode);
         Member member = new Member(date, memberId, firstname, surname, competitionStatus,idCode);
         memberList.addMemberToList(member);
+        System.out.println(member);
         memberId++;
     }
 

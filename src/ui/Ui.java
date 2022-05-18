@@ -15,10 +15,10 @@ public class Ui {
         ║              MENU              ║
         ╠════════════════════════════════╣
         ║   1:  Tilføj Ny Medlem         ║
-        ║   2:  Liste Af Medlemer        ║
+        ║   2:  Liste Af Medlemmer       ║
         ║   3:  Sortere Medlemmer        ║
         ║   4:  Slet Medlem              ║
-        ║   5:  Ændre Betaling Status    ║
+        ║   5:  Ændre Betalingsstatus    ║
         ║   99:  SHUTDOWN                ║
         ╚════════════════════════════════╝
         """);

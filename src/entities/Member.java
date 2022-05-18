@@ -19,6 +19,8 @@ public class Member {
   private LocalDate registerDate = LocalDate.now();
   private int id;
   private Discipline discipline;
+  public final String RED = "\u001B[31m";
+  public final String RESET = "\u001B[0m";
 
 
   public Member(Date birthday, int id, String firstName, String surname,
@@ -133,7 +135,7 @@ public class Member {
     String paidStatus;
     if(payment == true){
       paidStatus = "Betalt";
-    } else paidStatus = "Ikke Betalt";
+    } else paidStatus = RED + "Ikke Betalt" + RESET;
     return paidStatus;
   }
 
