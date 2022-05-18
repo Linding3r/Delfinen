@@ -1,13 +1,13 @@
 package entities;
 
 import disciplins.Discipline;
-import main.Birthday;
+import main.Date;
 
 import java.time.LocalDate;
 
 public class Member {
 
-  private Birthday birthday;
+  private Date birthday;
   private int age;
   private String membership;
   private String firstName;
@@ -21,26 +21,38 @@ public class Member {
   private Discipline discipline;
 
 
-  public Member(Birthday birthday, int id, String firstName, String surname, boolean active,
-                boolean competitionSwimmer, boolean payment, int idCode) {
+  public Member(Date birthday, int id, String firstName, String surname,
+                boolean competitionSwimmer, int idCode) {
     this.birthday = birthday;
     this.id = registerDate.getYear() * idCode + id;
     this.age = birthday.birthdayToAge();
     this.membership = birthday.membershipType();
     this.firstName = firstName;
     this.surname = surname;
-    this.active = active;
+    this.active = true;
     this.competitionSwimmer = competitionSwimmer;
-    this.payment = payment;
+    this.payment = true;
     this.discipline = new Discipline();
 
   }
 
-  public Discipline getCompetiton(){
+  public int subscription(){
+    int subscription;
+    if(active == true){
+      if(membership.equals("Junior")){
+      subscription = 1000;
+     } else if(membership.equals("Senior")){
+        subscription = 1600;
+      } else subscription = 1200;
+    }else subscription = 500;
+    return subscription;
+  }
+
+  public Discipline getDiscipline(){
     return discipline;
   }
 
-  public Birthday getBirthday() {
+  public Date getBirthday() {
     return birthday;
   }
 

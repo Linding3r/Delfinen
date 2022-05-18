@@ -5,7 +5,7 @@ import java.time.Year;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Birthday {
+public class Date {
     private int day;
     private int month;
     private int year;
@@ -15,7 +15,7 @@ public class Birthday {
     private LocalDate currentDate = LocalDate.now();
 
 
-    public String checkBirthday() {
+    public String checkDate() {
         String[] birthdayArray = birthday.split("/");
         try {
             for (int i = 0; i < birthdayArray.length; i++) {
@@ -28,9 +28,9 @@ public class Birthday {
         while (!(day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900
             && year <= Integer.parseInt(String.valueOf(Year.now())))) {
             System.out.println((Arrays.toString(birthdayArray).replace("{","").replace("}","")) +
-                " Er en ugyldig fødselsdagsdato. Indtast ny dato:");
+                " Er en ugyldig dato. Indtast ny dato:");
             birthday = sc.nextLine();
-            checkBirthday();
+            checkDate();
         }
         return birthday;
     }

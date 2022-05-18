@@ -93,7 +93,7 @@ public class Ui {
   }
 
   public void dolphinLogo() throws InterruptedException {
-    String dolphine = BLUE + "\n\n                   ▓█▄▄▄\n" +
+    String dolphin = BLUE + "\n\n                   ▓█▄▄▄\n" +
         "                    ▓████▄▄\n" +
         "                  ▄▄▓███████▄▄\n" +
         "            ▄▄▄▄▄████████████████▄▄▄\n" +
@@ -108,7 +108,7 @@ public class Ui {
         "▓▓█▀▀ ▀█▓█▄                                 ▀▀██▒\n" +
         "▓▀      ▀▓▒                                    ▀▀\n" +
         "         ▀▀" + RESET;
-    System.out.println(dolphine);
+    System.out.println(dolphin);
 
   }
 

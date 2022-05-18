@@ -4,7 +4,6 @@ import entities.Member;
 import entities.MemberList;
 import ui.Ui;
 
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
@@ -31,14 +30,11 @@ public class Engine {
         case "3" -> sortMemberList();
         case "4" -> deleteMember();
         case "5" -> changePaymentStatus();
-        //case "6" -> System.out.println("Implement see list of junior/senior members");
-        //case "7" -> System.out.println("Implement see list of active/non active members");
-        //case "8" -> System.out.println("Implement see list of payment status of members (paid/not paid)");
-        //case "9" -> System.out.println("Implement register best TRAINING result, date for junior/senior swimmers");
-        //case "10" -> System.out.println("Implement register best COMPETITION result, date for junior/senior swimmers ");
-        //case "11" -> System.out.println("Implement see list of top 5 results based on TRAINING results");
-        //case "12" -> System.out.println("Implement change status of swimmers from competition to free-timer swimmer (and vice versa)");
-        case "99" -> {
+        case "6" -> checkIncome();
+        //case "6" -> System.out.println("Implement register best COMPETITION/Training result, date for junior/senior swimmers ");
+        //case "7" -> System.out.println("Implement see list of top 5 results in each disciplin");
+        //case "8" -> System.out.println("Implement change status of swimmers from competition to free-timer swimmer (and vice versa)");
+        case "9" -> {
           run = false;
           ui.newLine();
           System.out.println("SHUTTING DOWN");
@@ -49,7 +45,15 @@ public class Engine {
 
     }
 
-    public void deleteMember() throws InterruptedException {
+  private void checkIncome() {
+    int income = 0;
+    for (int i = 0; i < memberList.getMemberList().size(); i++) {
+      income += memberList.getMemberList().get(i).subscription();
+    }
+    System.out.println(income + "DKK");
+  }
+
+  public void deleteMember() throws InterruptedException {
         System.out.println("Skriv medlemsnummeret på brugeren du ønsker at slette.");
         try {
 
@@ -88,7 +92,7 @@ public class Engine {
           default -> {
             ui.invalidInput();
             run = true;
-          }
+            }
           }
         } System.out.println(memberList.toString());
     }
@@ -101,16 +105,12 @@ public class Engine {
         System.out.println("Indtast medlemmets efternavn");
         String surname = sc.nextLine();
         System.out.println("\n\nIndtast medlemmets fødselsdagsdato. (FORMAT DD/MM/YEAR):");
-        Birthday birthday = new Birthday();
-        birthday.checkBirthday();
-        System.out.println("\n\nIndtast om medlemmet er aktiv eller inaktiv");
-        boolean memberStatus = makeChoiceBoolean(ui.activePassiveChoice());
+        Date date = new Date();
+        date.checkDate();
         System.out.println("\n\nIndtast om medlemmet er konkurrencesvømmer eller motionssvømmer");
         boolean competitionStatus = makeChoiceBoolean(ui.compNonCompChoice());
-        System.out.println("\n\nIndtast om medlemmet har betalt eller ikke betalt");
-        boolean paymentStatus = makeChoiceBoolean(ui.paidNotPaidChoice());
         idCode = updateIdCode(idCode);
-        Member member = new Member(birthday, memberId, firstname, surname, memberStatus, competitionStatus, paymentStatus,idCode);
+        Member member = new Member(date, memberId, firstname, surname, competitionStatus,idCode);
         memberList.addMemberToList(member);
         memberId++;
     }
