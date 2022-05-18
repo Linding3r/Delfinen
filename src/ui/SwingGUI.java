@@ -411,6 +411,7 @@ public class SwingGUI {
             }
         };
         j.setModel(tableModel);
+        j.setShowGrid(true);
         // Column Names
         j.setBounds(30, 40, 200, 300);
 
