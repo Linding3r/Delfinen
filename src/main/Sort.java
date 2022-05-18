@@ -62,7 +62,7 @@ public class Sort {
 
 //  public void sortTop5(){  TODO: Needs implementation
 //    if (memberList.getMemberList() != null) {
-//      Collections.sort(memberList.getMemberList(), Comparator.comparing(Member::getDiscipline, comparing(Discipline::getBackcrawl)));
+//      Collections.sort(memberList.getMemberList(), Comparator.comparing(Member::getSwimmingTime, comparing(Discipline::getBackcrawl)));
 //    } else System.out.println("Der er ingen medlemmer på listen til at sortere!");
 //  }
 

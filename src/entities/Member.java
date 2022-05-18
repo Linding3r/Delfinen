@@ -65,7 +65,7 @@ public class Member {
     return subscription;
   }
 
-  public SwimmingTime getDiscipline(){
+  public SwimmingTime getSwimmingTime(){
     return swimmingTime;
   }
 

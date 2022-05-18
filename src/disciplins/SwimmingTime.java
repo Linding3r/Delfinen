@@ -5,7 +5,6 @@ import main.Date;
 public class SwimmingTime {
 
   private String competitionName;
-  private Time time;
   private Date date;
   private Integer position;
   private SwimmingStyle swimmingStyle;
@@ -14,7 +13,8 @@ public class SwimmingTime {
   public SwimmingTime() {
     this.competitionName = null;
     this.position = null;
-    this.swimmingStyle = swimmingStyle;
+    this.swimmingStyle = null;
+    date = new Date();
   }
 
   public String getName() {
@@ -33,12 +33,20 @@ public class SwimmingTime {
     this.position = position;
   }
 
-  public SwimmingStyle getStyle(){
+  public SwimmingStyle getSwimmingStyle(){
     return swimmingStyle;
   }
 
-  public void setStyle(SwimmingStyle swimmingStyle){
+  public void setSwimmingStyle(SwimmingStyle swimmingStyle){
     this.swimmingStyle = swimmingStyle;
+  }
+
+  public Date getDate() {
+    return date;
+  }
+
+  public void setDate(Date date) {
+    this.date = date;
   }
 }
 

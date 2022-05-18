@@ -1,6 +1,8 @@
 package main;
 
+import disciplins.SwimmingStyle;
 import disciplins.SwimmingTime;
+import disciplins.Time;
 import entities.Member;
 import entities.MemberList;
 import entities.Trainer;
@@ -55,15 +57,53 @@ public class Engine {
     }
 
   }
-  private void createTime() {
-    System.out.println("Indtast ID på medlem:");
-    // TODO: 18/05/2022 Make method to get Member based on ID argument
-    System.out.println("Hvilken dato er tiden sat?");
-    Date date = new Date();
-    date.createDate();
 
+  private void createTime() throws InterruptedException {
+    Date date = new Date();
+    Time time = new Time();
+    SwimmingTime swimmingTime = new SwimmingTime();
+    SwimmingStyle swimmingStyle = new SwimmingStyle();
+    System.out.println("Indtast ID på medlem:");
+    int indexPosition = searchMember();
+    System.out.println("Hvilken dato er tiden sat?");
+    date.createDate();
+    swimmingTime.setDate(date);
+    System.out.println("Hvilken svømmestil er tiden sat i?");
+    ui.swimmingStyle();
+    String choice = sc.nextLine();
+    System.out.println("Hvad er tiden?");
+    time.competitionTime();
+    isExistingTime(indexPosition);
+    switch (choice) {
+      case "1" -> {
+        swimmingStyle.setButterfly(time);
+      }
+      case "2" -> {
+        swimmingStyle.setCrawl(time);
+      }
+      case "3" -> {
+        swimmingStyle.setBackcrawl(time);
+      }
+      case "4" -> {
+        swimmingStyle.setBreaststroke(time);
+      }
+      default -> ui.invalidInput();
+        // TODO: 18/05/2022 Implement ask for competition/not competition
+    }
 
   }
+
+  private void updateSwimmingTime() {
+    // TODO: 18/05/2022 Implement
+  }
+
+  private boolean isExistingTime(int indexPosition) {
+    Member member = memberList.getMemberList().get(indexPosition);
+    if (member.getSwimmingTime().getSwimmingStyle() != null) {
+      return true;
+    } else return false;
+  }
+
   private int searchMember() throws InterruptedException {
     System.out.println("Indtast ID på medlem:");
     int id = sc.nextInt();
@@ -74,11 +114,12 @@ public class Engine {
           System.out.println("De nuværende oplysninger på medlemmet er:");
           System.out.println(memberList.getMemberList().get(i));
           return i;
-          }
         }
-      } catch (NumberFormatException | InputMismatchException exception) {
+      }
+    } catch (NumberFormatException | InputMismatchException exception) {
       ui.invalidInput();
-    } return 0;
+    }
+    return 0;
   }
 
   private void chooseTrainer(int i) throws InterruptedException {
@@ -246,15 +287,16 @@ public class Engine {
         Member member = new Member(birthday, age, iD, firstName, surname, competition);
         memberList.addMemberToList(member);
       }
-      } catch (FileNotFoundException e) {
-        System.out.println("Cannot locate file");
-      } try {
+    } catch (FileNotFoundException e) {
+      System.out.println("Cannot locate file");
+    }
+    try {
       sort.sortId();
       loadLastMemberID();
     } catch (NoSuchElementException | IndexOutOfBoundsException e) {
-        System.out.println("File is empty\n\n\n");
-      }
+      System.out.println("File is empty\n\n\n");
     }
+  }
 
   public void saveMemberToFile() {
     try {
