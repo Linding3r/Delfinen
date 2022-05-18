@@ -22,7 +22,7 @@ public class Time {
       }
     } catch (ArrayIndexOutOfBoundsException | NumberFormatException ignored) {
     }
-    while (!(minutes >= 1 && minutes <= 60 && seconds >= 1 && seconds <= 60 && miliseconds >= 1
+    while (!(minutes >= 0 && minutes <= 60 && seconds >= 0 && seconds <= 60 && miliseconds >= 0
         && miliseconds <= 1000)) {
       System.out.println((Arrays.toString(timeArray)) +
           " Er en ugyldig tid. Indtast venligst ny tid:");
