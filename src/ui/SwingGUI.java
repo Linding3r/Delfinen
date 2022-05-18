@@ -25,11 +25,12 @@ public class SwingGUI {
     private JTextField textField;
     private final static String newline = "\n";
     private int memberID = Integer.parseInt(String.valueOf(Year.now())) * 1000 + 1;
-
+    private int idCode = 1000;
 
     MemberList memberList = new MemberList();
 
     public void mainMenu() {
+        loadLastMemberID();
         frame = new JFrame();
         frame.setTitle("Svømmeklubben Delfinen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -240,14 +241,15 @@ public class SwingGUI {
         }
     };
 
+    public void loadLastMemberID() {
+        memberID = (memberList.getMemberList().get(memberList.getMemberList().size() - 1).getId() + 1);
+    }
+
     public void validateInput(JTextField textFieldFirstName, JTextField textFieldLastName, JTextField textFieldAge, JCheckBox checkBoxActive, JCheckBox checkBoxComp, JFrame frameMember, JFrame frameMain) {
         String firstName;
         String lastName;
         Date birthday = new Date();
-        birthday.setBirthday((textFieldAge));
-        birthday.checkDateFromCSV();
-        birthday.birthdayToAge();
-        int age = birthday.getAge();
+        birthday.checkBirthday((textFieldAge));
         boolean active;
         boolean comp;
         firstName = textFieldFirstName.getText();
@@ -267,11 +269,6 @@ public class SwingGUI {
 
         if (!Objects.equals(textFieldFirstName.getText(), "") && !Objects.equals(textFieldLastName.getText(), "") && birthday.getBirthday() != null) {
             Member member = new Member(birthday, memberID, firstName, lastName, active, comp);
-            if (memberList.getMemberList() != null && !(memberList.getMemberList().isEmpty())) {
-                int calculateNewYear = memberList.getMemberList().get(memberList.getMemberList().size() - 1).getId() - Integer.parseInt(String.valueOf(Year.now()));
-                memberID = Integer.parseInt(String.valueOf(Year.now())) + calculateNewYear + 1;
-            }
-
             textArea.append("Medlem oprettet: " + newline + member + newline);
             memberList.addMemberToList(member);
             memberID++;

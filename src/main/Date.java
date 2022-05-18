@@ -1,5 +1,8 @@
 package main;
 
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.Arrays;
@@ -16,6 +19,29 @@ public class Date {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public String checkBirthday(JTextField textFieldAge) {
+        birthday = (textFieldAge.getText());
+        String[] birthdayArray = birthday.split("/");
+        try {
+            for (int i = 0; i < birthdayArray.length; i++) {
+                day = Integer.parseInt(birthdayArray[0]);
+                month = Integer.parseInt(birthdayArray[1]);
+                year = Integer.parseInt(birthdayArray[2]);
+            }
+        } catch (ArrayIndexOutOfBoundsException  | NumberFormatException ignored) {
+        }
+        Border br = BorderFactory.createLineBorder(Color.red);
+        if (!(day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900
+                && year <= Integer.parseInt(String.valueOf(Year.now())))) {
+            textFieldAge.setBorder(br);
+            return null;
+        }
+        else
+            br = BorderFactory.createLineBorder(Color.WHITE);
+        textFieldAge.setBorder(br);
+        return birthday;
     }
 
     public String createDate() {

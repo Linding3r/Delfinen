@@ -1,2 +1,3 @@
-2022001;Hansen;Frederik;false;true;06/10/1994;27;
-2022001;Hansen;Frederik;false;true;javax.swing.JTextField[,255,70,200x20,layout=javax.swing.plaf.basic.BasicTextUI$UpdateHandler,alignmentX=0.0,alignmentY=0.0,border=com.apple.laf.AquaTextFieldBorder@66c7338,flags=288,maximumSize=,minimumSize=,preferredSize=,caretColor=javax.swing.plaf.ColorUIResource[r=0,g=0,b=0],disabledTextColor=javax.swing.plaf.ColorUIResource[r=128,g=128,b=128],editable=true,margin=javax.swing.plaf.InsetsUIResource[top=0,left=0,bottom=0,right=0],selectedTextColor=com.apple.laf.AquaImageFactory$SystemColorProxy[r=0,g=0,b=0],selectionColor=com.apple.laf.AquaImageFactory$SystemColorProxy[r=165,g=205,b=255],columns=0,columnWidth=0,command=,horizontalAlignment=LEADING];2022;
+2022001;Larsen;Bob;true;true;10/07/1945;76;
+2022002;Hansen;Frederik;false;true;06/10/1994;27;
+2022003;Jensen;Erik;false;true;30/04/1967;55;
