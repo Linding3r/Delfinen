@@ -1,13 +1,15 @@
 package main;
 
+import disciplins.SwimmingTime;
 import entities.Member;
 import entities.MemberList;
 import entities.Trainer;
 import ui.Ui;
 
-import java.util.InputMismatchException;
-import java.util.Objects;
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.util.*;
 
 public class Engine {
   private Scanner sc = new Scanner(System.in);
@@ -16,13 +18,13 @@ public class Engine {
   private int memberId = 1;
   private int idCode = 1000;
   private Ui ui = new Ui();
-  private Trainer trainer1 = new Trainer("Egon");
-  private Trainer trainer2 = new Trainer("Benny");
+  private SwimmingTime swimmingTime = new SwimmingTime();
 
-  public void runProgram() throws InterruptedException {
+  public void runProgram() throws InterruptedException, FileNotFoundException {
     boolean run = true;
     ui.dolphinLogo();
     ui.loadingBar();
+    loadMembersFromFile();
     ui.introLabel();
     while (run) {
       ui.mainMenu();
@@ -31,9 +33,9 @@ public class Engine {
         case "1" -> addMember();
         case "2" -> System.out.println(memberList.toString());
         case "3" -> sortMemberList();
-        case "4" -> deleteMember();
-        case "5" -> changePaymentStatus();
-        case "6" -> changeMemberStatus();
+        case "4" -> updateMember(C = Choice.ONE);
+        case "5" -> updateMember(C = Choice.TWO);
+        case "6" -> updateMember(C = Choice.THREE);
         case "7" -> checkIncome();
         case "8" -> addOrRemoveTrainer();
         //case "8" -> System.out.println("Implement register best COMPETITION/Training result, date for junior/senior swimmers ");
@@ -48,6 +50,26 @@ public class Engine {
       }
     }
 
+  }
+  private void updateMember(Choice c) throws InterruptedException {
+    System.out.println("Indtast ID på medlem:");
+    try {
+      int id = sc.nextInt();
+      sc.nextLine();
+      for (int i = 0; i < memberList.getMemberList().size(); i++) {
+        if (id == memberList.getMemberList().get(i).getId()) {
+          System.out.println("De nuværende oplysninger på medlemmet er:");
+          System.out.println(memberList.getMemberList().get(i));
+          switch (c) {
+            case ONE -> deleteMember(i);
+            case TWO -> changePaymentStatusLoop(i);
+            case THREE -> changeMemberStatus(i);
+          }
+        }
+      }
+    } catch (NumberFormatException | InputMismatchException exception) {
+      ui.invalidInput();
+    }
   }
 
   private void chooseTrainer(int i) throws InterruptedException {
@@ -121,25 +143,14 @@ public class Engine {
     System.out.println(income + "DKK");
   }
 
-  public void deleteMember() throws InterruptedException {
-    System.out.println("Skriv medlemsnummeret på brugeren du ønsker at slette.");
-    try {
-
-      int whichMemberID = Integer.parseInt(sc.nextLine());
-      for (int i = 0; i < memberList.getMemberList().size(); i++) {
-        Member member = memberList.getMemberList().get(i);
-        if (whichMemberID == member.getId()) {
-          System.out.println("Du ved at slette bruger: " + member.getFirstName() + " " + member.getSurname() + ", Medlemsnummer: " + member.getId());
-          System.out.println("Tryk 1 for at slette tryk på alt andet for at afbryde.");
-          String choice = sc.nextLine();
-          if (Objects.equals(choice, "1")) {
-            memberList.getMemberList().remove(i);
-            System.out.println(member.getFirstName() + " " + member.getSurname() + " er blevet slettet.");
-          } else break;
-        }
-      }
-    } catch (NumberFormatException e) {
-      ui.invalidInput();
+  public void deleteMember(int i) {
+    Member member = memberList.getMemberList().get(i);
+    System.out.println("Du ved at slette bruger: " + member.getFirstName() + " " + member.getSurname() + ", Medlemsnummer: " + member.getId());
+    System.out.println("Tryk 1 for at slette tryk på alt andet for at afbryde.");
+    String choice = sc.nextLine();
+    if (Objects.equals(choice, "1")) {
+      memberList.getMemberList().remove(i);
+      System.out.println(member.getFirstName() + " " + member.getSurname() + " er blevet slettet.");
     }
   }
 
@@ -176,7 +187,7 @@ public class Engine {
     String surname = sc.nextLine();
     System.out.println("\n\nIndtast medlemmets fødselsdagsdato. (FORMAT DD/MM/YEAR):");
     Date date = new Date();
-    date.checkDate();
+    date.createDate();
     System.out.println("\n\nIndtast om medlemmet er konkurrencesvømmer eller motionssvømmer");
     boolean competitionStatus = makeChoiceBoolean(ui.compNonCompChoice());
     idCode = updateIdCode(idCode);
@@ -190,100 +201,130 @@ public class Engine {
     }
   }
 
-    public int updateIdCode(int idCode){
-        if(memberId == 1000){
-            memberId = 1001;
-            return 10000;
-        } else if(memberId==9999){
-            return 100000;
-        } else return idCode;
-    }
+  public int updateIdCode(int idCode) {
+    if (memberId == 1000) {
+      memberId = 1001;
+      return 10000;
+    } else if (memberId == 9999) {
+      return 100000;
+    } else return idCode;
+  }
 
-    public boolean makeChoiceBoolean(String ui) {
-        boolean value = true;
-        boolean run = true;
-        while (run) {
-            System.out.println(ui);
-            String input = sc.nextLine();
-            switch (input) {
-                case "1" -> {
-                    value = true;
-                    run = false;
-                }
-                case "2" -> {
-                    value = false;
-                    run = false;
-                }
-                default -> System.out.println("INVALID INPUT");
-            }
-        }
-        return value;
-    }
-
-  public void changePaymentStatus() throws InterruptedException {
-    System.out.println("Indtast ID på medlem:");
-    try {
-      int id = sc.nextInt();
-      sc.nextLine();
-      for (int i = 0; i < memberList.getMemberList().size(); i++) {
-        if (id == memberList.getMemberList().get(i).getId()) {
-          System.out.println("De nuværende oplysninger på medlemmet er:");
-          System.out.println(memberList.getMemberList().get(i));
-          System.out.println("Hvad vil du sætte betalingsstatussen til?");
-          boolean run = true;
-          while (run) {
-            System.out.println(ui.paidNotPaidChoice());
-            String input = sc.nextLine();
-            switch (input) {
-              case "1" -> {
-                memberList.getMemberList().get(i).setPayment(true);
-                run = false;
-              }
-              case "2" -> {
-                memberList.getMemberList().get(i).setPayment(false);
-                run = false;
-              }
-              default -> System.out.println("Invalid input");
-            }
-          }
+  public boolean makeChoiceBoolean(String ui) {
+    boolean value = true;
+    boolean run = true;
+    while (run) {
+      run = false;
+      System.out.println(ui);
+      String input = sc.nextLine();
+      switch (input) {
+        case "1" -> value = true;
+        case "2" -> value = false;
+        default -> {
+          System.out.println("INVALID INPUT");
+          run = true;
         }
       }
-    } catch (NumberFormatException | InputMismatchException exception) {
-      ui.invalidInput();
+    }
+    return value;
+  }
+
+  public void loadLastMemberID() {
+    int memberYear = memberList.getMemberList().get(memberList.getMemberList().size() - 1).getRegisterDate().getYear();
+    memberId = (memberList.getMemberList().get(memberList.getMemberList().size() - 1).getId() - (memberYear * idCode)) + 1;
+  }
+
+  public void loadMembersFromFile() {
+    try {
+      Scanner fileScanner = new Scanner(new File("members.csv"));
+      while (fileScanner.hasNextLine()) {
+        String line = fileScanner.nextLine();
+        Scanner input = new Scanner(line).useDelimiter(";").useLocale(Locale.ENGLISH);
+        Date birthday = new Date();
+        int iD = input.nextInt();
+        String surname = input.next();
+        String firstName = input.next();
+        boolean competition = input.nextBoolean();
+        birthday.setBirthday(input.next());
+        birthday.checkDateFromCSV();
+        birthday.birthdayToAge();
+        int age = birthday.getAge();
+        Member member = new Member(birthday, age, iD, firstName, surname, competition);
+        memberList.addMemberToList(member);
+      }
+      } catch (FileNotFoundException e) {
+        System.out.println("Cannot locate file");
+      } try {
+      sort.sortId();
+      loadLastMemberID();
+    } catch (NoSuchElementException | IndexOutOfBoundsException e) {
+        System.out.println("File is empty\n\n\n");
+      }
+    }
+
+  public void saveAnimalsToFile() {
+    try {
+      PrintStream out = new PrintStream("members.csv");
+      for (int i = 0; i < memberList.getMemberList().size(); i++) {
+        Member member = memberList.getMemberList().get(i);
+        out.print(member.getId());
+        out.print(";");
+        out.print(member.getSurname());
+        out.print(";");
+        out.print(member.getFirstName());
+        out.print(";");
+        out.print(member.isCompetitionSwimmer());
+        out.print(";");
+        out.print(member.getBirthday());
+        out.print(";");
+        out.print(member.getAge());
+        out.print(";\n");
+
+
+      }
+    } catch (FileNotFoundException e) {
+      System.out.println("Cannot locate file");
     }
   }
 
-  public void changeMemberStatus() throws InterruptedException {
-    System.out.println("Indtast ID på medlem:");
-    try {
-      int id = sc.nextInt();
-      sc.nextLine();
-      for (int i = 0; i < memberList.getMemberList().size(); i++) {
-        if (id == memberList.getMemberList().get(i).getId()) {
-          System.out.println("De nuværende oplysninger på medlemmet er:");
-          System.out.println(memberList.getMemberList().get(i));
-          System.out.println("Hvad vil du sætte medlemsstatussen til?");
-          boolean run = true;
-          while (run) {
-            System.out.println(ui.activePassiveChoice());
-            String input = sc.nextLine();
-            switch (input) {
-              case "1" -> {
-                memberList.getMemberList().get(i).setActive(true);
-                run = false;
-              }
-              case "2" -> {
-                memberList.getMemberList().get(i).setActive(false);
-                run = false;
-              }
-              default -> System.out.println("Invalid input");
-            }
-          }
+
+  public void changePaymentStatusLoop(int i) {
+    boolean run = true;
+    while (run) {
+      System.out.println(ui.paidNotPaidChoice());
+      String input = sc.nextLine();
+      switch (input) {
+        case "1" -> {
+          memberList.getMemberList().get(i).setPayment(true);
+          run = false;
         }
+        case "2" -> {
+          memberList.getMemberList().get(i).setPayment(false);
+          run = false;
+        }
+        default -> System.out.println("Invalid input");
       }
-    } catch (NumberFormatException | InputMismatchException exception) {
-      ui.invalidInput();
     }
+  }
+
+  public void changeMemberStatus(int i) throws InterruptedException {
+    boolean run = true;
+    while (run) {
+      System.out.println(ui.activePassiveChoice());
+      String input = sc.nextLine();
+      switch (input) {
+        case "1" -> {
+          memberList.getMemberList().get(i).setActive(true);
+          run = false;
+        }
+        case "2" -> {
+          memberList.getMemberList().get(i).setActive(false);
+          run = false;
+        }
+        default -> System.out.println("Invalid input");
+      }
+    }
+
   }
 
 }

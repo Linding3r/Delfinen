@@ -1,6 +1,6 @@
 package entities;
 
-import disciplins.Discipline;
+import disciplins.SwimmingTime;
 import main.Date;
 import ui.Ui;
 
@@ -19,7 +19,7 @@ public class Member {
   private Trainer trainer;
   private LocalDate registerDate = LocalDate.now();
   private int id;
-  private Discipline discipline;
+  private SwimmingTime swimmingTime;
   private Ui ui = new Ui();
 
 
@@ -34,8 +34,23 @@ public class Member {
     this.active = true;
     this.competitionSwimmer = competitionSwimmer;
     this.payment = true;
-    this.discipline = new Discipline();
-    trainer = null;
+    this.swimmingTime = new SwimmingTime();
+
+  }
+
+  public Member (Date birthday, int age, int id, String firstName, String surname,
+                boolean competitionSwimmer) {
+    this.birthday = birthday;
+    this.id = id;
+    this.age = age;
+    this.membership = birthday.membershipType();
+    this.firstName = firstName;
+    this.surname = surname;
+    this.active = true;
+    this.competitionSwimmer = competitionSwimmer;
+    this.payment = true;
+    this.swimmingTime = new SwimmingTime();
+
   }
 
   public int subscription(){
@@ -50,8 +65,8 @@ public class Member {
     return subscription;
   }
 
-  public Discipline getDiscipline(){
-    return discipline;
+  public SwimmingTime getDiscipline(){
+    return swimmingTime;
   }
 
   public Date getBirthday() {
@@ -108,6 +123,10 @@ public class Member {
 
   public void setPayment(boolean payment) {
     this.payment = payment;
+  }
+
+  public void setDiscipline(SwimmingTime swimmingTime){
+    this.swimmingTime = swimmingTime;
   }
 
 
