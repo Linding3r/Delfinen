@@ -39,7 +39,7 @@ public class Member {
   }
 
   public Member (Date birthday, int age, int id, String firstName, String surname,
-                boolean competitionSwimmer) {
+                boolean competitionSwimmer, boolean payment) {
     this.birthday = birthday;
     this.id = id;
     this.age = age;
@@ -48,8 +48,8 @@ public class Member {
     this.surname = surname;
     this.active = true;
     this.competitionSwimmer = competitionSwimmer;
-    this.payment = true;
-    this.swimmingTime = new SwimmingTime();
+    this.payment = payment;
+//    this.swimmingTime = swimmingTime;
 
   }
 

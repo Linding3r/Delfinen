@@ -24,9 +24,9 @@ public class Engine {
 
   public void runProgram() throws InterruptedException, FileNotFoundException {
     boolean run = true;
+    loadMembersFromFile();
     ui.dolphinLogo();
     ui.loadingBar();
-    loadMembersFromFile();
     ui.introLabel();
     while (run) {
       ui.mainMenu();
@@ -46,6 +46,7 @@ public class Engine {
         case "0" -> {
           run = false;
           ui.newLine();
+          saveMemberToFile();
           System.out.println("SHUTTING DOWN");
         }
         default -> ui.invalidInput();
@@ -228,14 +229,15 @@ public class Engine {
         String surname = input.next();
         String firstName = input.next();
         boolean competition = input.nextBoolean();
+        boolean payment = input.nextBoolean();
         birthday.setBirthday(input.next());
         birthday.checkDateFromCSV();
         birthday.birthdayToAge();
         int age = birthday.getAge();
-        Member member = new Member(birthday, age, iD, firstName, surname, competition);
+        Member member = new Member(birthday, age, iD, firstName, surname, competition, payment);
         memberList.addMemberToList(member);
       }
-      } catch (FileNotFoundException e) {
+      } catch (FileNotFoundException | NoSuchElementException e) {
         System.out.println("Cannot locate file");
       } try {
       sort.sortId();
@@ -258,11 +260,12 @@ public class Engine {
         out.print(";");
         out.print(member.isCompetitionSwimmer());
         out.print(";");
+        out.print(member.isPayment());
+        out.print(";");
         out.print(member.getBirthday());
         out.print(";");
         out.print(member.getAge());
         out.print(";\n");
-
 
       }
     } catch (FileNotFoundException e) {
