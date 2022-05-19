@@ -1,6 +1,7 @@
 package main;
 
 
+import disciplins.Time;
 import entities.Member;
 
 import java.util.Collections;
@@ -60,10 +61,10 @@ public class Sort {
     } else System.out.println("Der er ingen medlemmer på listen til at sortere!");
   }
 
-//  public void sortTop5(){  TODO: Needs implementation
-//    if (memberList.getMemberList() != null) {
-//      Collections.sort(memberList.getMemberList(), Comparator.comparing(Member::getSwimmingTime, comparing(Discipline::getBackcrawl)));
-//    } else System.out.println("Der er ingen medlemmer på listen til at sortere!");
-//  }
+ /* public void sortTop5Crawl(){
+    if (memberList.getMemberList() != null) {
+      Collections.sort(memberList.getMemberList(), Comparator.comparing(Member::getFastestSwimmingTime, comparing(Time::getTime)));
+    } else System.out.println("Der er ingen medlemmer på listen til at sortere!");
+  }*/
 
 }

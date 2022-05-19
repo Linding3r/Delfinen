@@ -152,7 +152,7 @@ public class Member {
 
   public String compOrNotComp(){
     String competition;
-    if(active == true){
+    if(competitionSwimmer == true){
       competition = "Konkurrencesvømmer";
     } else competition = "Motionssvømmer";
     return competition;

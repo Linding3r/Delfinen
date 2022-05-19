@@ -136,6 +136,7 @@ public class Engine {
     }
      return choice;
   }
+
   private int searchMember() throws InterruptedException {
     System.out.println("Indtast ID på medlem:");
     int id = sc.nextInt();
