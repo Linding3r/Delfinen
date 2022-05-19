@@ -6,6 +6,7 @@ import main.Date;
 import ui.Ui;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Member {
 
@@ -22,6 +23,7 @@ public class Member {
   private int id;
   private SwimmingTime fastestSwimmingTime;
   private Ui ui = new Ui();
+  private ArrayList<SwimmingTime> competitions;
 
 
   public Member(Date birthday, int id, String firstName, String surname,
@@ -29,13 +31,14 @@ public class Member {
     this.birthday = birthday;
     this.id = registerDate.getYear() * idCode + id;
     this.age = birthday.birthdayToAge();
-    this.membership = birthday.membershipType();
+    membership = birthday.membershipType();
     this.firstName = firstName;
     this.surname = surname;
-    this.active = true;
+    active = true;
     this.competitionSwimmer = competitionSwimmer;
-    this.payment = true;
-    this.fastestSwimmingTime = new SwimmingTime();
+    payment = true;
+    fastestSwimmingTime = new SwimmingTime();
+    competitions = new ArrayList<>();
   }
 
   public Member(Date birthday, int id, String firstName, String surname, boolean active, boolean competitionSwimmer) {
@@ -48,6 +51,7 @@ public class Member {
     this.active = active;
     this.competitionSwimmer = competitionSwimmer;
     this.payment = true;
+    competitions = new ArrayList<>();
   }
 
   public Member (Date birthday, int age, int id, String firstName, String surname,
@@ -61,8 +65,16 @@ public class Member {
     this.active = true;
     this.competitionSwimmer = competitionSwimmer;
     this.payment = payment;
+    competitions = new ArrayList<>();
 //    this.swimmingTime = swimmingTime;
+  }
 
+  public ArrayList<SwimmingTime> getCompetitions() {
+    return competitions;
+  }
+
+  public void setCompetitions(ArrayList<SwimmingTime> competitions) {
+    this.competitions = competitions;
   }
 
   public int subscription(){
@@ -186,7 +198,7 @@ public class Member {
   }
 
   public String fastestTime(){
-    if(fastestSwimmingTime.getTime().getTime() == null){
+    if(fastestSwimmingTime == null){
       return "No Time";
     } else return fastestSwimmingTime.getTime().getTime();
   }
@@ -194,6 +206,6 @@ public class Member {
   public String toString(){
     return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | %10s (%-2sår) | %-6s | %-6s | %11s | %-18s | Træner: %-5s | ",
         id, shortenSurname(), shortenFirstname(), birthday.getBirthday(), age, membership, activeOrPassive(), paidOrNotPaid(),
-        compOrNotComp(), trainerName()) + registerDate + " | " + fastestTime() + "\n";
+        compOrNotComp(), trainerName()) + registerDate + " | " + fastestTime() + competitions.toString() +"\n";
   }
 }

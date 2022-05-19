@@ -35,7 +35,7 @@ public class Engine {
     }
   }
 
-  public void runSwing(){
+  public void runSwing() {
     SwingGUI swing = new SwingGUI();
     swing.mainMenu();
   }
@@ -86,26 +86,60 @@ public class Engine {
     String validChoice = checkSwimmingStyleInput();
     System.out.println("Hvad er tiden?");
     time.competitionTime();
-    System.out.println("Blev tiden sat til en konkurrence?");
-    SwimmingTime swimmingTime = new SwimmingTime(date,time);
+    SwimmingTime swimmingTime = new SwimmingTime(date, time);
     switch (validChoice) {
-      case "1" -> member.getFastestSwimmingTime().setSwimmingStyle(SwimmingStyle.BUTTERFLY);
-      case "2" -> member.getFastestSwimmingTime().setSwimmingStyle(SwimmingStyle.CRAWL);
-      case "3" -> member.getFastestSwimmingTime().setSwimmingStyle(SwimmingStyle.BACKCRAWL);
-      case "4" -> member.getFastestSwimmingTime().setSwimmingStyle(SwimmingStyle.BREASTSTROKE);
+      case "1" -> swimmingTime.setSwimmingStyle(SwimmingStyle.BUTTERFLY);
+      case "2" -> swimmingTime.setSwimmingStyle(SwimmingStyle.CRAWL);
+      case "3" -> swimmingTime.setSwimmingStyle(SwimmingStyle.BACKCRAWL);
+      case "4" -> swimmingTime.setSwimmingStyle(SwimmingStyle.BREASTSTROKE);
+    }
+    System.out.println("Blev tiden sat til en konkurrence?");
+    System.out.println(ui.yesNo());
+    boolean yesNoChoice = yesNo();
+    if (yesNoChoice == true) {
+      System.out.println("Indtast navn på konkurrencen");
+      String competitionName = sc.nextLine();
+      swimmingTime.setCompetitionName(competitionName);
+      String position = inputPosition();
+      swimmingTime.setPosition(position);
+      member.getCompetitions().add(swimmingTime);
     }
     boolean checkedTime = isExistingTime(time, indexPosition);
     if (checkedTime == true) {
       member.setFastestSwimmingTime(swimmingTime);
-      }
-      // TODO: 18/05/2022 Implement ask for competition/not competition and placement in competition
     }
+  }
 
+  private String inputPosition(){
+    String position = "";
+    System.out.println("Hvilken position fik svømmeren?");
+    position = sc.nextLine();
+    return position;
+  }
+
+  private boolean yesNo() {
+    boolean runLoop = true;
+    boolean yesNo = false;
+    while (runLoop) {
+      String choice = sc.nextLine();
+      switch (choice) {
+        case "1" -> {
+          yesNo = true;
+          runLoop = false;
+        }
+        case "2" -> {
+          runLoop = false;
+        }
+        default -> System.out.println("Invalid input");
+      }
+    }
+    return yesNo;
+  }
 
   private boolean isExistingTime(Time time, int indexPosition) {
     Member member = memberList.getMemberList().get(indexPosition);
     if (member.getFastestSwimmingTime() != null) {
-      return isTimeFaster(time,member);
+      return isTimeFaster(time, member);
     } else return true;
   }
 
@@ -134,8 +168,9 @@ public class Engine {
         default -> ui.invalidInput();
       }
     }
-     return choice;
+    return choice;
   }
+
   private int searchMember() throws InterruptedException {
     System.out.println("Indtast ID på medlem:");
     int id = sc.nextInt();
@@ -146,11 +181,12 @@ public class Engine {
           System.out.println("De nuværende oplysninger på medlemmet er:");
           System.out.println(memberList.getMemberList().get(i));
           return i;
-          }
         }
-      } catch (NumberFormatException | InputMismatchException exception) {
+      }
+    } catch (NumberFormatException | InputMismatchException exception) {
       ui.invalidInput();
-    } return 0;
+    }
+    return 0;
   }
 
   private void chooseTrainer(int i) throws InterruptedException {
@@ -319,15 +355,16 @@ public class Engine {
         Member member = new Member(birthday, age, iD, firstName, surname, competition, payment);
         memberList.addMemberToList(member);
       }
-      } catch (FileNotFoundException | NoSuchElementException e) {
-        System.out.println("Cannot locate file");
-      } try {
+    } catch (FileNotFoundException | NoSuchElementException e) {
+      System.out.println("Cannot locate file");
+    }
+    try {
       sort.sortId();
       loadLastMemberID();
     } catch (NoSuchElementException | IndexOutOfBoundsException e) {
-        System.out.println("File is empty\n\n\n");
-      }
+      System.out.println("File is empty\n\n\n");
     }
+  }
 
   public void saveMemberToFile() {
     try {

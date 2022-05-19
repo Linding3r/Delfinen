@@ -6,7 +6,7 @@ public class SwimmingTime {
 
   private String competitionName;
   private Date date;
-  private Integer position;
+  private String position;
   private SwimmingStyle swimmingStyle;
   private Time time;
 
@@ -50,11 +50,11 @@ public class SwimmingTime {
     this.competitionName = name;
   }
 
-  public Integer getPosition() {
+  public String getPosition() {
     return position;
   }
 
-  public void setPosition(Integer position) {
+  public void setPosition(String position) {
     this.position = position;
   }
 
