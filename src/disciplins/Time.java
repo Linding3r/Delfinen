@@ -10,6 +10,7 @@ public class Time {
   private int miliseconds;
   Scanner sc = new Scanner(System.in);
   private String time;
+  // TODO: 19/05/2022 Implement local time instead 
 
   public String competitionTime() {
     time = sc.nextLine();
