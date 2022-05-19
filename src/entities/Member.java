@@ -20,8 +20,7 @@ public class Member {
   private Trainer trainer;
   private LocalDate registerDate = LocalDate.now();
   private int id;
-  private SwimmingTime swimmingTime;
-  private Time fastestSwimmingTime;
+  private SwimmingTime fastestSwimmingTime;
   private Ui ui = new Ui();
 
 
@@ -36,8 +35,7 @@ public class Member {
     this.active = true;
     this.competitionSwimmer = competitionSwimmer;
     this.payment = true;
-    this.swimmingTime = new SwimmingTime();
-    this.fastestSwimmingTime = null;
+    this.fastestSwimmingTime = new SwimmingTime();
   }
 
   public Member(Date birthday, int id, String firstName, String surname, boolean active, boolean competitionSwimmer) {
@@ -79,12 +77,8 @@ public class Member {
     return subscription;
   }
 
-  public Time getFastestSwimmingTime() {
+  public SwimmingTime getFastestSwimmingTime() {
     return fastestSwimmingTime;
-  }
-
-  public SwimmingTime getSwimmingTime(){
-    return swimmingTime;
   }
 
   public Date getBirthday() {
@@ -123,7 +117,7 @@ public class Member {
     return age;
   }
 
-  public void setFastestSwimmingTime(Time fastestSwimmingTime) {
+  public void setFastestSwimmingTime(SwimmingTime fastestSwimmingTime) {
     this.fastestSwimmingTime = fastestSwimmingTime;
   }
 
@@ -145,10 +139,6 @@ public class Member {
 
   public void setPayment(boolean payment) {
     this.payment = payment;
-  }
-
-  public void setSwimmingTime(SwimmingTime swimmingTime){
-    this.swimmingTime = swimmingTime;
   }
 
 
@@ -196,9 +186,9 @@ public class Member {
   }
 
   public String fastestTime(){
-    if(fastestSwimmingTime == null){
+    if(fastestSwimmingTime.getTime().getTime() == null){
       return "No Time";
-    } else return fastestSwimmingTime.getTime();
+    } else return fastestSwimmingTime.getTime().getTime();
   }
 
   public String toString(){

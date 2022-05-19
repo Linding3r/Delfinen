@@ -86,18 +86,17 @@ public class Engine {
     String validChoice = checkSwimmingStyleInput();
     System.out.println("Hvad er tiden?");
     time.competitionTime();
+    System.out.println("Blev tiden sat til en konkurrence?");
+    SwimmingTime swimmingTime = new SwimmingTime(date,time);
+    switch (validChoice) {
+      case "1" -> member.getFastestSwimmingTime().setSwimmingStyle(SwimmingStyle.BUTTERFLY);
+      case "2" -> member.getFastestSwimmingTime().setSwimmingStyle(SwimmingStyle.CRAWL);
+      case "3" -> member.getFastestSwimmingTime().setSwimmingStyle(SwimmingStyle.BACKCRAWL);
+      case "4" -> member.getFastestSwimmingTime().setSwimmingStyle(SwimmingStyle.BREASTSTROKE);
+    }
     boolean checkedTime = isExistingTime(time, indexPosition);
     if (checkedTime == true) {
-      member.setFastestSwimmingTime(time);
-      SwimmingTime swimmingTime = new SwimmingTime(date,time);
-      member.setSwimmingTime(swimmingTime);
-      switch (validChoice) {
-        case "1" -> member.getSwimmingTime().setSwimmingStyle(SwimmingStyle.BUTTERFLY);
-        case "2" -> member.getSwimmingTime().setSwimmingStyle(SwimmingStyle.CRAWL);
-        case "3" -> member.getSwimmingTime().setSwimmingStyle(SwimmingStyle.BACKCRAWL);
-        case "4" -> member.getSwimmingTime().setSwimmingStyle(SwimmingStyle.BREASTSTROKE);
-        }
-
+      member.setFastestSwimmingTime(swimmingTime);
       }
       // TODO: 18/05/2022 Implement ask for competition/not competition and placement in competition
     }
@@ -111,13 +110,13 @@ public class Engine {
   }
 
   private boolean isTimeFaster(Time time, Member member) {
-    if (time.getMinutes() < member.getFastestSwimmingTime().getMinutes()) {
+    if (time.getMinutes() < member.getFastestSwimmingTime().getTime().getMinutes()) {
       return true;
-    } else if (time.getMinutes() == member.getFastestSwimmingTime().getMinutes()) {
-      if (time.getSeconds() < member.getFastestSwimmingTime().getSeconds()) {
+    } else if (time.getMinutes() == member.getFastestSwimmingTime().getTime().getMinutes()) {
+      if (time.getSeconds() < member.getFastestSwimmingTime().getTime().getSeconds()) {
         return true;
-      } else if (time.getSeconds() == member.getFastestSwimmingTime().getSeconds()) {
-        if (time.getMiliseconds() < member.getFastestSwimmingTime().getMiliseconds()) {
+      } else if (time.getSeconds() == member.getFastestSwimmingTime().getTime().getSeconds()) {
+        if (time.getMiliseconds() < member.getFastestSwimmingTime().getTime().getMiliseconds()) {
           return true;
         }
       }
