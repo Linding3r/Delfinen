@@ -6,6 +6,8 @@ import disciplins.Time;
 import entities.Member;
 import entities.MemberList;
 import entities.Trainer;
+import sorting.Sort;
+import sorting.SortSwimTime;
 import ui.SwingGUI;
 import ui.Ui;
 
@@ -270,7 +272,11 @@ public class Engine {
         case "6" -> sort.sortRegDate();
         case "7" -> sort.sortId();
         case "8" -> sort.sortPayment();
-        case "9" -> System.out.println("Tilbage");
+        //TODO***************************************************************************************************************************************
+        //TODO***********************************************PROPPER TEST NEEDED*********************************************************************
+        //TODO***************************************************************************************************************************************
+        case "9" -> Collections.sort(memberList.getMemberList(), new SortSwimTime());
+        case "10" -> System.out.println("Tilbage");
         default -> {
           ui.invalidInput();
           run = true;
