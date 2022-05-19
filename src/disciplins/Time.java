@@ -31,7 +31,7 @@ public class Time {
     }
     StringBuilder builder = new StringBuilder();
     if (seconds == 0){
-      builder.append(minutes + ":000:"+miliseconds);
+      builder.append(minutes + ":00:"+miliseconds);
     }
     else if (miliseconds == 0){
       builder.append(minutes + ":" + seconds +":000");
