@@ -60,9 +60,9 @@ public class Date {
     public String membershipType(){
         if(age < 18){
             return "Junior";
-        } else if (age >= 18 && age < 65){
+        } else if (age >= 18 && age < 60){
             return "Senior";
-        }else return "65+";
+        }else return "60+";
     }
 
 
