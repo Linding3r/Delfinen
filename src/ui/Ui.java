@@ -23,6 +23,7 @@ public class Ui {
         ║   6:  Ændre Aktivitetsstatus   ║
         ║   7:  Årsregnskab              ║
         ║   8:  Tilføj/Fjern Træner      ║
+        ║   9:  Tilføj svømmetid         ║
         ║   0:  SHUTDOWN                 ║
         ╚════════════════════════════════╝
         """);
