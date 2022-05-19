@@ -8,13 +8,38 @@ public class SwimmingTime {
   private Date date;
   private Integer position;
   private SwimmingStyle swimmingStyle;
-
+  private Time time;
 
   public SwimmingTime() {
-    this.competitionName = null;
-    this.position = null;
-    this.swimmingStyle = new SwimmingStyle();
-    date = new Date();
+    competitionName = null;
+    position = null;
+    swimmingStyle = null;
+    this.date = new Date();
+    this.time = new Time();
+  }
+
+  public SwimmingTime(Date date, Time time) {
+    competitionName = null;
+    position = null;
+    swimmingStyle = null;
+    this.date = date;
+    this.time = time;
+  }
+
+  public String getCompetitionName() {
+    return competitionName;
+  }
+
+  public void setCompetitionName(String competitionName) {
+    this.competitionName = competitionName;
+  }
+
+  public Time getTime() {
+    return time;
+  }
+
+  public void setTime(Time time) {
+    this.time = time;
   }
 
   public String getName() {

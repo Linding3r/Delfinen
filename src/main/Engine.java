@@ -21,7 +21,6 @@ public class Engine {
   private int memberId = 1;
   private int idCode = 1000;
   private Ui ui = new Ui();
-  private SwimmingTime swimmingTime = new SwimmingTime();
   private Trainer trainer1 = new Trainer("Egon Olson");
   private Trainer trainer2 = new Trainer("Benny Frandsen");
 
@@ -82,7 +81,6 @@ public class Engine {
     Member member = memberList.getMemberList().get(indexPosition);
     System.out.println("Hvilken dato er tiden sat?");
     date.createDate();
-    swimmingTime.setDate(date);
     System.out.println("Hvilken svømmestil er tiden sat i?");
     System.out.println(ui.swimmingStyle());
     String validChoice = checkSwimmingStyleInput();
@@ -91,12 +89,15 @@ public class Engine {
     boolean checkedTime = isExistingTime(time, indexPosition);
     if (checkedTime == true) {
       member.setFastestSwimmingTime(time);
+      SwimmingTime swimmingTime = new SwimmingTime(date,time);
+      member.setSwimmingTime(swimmingTime);
       switch (validChoice) {
-        case "1" -> member.getSwimmingTime().getSwimmingStyle().setButterfly(time);
-        case "2" -> member.getSwimmingTime().getSwimmingStyle().setCrawl(time);
-        case "3" -> member.getSwimmingTime().getSwimmingStyle().setBackcrawl(time);
-        case "4" -> member.getSwimmingTime().getSwimmingStyle().setBreaststroke(time);
+        case "1" -> member.getSwimmingTime().setSwimmingStyle(SwimmingStyle.BUTTERFLY);
+        case "2" -> member.getSwimmingTime().setSwimmingStyle(SwimmingStyle.CRAWL);
+        case "3" -> member.getSwimmingTime().setSwimmingStyle(SwimmingStyle.BACKCRAWL);
+        case "4" -> member.getSwimmingTime().setSwimmingStyle(SwimmingStyle.BREASTSTROKE);
         }
+
       }
       // TODO: 18/05/2022 Implement ask for competition/not competition and placement in competition
     }
