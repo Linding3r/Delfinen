@@ -23,12 +23,31 @@ public class Time {
       }
     } catch (ArrayIndexOutOfBoundsException | NumberFormatException ignored) {
     }
-    while (!(minutes >= 1 && minutes <= 60 && seconds >= 1 && seconds <= 60 && miliseconds >= 1)) {
+    while (!(minutes >= 0 && minutes <= 60 && seconds >= 0 && seconds <= 60 && miliseconds >= 0)) {
       System.out.println((Arrays.toString(timeArray)) +
           " Er en ugyldig tid. Indtast venligst ny tid:");
       time = sc.nextLine();
       competitionTime();
     }
+    StringBuilder builder = new StringBuilder();
+    if (seconds == 0){
+      builder.append(minutes + ":00:"+miliseconds);
+    }
+    else if (miliseconds == 0){
+      builder.append(minutes + ":" + seconds +":000");
+    }
+    else if (minutes <= 9){
+      builder.append("0" + minutes+":"+seconds + ":" + miliseconds);
+    }
+    else if (seconds <=9){
+      builder.append(minutes+":"+ "0"+seconds + ":" + miliseconds);
+    }
+    else if (miliseconds <=9){
+      builder.append(minutes+":"+seconds + ":00" + miliseconds);
+
+    }
+    else builder.append(minutes + ":" + seconds + ":" + miliseconds);
+    time = String.valueOf(builder);
     return time;
   }
 
@@ -36,7 +55,7 @@ public class Time {
     return time;
   }
 
-  public int getMinutes() {
+  public long getMinutes() {
     return minutes;
   }
 
@@ -44,7 +63,7 @@ public class Time {
     this.minutes = minutes;
   }
 
-  public int getSeconds() {
+  public long getSeconds() {
     return seconds;
   }
 
@@ -52,7 +71,7 @@ public class Time {
     this.seconds = seconds;
   }
 
-  public int getMiliseconds() {
+  public long getMiliseconds() {
     return miliseconds;
   }
 
