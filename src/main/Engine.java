@@ -1,5 +1,6 @@
 package main;
 
+import disciplins.Competition;
 import disciplins.SwimmingStyle;
 import disciplins.SwimmingTime;
 import disciplins.Time;
@@ -24,10 +25,12 @@ public class Engine {
   private Ui ui = new Ui();
   private Trainer trainer1 = new Trainer("Egon Olson");
   private Trainer trainer2 = new Trainer("Benny Frandsen");
+  private ArrayList<Competition> competitionsList = new ArrayList<>();
 
   public void runProgram() throws FileNotFoundException, InterruptedException {
     System.out.println(ui.consoleOrSwing());
     loadMembersFromFile();
+    loadCompetitionsFromFile();
     String choice = sc.nextLine();
     switch (choice) {
       case "1" -> runConsole();
@@ -65,6 +68,7 @@ public class Engine {
           ui.newLine();
           System.out.println("SHUTTING DOWN");
           saveMemberToFile();
+          saveCompetitionsToFile();
         }
         default -> ui.invalidInput();
       }
@@ -116,6 +120,7 @@ public class Engine {
     System.out.println("Indtast ID på medlem:");//printer 2 gange
     int indexPosition = searchMember();
     Member member = memberList.get(indexPosition);
+    int memberId = member.getId();
     System.out.println("Hvilken dato er tiden sat?");
     date.createDate();
     System.out.println("Hvilken svømmestil er tiden sat i?");
@@ -139,7 +144,8 @@ public class Engine {
       swimmingTime.setCompetitionName(competitionName);
       String position = inputPosition();
       swimmingTime.setPosition(position);
-      member.getCompetitions().add(swimmingTime);
+      Competition competition = new Competition(swimmingTime, competitionName, memberId, position);
+      competitionsList.add(competition);
     }
     boolean checkedTime = isExistingTime(time, indexPosition);
     if (checkedTime == true) {
@@ -443,6 +449,55 @@ public class Engine {
 
       }
     } catch (FileNotFoundException e) {
+      System.out.println("Cannot locate file");
+    }
+  }
+
+  public void saveCompetitionsToFile (){
+    try {
+      PrintStream out = new PrintStream("competitions.csv");
+      for (int i = 0; i < competitionsList.size(); i++) {
+        Competition comp = competitionsList.get(i);
+        out.print(comp.getCompetitionName());
+        out.print(";");
+        out.print(comp.getSwimmingTime().getDate().getBirthday());
+        out.print(";");
+        out.print(comp.getMemberId());
+        out.print(";");
+        out.print(comp.getSwimmingTime().getSwimmingStyle());
+        out.print(";");
+        out.print(comp.getPlacement());
+        out.print(";");
+        out.print(comp.getSwimmingTime().getTime().getTime());
+        out.print(";\n");
+      }
+    } catch (FileNotFoundException e) {
+      System.out.println("Cannot locate file");
+    }
+  }
+
+  public void loadCompetitionsFromFile() {
+    try {
+      Scanner fileScanner = new Scanner("competitions.csv");
+      while (fileScanner.hasNextLine()) {
+        String line = fileScanner.nextLine();
+        Scanner input = new Scanner(line).useDelimiter(";").useLocale(Locale.ENGLISH);
+        String compName = input.next();
+        Date date = new Date();
+        date.setBirthday(input.next());
+        date.checkDateFromCSV();
+        int memberId = input.nextInt();
+        SwimmingStyle style = SwimmingStyle.valueOf(input.next());
+        String placement = input.next();
+        Time time = new Time();
+        time.competitionTimeCsv(input.next());
+        SwimmingTime swimmingTime = new SwimmingTime(date, time);
+        swimmingTime.setSwimmingStyle(style);
+        Competition competition = new Competition(swimmingTime, compName, memberId, placement);
+        competitionsList.add(competition);
+      }
+
+    } catch (NoSuchElementException e) {
       System.out.println("Cannot locate file");
     }
   }
