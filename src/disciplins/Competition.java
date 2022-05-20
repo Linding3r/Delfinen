@@ -30,4 +30,8 @@ public class Competition {
     return placement;
   }
 
+  public String toString (){
+    return competitionName + " " + memberId + " " + placement + " " + swimmingTime.getTime().getTime();
+  }
+
 }
