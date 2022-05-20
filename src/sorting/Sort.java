@@ -62,5 +62,4 @@ public class Sort {
     } else System.out.println("Der er ingen medlemmer på listen til at sortere!");
   }
 
-
 }
