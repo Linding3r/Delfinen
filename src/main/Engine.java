@@ -4,7 +4,6 @@ import disciplins.SwimmingStyle;
 import disciplins.SwimmingTime;
 import disciplins.Time;
 import entities.Member;
-import entities.MemberList;
 import entities.Trainer;
 import sorting.Sort;
 import sorting.SortSwimTime;
@@ -18,7 +17,7 @@ import java.util.*;
 
 public class Engine {
   private Scanner sc = new Scanner(System.in);
-  public static MemberList memberList = new MemberList();
+  private static ArrayList<Member> memberList = new ArrayList<>();
   private Sort sort = new Sort();
   private int memberId = 1;
   private int idCode = 1000;
@@ -52,7 +51,7 @@ public class Engine {
       String choice = sc.nextLine();
       switch (choice) {
         case "1" -> addMember();
-        case "2" -> System.out.println(memberList.toString());
+        case "2" -> System.out.println(ui.memberListToString(memberList));
         case "3" -> sortMemberList();
         case "4" -> deleteMember();
         case "5" -> changePaymentStatusLoop();
@@ -60,9 +59,7 @@ public class Engine {
         case "7" -> checkIncome();
         case "8" -> addOrRemoveTrainer();
         case "9" -> createTime();
-        //case "8" -> System.out.println("Implement register best COMPETITION/Training result, date for junior/senior swimmers ");
-        //case "9" -> System.out.println("Implement see list of top 5 results in each disciplin");
-        //case "8" -> System.out.println("Implement change status of swimmers from competition to free-timer swimmer (and vice versa)");
+        //case "10" -> System.out.println("Implement see list of top 5 results in each disciplin");
         case "0" -> {
           run = false;
           ui.newLine();
@@ -80,7 +77,7 @@ public class Engine {
     Time time = new Time();
     System.out.println("Indtast ID på medlem:");
     int indexPosition = searchMember();
-    Member member = memberList.getMemberList().get(indexPosition);
+    Member member = memberList.get(indexPosition);
     System.out.println("Hvilken dato er tiden sat?");
     date.createDate();
     System.out.println("Hvilken svømmestil er tiden sat i?");
@@ -139,7 +136,7 @@ public class Engine {
   }
 
   private boolean isExistingTime(Time time, int indexPosition) {
-    Member member = memberList.getMemberList().get(indexPosition);
+    Member member = memberList.get(indexPosition);
     if (member.getFastestSwimmingTime() != null) {
       return isTimeFaster(time, member);
     } else return true;
@@ -178,10 +175,10 @@ public class Engine {
     int id = sc.nextInt();
     sc.nextLine();
     try {
-      for (int i = 0; i < memberList.getMemberList().size(); i++) {
-        if (id == memberList.getMemberList().get(i).getId()) {
+      for (int i = 0; i < memberList.size(); i++) {
+        if (id == memberList.get(i).getId()) {
           System.out.println("De nuværende oplysninger på medlemmet er:");
-          System.out.println(memberList.getMemberList().get(i));
+          System.out.println(memberList.get(i));
           return i;
         }
       }
@@ -198,8 +195,8 @@ public class Engine {
       System.out.println(ui.chooseTrainer());
       String input = sc.nextLine();
       switch (input) {
-        case "1" -> memberList.getMemberList().get(i).setTrainer(trainer1);
-        case "2" -> memberList.getMemberList().get(i).setTrainer(trainer2);
+        case "1" -> memberList.get(i).setTrainer(trainer1);
+        case "2" -> memberList.get(i).setTrainer(trainer2);
         default -> {
           System.out.println("Invalid input");
           run = true;
@@ -214,8 +211,8 @@ public class Engine {
     try {
       int id = sc.nextInt();
       sc.nextLine();
-      for (int i = 0; i < memberList.getMemberList().size(); i++) {
-        if (id == memberList.getMemberList().get(i).getId()) {
+      for (int i = 0; i < memberList.size(); i++) {
+        if (id == memberList.get(i).getId()) {
           boolean run = true;
           while (run) {
             run = false;
@@ -223,7 +220,7 @@ public class Engine {
             String input = sc.nextLine();
             switch (input) {
               case "1" -> chooseTrainer(i);
-              case "2" -> memberList.getMemberList().get(i).setTrainer(null);
+              case "2" -> memberList.get(i).setTrainer(null);
               default -> {
                 ui.invalidInput();
                 run = true;
@@ -239,8 +236,8 @@ public class Engine {
 
   private void checkIncome() {
     int income = 0;
-    for (int i = 0; i < memberList.getMemberList().size(); i++) {
-      income += memberList.getMemberList().get(i).subscription();
+    for (int i = 0; i < memberList.size(); i++) {
+      income += memberList.get(i).subscription();
     }
     System.out.println("\n\n\nForventet årligt indkomst:");
     System.out.println(income + "DKK");
@@ -248,12 +245,12 @@ public class Engine {
 
   public void deleteMember() throws InterruptedException {
     int i = searchMember();
-    Member member = memberList.getMemberList().get(i);
+    Member member = memberList.get(i);
     System.out.println("Du ved at slette bruger: " + member.getFirstName() + " " + member.getSurname() + ", Medlemsnummer: " + member.getId());
     System.out.println("Tryk 1 for at slette tryk på alt andet for at afbryde.");
     String choice = sc.nextLine();
     if (Objects.equals(choice, "1")) {
-      memberList.getMemberList().remove(i);
+      memberList.remove(i);
       System.out.println(member.getFirstName() + " " + member.getSurname() + " er blevet slettet.");
     }
   }
@@ -264,18 +261,18 @@ public class Engine {
       run = false;
       ui.sortMenu();
       switch (sc.nextLine()) {
-        case "1" -> sort.sortSurname();
-        case "2" -> sort.sortFirstname();
-        case "3" -> sort.sortAge();
-        case "4" -> sort.sortActive();
-        case "5" -> sort.sortComp();
-        case "6" -> sort.sortRegDate();
-        case "7" -> sort.sortId();
-        case "8" -> sort.sortPayment();
+        case "1" -> sort.sortSurname(memberList);
+        case "2" -> sort.sortFirstname(memberList);
+        case "3" -> sort.sortAge(memberList);
+        case "4" -> sort.sortActive(memberList);
+        case "5" -> sort.sortComp(memberList);
+        case "6" -> sort.sortRegDate(memberList);
+        case "7" -> sort.sortId(memberList);
+        case "8" -> sort.sortPayment(memberList);
         //TODO***************************************************************************************************************************************
         //TODO***********************************************PROPPER TEST NEEDED*********************************************************************
         //TODO***************************************************************************************************************************************
-        case "9" -> Collections.sort(memberList.getMemberList(), new SortSwimTime());
+        case "9" -> Collections.sort(memberList, new SortSwimTime());
         case "10" -> System.out.println("Tilbage");
         default -> {
           ui.invalidInput();
@@ -283,7 +280,7 @@ public class Engine {
         }
       }
     }
-    System.out.println(memberList.toString());
+    System.out.println(ui.memberListToString(memberList));
   }
 
   public void addMember() {
@@ -304,7 +301,7 @@ public class Engine {
     System.out.println(member);
     boolean yesNo = makeChoiceBoolean(ui.yesNo());
     if (yesNo == true) {
-      memberList.addMemberToList(member);
+      memberList.add(member);
       memberId++;
     }
   }
@@ -338,8 +335,8 @@ public class Engine {
   }
 
   public void loadLastMemberID() {
-    int memberYear = memberList.getMemberList().get(memberList.getMemberList().size() - 1).getRegisterDate().getYear();
-    memberId = (memberList.getMemberList().get(memberList.getMemberList().size() - 1).getId() - (memberYear * idCode)) + 1;
+    int memberYear = memberList.get(memberList.size() - 1).getRegisterDate().getYear();
+    memberId = (memberList.get(memberList.size() - 1).getId() - (memberYear * idCode)) + 1;
   }
 
   public void loadMembersFromFile() {
@@ -359,13 +356,13 @@ public class Engine {
         birthday.birthdayToAge();
         int age = birthday.getAge();
         Member member = new Member(birthday, age, iD, firstName, surname, competition, payment);
-        memberList.addMemberToList(member);
+        memberList.add(member);
       }
     } catch (FileNotFoundException | NoSuchElementException e) {
       System.out.println("Cannot locate file");
     }
     try {
-      sort.sortId();
+      sort.sortId(memberList);
       loadLastMemberID();
     } catch (NoSuchElementException | IndexOutOfBoundsException e) {
       System.out.println("File is empty\n\n\n");
@@ -375,8 +372,8 @@ public class Engine {
   public void saveMemberToFile() {
     try {
       PrintStream out = new PrintStream("members.csv");
-      for (int i = 0; i < memberList.getMemberList().size(); i++) {
-        Member member = memberList.getMemberList().get(i);
+      for (int i = 0; i < memberList.size(); i++) {
+        Member member = memberList.get(i);
         out.print(member.getId());
         out.print(";");
         out.print(member.getSurname());
@@ -408,11 +405,11 @@ public class Engine {
       String input = sc.nextLine();
       switch (input) {
         case "1" -> {
-          memberList.getMemberList().get(i).setPayment(true);
+          memberList.get(i).setPayment(true);
           run = false;
         }
         case "2" -> {
-          memberList.getMemberList().get(i).setPayment(false);
+          memberList.get(i).setPayment(false);
           run = false;
         }
         default -> System.out.println("Invalid input");
@@ -428,17 +425,23 @@ public class Engine {
       String input = sc.nextLine();
       switch (input) {
         case "1" -> {
-          memberList.getMemberList().get(i).setActive(true);
+          memberList.get(i).setActive(true);
           run = false;
         }
         case "2" -> {
-          memberList.getMemberList().get(i).setActive(false);
+          memberList.get(i).setActive(false);
           run = false;
         }
         default -> System.out.println("Invalid input");
       }
     }
-
   }
 
+  public static ArrayList<Member> getMemberList() {
+    return memberList;
+  }
+
+  public static void setMemberList(ArrayList<Member> memberList) {
+    Engine.memberList = memberList;
+  }
 }

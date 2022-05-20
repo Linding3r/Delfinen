@@ -1,7 +1,6 @@
 package ui;
 
 import entities.Member;
-import entities.MemberList;
 import main.Date;
 import main.Engine;
 

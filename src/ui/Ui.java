@@ -1,5 +1,9 @@
 package ui;
 
+import entities.Member;
+
+import java.util.ArrayList;
+
 public class Ui {
   public final String BLUE = "\u001B[34m";
   public final String RESET = "\u001B[0m";
@@ -213,6 +217,14 @@ public class Ui {
   public void confirmInput(){
     newLine();
     System.out.println(YELLOW + "Vil du bekræfte, at dataene er udfyldt korrekt?" + RESET);
+  }
+
+  public String memberListToString(ArrayList<Member> memberList) {
+    String member = "\n";
+    for (int i = 0; i < memberList.size(); i++) {
+      member += memberList.get(i).toString();
+    }
+    return asciiLines() + "\n" + member + "\n" + asciiLines() + "\n\n\n";
   }
 
 }
