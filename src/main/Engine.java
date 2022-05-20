@@ -34,7 +34,7 @@ public class Engine {
     String choice = sc.nextLine();
     switch (choice) {
       case "1" -> runConsole();
-     // case "2" -> runSwing();
+      // case "2" -> runSwing();
       default -> ui.invalidInput();
     }
   }
@@ -62,7 +62,7 @@ public class Engine {
         case "7" -> checkIncome();
         case "8" -> addOrRemoveTrainer();
         case "9" -> createTime();
-        //case "10" -> System.out.println("Implement see list of top 5 results in each disciplin");
+        case "10" -> viewTop5();
         case "0" -> {
           run = false;
           ui.newLine();
@@ -73,8 +73,46 @@ public class Engine {
         default -> ui.invalidInput();
       }
     }
-
   }
+
+  private void viewTop5() throws InterruptedException {
+    System.out.println(ui.swimmingStyle());
+    String choiceSwimmingStyle = checkSwimmingStyleInput();
+    System.out.println(ui.juniorOrSenior());
+    String choiceAgeGroup = checkAgeGroup();
+    if (choiceAgeGroup.equals("2")) {
+      switch (choiceSwimmingStyle) {
+        case "1" -> {
+          sortByStyle(memberList, SwimmingStyle.BUTTERFLY);
+        }
+   /*     case "2" -> sortByStyle(SwimmingStyle.CRAWL);
+        case "3" -> sortByStyle(SwimmingStyle.BACKCRAWL);
+        case "4" -> sortByStyle(SwimmingStyle.BREASTSTROKE);
+      }
+    } else
+      switch (choiceSwimmingStyle) {
+        case "1" -> sortByStyle(SwimmingStyle.BUTTERFLY);
+        case "2" -> sortByStyle(SwimmingStyle.CRAWL);
+        case "3" -> sortByStyle(SwimmingStyle.BACKCRAWL);
+        case "4" -> sortByStyle(SwimmingStyle.BREASTSTROKE);*/
+      }
+    }
+  }
+
+
+  public void sortByStyle(ArrayList<Member> memberList, SwimmingStyle swimmingStyle) {
+    ArrayList<Member> top5 = new ArrayList<>();
+    for (int i = 0; i < memberList.size(); i++) {
+      if (memberList.get(i).getFastestSwimmingTime() != null && memberList.get(i).getFastestSwimmingTime().getSwimmingStyle() == swimmingStyle) {
+        top5.add(memberList.get(i));
+      }
+    }
+    Collections.sort(top5, new SortSwimTime());
+    for (int i = 0; i < 5; i++) {
+      System.out.println(top5.get(i));
+    }
+  }
+
 
   private void createTime() throws InterruptedException {
     Date date = new Date();
@@ -115,7 +153,7 @@ public class Engine {
     }
   }
 
-  private String inputPosition(){
+  private String inputPosition() {
     String position = "";
     System.out.println("Hvilken position fik svømmeren?");
     position = sc.nextLine();
@@ -170,6 +208,19 @@ public class Engine {
       choice = sc.nextLine();
       switch (choice) {
         case "1", "2", "3", "4" -> runLoop = false;
+        default -> ui.invalidInput();
+      }
+    }
+    return choice;
+  }
+
+  private String checkAgeGroup() throws InterruptedException {
+    boolean runLoop = true;
+    String choice = "";
+    while (runLoop) {
+      choice = sc.nextLine();
+      switch (choice) {
+        case "1", "2" -> runLoop = false;
         default -> ui.invalidInput();
       }
     }
