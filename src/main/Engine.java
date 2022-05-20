@@ -7,7 +7,7 @@ import entities.Member;
 import entities.Trainer;
 import sorting.Sort;
 import sorting.SortSwimTime;
-import ui.SwingGUI;
+//import ui.SwingGUI;
 import ui.Ui;
 
 import java.io.File;
@@ -31,15 +31,15 @@ public class Engine {
     String choice = sc.nextLine();
     switch (choice) {
       case "1" -> runConsole();
-      case "2" -> runSwing();
+     // case "2" -> runSwing();
       default -> ui.invalidInput();
     }
   }
 
-  public void runSwing() {
+  /*public void runSwing() {
     SwingGUI swing = new SwingGUI();
     swing.mainMenu();
-  }
+  }*/
 
   public void runConsole() throws InterruptedException, FileNotFoundException {
     boolean run = true;
@@ -75,7 +75,7 @@ public class Engine {
   private void createTime() throws InterruptedException {
     Date date = new Date();
     Time time = new Time();
-    System.out.println("Indtast ID på medlem:");
+    System.out.println("Indtast ID på medlem:");//printer 2 gange
     int indexPosition = searchMember();
     Member member = memberList.get(indexPosition);
     System.out.println("Hvilken dato er tiden sat?");
@@ -435,10 +435,6 @@ public class Engine {
         default -> System.out.println("Invalid input");
       }
     }
-  }
-
-  public static ArrayList<Member> getMemberList() {
-    return memberList;
   }
 
   public static void setMemberList(ArrayList<Member> memberList) {

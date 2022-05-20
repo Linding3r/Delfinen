@@ -1,3 +1,4 @@
+/*
 package ui;
 
 import entities.Member;
@@ -25,8 +26,6 @@ public class SwingGUI {
     private final static String newline = "\n";
     private int memberID = Integer.parseInt(String.valueOf(Year.now())) * 1000 + 1;
     private int idCode = 1000;
-
-    MemberList memberList = new MemberList();
 
     public void mainMenu() {
         loadLastMemberID();
@@ -426,3 +425,4 @@ public class SwingGUI {
     }
 
 }
+*/
