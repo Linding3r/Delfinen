@@ -1,5 +1,6 @@
 package ui;
 
+import disciplins.Competition;
 import entities.Member;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class Ui {
         ║   8:  Tilføj/Fjern Træner          ║
         ║   9:  Tilføj svømmetid             ║
         ║   10: Se top 5 over svømmetider    ║
+        ║   11: Se Svømmestævner             ║
         ║   0:  SHUTDOWN                     ║
         ╚════════════════════════════════════╝
         """);
@@ -237,6 +239,14 @@ public class Ui {
       member += memberList.get(i).toString();
     }
     return asciiLines() + "\n" + member + "\n" + asciiLines() + "\n\n\n";
+  }
+
+  public String competitionListToString(ArrayList<Competition> competitionsList) {
+    String competition = "\n";
+    for (int i = 0; i < competitionsList.size(); i++) {
+      competition += competitionsList.get(i).toString();
+    }
+    return asciiLines() + "\n" + competition + "\n" + asciiLines() + "\n\n\n";
   }
 
 }

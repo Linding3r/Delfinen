@@ -74,6 +74,7 @@ public class Engine {
         case "8" -> addOrRemoveTrainer();
         case "9" -> createTime();
         case "10" -> viewTop5();
+        case "11" -> System.out.println(ui.competitionListToString(competitionsList));
         case "0" -> {
           run = false;
           ui.newLine();
