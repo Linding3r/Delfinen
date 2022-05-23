@@ -14,6 +14,7 @@ import ui.Ui;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.time.Year;
 import java.util.*;
 
 public class Engine {
@@ -360,8 +361,11 @@ public class Engine {
     System.out.println("\n\nIndtast medlemmets fødselsdagsdato. (FORMAT DD/MM/YEAR):");
     Date date = new Date();
     date.createDate();
-    System.out.println("\n\nIndtast om medlemmet er konkurrencesvømmer eller motionssvømmer");
-    boolean competitionStatus = makeChoiceBoolean(ui.compNonCompChoice());
+    boolean competitionStatus = false;
+    if (Integer.parseInt(String.valueOf(Year.now()))-date.getYear() < 60) {
+      System.out.println("\n\nIndtast om medlemmet er konkurrencesvømmer eller motionssvømmer");
+      competitionStatus = makeChoiceBoolean(ui.compNonCompChoice());
+    }
     idCode = updateIdCode(idCode);
     Member member = new Member(date, memberId, firstname, surname, competitionStatus, idCode);
     ui.confirmInput();

@@ -32,15 +32,14 @@ public class Date {
                 month = Integer.parseInt(birthdayArray[1]);
                 year = Integer.parseInt(birthdayArray[2]);
             }
-        } catch (ArrayIndexOutOfBoundsException  | NumberFormatException ignored) {
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException ignored) {
         }
         Border br = BorderFactory.createLineBorder(Color.red);
         if (!(day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900
-                && year <= Integer.parseInt(String.valueOf(Year.now())))) {
+            && year <= Integer.parseInt(String.valueOf(Year.now())))) {
             textFieldAge.setBorder(br);
             return null;
-        }
-        else
+        } else
             br = BorderFactory.createLineBorder(Color.WHITE);
         textFieldAge.setBorder(br);
         return date;
@@ -55,11 +54,11 @@ public class Date {
                 month = Integer.parseInt(birthdayArray[1]);
                 year = Integer.parseInt(birthdayArray[2]);
             }
-        } catch (ArrayIndexOutOfBoundsException  | NumberFormatException ignored) {
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException ignored) {
         }
         while (!(day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900
             && year <= Integer.parseInt(String.valueOf(Year.now())))) {
-            System.out.println((Arrays.toString(birthdayArray).replace("{","").replace("}","")) +
+            System.out.println((Arrays.toString(birthdayArray).replace("{", "").replace("}", "")) +
                 " Er en ugyldig dato. Indtast ny dato:");
             date = sc.nextLine();
             createDate();
@@ -75,7 +74,7 @@ public class Date {
                 month = Integer.parseInt(birthdayArray[1]);
                 year = Integer.parseInt(birthdayArray[2]);
             }
-        } catch (ArrayIndexOutOfBoundsException  | NumberFormatException ignored) {
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException ignored) {
         }
         return date;
     }
@@ -84,38 +83,45 @@ public class Date {
         return date;
     }
 
-    public int getAge(){
+    public int getAge() {
         return age;
     }
 
-    public int birthdayToAge(){
+    public int birthdayToAge() {
         int ageYear = currentDate.getYear() - year;
         int ageMonth = currentDate.getMonthValue() - month;
         int ageDay = currentDate.getDayOfMonth() - day;
 
-        if(ageMonth < 0 || ageDay < 0) {
+        if (ageMonth < 0 || ageDay < 0) {
             if (ageMonth < 0) {
                 ageYear--;
-            } if(ageDay < 0){
+            }
+            if (ageDay < 0) {
                 ageMonth--;
-                if(ageMonth < 0) {
+                if (ageMonth < 0) {
                     ageYear--;
 
                 }
             }
-        } return age = ageYear;
+        }
+        return age = ageYear;
     }
 
-    public Enum membershipType(){
-        if(age < 18){
-            return AgeGroup.JUNIOR;
-        } else if (age >= 18 && age < 60){
-            return AgeGroup.SENIOR;
-        }else return AgeGroup.SIXTY;
-    }
 
-    @Override
-    public String toString() {
-        return date;
+        public int getYear () {
+            return year;
+        }
+
+        public Enum membershipType () {
+            if (age < 18) {
+                return AgeGroup.JUNIOR;
+            } else if (age >= 18 && age < 60) {
+                return AgeGroup.SENIOR;
+            } else return AgeGroup.SIXTY;
+        }
+
+        @Override
+        public String toString () {
+            return date;
+        }
     }
-}
