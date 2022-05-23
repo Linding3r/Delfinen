@@ -16,20 +16,21 @@ public class Ui {
 
   public void mainMenu() {
     System.out.println("""
-        ╔════════════════════════════════╗
-        ║              MENU              ║
-        ╠════════════════════════════════╣
-        ║   1:  Tilføj Ny Medlem         ║
-        ║   2:  Liste Af Medlemmer       ║
-        ║   3:  Sortere Medlemmer        ║
-        ║   4:  Slet Medlem              ║
-        ║   5:  Ændre Betalingsstatus    ║
-        ║   6:  Ændre Aktivitetsstatus   ║
-        ║   7:  Årsregnskab              ║
-        ║   8:  Tilføj/Fjern Træner      ║
-        ║   9:  Tilføj svømmetid         ║
-        ║   0:  SHUTDOWN                 ║
-        ╚════════════════════════════════╝
+        ╔════════════════════════════════════╗
+        ║              MENU                  ║
+        ╠════════════════════════════════════╣
+        ║   1:  Tilføj Ny Medlem             ║
+        ║   2:  Liste Af Medlemmer           ║
+        ║   3:  Sortere Medlemmer            ║
+        ║   4:  Slet Medlem                  ║
+        ║   5:  Ændre Betalingsstatus        ║
+        ║   6:  Ændre Aktivitetsstatus       ║
+        ║   7:  Årsregnskab                  ║
+        ║   8:  Tilføj/Fjern Træner          ║
+        ║   9:  Tilføj svømmetid             ║
+        ║   10: Se top 5 over svømmetider    ║
+        ║   0:  SHUTDOWN                     ║
+        ╚════════════════════════════════════╝
         """);
   }
 
