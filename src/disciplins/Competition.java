@@ -34,8 +34,14 @@ public class Competition {
     return placement;
   }
 
-  public String toString (){
+  /*public String toString (){
     return competitionName + " | " + memberId + " | " + date + " | " + placement + " | " + swimmingTime.getTime().getTime() + "\n";
+  }*/
+
+  public String toString (){
+    return String.format("Stævne: %-40s | ID: %-7d | Dato: %-10s | Placering: %-2s | Tid: %-9s | ",
+        competitionName, memberId, date, placement, swimmingTime.getTime().getTime()) + "\n";
+
   }
 
 }
