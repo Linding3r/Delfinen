@@ -25,7 +25,7 @@ public class Time {
     }
     while (!(minutes >= 0 && minutes <= 60 && seconds >= 0 && seconds <= 60 && miliseconds >= 0)) {
       System.out.println((Arrays.toString(timeArray)) +
-          " Er en ugyldig tid. Indtast venligst ny tid:");
+          " Er en ugyldig tid. Indtast venligst ny tid i formatet: DD/MM/YYYY ");
       time = sc.nextLine();
       competitionTime();
     }
