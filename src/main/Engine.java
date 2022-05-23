@@ -41,10 +41,10 @@ public class Engine {
           runConsole();
           runLoop = false;
         }
-        // case "2" -> {
-        //runSwing();
-        //runLoop = false;
-        //}
+         case "2" -> {
+        runSwing();
+        runLoop = false;
+        }
         default -> ui.invalidInput();
       }
     }

@@ -29,6 +29,7 @@ public class SwingGUI {
     private Engine engine = new Engine();
 
     public void mainMenu() {
+        engine.loadMembersFromFile();
         loadLastMemberID();
         frame = new JFrame();
         frame.setTitle("Svømmeklubben Delfinen");
