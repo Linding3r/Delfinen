@@ -1,4 +1,4 @@
-/*
+
 package ui;
 
 import entities.Member;
@@ -26,6 +26,7 @@ public class SwingGUI {
     private final static String newline = "\n";
     private int memberID = Integer.parseInt(String.valueOf(Year.now())) * 1000 + 1;
     private int idCode = 1000;
+    private Engine engine = new Engine();
 
     public void mainMenu() {
         loadLastMemberID();
@@ -140,7 +141,6 @@ public class SwingGUI {
         changePaymentStatus.addActionListener(e -> changePaymentStatus(textField, textArea));
 
         checkIncome.addActionListener(e -> checkIncome());
-        Engine engine = new Engine();
         saveAndExit.addActionListener(e -> {  engine.saveMemberToFile() ;System.exit(frame.EXIT_ON_CLOSE);});
 
     }
@@ -244,7 +244,7 @@ public class SwingGUI {
     };
 
     public void loadLastMemberID() {
-        memberID = (memberList.getMemberList().get(memberList.getMemberList().size() - 1).getId() + 1);
+        memberID = (engine.getMemberList().get(engine.getMemberList().size()-1).getId() + 1);
     }
 
     public void validateInput(JTextField textFieldFirstName, JTextField textFieldLastName, JTextField textFieldAge, JCheckBox checkBoxActive, JCheckBox checkBoxComp, JFrame frameMember, JFrame frameMain) {
@@ -269,10 +269,10 @@ public class SwingGUI {
         textFieldFirstName.setBorder(br);
         textFieldLastName.setBorder(br);
 
-        if (!Objects.equals(textFieldFirstName.getText(), "") && !Objects.equals(textFieldLastName.getText(), "") && birthday.getBirthday() != null) {
+        if (!Objects.equals(textFieldFirstName.getText(), "") && !Objects.equals(textFieldLastName.getText(), "") && birthday.getDate() != null) {
             Member member = new Member(birthday, memberID, firstName, lastName, active, comp);
             textArea.append("Medlem oprettet: " + newline + member + newline);
-            memberList.addMemberToList(member);
+            engine.getMemberList().add(member);
             memberID++;
             if (memberID == 2023000) {
                 memberID = 20221000;
@@ -325,13 +325,13 @@ public class SwingGUI {
 
     public void changePaymentStatus(JTextField textField, JTextArea textArea) {
         try {
-            for (int i = 0; i < memberList.getMemberList().size(); i++) {
-                int getID = memberList.getMemberList().get(i).getId();
+            for (int i = 0; i < engine.getMemberList().size(); i++) {
+                int getID = engine.getMemberList().get(i).getId();
                 if (Objects.equals(textField.getText(), "")) {
                     textArea.append("Ugyldigt nummer. Indtast medlemsnummeret i input feltet under." + newline);
                 } else if (Integer.parseInt(textField.getText()) == getID) {
-                    textArea.append(newline + "Du har ændret betalingsstatus for: " + newline + memberList.getMemberList().get(i).getFirstName() + ", Medlemsnummer: " + getID);
-                    memberList.getMemberList().get(i).setPayment(false);
+                    textArea.append(newline + "Du har ændret betalingsstatus for: " + newline + engine.getMemberList().get(i).getFirstName() + ", Medlemsnummer: " + getID);
+                    engine.getMemberList().get(i).setPayment(false);
                     textField.setText("");
                 }
             }
@@ -341,13 +341,13 @@ public class SwingGUI {
 
     public void deleteMember(JTextField textField, JTextArea textArea) {
         try {
-            for (int i = 0; i < memberList.getMemberList().size(); i++) {
-                int getID = memberList.getMemberList().get(i).getId();
+            for (int i = 0; i < engine.getMemberList().size(); i++) {
+                int getID = engine.getMemberList().get(i).getId();
                 if (Objects.equals(textField.getText(), "")) {
                     textArea.append("Ugyldigt nummer. Indtast medlemsnummeret i input feltet under." + newline);
                 } else if (Integer.parseInt(textField.getText()) == getID) {
-                    textArea.append(newline + "Du har slettet: " + newline + memberList.getMemberList().get(i).getFirstName() + ", Medlemsnummer: " + getID);
-                    memberList.getMemberList().remove(i);
+                    textArea.append(newline + "Du har slettet: " + newline + engine.getMemberList().get(i).getFirstName() + ", Medlemsnummer: " + getID);
+                    engine.getMemberList().remove(i);
                     textField.setText("");
                 }
             }
@@ -357,8 +357,8 @@ public class SwingGUI {
 
     public void checkIncome() {
         int income = 0;
-        for (int i = 0; i < memberList.getMemberList().size(); i++) {
-            income += memberList.getMemberList().get(i).subscription();
+        for (int i = 0; i < engine.getMemberList().size(); i++) {
+            income += engine.getMemberList().get(i).subscription();
         }
         textArea.append(newline + "Indtjening på nuværende medlemmers kontigent: " + income + " DKK" + newline);
     }
@@ -370,10 +370,10 @@ public class SwingGUI {
 
         // Frame Title
         f.setTitle("Tabel over medlemmer");
-        String[][] data = new String[memberList.getMemberList().size()][8];
+        String[][] data = new String[engine.getMemberList().size()][8];
         String[] columnNames = {"Fornavn:", "Efternavn:", "Fødselsdagsdato:", "Alder / Medlemstype:", "Medlemsnummer:", "Aktivt medlem:", "Konkurrencesvømmer:", "Betalingsstatus: "};
-        for (int i = 0; i < memberList.getMemberList().size(); i++) {
-            Member member = memberList.getMemberList().get(i);
+        for (int i = 0; i < engine.getMemberList().size(); i++) {
+            Member member = engine.getMemberList().get(i);
             data[i][0] = member.getFirstName();
             data[i][1] = member.getSurname();
             data[i][2] = String.valueOf(member.getBirthday());
@@ -425,4 +425,4 @@ public class SwingGUI {
     }
 
 }
-*/
+
