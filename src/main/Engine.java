@@ -424,14 +424,18 @@ public class Engine {
         int age = input.nextInt();
         Time time = new Time();
         Date swimDate = new Date();
-        time.competitionTimeCsv(input.next());
-        SwimmingStyle style = SwimmingStyle.valueOf(input.next());
-        swimDate.setDate(input.next());
-        swimDate.checkDateFromCSV();
-        SwimmingTime swimmingTime = new SwimmingTime(swimDate, time);
-        swimmingTime.setSwimmingStyle(style);
-        Member member = new Member(birthday, age, iD, firstName, surname, competition, payment, swimmingTime);
-        memberList.add(member);
+        if(time.competitionTimeCsv(input.next())) {
+          SwimmingStyle style = SwimmingStyle.valueOf(input.next());
+          swimDate.setDate(input.next());
+          swimDate.checkDateFromCSV();
+          SwimmingTime swimmingTime = new SwimmingTime(swimDate, time);
+          swimmingTime.setSwimmingStyle(style);
+          Member member = new Member(birthday, age, iD, firstName, surname, competition, payment, swimmingTime);
+          memberList.add(member);
+        } else {
+          Member member = new Member(birthday, age, iD, firstName, surname, competition, payment);
+          memberList.add(member);
+        }
       }
     } catch (FileNotFoundException | NoSuchElementException e) {
       System.out.println("Cannot locate file");
