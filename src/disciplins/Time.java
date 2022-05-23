@@ -51,7 +51,7 @@ public class Time {
     return time;
   }
 
-  public String competitionTimeCsv (String time) {
+  public void competitionTimeCsv (String time) {
     String[] timeArray = time.split(":");
     try {
       for (int i = 0; i < timeArray.length; i++) {
@@ -60,12 +60,6 @@ public class Time {
         miliseconds = Integer.parseInt(timeArray[2]);
       }
     } catch (ArrayIndexOutOfBoundsException | NumberFormatException ignored) {
-    }
-    while (!(minutes >= 0 && minutes <= 60 && seconds >= 0 && seconds <= 60 && miliseconds >= 0)) {
-      System.out.println((Arrays.toString(timeArray)) +
-          " Er en ugyldig tid. Indtast venligst ny tid:");
-      time = sc.nextLine();
-      competitionTime();
     }
     StringBuilder builder = new StringBuilder();
     if (seconds == 0){
@@ -80,13 +74,15 @@ public class Time {
     else if (seconds <=9){
       builder.append(minutes+":"+ "0"+seconds + ":" + miliseconds);
     }
+    else if (miliseconds <=99){
+      builder.append(minutes+":"+seconds + ":0" + miliseconds);
+    }
     else if (miliseconds <=9){
       builder.append(minutes+":"+seconds + ":00" + miliseconds);
-
     }
     else builder.append(minutes + ":" + seconds + ":" + miliseconds);
     time = String.valueOf(builder);
-    return time;
+    this.time = time;
   }
 
   public String getTime(){

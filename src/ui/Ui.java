@@ -166,7 +166,7 @@ public class Ui {
         "║" + BLUE + "  ██████  ███████ ███████ ██      ██ ██   ████ ███████ ██   ████ " + RESET + " ║\n" +
         "╚══════════════════════════════════════════════════════════════════╝\n\n\n\n\n";
     System.out.println(intro);
-    Thread.sleep(1000);
+    Thread.sleep(0);
     newLine();
 
   }
@@ -192,8 +192,8 @@ public class Ui {
   }
 
   public String asciiLines(){
-    return BLUE + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" +
-        "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓" + RESET;
+    return BLUE + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" +
+        "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓" + RESET;
   }
 
   public void loadingBar() throws InterruptedException {
@@ -206,9 +206,9 @@ public class Ui {
       solidBar += BLUE + "▓" + RESET;
       bar = bar.substring(0,46-i);
       System.out.print("|" + solidBar + bar + "| " + procent + "/100%\r");
-      Thread.sleep(50);
+      Thread.sleep(5);
     }
-    Thread.sleep(1000);
+    Thread.sleep(0);
     newLine();
   }
 

@@ -1,18 +1,17 @@
 package entities;
 
 import disciplins.SwimmingTime;
-import disciplins.Time;
 import main.Date;
 import ui.Ui;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
+import static entities.AgeGroup.JUNIOR;
+import static entities.AgeGroup.SENIOR;
 
 public class Member {
 
   private Date birthday;
   private int age;
-  private String membership;
+  private Enum membership;
   private String firstName;
   private String surname;
   private boolean active;
@@ -23,7 +22,6 @@ public class Member {
   private int id;
   private SwimmingTime fastestSwimmingTime;
   private Ui ui = new Ui();
-  private ArrayList<SwimmingTime> competitions;
 
 
   public Member(Date birthday, int id, String firstName, String surname,
@@ -38,7 +36,6 @@ public class Member {
     this.competitionSwimmer = competitionSwimmer;
     payment = true;
     fastestSwimmingTime = new SwimmingTime();
-    competitions = new ArrayList<>();
   }
 
   public Member(Date birthday, int id, String firstName, String surname, boolean active, boolean competitionSwimmer) {
@@ -51,11 +48,11 @@ public class Member {
     this.active = active;
     this.competitionSwimmer = competitionSwimmer;
     this.payment = true;
-    competitions = new ArrayList<>();
+    fastestSwimmingTime = new SwimmingTime();
   }
 
   public Member (Date birthday, int age, int id, String firstName, String surname,
-                boolean competitionSwimmer, boolean payment) {
+                 boolean competitionSwimmer, boolean payment) {
     this.birthday = birthday;
     this.id = id;
     this.age = age;
@@ -65,24 +62,29 @@ public class Member {
     this.active = true;
     this.competitionSwimmer = competitionSwimmer;
     this.payment = payment;
-    competitions = new ArrayList<>();
-//    this.swimmingTime = swimmingTime;
+    fastestSwimmingTime = new SwimmingTime();
   }
 
-  public ArrayList<SwimmingTime> getCompetitions() {
-    return competitions;
-  }
-
-  public void setCompetitions(ArrayList<SwimmingTime> competitions) {
-    this.competitions = competitions;
+  public Member (Date birthday, int age, int id, String firstName, String surname,
+                boolean competitionSwimmer, boolean payment, SwimmingTime fastestSwimmingTime) {
+    this.birthday = birthday;
+    this.id = id;
+    this.age = age;
+    this.membership = birthday.membershipType();
+    this.firstName = firstName;
+    this.surname = surname;
+    this.active = true;
+    this.competitionSwimmer = competitionSwimmer;
+    this.payment = payment;
+    this.fastestSwimmingTime = fastestSwimmingTime;
   }
 
   public int subscription(){
     int subscription;
     if(active == true){
-      if(membership.equals("Junior")){
+      if(membership.equals(JUNIOR)){
       subscription = 1000;
-     } else if(membership.equals("Senior")){
+     } else if(membership.equals(SENIOR)){
         subscription = 1600;
       } else subscription = 1200;
     }else subscription = 500;
@@ -198,14 +200,22 @@ public class Member {
   }
 
   public String fastestTime(){
-    if(fastestSwimmingTime == null){
+    if(fastestSwimmingTime.getTime().getTime() == null){
       return "No Time";
     } else return fastestSwimmingTime.getTime().getTime();
   }
 
+  public String membershipToString(){
+    if(membership == JUNIOR){
+      return "Junior";
+    }else if(membership == SENIOR){
+      return "Senior";
+    } else return "60+";
+  }
+
   public String toString(){
     return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | %10s (%-2sår) | %-6s | %-6s | %11s | %-18s | Træner: %-5s | ",
-        id, shortenSurname(), shortenFirstname(), birthday.getBirthday(), age, membership, activeOrPassive(), paidOrNotPaid(),
-        compOrNotComp(), trainerName()) + registerDate + " | " + fastestTime() + competitions.toString() +"\n";
+        id, shortenSurname(), shortenFirstname(), birthday.getDate(), age, membershipToString(), activeOrPassive(), paidOrNotPaid(),
+        compOrNotComp(), trainerName()) + registerDate + " | " + fastestTime() +"\n";
   }
 }

@@ -7,8 +7,8 @@ import disciplins.Time;
 import entities.Member;
 import entities.Trainer;
 import sorting.Sort;
-import sorting.SortSwimTime;
-//import ui.SwingGUI;
+import sorting.SortSwimmingTime;
+import ui.SwingGUI;
 import ui.Ui;
 
 import java.io.File;
@@ -18,7 +18,7 @@ import java.util.*;
 
 public class Engine {
   private Scanner sc = new Scanner(System.in);
-  private static ArrayList<Member> memberList = new ArrayList<>();
+  private ArrayList<Member> memberList = new ArrayList<>();
   private Sort sort = new Sort();
   private int memberId = 1;
   private int idCode = 1000;
@@ -48,10 +48,10 @@ public class Engine {
     }
   }
 
-  /*public void runSwing() {
+  public void runSwing() {
     SwingGUI swing = new SwingGUI();
     swing.mainMenu();
-  }*/
+  }
 
   public void runConsole() throws InterruptedException, FileNotFoundException {
     boolean run = true;
@@ -116,7 +116,7 @@ public class Engine {
         top5.add(memberList.get(i));
       }
     }
-    Collections.sort(top5, new SortSwimTime());
+    Collections.sort(top5, new SortSwimmingTime());
     for (int i = 0; i < 5; i++) {
       if (i < top5.size()){
         System.out.println(top5.get(i));
@@ -163,14 +163,14 @@ public class Engine {
     }
   }
 
-  private String inputPosition() {
+  public String inputPosition(){
     String position = "";
     System.out.println("Hvilken position fik svømmeren?");
     position = sc.nextLine();
     return position;
   }
 
-  private boolean yesNo() {
+  public boolean yesNo() {
     boolean runLoop = true;
     boolean yesNo = false;
     while (runLoop) {
@@ -189,14 +189,14 @@ public class Engine {
     return yesNo;
   }
 
-  private boolean isExistingTime(Time time, int indexPosition) {
+  public boolean isExistingTime(Time time, int indexPosition) {
     Member member = memberList.get(indexPosition);
-    if (member.getFastestSwimmingTime() != null) {
+    if (member.getFastestSwimmingTime().getTime().getTime() != null) {
       return isTimeFaster(time, member);
     } else return true;
   }
 
-  private boolean isTimeFaster(Time time, Member member) {
+  public boolean isTimeFaster(Time time, Member member) {
     if (time.getMinutes() < member.getFastestSwimmingTime().getTime().getMinutes()) {
       return true;
     } else if (time.getMinutes() == member.getFastestSwimmingTime().getTime().getMinutes()) {
@@ -211,7 +211,7 @@ public class Engine {
     return false;
   }
 
-  private String checkSwimmingStyleInput() throws InterruptedException {
+  public String checkSwimmingStyleInput() throws InterruptedException {
     boolean runLoop = true;
     String choice = "";
     while (runLoop) {
@@ -224,7 +224,7 @@ public class Engine {
     return choice;
   }
 
-  private String checkAgeGroup() throws InterruptedException {
+  public String checkAgeGroup() throws InterruptedException {
     boolean runLoop = true;
     String choice = "";
     while (runLoop) {
@@ -237,7 +237,7 @@ public class Engine {
     return choice;
   }
 
-  private int searchMember() throws InterruptedException {
+  public int searchMember() throws InterruptedException {
     System.out.println("Indtast ID på medlem:");
     int id = sc.nextInt();
     sc.nextLine();
@@ -255,7 +255,7 @@ public class Engine {
     return 0;
   }
 
-  private void chooseTrainer(int i) throws InterruptedException {
+  public void chooseTrainer(int i) throws InterruptedException {
     boolean run = true;
     while (run) {
       run = false;
@@ -273,7 +273,7 @@ public class Engine {
   }
 
 
-  private void addOrRemoveTrainer() throws InterruptedException {
+  public void addOrRemoveTrainer() throws InterruptedException {
     System.out.println("Indtast ID på medlem:");
     try {
       int id = sc.nextInt();
@@ -301,7 +301,7 @@ public class Engine {
     }
   }
 
-  private void checkIncome() {
+  public void checkIncome() {
     int income = 0;
     for (int i = 0; i < memberList.size(); i++) {
       income += memberList.get(i).subscription();
@@ -339,7 +339,7 @@ public class Engine {
         //TODO***************************************************************************************************************************************
         //TODO***********************************************PROPPER TEST NEEDED*********************************************************************
         //TODO***************************************************************************************************************************************
-        case "9" -> Collections.sort(memberList, new SortSwimTime());
+        case "9" -> Collections.sort(memberList, new SortSwimmingTime());
         case "10" -> System.out.println("Tilbage");
         default -> {
           ui.invalidInput();
@@ -418,11 +418,19 @@ public class Engine {
         String firstName = input.next();
         boolean competition = input.nextBoolean();
         boolean payment = input.nextBoolean();
-        birthday.setBirthday(input.next());
+        birthday.setDate(input.next());
         birthday.checkDateFromCSV();
         birthday.birthdayToAge();
-        int age = birthday.getAge();
-        Member member = new Member(birthday, age, iD, firstName, surname, competition, payment);
+        int age = input.nextInt();
+        Time time = new Time();
+        Date swimDate = new Date();
+        time.competitionTimeCsv(input.next());
+        SwimmingStyle style = SwimmingStyle.valueOf(input.next());
+        swimDate.setDate(input.next());
+        swimDate.checkDateFromCSV();
+        SwimmingTime swimmingTime = new SwimmingTime(swimDate, time);
+        swimmingTime.setSwimmingStyle(style);
+        Member member = new Member(birthday, age, iD, firstName, surname, competition, payment, swimmingTime);
         memberList.add(member);
       }
     } catch (FileNotFoundException | NoSuchElementException e) {
@@ -454,6 +462,24 @@ public class Engine {
         out.print(member.getBirthday());
         out.print(";");
         out.print(member.getAge());
+        out.print(";");
+        try {
+          out.print(member.getFastestSwimmingTime().getTime().getTime());
+        }catch (NullPointerException e){
+          out.print("");
+        }
+        out.print(";");
+        try {
+          out.print(member.getFastestSwimmingTime().getSwimmingStyle());
+        }catch (NullPointerException e){
+          out.print("");
+        }
+        out.print(";");
+        try {
+          out.print(member.getFastestSwimmingTime().getDate().getDate());
+        }catch (NullPointerException e){
+          out.print("");
+        }
         out.print(";\n");
 
 
@@ -470,7 +496,7 @@ public class Engine {
         Competition comp = competitionsList.get(i);
         out.print(comp.getCompetitionName());
         out.print(";");
-        out.print(comp.getSwimmingTime().getDate().getBirthday());
+        out.print(comp.getSwimmingTime().getDate().getDate());
         out.print(";");
         out.print(comp.getMemberId());
         out.print(";");
@@ -488,13 +514,13 @@ public class Engine {
 
   public void loadCompetitionsFromFile() {
     try {
-      Scanner fileScanner = new Scanner("competitions.csv");
+      Scanner fileScanner = new Scanner(new File("competitions.csv"));
       while (fileScanner.hasNextLine()) {
         String line = fileScanner.nextLine();
         Scanner input = new Scanner(line).useDelimiter(";").useLocale(Locale.ENGLISH);
         String compName = input.next();
         Date date = new Date();
-        date.setBirthday(input.next());
+        date.setDate(input.next());
         date.checkDateFromCSV();
         int memberId = input.nextInt();
         SwimmingStyle style = SwimmingStyle.valueOf(input.next());
@@ -507,8 +533,8 @@ public class Engine {
         competitionsList.add(competition);
       }
 
-    } catch (NoSuchElementException e) {
-      System.out.println("Cannot locate file");
+    } catch (FileNotFoundException | NoSuchElementException e) {
+      System.out.println("Cannot locate competition file");
     }
   }
 
@@ -553,7 +579,11 @@ public class Engine {
     }
   }
 
-  public static void setMemberList(ArrayList<Member> memberList) {
-    Engine.memberList = memberList;
+  public void setMemberList(ArrayList<Member> memberList) {
+    this.memberList = memberList;
+  }
+
+  public ArrayList<Member> getMemberList() {
+    return memberList;
   }
 }
