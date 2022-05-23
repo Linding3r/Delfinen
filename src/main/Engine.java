@@ -478,7 +478,7 @@ public class Engine {
 
   public void loadCompetitionsFromFile() {
     try {
-      Scanner fileScanner = new Scanner("competitions.csv");
+      Scanner fileScanner = new Scanner(new File("competitions.csv"));
       while (fileScanner.hasNextLine()) {
         String line = fileScanner.nextLine();
         Scanner input = new Scanner(line).useDelimiter(";").useLocale(Locale.ENGLISH);
@@ -497,8 +497,8 @@ public class Engine {
         competitionsList.add(competition);
       }
 
-    } catch (NoSuchElementException e) {
-      System.out.println("Cannot locate file");
+    } catch (FileNotFoundException | NoSuchElementException e) {
+      System.out.println("Cannot locate competition file");
     }
   }
 
