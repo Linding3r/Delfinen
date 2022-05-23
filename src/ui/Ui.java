@@ -1,5 +1,6 @@
 package ui;
 
+import disciplins.Competition;
 import entities.Member;
 
 import java.util.ArrayList;
@@ -16,20 +17,22 @@ public class Ui {
 
   public void mainMenu() {
     System.out.println("""
-        ╔════════════════════════════════╗
-        ║              MENU              ║
-        ╠════════════════════════════════╣
-        ║   1:  Tilføj Ny Medlem         ║
-        ║   2:  Liste Af Medlemmer       ║
-        ║   3:  Sortere Medlemmer        ║
-        ║   4:  Slet Medlem              ║
-        ║   5:  Ændre Betalingsstatus    ║
-        ║   6:  Ændre Aktivitetsstatus   ║
-        ║   7:  Årsregnskab              ║
-        ║   8:  Tilføj/Fjern Træner      ║
-        ║   9:  Tilføj svømmetid         ║
-        ║   0:  SHUTDOWN                 ║
-        ╚════════════════════════════════╝
+        ╔════════════════════════════════════╗
+        ║              MENU                  ║
+        ╠════════════════════════════════════╣
+        ║   1:  Tilføj Ny Medlem             ║
+        ║   2:  Liste Af Medlemmer           ║
+        ║   3:  Sortere Medlemmer            ║
+        ║   4:  Slet Medlem                  ║
+        ║   5:  Ændre Betalingsstatus        ║
+        ║   6:  Ændre Aktivitetsstatus       ║
+        ║   7:  Årsregnskab                  ║
+        ║   8:  Tilføj/Fjern Træner          ║
+        ║   9:  Tilføj svømmetid             ║
+        ║   10: Se top 5 over svømmetider    ║
+        ║   11: Se Svømmestævner             ║
+        ║   0:  SHUTDOWN                     ║
+        ╚════════════════════════════════════╝
         """);
   }
 
@@ -236,6 +239,14 @@ public class Ui {
       member += memberList.get(i).toString();
     }
     return asciiLines() + "\n" + member + "\n" + asciiLines() + "\n\n\n";
+  }
+
+  public String competitionListToString(ArrayList<Competition> competitionsList) {
+    String competition = "\n";
+    for (int i = 0; i < competitionsList.size(); i++) {
+      competition += competitionsList.get(i).toString();
+    }
+    return asciiLines() + "\n" + competition + "\n" + asciiLines() + "\n\n\n";
   }
 
 }

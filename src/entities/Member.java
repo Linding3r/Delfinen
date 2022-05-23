@@ -11,7 +11,7 @@ public class Member {
 
   private Date birthday;
   private int age;
-  private Enum membership;
+  private Enum ageGroup;
   private String firstName;
   private String surname;
   private boolean active;
@@ -29,7 +29,7 @@ public class Member {
     this.birthday = birthday;
     this.id = registerDate.getYear() * idCode + id;
     this.age = birthday.birthdayToAge();
-    membership = birthday.membershipType();
+    ageGroup = birthday.ageGroupType();
     this.firstName = firstName;
     this.surname = surname;
     active = true;
@@ -42,7 +42,7 @@ public class Member {
     this.birthday = birthday;
     this.age = birthday.birthdayToAge();
     this.id = id;
-    this.membership = birthday.membershipType();
+    this.ageGroup = birthday.ageGroupType();
     this.firstName = firstName;
     this.surname = surname;
     this.active = active;
@@ -56,7 +56,7 @@ public class Member {
     this.birthday = birthday;
     this.id = id;
     this.age = age;
-    this.membership = birthday.membershipType();
+    this.ageGroup = birthday.ageGroupType();
     this.firstName = firstName;
     this.surname = surname;
     this.active = true;
@@ -71,7 +71,7 @@ public class Member {
     this.birthday = birthday;
     this.id = id;
     this.age = age;
-    this.membership = birthday.membershipType();
+    this.ageGroup = birthday.ageGroupType();
     this.firstName = firstName;
     this.surname = surname;
     this.active = true;
@@ -84,13 +84,17 @@ public class Member {
   public int subscription(){
     int subscription;
     if(active == true){
-      if(membership.equals(JUNIOR)){
+      if(ageGroup.equals(JUNIOR)){
       subscription = 1000;
-     } else if(membership.equals(SENIOR)){
+     } else if(ageGroup.equals(SENIOR)){
         subscription = 1600;
       } else subscription = 1200;
     }else subscription = 500;
     return subscription;
+  }
+
+  public Enum getAgeGroup() {
+    return ageGroup;
   }
 
   public SwimmingTime getFastestSwimmingTime() {
@@ -183,7 +187,7 @@ public class Member {
   }
 
   public String trainerName(){
-    String name = "";
+    String name = "No Trainer";
     if(trainer != null){
         name = trainer.getName();
     } return name;
@@ -208,15 +212,15 @@ public class Member {
   }
 
   public String membershipToString(){
-    if(membership == JUNIOR){
+    if(ageGroup == JUNIOR){
       return "Junior";
-    }else if(membership == SENIOR){
+    }else if(ageGroup == SENIOR){
       return "Senior";
     } else return "60+";
   }
 
   public String toString(){
-    return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | %10s (%-2sår) | %-6s | %-6s | %11s | %-18s | Træner: %-5s | ",
+    return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | %10s (%-2sår) | %-6s | %-6s | %11s | %-18s | %-10s | ",
         id, shortenSurname(), shortenFirstname(), birthday.getDate(), age, membershipToString(), activeOrPassive(), paidOrNotPaid(),
         compOrNotComp(), trainerName()) + registerDate + " | " + fastestTime() +"\n";
   }
