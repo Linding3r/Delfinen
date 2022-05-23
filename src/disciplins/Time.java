@@ -29,20 +29,23 @@ public class Time {
       time = sc.nextLine();
       competitionTime();
     }
-    StringBuilder builder = new StringBuilder();
-    if (seconds == 0) {
-      builder.append(minutes + ":00:" + miliseconds);
-    } else if (miliseconds == 0) {
-      builder.append(minutes + ":" + seconds + ":000");
-    } else if (minutes <= 9) {
-      builder.append("0" + minutes + ":" + seconds + ":" + miliseconds);
-    } else if (seconds <= 9) {
-      builder.append(minutes + ":" + "0" + seconds + ":" + miliseconds);
-    } else if (miliseconds <= 9) {
-      builder.append(minutes + ":" + seconds + ":00" + miliseconds);
-
-    } else builder.append(minutes + ":" + seconds + ":" + miliseconds);
-    time = String.valueOf(builder);
+    String min = "" + minutes;
+    String sec = "" + seconds;
+    String milisec = "" + miliseconds;
+    if (minutes <= 9){
+      min = "0" + minutes;
+    } if (minutes == 0){
+      min = "00";
+    } if (seconds <= 9){
+      sec = "0" + seconds;
+    } if (seconds == 0){
+      sec = "00";
+    } if (miliseconds <= 99){
+      milisec = "0" + miliseconds;
+    } if (miliseconds <= 9){
+      milisec = "00" + miliseconds;
+    }
+    time = min + ":" + sec + ":" + milisec;
     return time;
   }
 
@@ -59,21 +62,23 @@ public class Time {
         }
       } catch (ArrayIndexOutOfBoundsException | NumberFormatException ignored) {
       }
-      StringBuilder builder = new StringBuilder();
-      if (seconds == 0) {
-        builder.append(minutes + ":00:" + miliseconds);
-      } else if (miliseconds == 0) {
-        builder.append(minutes + ":" + seconds + ":000");
-      } else if (minutes <= 9) {
-        builder.append("0" + minutes + ":" + seconds + ":" + miliseconds);
-      } else if (seconds <= 9) {
-        builder.append(minutes + ":" + "0" + seconds + ":" + miliseconds);
-      } else if (miliseconds <= 99) {
-        builder.append(minutes + ":" + seconds + ":0" + miliseconds);
-      } else if (miliseconds <= 9) {
-        builder.append(minutes + ":" + seconds + ":00" + miliseconds);
-      } else builder.append(minutes + ":" + seconds + ":" + miliseconds);
-      time = String.valueOf(builder);
+      String min = "" + minutes;
+      String sec = "" + seconds;
+      String milisec = "" + miliseconds;
+      if (minutes <= 9){
+        min = "0" + minutes;
+      } if (minutes == 0){
+        min = "00";
+      } if (seconds <= 9){
+        sec = "0" + seconds;
+      } if (seconds == 0){
+        sec = "00";
+      } if (miliseconds <= 99){
+        milisec = "0" + miliseconds;
+      } if (miliseconds <= 9){
+        milisec = "00" + miliseconds;
+      }
+      time = min + ":" + sec + ":" + milisec;
       this.time = time;
       return true;
     }

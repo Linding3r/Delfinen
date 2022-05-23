@@ -134,7 +134,6 @@ public class Engine {
   public void createTime() throws InterruptedException {
     Date date = new Date();
     Time time = new Time();
-    System.out.println("Indtast ID på medlem:");//printer 2 gange
     int indexPosition = searchMember();
     Member member = memberList.get(indexPosition);
     int memberId = member.getId();
@@ -262,7 +261,7 @@ public class Engine {
     return 0;
   }
 
-  public void chooseTrainer(int i) throws InterruptedException {
+  public void chooseTrainer(int i) {
     boolean run = true;
     while (run) {
       run = false;
@@ -343,9 +342,6 @@ public class Engine {
         case "6" -> sort.sortRegDate(memberList);
         case "7" -> sort.sortId(memberList);
         case "8" -> sort.sortPayment(memberList);
-        //TODO***************************************************************************************************************************************
-        //TODO***********************************************PROPPER TEST NEEDED*********************************************************************
-        //TODO***************************************************************************************************************************************
         case "9" -> Collections.sort(memberList, new SortSwimmingTime());
         case "10" -> System.out.println("Tilbage");
         default -> {
@@ -461,9 +457,9 @@ public class Engine {
   }
 
   public Trainer checkTrainerFromCSV(String name){
-    if(name.equals("Egon Olson")){
+    if(name.equals("Egon")){
       return trainer1;
-    } else if(name.equals("Benny Frandsen")){
+    } else if(name.equals("Benny")){
       return trainer2;
     } else return null;
   }
@@ -487,10 +483,10 @@ public class Engine {
         out.print(";");
         out.print(member.getAge());
         out.print(";");
-        if(member.getTrainer() == null){
-          out.print("");
-        } else {
+        try{
           out.print(member.getTrainer().getName());
+        } catch (NullPointerException e) {
+          out.print("");
         }
         out.print(";");
         try {
@@ -510,7 +506,7 @@ public class Engine {
         } catch (NullPointerException e) {
           out.print("");
         }
-        out.print(";\n");
+        out.print("\n");
 
 
       }
