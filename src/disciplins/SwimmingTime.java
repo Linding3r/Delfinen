@@ -9,6 +9,7 @@ public class SwimmingTime {
   private String position;
   private SwimmingStyle swimmingStyle;
   private Time time;
+  private int memberID;
 
   public SwimmingTime() {
     competitionName = null;

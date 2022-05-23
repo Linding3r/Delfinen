@@ -4,7 +4,7 @@ import entities.Member;
 
 import java.util.Comparator;
 
-public class SortSwimTime implements Comparator<Member>{
+public class SortSwimmingTime implements Comparator<Member>{
 
   @Override
   public int compare(Member o1, Member o2) {

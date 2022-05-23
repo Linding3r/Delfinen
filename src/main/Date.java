@@ -7,23 +7,25 @@ import java.time.LocalDate;
 import java.time.Year;
 import java.util.Arrays;
 import java.util.Scanner;
+import entities.AgeGroup;
 
 public class Date {
+
     private int day;
     private int month;
     private int year;
     private int age;
     Scanner sc = new Scanner(System.in);
-    private String birthday;
+    private String date;
     private LocalDate currentDate = LocalDate.now();
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String checkBirthday(JTextField textFieldAge) {
-        birthday = (textFieldAge.getText());
-        String[] birthdayArray = birthday.split("/");
+        date = (textFieldAge.getText());
+        String[] birthdayArray = date.split("/");
         try {
             for (int i = 0; i < birthdayArray.length; i++) {
                 day = Integer.parseInt(birthdayArray[0]);
@@ -41,12 +43,12 @@ public class Date {
         else
             br = BorderFactory.createLineBorder(Color.WHITE);
         textFieldAge.setBorder(br);
-        return birthday;
+        return date;
     }
 
     public String createDate() {
-        birthday = sc.nextLine();
-        String[] birthdayArray = birthday.split("/");
+        date = sc.nextLine();
+        String[] birthdayArray = date.split("/");
         try {
             for (int i = 0; i < birthdayArray.length; i++) {
                 day = Integer.parseInt(birthdayArray[0]);
@@ -59,14 +61,14 @@ public class Date {
             && year <= Integer.parseInt(String.valueOf(Year.now())))) {
             System.out.println((Arrays.toString(birthdayArray).replace("{","").replace("}","")) +
                 " Er en ugyldig dato. Indtast ny dato:");
-            birthday = sc.nextLine();
+            date = sc.nextLine();
             createDate();
         }
-        return birthday;
+        return date;
     }
 
     public String checkDateFromCSV() {
-        String[] birthdayArray = birthday.split("/");
+        String[] birthdayArray = date.split("/");
         try {
             for (int i = 0; i < birthdayArray.length; i++) {
                 day = Integer.parseInt(birthdayArray[0]);
@@ -75,11 +77,11 @@ public class Date {
             }
         } catch (ArrayIndexOutOfBoundsException  | NumberFormatException ignored) {
         }
-        return birthday;
+        return date;
     }
 
-    public String getBirthday() {
-        return birthday;
+    public String getDate() {
+        return date;
     }
 
     public int getAge(){
@@ -104,16 +106,16 @@ public class Date {
         } return age = ageYear;
     }
 
-    public String membershipType(){
+    public Enum membershipType(){
         if(age < 18){
-            return "Junior";
+            return AgeGroup.JUNIOR;
         } else if (age >= 18 && age < 60){
-            return "Senior";
-        }else return "60+";
+            return AgeGroup.SENIOR;
+        }else return AgeGroup.SIXTY;
     }
 
     @Override
     public String toString() {
-        return birthday;
+        return date;
     }
 }
