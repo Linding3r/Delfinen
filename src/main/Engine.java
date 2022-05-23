@@ -32,10 +32,19 @@ public class Engine {
     loadMembersFromFile();
     loadCompetitionsFromFile();
     String choice = sc.nextLine();
-    switch (choice) {
-      case "1" -> runConsole();
-      // case "2" -> runSwing();
-      default -> ui.invalidInput();
+    boolean runLoop = true;
+    while (runLoop) {
+      switch (choice) {
+        case "1" -> {
+          runConsole();
+          runLoop = false;
+        }
+        // case "2" -> {
+        //runSwing();
+        //runLoop = false;
+        //}
+        default -> ui.invalidInput();
+      }
     }
   }
 
@@ -109,10 +118,15 @@ public class Engine {
     }
     Collections.sort(top5, new SortSwimTime());
     for (int i = 0; i < 5; i++) {
-      System.out.println(top5.get(i));
+      if (isTrue(top5)) {
+        System.out.println(top5.get(i));
+      }
     }
   }
 
+  public boolean isTrue(Object objName) {
+    return ((objName instanceof Boolean) ? ((Boolean) objName) : true);
+  }
 
   private void createTime() throws InterruptedException {
     Date date = new Date();
@@ -453,7 +467,7 @@ public class Engine {
     }
   }
 
-  public void saveCompetitionsToFile (){
+  public void saveCompetitionsToFile() {
     try {
       PrintStream out = new PrintStream("competitions.csv");
       for (int i = 0; i < competitionsList.size(); i++) {
