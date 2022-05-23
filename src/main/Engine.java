@@ -180,7 +180,7 @@ public class Engine {
 
   public boolean isExistingTime(Time time, int indexPosition) {
     Member member = memberList.get(indexPosition);
-    if (member.getFastestSwimmingTime() != null) {
+    if (member.getFastestSwimmingTime().getTime().getTime() != null) {
       return isTimeFaster(time, member);
     } else return true;
   }
@@ -410,8 +410,7 @@ public class Engine {
         birthday.setDate(input.next());
         birthday.checkDateFromCSV();
         birthday.birthdayToAge();
-        int age = birthday.getAge();
-        /*
+        int age = input.nextInt();
         Time time = new Time();
         Date swimDate = new Date();
         time.competitionTimeCsv(input.next());
@@ -420,8 +419,7 @@ public class Engine {
         swimDate.checkDateFromCSV();
         SwimmingTime swimmingTime = new SwimmingTime(swimDate, time);
         swimmingTime.setSwimmingStyle(style);
-        */
-        Member member = new Member(birthday, age, iD, firstName, surname, competition, payment);
+        Member member = new Member(birthday, age, iD, firstName, surname, competition, payment, swimmingTime);
         memberList.add(member);
       }
     } catch (FileNotFoundException | NoSuchElementException e) {

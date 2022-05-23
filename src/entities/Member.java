@@ -48,10 +48,11 @@ public class Member {
     this.active = active;
     this.competitionSwimmer = competitionSwimmer;
     this.payment = true;
+    fastestSwimmingTime = new SwimmingTime();
   }
 
   public Member (Date birthday, int age, int id, String firstName, String surname,
-                boolean competitionSwimmer, boolean payment) {
+                 boolean competitionSwimmer, boolean payment) {
     this.birthday = birthday;
     this.id = id;
     this.age = age;
@@ -61,7 +62,21 @@ public class Member {
     this.active = true;
     this.competitionSwimmer = competitionSwimmer;
     this.payment = payment;
-    //this.fastestSwimmingTime = fastestSwimmingTime;
+    fastestSwimmingTime = new SwimmingTime();
+  }
+
+  public Member (Date birthday, int age, int id, String firstName, String surname,
+                boolean competitionSwimmer, boolean payment, SwimmingTime fastestSwimmingTime) {
+    this.birthday = birthday;
+    this.id = id;
+    this.age = age;
+    this.membership = birthday.membershipType();
+    this.firstName = firstName;
+    this.surname = surname;
+    this.active = true;
+    this.competitionSwimmer = competitionSwimmer;
+    this.payment = payment;
+    this.fastestSwimmingTime = fastestSwimmingTime;
   }
 
   public int subscription(){
