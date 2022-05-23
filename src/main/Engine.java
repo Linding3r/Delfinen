@@ -313,7 +313,7 @@ public class Engine {
       income += memberList.get(i).subscription();
     }
     System.out.println("\n\n\nForventet årligt indkomst:");
-    System.out.println(income + "DKK");
+    System.out.println(income + " DKK");
   }
 
   public void deleteMember() throws InterruptedException {
@@ -367,7 +367,7 @@ public class Engine {
     Date date = new Date();
     date.createDate();
     boolean competitionStatus = false;
-    if (Integer.parseInt(String.valueOf(Year.now())) - date.getYear() < 60) {
+    if (Integer.parseInt(String.valueOf(Year.now())) - date.getYear() < 60) {//Alle over 60 er i aldersgruppen 60+ og kan ikke være konkurrencesvømmere
       System.out.println("\n\nIndtast om medlemmet er konkurrencesvømmer eller motionssvømmer");
       competitionStatus = makeChoiceBoolean(ui.compNonCompChoice());
     }
@@ -493,9 +493,7 @@ public class Engine {
         } catch (NullPointerException e) {
           out.print("");
         }
-        out.print(";\n");
-
-
+        out.print("\n");
       }
     } catch (FileNotFoundException e) {
       System.out.println("Cannot locate file");
