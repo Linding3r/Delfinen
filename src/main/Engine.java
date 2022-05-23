@@ -118,14 +118,10 @@ public class Engine {
     }
     Collections.sort(top5, new SortSwimTime());
     for (int i = 0; i < 5; i++) {
-      if (isTrue(top5)) {
+      if (i < top5.size()){
         System.out.println(top5.get(i));
       }
     }
-  }
-
-  public boolean isTrue(Object objName) {
-    return ((objName instanceof Boolean) ? ((Boolean) objName) : true);
   }
 
   private void createTime() throws InterruptedException {
