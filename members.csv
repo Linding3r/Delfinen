@@ -1,4 +1,8 @@
-2022001;Lindinger;Thomas;false;true;22/03/1992;30;01:2:44;CRAWL;22/12/1993;
-2022002;Fjeldhoff;Casper;false;true;21/09/1995;26;00:52:4;BREASTSTROKE;01/4/2021;
+2022001;Lindinger;Thomas;false;true;22/03/1992;30;01:2:440;CRAWL;22/12/1993;
+2022002;Fjeldhoff;Casper;false;true;21/09/1995;26;00:52:400;BREASTSTROKE;01/4/2021;
 2022003;Kirk;Theodor;false;true;21/12/2008;13;null;null;null;
 2022004;Hansen;Frederik;true;true;06/10/1994;27;null;null;null;
+2022005;Larsen;Jørgen;true;true;20/03/2010;12;06:3:300;CRAWL;23/05/2022;
+2022006;Larsen;William;true;true;12/11/2008;13;01:34:344;BUTTERFLY;05/04/2022;
+2022007;Frandsen;Heidi;false;true;23/12/1955;66;null;null;null;
+2022008;Jensen;Rebecca;true;true;30/04/1999;23;06:33:332;BUTTERFLY;01/03/2003;
