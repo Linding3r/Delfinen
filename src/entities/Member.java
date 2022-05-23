@@ -52,7 +52,7 @@ public class Member {
   }
 
   public Member (Date birthday, int age, int id, String firstName, String surname,
-                 boolean competitionSwimmer, boolean payment) {
+                 boolean competitionSwimmer, boolean payment, Trainer trainer) {
     this.birthday = birthday;
     this.id = id;
     this.age = age;
@@ -63,10 +63,11 @@ public class Member {
     this.competitionSwimmer = competitionSwimmer;
     this.payment = payment;
     fastestSwimmingTime = new SwimmingTime();
+    this.trainer = trainer;
   }
 
   public Member (Date birthday, int age, int id, String firstName, String surname,
-                boolean competitionSwimmer, boolean payment, SwimmingTime fastestSwimmingTime) {
+                boolean competitionSwimmer, boolean payment, SwimmingTime fastestSwimmingTime, Trainer trainer) {
     this.birthday = birthday;
     this.id = id;
     this.age = age;
@@ -77,6 +78,7 @@ public class Member {
     this.competitionSwimmer = competitionSwimmer;
     this.payment = payment;
     this.fastestSwimmingTime = fastestSwimmingTime;
+    this.trainer = trainer;
   }
 
   public int subscription(){

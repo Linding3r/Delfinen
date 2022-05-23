@@ -413,16 +413,18 @@ public class Engine {
         int age = input.nextInt();
         Time time = new Time();
         Date swimDate = new Date();
+        Trainer trainer = checkTrainerFromCSV(input.next());;
+        SwimmingTime swimmingTime;
         if(time.competitionTimeCsv(input.next())) {
           SwimmingStyle style = SwimmingStyle.valueOf(input.next());
           swimDate.setDate(input.next());
           swimDate.checkDateFromCSV();
-          SwimmingTime swimmingTime = new SwimmingTime(swimDate, time);
+          swimmingTime = new SwimmingTime(swimDate, time);
           swimmingTime.setSwimmingStyle(style);
-          Member member = new Member(birthday, age, iD, firstName, surname, competition, payment, swimmingTime);
+          Member member = new Member(birthday, age, iD, firstName, surname, competition, payment, swimmingTime, trainer);
           memberList.add(member);
         } else {
-          Member member = new Member(birthday, age, iD, firstName, surname, competition, payment);
+          Member member = new Member(birthday, age, iD, firstName, surname, competition, payment,trainer);
           memberList.add(member);
         }
       }
@@ -435,6 +437,14 @@ public class Engine {
     } catch (NoSuchElementException | IndexOutOfBoundsException e) {
       System.out.println("File is empty\n\n\n");
     }
+  }
+
+  public Trainer checkTrainerFromCSV(String name){
+    if(name.equals("Egon Olson")){
+      return trainer1;
+    } else if(name.equals("Benny Frandsen")){
+      return trainer2;
+    } else return null;
   }
 
   public void saveMemberToFile() {
@@ -456,24 +466,23 @@ public class Engine {
         out.print(";");
         out.print(member.getAge());
         out.print(";");
-        try {
-          out.print(member.getFastestSwimmingTime().getTime().getTime());
-        }catch (NullPointerException e){
+        if (member.getTrainer() == null) {
           out.print("");
+        } else{
+          out.print(member.getTrainer().getName());
         }
         out.print(";");
-        try {
-          out.print(member.getFastestSwimmingTime().getSwimmingStyle());
-        }catch (NullPointerException e){
-          out.print("");
-        }
+        out.print(member.getFastestSwimmingTime().getTime().getTime());
         out.print(";");
-        try {
-          out.print(member.getFastestSwimmingTime().getDate().getDate());
-        }catch (NullPointerException e){
+        out.print(member.getFastestSwimmingTime().getSwimmingStyle());
+        out.print(";");
+        out.print(member.getFastestSwimmingTime().getDate().getDate());
+        if (member.getTrainer() == null) {
           out.print("");
+        } else{
+          out.print(member.getTrainer().getName());
         }
-        out.print(";\n");
+        out.print("\n");
       }
     } catch (FileNotFoundException e) {
       System.out.println("Cannot locate file");
