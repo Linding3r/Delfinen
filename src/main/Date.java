@@ -112,7 +112,7 @@ public class Date {
             return year;
         }
 
-        public Enum membershipType () {
+        public Enum ageGroupType() {
             if (age < 18) {
                 return AgeGroup.JUNIOR;
             } else if (age >= 18 && age < 60) {

@@ -4,6 +4,7 @@ import disciplins.Competition;
 import disciplins.SwimmingStyle;
 import disciplins.SwimmingTime;
 import disciplins.Time;
+import entities.AgeGroup;
 import entities.Member;
 import entities.Trainer;
 import sorting.Sort;
@@ -90,39 +91,42 @@ public class Engine {
     String choiceSwimmingStyle = checkSwimmingStyleInput();
     System.out.println(ui.juniorOrSenior());
     String choiceAgeGroup = checkAgeGroup();
-    if (choiceAgeGroup.equals("2")) {
+    if (choiceAgeGroup.equals("1")) {
       switch (choiceSwimmingStyle) {
-        case "1" -> {
-          sortByStyle(memberList, SwimmingStyle.BUTTERFLY);
-        }
-   /*     case "2" -> sortByStyle(SwimmingStyle.CRAWL);
-        case "3" -> sortByStyle(SwimmingStyle.BACKCRAWL);
-        case "4" -> sortByStyle(SwimmingStyle.BREASTSTROKE);
+        case "1" -> sortByStyle(memberList, AgeGroup.JUNIOR, SwimmingStyle.BUTTERFLY);
+        case "2" -> sortByStyle(memberList, AgeGroup.JUNIOR, SwimmingStyle.CRAWL);
+        case "3" -> sortByStyle(memberList, AgeGroup.JUNIOR, SwimmingStyle.BACKCRAWL);
+        case "4" -> sortByStyle(memberList, AgeGroup.JUNIOR, SwimmingStyle.BREASTSTROKE);
       }
     } else
       switch (choiceSwimmingStyle) {
-        case "1" -> sortByStyle(SwimmingStyle.BUTTERFLY);
-        case "2" -> sortByStyle(SwimmingStyle.CRAWL);
-        case "3" -> sortByStyle(SwimmingStyle.BACKCRAWL);
-        case "4" -> sortByStyle(SwimmingStyle.BREASTSTROKE);*/
+        case "1" -> sortByStyle(memberList, AgeGroup.SENIOR, SwimmingStyle.BUTTERFLY);
+        case "2" -> sortByStyle(memberList, AgeGroup.SENIOR, SwimmingStyle.CRAWL);
+        case "3" -> sortByStyle(memberList, AgeGroup.SENIOR, SwimmingStyle.BACKCRAWL);
+        case "4" -> sortByStyle(memberList, AgeGroup.SENIOR, SwimmingStyle.BREASTSTROKE);
       }
-    }
   }
 
 
-  public void sortByStyle(ArrayList<Member> memberList, SwimmingStyle swimmingStyle) {
+  public void sortByStyle(ArrayList<Member> memberList, AgeGroup ageGroup, SwimmingStyle swimmingStyle) {
     ArrayList<Member> top5 = new ArrayList<>();
     for (int i = 0; i < memberList.size(); i++) {
-      if (memberList.get(i).getFastestSwimmingTime() != null && memberList.get(i).getFastestSwimmingTime().getSwimmingStyle() == swimmingStyle) {
+      Member getMember = memberList.get(i);
+      if (getMember.getFastestSwimmingTime().getTime().getTime() != null
+          && getMember.getFastestSwimmingTime().getSwimmingStyle() == swimmingStyle
+          && getMember.getAgeGroup() == ageGroup
+          && getMember.isCompetitionSwimmer() == true) {
         top5.add(memberList.get(i));
       }
     }
-    Collections.sort(top5, new SortSwimmingTime());
-    for (int i = 0; i < 5; i++) {
-      if (i < top5.size()){
-        System.out.println(top5.get(i));
+    if (top5.size() != 0) {
+      Collections.sort(top5, new SortSwimmingTime());
+      for (int i = 0; i < 5; i++) {
+        if (i < top5.size()) {
+          System.out.println(top5.get(i));
+        }
       }
-    }
+    } else System.out.println("Der er ingen medlemmer på top 5 listen endnu for denne svømmedisciplin og aldersgruppe");
   }
 
   private void createTime() throws InterruptedException {
@@ -164,7 +168,7 @@ public class Engine {
     }
   }
 
-  public String inputPosition(){
+  public String inputPosition() {
     String position = "";
     System.out.println("Hvilken position fik svømmeren?");
     position = sc.nextLine();
@@ -362,7 +366,7 @@ public class Engine {
     Date date = new Date();
     date.createDate();
     boolean competitionStatus = false;
-    if (Integer.parseInt(String.valueOf(Year.now()))-date.getYear() < 60) {
+    if (Integer.parseInt(String.valueOf(Year.now())) - date.getYear() < 60) {
       System.out.println("\n\nIndtast om medlemmet er konkurrencesvømmer eller motionssvømmer");
       competitionStatus = makeChoiceBoolean(ui.compNonCompChoice());
     }
@@ -428,7 +432,7 @@ public class Engine {
         int age = input.nextInt();
         Time time = new Time();
         Date swimDate = new Date();
-        if(time.competitionTimeCsv(input.next())) {
+        if (time.competitionTimeCsv(input.next())) {
           SwimmingStyle style = SwimmingStyle.valueOf(input.next());
           swimDate.setDate(input.next());
           swimDate.checkDateFromCSV();
@@ -473,19 +477,19 @@ public class Engine {
         out.print(";");
         try {
           out.print(member.getFastestSwimmingTime().getTime().getTime());
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
           out.print("");
         }
         out.print(";");
         try {
           out.print(member.getFastestSwimmingTime().getSwimmingStyle());
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
           out.print("");
         }
         out.print(";");
         try {
           out.print(member.getFastestSwimmingTime().getDate().getDate());
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
           out.print("");
         }
         out.print(";\n");
