@@ -29,6 +29,7 @@ public class SwingGUI {
     private Engine engine = new Engine();
 
     public void mainMenu() {
+        engine.loadMembersFromFile();
         loadLastMemberID();
         frame = new JFrame();
         frame.setTitle("Svømmeklubben Delfinen");
@@ -377,7 +378,7 @@ public class SwingGUI {
             data[i][0] = member.getFirstName();
             data[i][1] = member.getSurname();
             data[i][2] = String.valueOf(member.getBirthday());
-            data[i][3] = member.getAge() + " år, " + member.getBirthday().membershipType();
+            data[i][3] = member.getAge() + " år, " + member.getBirthday().ageGroupType();
             data[i][4] = String.valueOf(member.getId());
             String yesNoActive;
             String yesNoComp;

@@ -55,7 +55,7 @@ public class Engine {
     swing.mainMenu();
   }
 
-  public void runConsole() throws InterruptedException {
+  public void runConsole() throws InterruptedException, FileNotFoundException {
     boolean run = true;
     ui.dolphinLogo();
     ui.loadingBar();
@@ -106,7 +106,8 @@ public class Engine {
         case "3" -> sortByStyle(memberList, AgeGroup.SENIOR, SwimmingStyle.BACKCRAWL);
         case "4" -> sortByStyle(memberList, AgeGroup.SENIOR, SwimmingStyle.BREASTSTROKE);
       }
-  }
+    }
+
 
 
   public void sortByStyle(ArrayList<Member> memberList, AgeGroup ageGroup, SwimmingStyle swimmingStyle) {
@@ -130,7 +131,7 @@ public class Engine {
     } else System.out.println("Der er ingen medlemmer på top 5 listen endnu for denne svømmedisciplin og aldersgruppe");
   }
 
-  private void createTime() throws InterruptedException {
+  public void createTime() throws InterruptedException {
     Date date = new Date();
     Time time = new Time();
     System.out.println("Indtast ID på medlem:");//printer 2 gange
@@ -169,7 +170,7 @@ public class Engine {
     }
   }
 
-  public String inputPosition() {
+  public String inputPosition(){
     String position = "";
     System.out.println("Hvilken position fik svømmeren?");
     position = sc.nextLine();
@@ -492,19 +493,33 @@ public class Engine {
           out.print(member.getTrainer().getName());
         }
         out.print(";");
-        out.print(member.getFastestSwimmingTime().getTime().getTime());
+        try {
+          out.print(member.getFastestSwimmingTime().getTime().getTime());
+        } catch (NullPointerException e) {
+          out.print("");
+        }
         out.print(";");
-        out.print(member.getFastestSwimmingTime().getSwimmingStyle());
+        try {
+          out.print(member.getFastestSwimmingTime().getSwimmingStyle());
+        } catch (NullPointerException e) {
+          out.print("");
+        }
         out.print(";");
-        out.print(member.getFastestSwimmingTime().getDate().getDate());
-        out.print("\n");
+        try {
+          out.print(member.getFastestSwimmingTime().getDate().getDate());
+        } catch (NullPointerException e) {
+          out.print("");
+        }
+        out.print(";\n");
+
+
       }
     } catch (FileNotFoundException e) {
       System.out.println("Cannot locate file");
     }
   }
 
-  public void saveCompetitionsToFile() {
+  public void saveCompetitionsToFile (){
     try {
       PrintStream out = new PrintStream("competitions.csv");
       for (int i = 0; i < competitionsList.size(); i++) {

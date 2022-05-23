@@ -198,6 +198,11 @@ public class Ui {
         "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓" + RESET;
   }
 
+  public String asciiLinesCompetition(){
+    return BLUE + "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒" +
+        RESET;
+  }
+
   public void loadingBar() throws InterruptedException {
     System.out.println("\n\n                     LOADING");
     String bar ="░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
@@ -246,7 +251,7 @@ public class Ui {
     for (int i = 0; i < competitionsList.size(); i++) {
       competition += competitionsList.get(i).toString();
     }
-    return asciiLines() + "\n" + competition + "\n" + asciiLines() + "\n\n\n";
+    return asciiLinesCompetition() + "\n" + competition + "\n" + asciiLinesCompetition() + "\n\n\n";
   }
 
 }
