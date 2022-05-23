@@ -30,59 +30,53 @@ public class Time {
       competitionTime();
     }
     StringBuilder builder = new StringBuilder();
-    if (seconds == 0){
-      builder.append(minutes + ":00:"+miliseconds);
-    }
-    else if (miliseconds == 0){
-      builder.append(minutes + ":" + seconds +":000");
-    }
-    else if (minutes <= 9){
-      builder.append("0" + minutes+":"+seconds + ":" + miliseconds);
-    }
-    else if (seconds <=9){
-      builder.append(minutes+":"+ "0"+seconds + ":" + miliseconds);
-    }
-    else if (miliseconds <=9){
-      builder.append(minutes+":"+seconds + ":00" + miliseconds);
+    if (seconds == 0) {
+      builder.append(minutes + ":00:" + miliseconds);
+    } else if (miliseconds == 0) {
+      builder.append(minutes + ":" + seconds + ":000");
+    } else if (minutes <= 9) {
+      builder.append("0" + minutes + ":" + seconds + ":" + miliseconds);
+    } else if (seconds <= 9) {
+      builder.append(minutes + ":" + "0" + seconds + ":" + miliseconds);
+    } else if (miliseconds <= 9) {
+      builder.append(minutes + ":" + seconds + ":00" + miliseconds);
 
-    }
-    else builder.append(minutes + ":" + seconds + ":" + miliseconds);
+    } else builder.append(minutes + ":" + seconds + ":" + miliseconds);
     time = String.valueOf(builder);
     return time;
   }
 
-  public void competitionTimeCsv (String time) {
-    String[] timeArray = time.split(":");
-    try {
-      for (int i = 0; i < timeArray.length; i++) {
-        minutes = Integer.parseInt(timeArray[0]);
-        seconds = Integer.parseInt(timeArray[1]);
-        miliseconds = Integer.parseInt(timeArray[2]);
+  public boolean competitionTimeCsv(String time) {
+    if (time.equals("null")) {
+      return false;
+    } else {
+      String[] timeArray = time.split(":");
+      try {
+        for (int i = 0; i < timeArray.length; i++) {
+          minutes = Integer.parseInt(timeArray[0]);
+          seconds = Integer.parseInt(timeArray[1]);
+          miliseconds = Integer.parseInt(timeArray[2]);
+        }
+      } catch (ArrayIndexOutOfBoundsException | NumberFormatException ignored) {
       }
-    } catch (ArrayIndexOutOfBoundsException | NumberFormatException ignored) {
+      StringBuilder builder = new StringBuilder();
+      if (seconds == 0) {
+        builder.append(minutes + ":00:" + miliseconds);
+      } else if (miliseconds == 0) {
+        builder.append(minutes + ":" + seconds + ":000");
+      } else if (minutes <= 9) {
+        builder.append("0" + minutes + ":" + seconds + ":" + miliseconds);
+      } else if (seconds <= 9) {
+        builder.append(minutes + ":" + "0" + seconds + ":" + miliseconds);
+      } else if (miliseconds <= 99) {
+        builder.append(minutes + ":" + seconds + ":0" + miliseconds);
+      } else if (miliseconds <= 9) {
+        builder.append(minutes + ":" + seconds + ":00" + miliseconds);
+      } else builder.append(minutes + ":" + seconds + ":" + miliseconds);
+      time = String.valueOf(builder);
+      this.time = time;
+      return true;
     }
-    StringBuilder builder = new StringBuilder();
-    if (seconds == 0){
-      builder.append(minutes + ":00:"+miliseconds);
-    }
-    else if (miliseconds == 0){
-      builder.append(minutes + ":" + seconds +":000");
-    }
-    else if (minutes <= 9){
-      builder.append("0" + minutes+":"+seconds + ":" + miliseconds);
-    }
-    else if (seconds <=9){
-      builder.append(minutes+":"+ "0"+seconds + ":" + miliseconds);
-    }
-    else if (miliseconds <=99){
-      builder.append(minutes+":"+seconds + ":0" + miliseconds);
-    }
-    else if (miliseconds <=9){
-      builder.append(minutes+":"+seconds + ":00" + miliseconds);
-    }
-    else builder.append(minutes + ":" + seconds + ":" + miliseconds);
-    time = String.valueOf(builder);
-    this.time = time;
   }
 
   public String getTime(){
