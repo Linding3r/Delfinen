@@ -11,7 +11,7 @@ class EngineTest {
         Engine engine = new Engine();
         engine.loadMembersFromFile();
         int total = engine.checkIncome2();
-        int expected = 4800;
+        int expected = 10600;
 
                 assertEquals(expected,total);
     }
