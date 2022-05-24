@@ -2,6 +2,7 @@ package entities;
 
 import disciplins.SwimmingTime;
 import main.Date;
+import org.w3c.dom.ls.LSOutput;
 import ui.Ui;
 import java.time.LocalDate;
 import static entities.AgeGroup.JUNIOR;
@@ -207,8 +208,14 @@ public class Member {
 
   public String fastestTime(){
     if(fastestSwimmingTime.getTime().getTime() == null){
-      return "No Time";
+      return " No Time ";
     } else return fastestSwimmingTime.getTime().getTime();
+  }
+
+  public String styleToString(){
+    if(fastestSwimmingTime.getSwimmingStyle() == null){
+      return "  -  ";
+    } else return "" + fastestSwimmingTime.getSwimmingStyle();
   }
 
   public String membershipToString(){
@@ -222,6 +229,8 @@ public class Member {
   public String toString(){
     return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | %10s (%-2sår) | %-6s | %-6s | %11s | %-18s | %-10s | ",
         id, shortenSurname(), shortenFirstname(), birthday.getDate(), age, membershipToString(), activeOrPassive(), paidOrNotPaid(),
-        compOrNotComp(), trainerName()) + registerDate + " | " + fastestTime() +"\n";
+        compOrNotComp(), trainerName()) + registerDate + " | " + fastestTime() + " | " + styleToString() + "\n";
+
   }
+
 }
