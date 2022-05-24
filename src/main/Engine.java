@@ -25,8 +25,8 @@ public class Engine {
   private int memberId = 1;
   private int idCode = 1000;
   private Ui ui = new Ui();
-  private Trainer trainer1 = new Trainer("Egon Olson");
-  private Trainer trainer2 = new Trainer("Benny Frandsen");
+  private Trainer trainer1 = new Trainer("Egon");
+  private Trainer trainer2 = new Trainer("Benny");
   private ArrayList<Competition> competitionsList = new ArrayList<>();
 
   public void runProgram() throws FileNotFoundException, InterruptedException {
@@ -41,10 +41,10 @@ public class Engine {
           runConsole();
           runLoop = false;
         }
-        // case "2" -> {
-        //runSwing();
-        //runLoop = false;
-        //}
+         case "2" -> {
+        runSwing();
+        runLoop = false;
+        }
         default -> ui.invalidInput();
       }
     }
@@ -106,7 +106,8 @@ public class Engine {
         case "3" -> sortByStyle(memberList, AgeGroup.SENIOR, SwimmingStyle.BACKCRAWL);
         case "4" -> sortByStyle(memberList, AgeGroup.SENIOR, SwimmingStyle.BREASTSTROKE);
       }
-  }
+    }
+
 
 
   public void sortByStyle(ArrayList<Member> memberList, AgeGroup ageGroup, SwimmingStyle swimmingStyle) {
@@ -130,10 +131,9 @@ public class Engine {
     } else System.out.println("Der er ingen medlemmer på top 5 listen endnu for denne svømmedisciplin og aldersgruppe");
   }
 
-  private void createTime() throws InterruptedException {
+  public void createTime() throws InterruptedException {
     Date date = new Date();
     Time time = new Time();
-    System.out.println("Indtast ID på medlem:");//printer 2 gange
     int indexPosition = searchMember();
     Member member = memberList.get(indexPosition);
     int memberId = member.getId();
@@ -169,7 +169,7 @@ public class Engine {
     }
   }
 
-  public String inputPosition() {
+  public String inputPosition(){
     String position = "";
     System.out.println("Hvilken position fik svømmeren?");
     position = sc.nextLine();
@@ -261,7 +261,7 @@ public class Engine {
     return 0;
   }
 
-  public void chooseTrainer(int i) throws InterruptedException {
+  public void chooseTrainer(int i) {
     boolean run = true;
     while (run) {
       run = false;
@@ -313,7 +313,7 @@ public class Engine {
       income += memberList.get(i).subscription();
     }
     System.out.println("\n\n\nForventet årligt indkomst:");
-    System.out.println(income + " DKK");
+    System.out.println(income + "DKK");
   }
 
   public void deleteMember() throws InterruptedException {
@@ -342,9 +342,6 @@ public class Engine {
         case "6" -> sort.sortRegDate(memberList);
         case "7" -> sort.sortId(memberList);
         case "8" -> sort.sortPayment(memberList);
-        //TODO***************************************************************************************************************************************
-        //TODO***********************************************PROPPER TEST NEEDED*********************************************************************
-        //TODO***************************************************************************************************************************************
         case "9" -> Collections.sort(memberList, new SortSwimmingTime());
         case "10" -> System.out.println("Tilbage");
         default -> {
@@ -367,7 +364,7 @@ public class Engine {
     Date date = new Date();
     date.createDate();
     boolean competitionStatus = false;
-    if (Integer.parseInt(String.valueOf(Year.now())) - date.getYear() < 60) {//Alle over 60 er i aldersgruppen 60+ og kan ikke være konkurrencesvømmere
+    if (Integer.parseInt(String.valueOf(Year.now())) - date.getYear() < 60) {
       System.out.println("\n\nIndtast om medlemmet er konkurrencesvømmer eller motionssvømmer");
       competitionStatus = makeChoiceBoolean(ui.compNonCompChoice());
     }
@@ -433,16 +430,18 @@ public class Engine {
         int age = input.nextInt();
         Time time = new Time();
         Date swimDate = new Date();
+        Trainer trainer = checkTrainerFromCSV(input.next());;
+        SwimmingTime swimmingTime;
         if (time.competitionTimeCsv(input.next())) {
           SwimmingStyle style = SwimmingStyle.valueOf(input.next());
           swimDate.setDate(input.next());
           swimDate.checkDateFromCSV();
-          SwimmingTime swimmingTime = new SwimmingTime(swimDate, time);
+          swimmingTime = new SwimmingTime(swimDate, time);
           swimmingTime.setSwimmingStyle(style);
-          Member member = new Member(birthday, age, iD, firstName, surname, competition, payment, swimmingTime);
+          Member member = new Member(birthday, age, iD, firstName, surname, competition, payment, swimmingTime, trainer);
           memberList.add(member);
         } else {
-          Member member = new Member(birthday, age, iD, firstName, surname, competition, payment);
+          Member member = new Member(birthday, age, iD, firstName, surname, competition, payment,trainer);
           memberList.add(member);
         }
       }
@@ -455,6 +454,14 @@ public class Engine {
     } catch (NoSuchElementException | IndexOutOfBoundsException e) {
       System.out.println("File is empty\n\n\n");
     }
+  }
+
+  public Trainer checkTrainerFromCSV(String name){
+    if(name.equals("Egon")){
+      return trainer1;
+    } else if(name.equals("Benny")){
+      return trainer2;
+    } else return null;
   }
 
   public void saveMemberToFile() {
@@ -476,6 +483,12 @@ public class Engine {
         out.print(";");
         out.print(member.getAge());
         out.print(";");
+        try{
+          out.print(member.getTrainer().getName());
+        } catch (NullPointerException e) {
+          out.print("");
+        }
+        out.print(";");
         try {
           out.print(member.getFastestSwimmingTime().getTime().getTime());
         } catch (NullPointerException e) {
@@ -494,13 +507,15 @@ public class Engine {
           out.print("");
         }
         out.print("\n");
+
+
       }
     } catch (FileNotFoundException e) {
       System.out.println("Cannot locate file");
     }
   }
 
-  public void saveCompetitionsToFile() {
+  public void saveCompetitionsToFile (){
     try {
       PrintStream out = new PrintStream("competitions.csv");
       for (int i = 0; i < competitionsList.size(); i++) {

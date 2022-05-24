@@ -52,7 +52,7 @@ public class Member {
   }
 
   public Member (Date birthday, int age, int id, String firstName, String surname,
-                 boolean competitionSwimmer, boolean payment) {
+                 boolean competitionSwimmer, boolean payment, Trainer trainer) {
     this.birthday = birthday;
     this.id = id;
     this.age = age;
@@ -63,10 +63,11 @@ public class Member {
     this.competitionSwimmer = competitionSwimmer;
     this.payment = payment;
     fastestSwimmingTime = new SwimmingTime();
+    this.trainer = trainer;
   }
 
   public Member (Date birthday, int age, int id, String firstName, String surname,
-                boolean competitionSwimmer, boolean payment, SwimmingTime fastestSwimmingTime) {
+                boolean competitionSwimmer, boolean payment, SwimmingTime fastestSwimmingTime, Trainer trainer) {
     this.birthday = birthday;
     this.id = id;
     this.age = age;
@@ -77,6 +78,7 @@ public class Member {
     this.competitionSwimmer = competitionSwimmer;
     this.payment = payment;
     this.fastestSwimmingTime = fastestSwimmingTime;
+    this.trainer = trainer;
   }
 
   public int subscription(){
@@ -185,7 +187,7 @@ public class Member {
   }
 
   public String trainerName(){
-    String name = "";
+    String name = "No Trainer";
     if(trainer != null){
         name = trainer.getName();
     } return name;
@@ -218,7 +220,7 @@ public class Member {
   }
 
   public String toString(){
-    return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | %10s (%-2sår) | %-6s | %-6s | %11s | %-18s | Træner: %-5s | ",
+    return String.format("ID: %-9d | Efternavn: %-20s | Fornavn: %-18s | %10s (%-2sår) | %-6s | %-6s | %11s | %-18s | %-10s | ",
         id, shortenSurname(), shortenFirstname(), birthday.getDate(), age, membershipToString(), activeOrPassive(), paidOrNotPaid(),
         compOrNotComp(), trainerName()) + registerDate + " | " + fastestTime() +"\n";
   }

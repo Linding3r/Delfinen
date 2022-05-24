@@ -11,5 +11,4 @@ public class Trainer {
         return name;
     }
 
-
 }
