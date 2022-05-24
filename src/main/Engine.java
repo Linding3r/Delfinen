@@ -307,6 +307,14 @@ public class Engine {
     }
   }
 
+  public int checkIncome2() {
+    int income = 0;
+    for (int i = 0; i < memberList.size(); i++) {
+      income += memberList.get(i).subscription();
+    }
+      return income;
+  }
+
   public void checkIncome() {
     int income = 0;
     for (int i = 0; i < memberList.size(); i++) {
