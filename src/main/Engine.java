@@ -88,7 +88,6 @@ public class Engine {
     }
   }
 
-  // TODO: 24/05/2022 Implement changeActivityStatus method
   private void changeActivityStatus() throws InterruptedException {
     int i = searchMember();
     boolean run = true;
