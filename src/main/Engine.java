@@ -331,21 +331,14 @@ public class Engine {
     }
   }
 
-  public int checkIncome2() {
-    int income = 0;
-    for (int i = 0; i < memberList.size(); i++) {
-      income += memberList.get(i).subscription();
-    }
-      return income;
-  }
-
-  public void checkIncome() {
+  public int checkIncome() {
     int income = 0;
     for (int i = 0; i < memberList.size(); i++) {
       income += memberList.get(i).subscription();
     }
     System.out.println("\n\n\nForventet årligt indkomst:");
     System.out.println(income + "DKK");
+    return income;
   }
 
   public void deleteMember() throws InterruptedException {

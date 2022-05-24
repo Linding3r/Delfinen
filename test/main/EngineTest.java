@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class EngineTest {
 
     @Test
-    void checkIncome2() {
+    void checkIncome() {
         Engine engine = new Engine();
         engine.loadMembersFromFile();
-        int total = engine.checkIncome2();
+        int total = engine.checkIncome();
         int expected = 10600;
 
                 assertEquals(expected,total);
