@@ -148,7 +148,7 @@ public class Ui {
   public String juniorOrSenior(){
     return """
         ╔════════════════════════════════╗
-        ║              MENU              ║
+        ║              Vælg              ║
         ╠════════════════════════════════╣
         ║   1:  Junior                   ║
         ║   2:  Senior                   ║
