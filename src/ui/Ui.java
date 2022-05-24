@@ -25,12 +25,13 @@ public class Ui {
         ║   3:  Sortere Medlemmer            ║
         ║   4:  Slet Medlem                  ║
         ║   5:  Ændre Betalingsstatus        ║
-        ║   6:  Ændre Aktivitetsstatus       ║
-        ║   7:  Årsregnskab                  ║
-        ║   8:  Tilføj/Fjern Træner          ║
-        ║   9:  Tilføj svømmetid             ║
-        ║   10: Se top 5 over svømmetider    ║
-        ║   11: Se Svømmestævner             ║
+        ║   6:  Ændre Medlemsstatus          ║
+        ║   7:  Ændre Aktivitetsstatus       ║
+        ║   8:  Årsregnskab                  ║
+        ║   9:  Tilføj/Fjern Træner          ║
+        ║   10: Tilføj svømmetid             ║
+        ║   11: Se top 5 over svømmetider    ║
+        ║   12: Se Svømmestævner             ║
         ║   0:  SHUTDOWN                     ║
         ╚════════════════════════════════════╝
         """);
