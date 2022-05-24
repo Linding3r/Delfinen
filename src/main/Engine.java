@@ -70,11 +70,12 @@ public class Engine {
         case "4" -> deleteMember();
         case "5" -> changePaymentStatusLoop();
         case "6" -> changeMemberStatus();
-        case "7" -> checkIncome();
-        case "8" -> addOrRemoveTrainer();
-        case "9" -> createTime();
-        case "10" -> viewTop5();
-        case "11" -> System.out.println(ui.competitionListToString(competitionsList));
+        case "7" -> changeActivityStatus();
+        case "8" -> checkIncome();
+        case "9" -> addOrRemoveTrainer();
+        case "10" -> createTime();
+        case "11" -> viewTop5();
+        case "12" -> System.out.println(ui.competitionListToString(competitionsList));
         case "0" -> {
           run = false;
           ui.newLine();
@@ -85,6 +86,29 @@ public class Engine {
         default -> ui.invalidInput();
       }
     }
+  }
+
+  // TODO: 24/05/2022 Implement changeActivityStatus method
+  private void changeActivityStatus() throws InterruptedException {
+    int i = searchMember();
+    boolean run = true;
+    while (run) {
+      System.out.println("Hvad skal medlemmets status ændres til?");
+      System.out.println(ui.compNonCompChoice());
+      String input = sc.nextLine();
+      switch (input) {
+        case "1" -> {
+          memberList.get(i).setCompetitionSwimmer(true);
+          run = false;
+        }
+        case "2" -> {
+          memberList.get(i).setCompetitionSwimmer(false);
+          run = false;
+        }
+        default -> System.out.println("Invalid input");
+      }
+    }
+    
   }
 
   private void viewTop5() throws InterruptedException {
