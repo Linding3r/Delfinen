@@ -9,7 +9,6 @@ public class SwimmingTime {
   private String position;
   private SwimmingStyle swimmingStyle;
   private Time time;
-  private int memberID;
 
   public SwimmingTime() {
     competitionName = null;
@@ -27,32 +26,12 @@ public class SwimmingTime {
     this.time = time;
   }
 
-  public String getCompetitionName() {
-    return competitionName;
-  }
-
   public void setCompetitionName(String competitionName) {
     this.competitionName = competitionName;
   }
 
   public Time getTime() {
     return time;
-  }
-
-  public void setTime(Time time) {
-    this.time = time;
-  }
-
-  public String getName() {
-    return competitionName;
-  }
-
-  public void setName(String name) {
-    this.competitionName = name;
-  }
-
-  public String getPosition() {
-    return position;
   }
 
   public void setPosition(String position) {
@@ -69,10 +48,6 @@ public class SwimmingTime {
 
   public Date getDate() {
     return date;
-  }
-
-  public void setDate(Date date) {
-    this.date = date;
   }
 }
 

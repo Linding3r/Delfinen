@@ -20,9 +20,7 @@ public class Date {
   private String date;
   private LocalDate currentDate = LocalDate.now();
 
-  public void setDate(String date) {
-    this.date = date;
-  }
+
 
   public String checkBirthday(JTextField textFieldAge) {
     date = (textFieldAge.getText());
@@ -95,8 +93,8 @@ public class Date {
     return date;
   }
 
-  public int getAge() {
-    return age;
+  public void setDate(String date) {
+    this.date = date;
   }
 
   public int birthdayToAge() {

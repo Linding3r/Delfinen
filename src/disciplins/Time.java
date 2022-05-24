@@ -10,7 +10,7 @@ public class Time {
   private int miliseconds;
   Scanner sc = new Scanner(System.in);
   private String time;
-  // TODO: 19/05/2022 Implement local time instead 
+
 
   public String competitionTime() {
     time = sc.nextLine();
@@ -92,23 +92,11 @@ public class Time {
     return minutes;
   }
 
-  public void setMinutes(int minutes) {
-    this.minutes = minutes;
-  }
-
   public long getSeconds() {
     return seconds;
   }
 
-  public void setSeconds(int seconds) {
-    this.seconds = seconds;
-  }
-
   public long getMiliseconds() {
     return miliseconds;
-  }
-
-  public void setMiliseconds(int miliseconds) {
-    this.miliseconds = miliseconds;
   }
 }
