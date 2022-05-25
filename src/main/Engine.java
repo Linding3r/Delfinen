@@ -55,7 +55,7 @@ public class Engine {
     swing.mainMenu();
   }
 
-  public void runConsole() throws InterruptedException, FileNotFoundException {
+  public void runConsole() throws InterruptedException {
     boolean run = true;
     ui.dolphinLogo();
     ui.loadingBar();
