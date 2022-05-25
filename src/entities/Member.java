@@ -2,7 +2,6 @@ package entities;
 
 import disciplins.SwimmingTime;
 import main.Date;
-import org.w3c.dom.ls.LSOutput;
 import ui.Ui;
 import java.time.LocalDate;
 import static entities.AgeGroup.JUNIOR;
@@ -25,10 +24,10 @@ public class Member {
   private Ui ui = new Ui();
 
 
-  public Member(Date birthday, int id, String firstName, String surname,
+  public Member(Date birthday, int memberId, String firstName, String surname,
                 boolean competitionSwimmer, int idCode) {
     this.birthday = birthday;
-    this.id = registerDate.getYear() * idCode + id;
+    this.id = registerDate.getYear() * idCode + memberId;
     this.age = birthday.birthdayToAge();
     ageGroup = birthday.ageGroupType();
     this.firstName = firstName;
@@ -39,10 +38,10 @@ public class Member {
     fastestSwimmingTime = new SwimmingTime();
   }
 
-  public Member(Date birthday, int id, String firstName, String surname, boolean active, boolean competitionSwimmer) {
+  public Member(Date birthday, int memberId, String firstName, String surname, boolean active, boolean competitionSwimmer) {
     this.birthday = birthday;
     this.age = birthday.birthdayToAge();
-    this.id = id;
+    this.id = memberId;
     this.ageGroup = birthday.ageGroupType();
     this.firstName = firstName;
     this.surname = surname;
@@ -52,10 +51,10 @@ public class Member {
     fastestSwimmingTime = new SwimmingTime();
   }
 
-  public Member (Date birthday, int age, int id, String firstName, String surname,
+  public Member (Date birthday, int age, int memberId, String firstName, String surname,
                  boolean competitionSwimmer, boolean payment, Trainer trainer) {
     this.birthday = birthday;
-    this.id = id;
+    this.id = memberId;
     this.age = age;
     this.ageGroup = birthday.ageGroupType();
     this.firstName = firstName;
@@ -67,10 +66,10 @@ public class Member {
     this.trainer = trainer;
   }
 
-  public Member (Date birthday, int age, int id, String firstName, String surname,
-                boolean competitionSwimmer, boolean payment, SwimmingTime fastestSwimmingTime, Trainer trainer) {
+  public Member (Date birthday, int age, int memberId, String firstName, String surname,
+                 boolean competitionSwimmer, boolean payment, SwimmingTime fastestSwimmingTime, Trainer trainer) {
     this.birthday = birthday;
-    this.id = id;
+    this.id = memberId;
     this.age = age;
     this.ageGroup = birthday.ageGroupType();
     this.firstName = firstName;

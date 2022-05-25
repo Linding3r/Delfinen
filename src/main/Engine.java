@@ -385,15 +385,15 @@ public class Engine {
     System.out.println("Indtast medlemmets efternavn");
     String surname = sc.nextLine();
     System.out.println("\n\nIndtast medlemmets fødselsdagsdato. (FORMAT DD/MM/YEAR):");
-    Date date = new Date();
-    date.createDate();
+    Date birthday = new Date();
+    birthday.createDate();
     boolean competitionStatus = false;
-    if (Integer.parseInt(String.valueOf(Year.now())) - date.getYear() < 60) {
+    if (Integer.parseInt(String.valueOf(Year.now())) - birthday.getYear() < 60) {
       System.out.println("\n\nIndtast om medlemmet er konkurrencesvømmer eller motionssvømmer");
       competitionStatus = makeChoiceBoolean(ui.compNonCompChoice());
     }
     idCode = updateIdCode(idCode);
-    Member member = new Member(date, memberId, firstname, surname, competitionStatus, idCode);
+    Member member = new Member(birthday, memberId, firstname, surname, competitionStatus, idCode);
     ui.confirmInput();
     System.out.println(member);
     boolean yesNo = makeChoiceBoolean(ui.yesNo());
